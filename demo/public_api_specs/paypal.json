@@ -1,0 +1,1003 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PayPal API",
+    "description": "API for integrating PayPal payment services",
+    "version": "2.0.0",
+    "contact": {
+      "name": "PayPal Developer Support",
+      "url": "https://developer.paypal.com/support/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.paypal.com/v2",
+      "description": "Production server"
+    },
+    {
+      "url": "https://api.sandbox.paypal.com/v2",
+      "description": "Sandbox server"
+    }
+  ],
+  "paths": {
+    "/payments/payment": {
+      "post": {
+        "summary": "Create a payment",
+        "description": "Create a PayPal payment",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Payment created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payment"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "https://uri.paypal.com/services/payments/payment"
+            ]
+          }
+        ]
+      }
+    },
+    "/payments/payment/{payment_id}": {
+      "get": {
+        "summary": "Get payment details",
+        "description": "Retrieve details of a specific payment",
+        "parameters": [
+          {
+            "name": "payment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment details retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payment"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Payment not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "https://uri.paypal.com/services/payments/payment"
+            ]
+          }
+        ]
+      }
+    },
+    "/payments/payment/{payment_id}/execute": {
+      "post": {
+        "summary": "Execute a payment",
+        "description": "Execute an approved PayPal payment",
+        "parameters": [
+          {
+            "name": "payment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentExecuteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Payment executed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payment"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "https://uri.paypal.com/services/payments/payment"
+            ]
+          }
+        ]
+      }
+    },
+    "/billing/plans": {
+      "post": {
+        "summary": "Create a billing plan",
+        "description": "Create a new PayPal billing plan",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BillingPlanRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Billing plan created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillingPlan"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "https://uri.paypal.com/services/subscriptions"
+            ]
+          }
+        ]
+      }
+    },
+    "/billing/subscriptions": {
+      "post": {
+        "summary": "Create a subscription",
+        "description": "Create a new PayPal subscription",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Subscription created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subscription"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "https://uri.paypal.com/services/subscriptions"
+            ]
+          }
+        ]
+      }
+    },
+    "/billing/subscriptions/{subscription_id}": {
+      "get": {
+        "summary": "Get subscription details",
+        "description": "Retrieve details of a specific subscription",
+        "parameters": [
+          {
+            "name": "subscription_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Subscription details retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subscription"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Subscription not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "https://uri.paypal.com/services/subscriptions"
+            ]
+          }
+        ]
+      },
+      "patch": {
+        "summary": "Update a subscription",
+        "description": "Update an existing PayPal subscription",
+        "parameters": [
+          {
+            "name": "subscription_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Subscription updated successfully"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "https://uri.paypal.com/services/subscriptions"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PaymentRequest": {
+        "type": "object",
+        "required": [
+          "intent",
+          "payer",
+          "transactions"
+        ],
+        "properties": {
+          "intent": {
+            "type": "string",
+            "enum": [
+              "sale",
+              "authorize",
+              "order"
+            ]
+          },
+          "payer": {
+            "$ref": "#/components/schemas/Payer"
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Transaction"
+            }
+          },
+          "redirect_urls": {
+            "$ref": "#/components/schemas/RedirectUrls"
+          }
+        }
+      },
+      "Payment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "intent": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "payer": {
+            "$ref": "#/components/schemas/Payer"
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Transaction"
+            }
+          },
+          "create_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            }
+          }
+        }
+      },
+      "PaymentExecuteRequest": {
+        "type": "object",
+        "required": [
+          "payer_id"
+        ],
+        "properties": {
+          "payer_id": {
+            "type": "string"
+          }
+        }
+      },
+      "Payer": {
+        "type": "object",
+        "properties": {
+          "payment_method": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "payer_info": {
+            "$ref": "#/components/schemas/PayerInfo"
+          }
+        }
+      },
+      "PayerInfo": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "payer_id": {
+            "type": "string"
+          }
+        }
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "description": {
+            "type": "string"
+          },
+          "item_list": {
+            "$ref": "#/components/schemas/ItemList"
+          }
+        }
+      },
+      "Amount": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "details": {
+            "$ref": "#/components/schemas/AmountDetails"
+          }
+        }
+      },
+      "AmountDetails": {
+        "type": "object",
+        "properties": {
+          "subtotal": {
+            "type": "string"
+          },
+          "tax": {
+            "type": "string"
+          },
+          "shipping": {
+            "type": "string"
+          }
+        }
+      },
+      "ItemList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            }
+          }
+        }
+      },
+      "Item": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "sku": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer"
+          }
+        }
+      },
+      "RedirectUrls": {
+        "type": "object",
+        "properties": {
+          "return_url": {
+            "type": "string"
+          },
+          "cancel_url": {
+            "type": "string"
+          }
+        }
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "rel": {
+            "type": "string"
+          },
+          "method": {
+            "type": "string"
+          }
+        }
+      },
+      "BillingPlanRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "type",
+          "payment_definitions",
+          "merchant_preferences"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "FIXED",
+              "INFINITE"
+            ]
+          },
+          "payment_definitions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentDefinition"
+            }
+          },
+          "merchant_preferences": {
+            "$ref": "#/components/schemas/MerchantPreferences"
+          }
+        }
+      },
+      "BillingPlan": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "create_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "update_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "payment_definitions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentDefinition"
+            }
+          },
+          "merchant_preferences": {
+            "$ref": "#/components/schemas/MerchantPreferences"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            }
+          }
+        }
+      },
+      "PaymentDefinition": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "TRIAL",
+              "REGULAR"
+            ]
+          },
+          "frequency": {
+            "type": "string",
+            "enum": [
+              "WEEK",
+              "DAY",
+              "YEAR",
+              "MONTH"
+            ]
+          },
+          "frequency_interval": {
+            "type": "string"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "cycles": {
+            "type": "string"
+          }
+        }
+      },
+      "MerchantPreferences": {
+        "type": "object",
+        "properties": {
+          "setup_fee": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "return_url": {
+            "type": "string"
+          },
+          "cancel_url": {
+            "type": "string"
+          },
+          "auto_bill_amount": {
+            "type": "string",
+            "enum": [
+              "YES",
+              "NO"
+            ]
+          },
+          "initial_fail_amount_action": {
+            "type": "string",
+            "enum": [
+              "CONTINUE",
+              "CANCEL"
+            ]
+          },
+          "max_fail_attempts": {
+            "type": "string"
+          }
+        }
+      },
+      "Currency": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          }
+        }
+      },
+      "SubscriptionRequest": {
+        "type": "object",
+        "required": [
+          "plan_id",
+          "start_time",
+          "subscriber"
+        ],
+        "properties": {
+          "plan_id": {
+            "type": "string"
+          },
+          "start_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "subscriber": {
+            "$ref": "#/components/schemas/Subscriber"
+          },
+          "application_context": {
+            "$ref": "#/components/schemas/ApplicationContext"
+          }
+        }
+      },
+      "Subscription": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "plan_id": {
+            "type": "string"
+          },
+          "start_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "shipping_amount": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "subscriber": {
+            "$ref": "#/components/schemas/Subscriber"
+          },
+          "billing_info": {
+            "$ref": "#/components/schemas/BillingInfo"
+          },
+          "create_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "update_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            }
+          }
+        }
+      },
+      "Subscriber": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/Name"
+          },
+          "email_address": {
+            "type": "string"
+          },
+          "shipping_address": {
+            "$ref": "#/components/schemas/ShippingAddress"
+          }
+        }
+      },
+      "Name": {
+        "type": "object",
+        "properties": {
+          "given_name": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          }
+        }
+      },
+      "ShippingAddress": {
+        "type": "object",
+        "properties": {
+          "address_line_1": {
+            "type": "string"
+          },
+          "address_line_2": {
+            "type": "string"
+          },
+          "admin_area_2": {
+            "type": "string"
+          },
+          "admin_area_1": {
+            "type": "string"
+          },
+          "postal_code": {
+            "type": "string"
+          },
+          "country_code": {
+            "type": "string"
+          }
+        }
+      },
+      "ApplicationContext": {
+        "type": "object",
+        "properties": {
+          "brand_name": {
+            "type": "string"
+          },
+          "locale": {
+            "type": "string"
+          },
+          "shipping_preference": {
+            "type": "string",
+            "enum": [
+              "GET_FROM_FILE",
+              "NO_SHIPPING",
+              "SET_PROVIDED_ADDRESS"
+            ]
+          },
+          "user_action": {
+            "type": "string",
+            "enum": [
+              "CONTINUE",
+              "SUBSCRIBE_NOW"
+            ]
+          },
+          "payment_method": {
+            "$ref": "#/components/schemas/PaymentMethod"
+          },
+          "return_url": {
+            "type": "string"
+          },
+          "cancel_url": {
+            "type": "string"
+          }
+        }
+      },
+      "PaymentMethod": {
+        "type": "object",
+        "properties": {
+          "payer_selected": {
+            "type": "string"
+          },
+          "payee_preferred": {
+            "type": "string",
+            "enum": [
+              "UNRESTRICTED",
+              "IMMEDIATE_PAYMENT_REQUIRED"
+            ]
+          }
+        }
+      },
+      "BillingInfo": {
+        "type": "object",
+        "properties": {
+          "outstanding_balance": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "cycle_executions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CycleExecution"
+            }
+          },
+          "last_payment": {
+            "$ref": "#/components/schemas/LastPayment"
+          },
+          "next_billing_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "failed_payments_count": {
+            "type": "integer"
+          }
+        }
+      },
+      "CycleExecution": {
+        "type": "object",
+        "properties": {
+          "tenure_type": {
+            "type": "string",
+            "enum": [
+              "REGULAR",
+              "TRIAL"
+            ]
+          },
+          "sequence": {
+            "type": "integer"
+          },
+          "cycles_completed": {
+            "type": "integer"
+          },
+          "cycles_remaining": {
+            "type": "integer"
+          },
+          "total_cycles": {
+            "type": "integer"
+          }
+        }
+      },
+      "LastPayment": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SubscriptionUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "plan_id": {
+            "type": "string"
+          },
+          "shipping_amount": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "shipping_address": {
+            "$ref": "#/components/schemas/ShippingAddress"
+          },
+          "application_context": {
+            "$ref": "#/components/schemas/ApplicationContext"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "debug_id": {
+            "type": "string"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetails"
+            }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            }
+          }
+        }
+      },
+      "ErrorDetails": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "issue": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://www.paypal.com/signin/authorize",
+            "tokenUrl": "https://api.paypal.com/v1/oauth2/token",
+            "scopes": {
+              "https://uri.paypal.com/services/payments/payment": "Create and manage payments",
+              "https://uri.paypal.com/services/subscriptions": "Create and manage subscriptions"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,434 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Elasticsearch API",
+    "version": "7.x",
+    "description": "API specification for Elasticsearch",
+    "contact": {
+      "name": "Elastic",
+      "url": "https://www.elastic.co"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:9200",
+      "description": "Local Elasticsearch instance"
+    }
+  ],
+  "paths": {
+    "/_cluster/health": {
+      "get": {
+        "summary": "Get cluster health",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClusterHealth"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{index}": {
+      "put": {
+        "summary": "Create an index",
+        "parameters": [
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IndexSettings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an index",
+        "parameters": [
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/{index}/_doc": {
+      "post": {
+        "summary": "Index a document",
+        "parameters": [
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Document indexed"
+          }
+        }
+      }
+    },
+    "/{index}/_doc/{id}": {
+      "get": {
+        "summary": "Get a document by ID",
+        "parameters": [
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Index or update a document",
+        "parameters": [
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Document indexed or updated"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a document",
+        "parameters": [
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Document deleted"
+          }
+        }
+      }
+    },
+    "/{index}/_search": {
+      "post": {
+        "summary": "Search documents",
+        "parameters": [
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_bulk": {
+      "post": {
+        "summary": "Perform bulk operations",
+        "requestBody": {
+          "content": {
+            "application/x-ndjson": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/_cat/indices": {
+      "get": {
+        "summary": "Get information about indices",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ClusterHealth": {
+        "type": "object",
+        "properties": {
+          "cluster_name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "green",
+              "yellow",
+              "red"
+            ]
+          },
+          "number_of_nodes": {
+            "type": "integer"
+          },
+          "number_of_data_nodes": {
+            "type": "integer"
+          },
+          "active_primary_shards": {
+            "type": "integer"
+          },
+          "active_shards": {
+            "type": "integer"
+          },
+          "relocating_shards": {
+            "type": "integer"
+          },
+          "initializing_shards": {
+            "type": "integer"
+          },
+          "unassigned_shards": {
+            "type": "integer"
+          }
+        }
+      },
+      "IndexSettings": {
+        "type": "object",
+        "properties": {
+          "settings": {
+            "type": "object"
+          },
+          "mappings": {
+            "type": "object"
+          }
+        }
+      },
+      "Document": {
+        "type": "object",
+        "properties": {
+          "_index": {
+            "type": "string"
+          },
+          "_type": {
+            "type": "string"
+          },
+          "_id": {
+            "type": "string"
+          },
+          "_version": {
+            "type": "integer"
+          },
+          "_source": {
+            "type": "object"
+          }
+        }
+      },
+      "SearchQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object"
+          },
+          "from": {
+            "type": "integer"
+          },
+          "size": {
+            "type": "integer"
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "SearchResponse": {
+        "type": "object",
+        "properties": {
+          "took": {
+            "type": "integer"
+          },
+          "timed_out": {
+            "type": "boolean"
+          },
+          "_shards": {
+            "type": "object"
+          },
+          "hits": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "type": "object"
+              },
+              "max_score": {
+                "type": "number"
+              },
+              "hits": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          }
+        }
+      },
+      "BulkResponse": {
+        "type": "object",
+        "properties": {
+          "took": {
+            "type": "integer"
+          },
+          "errors": {
+            "type": "boolean"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  }
+}

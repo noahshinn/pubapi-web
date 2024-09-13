@@ -1,0 +1,549 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Dynatrace API",
+    "description": "API for interacting with Dynatrace monitoring and observability platform",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Dynatrace Support",
+      "url": "https://www.dynatrace.com/support/",
+      "email": "support@dynatrace.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://{your-environment-id}.live.dynatrace.com/api/v2",
+      "variables": {
+        "your-environment-id": {
+          "default": "abc12345",
+          "description": "Your Dynatrace environment ID"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/metrics": {
+      "get": {
+        "summary": "Get metrics",
+        "description": "Retrieve metrics data",
+        "parameters": [
+          {
+            "name": "metricSelector",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The metric selector"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Start timestamp of the query"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "End timestamp of the query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetricsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/entities": {
+      "get": {
+        "summary": "Get entities",
+        "description": "Retrieve monitored entities",
+        "parameters": [
+          {
+            "name": "entitySelector",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The entity selector"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntitiesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/problems": {
+      "get": {
+        "summary": "Get problems",
+        "description": "Retrieve detected problems",
+        "parameters": [
+          {
+            "name": "problemSelector",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The problem selector"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Start timestamp of the query"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "End timestamp of the query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events": {
+      "post": {
+        "summary": "Push custom event",
+        "description": "Push a custom event to Dynatrace",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventPush"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Event successfully pushed"
+          }
+        }
+      }
+    },
+    "/config/v1/managementZones": {
+      "get": {
+        "summary": "Get management zones",
+        "description": "Retrieve configured management zones",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagementZonesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/config/v1/alertingProfiles": {
+      "get": {
+        "summary": "Get alerting profiles",
+        "description": "Retrieve configured alerting profiles",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlertingProfilesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "MetricsResponse": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer"
+          },
+          "nextPageKey": {
+            "type": "string"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricData"
+            }
+          }
+        }
+      },
+      "MetricData": {
+        "type": "object",
+        "properties": {
+          "metricId": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataPoint"
+            }
+          }
+        }
+      },
+      "DataPoint": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "value": {
+            "type": "number"
+          }
+        }
+      },
+      "EntitiesResponse": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer"
+          },
+          "pageSize": {
+            "type": "integer"
+          },
+          "nextPageKey": {
+            "type": "string"
+          },
+          "entities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Entity"
+            }
+          }
+        }
+      },
+      "Entity": {
+        "type": "object",
+        "properties": {
+          "entityId": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ProblemsResponse": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer"
+          },
+          "pageSize": {
+            "type": "integer"
+          },
+          "nextPageKey": {
+            "type": "string"
+          },
+          "problems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        }
+      },
+      "Problem": {
+        "type": "object",
+        "properties": {
+          "problemId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "impactLevel": {
+            "type": "string",
+            "enum": [
+              "APPLICATION",
+              "SERVICE",
+              "INFRASTRUCTURE"
+            ]
+          },
+          "severityLevel": {
+            "type": "string",
+            "enum": [
+              "AVAILABILITY",
+              "ERROR",
+              "PERFORMANCE",
+              "RESOURCE_CONTENTION",
+              "CUSTOM_ALERT"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "CLOSED"
+            ]
+          },
+          "affectedEntities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Entity"
+            }
+          }
+        }
+      },
+      "EventPush": {
+        "type": "object",
+        "required": [
+          "eventType",
+          "title",
+          "startTime",
+          "endTime"
+        ],
+        "properties": {
+          "eventType": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "type": "string"
+          },
+          "entitySelector": {
+            "type": "string"
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ManagementZonesResponse": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ManagementZone"
+            }
+          }
+        }
+      },
+      "ManagementZone": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ManagementZoneRule"
+            }
+          }
+        }
+      },
+      "ManagementZoneRule": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "propagationTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Condition"
+            }
+          }
+        }
+      },
+      "Condition": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "comparisonInfo": {
+            "$ref": "#/components/schemas/ComparisonInfo"
+          }
+        }
+      },
+      "ComparisonInfo": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "operator": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "AlertingProfilesResponse": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertingProfile"
+            }
+          }
+        }
+      },
+      "AlertingProfile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertingRule"
+            }
+          }
+        }
+      },
+      "AlertingRule": {
+        "type": "object",
+        "properties": {
+          "severityLevel": {
+            "type": "string"
+          },
+          "tagFilter": {
+            "$ref": "#/components/schemas/TagFilter"
+          },
+          "delayInMinutes": {
+            "type": "integer"
+          }
+        }
+      },
+      "TagFilter": {
+        "type": "object",
+        "properties": {
+          "includeMode": {
+            "type": "string"
+          },
+          "tagFilters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TagFilterItem"
+            }
+          }
+        }
+      },
+      "TagFilterItem": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiToken": []
+    }
+  ]
+}

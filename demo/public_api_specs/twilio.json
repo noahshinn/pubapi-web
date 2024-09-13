@@ -1,0 +1,938 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Twilio API",
+    "description": "The Twilio API for SMS, Voice, Video, and Verify services.",
+    "version": "2010-04-01",
+    "contact": {
+      "name": "Twilio Support",
+      "url": "https://www.twilio.com/help/contact",
+      "email": "support@twilio.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.twilio.com/2010-04-01"
+    }
+  ],
+  "paths": {
+    "/Accounts/{AccountSid}/Messages.json": {
+      "post": {
+        "summary": "Send an SMS or MMS message",
+        "operationId": "createMessage",
+        "tags": [
+          "SMS"
+        ],
+        "parameters": [
+          {
+            "name": "AccountSid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "To": {
+                    "type": "string",
+                    "description": "The destination phone number"
+                  },
+                  "From": {
+                    "type": "string",
+                    "description": "The Twilio phone number or Messaging Service SID to send the message from"
+                  },
+                  "Body": {
+                    "type": "string",
+                    "description": "The text of the message you want to send"
+                  },
+                  "MediaUrl": {
+                    "type": "string",
+                    "description": "The URL of the media you wish to send"
+                  }
+                },
+                "required": [
+                  "To",
+                  "From",
+                  "Body"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "List SMS messages",
+        "operationId": "listMessages",
+        "tags": [
+          "SMS"
+        ],
+        "parameters": [
+          {
+            "name": "AccountSid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "To",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "From",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "DateSent",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "messages": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Accounts/{AccountSid}/Calls.json": {
+      "post": {
+        "summary": "Make a phone call",
+        "operationId": "createCall",
+        "tags": [
+          "Voice"
+        ],
+        "parameters": [
+          {
+            "name": "AccountSid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "To": {
+                    "type": "string",
+                    "description": "The phone number to call"
+                  },
+                  "From": {
+                    "type": "string",
+                    "description": "The Twilio phone number to use as the caller ID"
+                  },
+                  "Url": {
+                    "type": "string",
+                    "description": "The URL of the TwiML instructions for the call"
+                  }
+                },
+                "required": [
+                  "To",
+                  "From",
+                  "Url"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Call"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "List phone calls",
+        "operationId": "listCalls",
+        "tags": [
+          "Voice"
+        ],
+        "parameters": [
+          {
+            "name": "AccountSid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "To",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "From",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "queued",
+                "ringing",
+                "in-progress",
+                "completed",
+                "failed",
+                "busy",
+                "no-answer"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "calls": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Call"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Accounts/{AccountSid}/Verify/Services": {
+      "post": {
+        "summary": "Create a Verify service",
+        "operationId": "createVerifyService",
+        "tags": [
+          "Verify"
+        ],
+        "parameters": [
+          {
+            "name": "AccountSid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "FriendlyName": {
+                    "type": "string",
+                    "description": "A descriptive string that you create to describe the verification service"
+                  }
+                },
+                "required": [
+                  "FriendlyName"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerifyService"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Accounts/{AccountSid}/Verify/Services/{ServiceSid}/Verifications": {
+      "post": {
+        "summary": "Start a verification",
+        "operationId": "createVerification",
+        "tags": [
+          "Verify"
+        ],
+        "parameters": [
+          {
+            "name": "AccountSid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ServiceSid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "To": {
+                    "type": "string",
+                    "description": "The phone number or email to verify"
+                  },
+                  "Channel": {
+                    "type": "string",
+                    "description": "The verification method to use",
+                    "enum": [
+                      "sms",
+                      "call",
+                      "email"
+                    ]
+                  }
+                },
+                "required": [
+                  "To",
+                  "Channel"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Verification"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Accounts/{AccountSid}/Verify/Services/{ServiceSid}/VerificationCheck": {
+      "post": {
+        "summary": "Check a verification",
+        "operationId": "checkVerification",
+        "tags": [
+          "Verify"
+        ],
+        "parameters": [
+          {
+            "name": "AccountSid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ServiceSid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "To": {
+                    "type": "string",
+                    "description": "The phone number or email being verified"
+                  },
+                  "Code": {
+                    "type": "string",
+                    "description": "The verification code"
+                  }
+                },
+                "required": [
+                  "To",
+                  "Code"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerificationCheck"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Accounts/{AccountSid}/Conferences": {
+      "post": {
+        "summary": "Create a conference",
+        "operationId": "createConference",
+        "tags": [
+          "Voice"
+        ],
+        "parameters": [
+          {
+            "name": "AccountSid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "FriendlyName": {
+                    "type": "string",
+                    "description": "A descriptive string that you create to describe the conference"
+                  }
+                },
+                "required": [
+                  "FriendlyName"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conference"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Accounts/{AccountSid}/Recordings": {
+      "get": {
+        "summary": "List recordings",
+        "operationId": "listRecordings",
+        "tags": [
+          "Voice"
+        ],
+        "parameters": [
+          {
+            "name": "AccountSid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "DateCreated",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "CallSid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "recordings": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Recording"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    },
+    "schemas": {
+      "Message": {
+        "type": "object",
+        "properties": {
+          "sid": {
+            "type": "string"
+          },
+          "date_created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "date_updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "date_sent": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "account_sid": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          },
+          "messaging_service_sid": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "queued",
+              "sending",
+              "sent",
+              "failed",
+              "delivered"
+            ]
+          },
+          "num_segments": {
+            "type": "string"
+          },
+          "num_media": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "inbound",
+              "outbound-api",
+              "outbound-call",
+              "outbound-reply"
+            ]
+          },
+          "api_version": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "price_unit": {
+            "type": "string"
+          },
+          "error_code": {
+            "type": "string"
+          },
+          "error_message": {
+            "type": "string"
+          },
+          "uri": {
+            "type": "string"
+          },
+          "subresource_uris": {
+            "type": "object"
+          }
+        }
+      },
+      "Call": {
+        "type": "object",
+        "properties": {
+          "sid": {
+            "type": "string"
+          },
+          "date_created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "date_updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "parent_call_sid": {
+            "type": "string"
+          },
+          "account_sid": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "to_formatted": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          },
+          "from_formatted": {
+            "type": "string"
+          },
+          "phone_number_sid": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "queued",
+              "ringing",
+              "in-progress",
+              "completed",
+              "failed",
+              "busy",
+              "no-answer"
+            ]
+          },
+          "start_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "duration": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "price_unit": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "inbound",
+              "outbound-api",
+              "outbound-dial"
+            ]
+          },
+          "answered_by": {
+            "type": "string"
+          },
+          "api_version": {
+            "type": "string"
+          },
+          "forwarded_from": {
+            "type": "string"
+          },
+          "group_sid": {
+            "type": "string"
+          },
+          "caller_name": {
+            "type": "string"
+          },
+          "uri": {
+            "type": "string"
+          },
+          "subresource_uris": {
+            "type": "object"
+          }
+        }
+      },
+      "VerifyService": {
+        "type": "object",
+        "properties": {
+          "sid": {
+            "type": "string"
+          },
+          "account_sid": {
+            "type": "string"
+          },
+          "friendly_name": {
+            "type": "string"
+          },
+          "code_length": {
+            "type": "integer"
+          },
+          "lookup_enabled": {
+            "type": "boolean"
+          },
+          "psd2_enabled": {
+            "type": "boolean"
+          },
+          "skip_sms_to_landlines": {
+            "type": "boolean"
+          },
+          "dtmf_input_required": {
+            "type": "boolean"
+          },
+          "tts_name": {
+            "type": "string"
+          },
+          "date_created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "date_updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "Verification": {
+        "type": "object",
+        "properties": {
+          "sid": {
+            "type": "string"
+          },
+          "service_sid": {
+            "type": "string"
+          },
+          "account_sid": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "channel": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "valid": {
+            "type": "boolean"
+          },
+          "date_created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "date_updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "VerificationCheck": {
+        "type": "object",
+        "properties": {
+          "sid": {
+            "type": "string"
+          },
+          "service_sid": {
+            "type": "string"
+          },
+          "account_sid": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "channel": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "valid": {
+            "type": "boolean"
+          },
+          "date_created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "date_updated": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Conference": {
+        "type": "object",
+        "properties": {
+          "sid": {
+            "type": "string"
+          },
+          "friendly_name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "date_created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "date_updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "account_sid": {
+            "type": "string"
+          },
+          "uri": {
+            "type": "string"
+          }
+        }
+      },
+      "Recording": {
+        "type": "object",
+        "properties": {
+          "sid": {
+            "type": "string"
+          },
+          "date_created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "date_updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "account_sid": {
+            "type": "string"
+          },
+          "call_sid": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "price_unit": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "channels": {
+            "type": "integer"
+          },
+          "source": {
+            "type": "string"
+          },
+          "error_code": {
+            "type": "string"
+          },
+          "uri": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

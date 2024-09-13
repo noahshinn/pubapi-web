@@ -1,0 +1,543 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Akamai API",
+    "description": "API for interacting with Akamai's Content Delivery Network and other services",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Akamai Support",
+      "url": "https://www.akamai.com/support",
+      "email": "support@akamai.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.akamai.com/v1"
+    }
+  ],
+  "paths": {
+    "/purge": {
+      "post": {
+        "summary": "Purge content from the CDN",
+        "description": "Remove content from Akamai's edge servers to force a refresh from the origin",
+        "tags": [
+          "CDN"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurgeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful purge request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PurgeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/cps/v2/enrollments": {
+      "get": {
+        "summary": "List CPS enrollments",
+        "description": "Retrieve a list of Certificate Provisioning System (CPS) enrollments",
+        "tags": [
+          "SSL/TLS"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of enrollments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CPSEnrollment"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new CPS enrollment",
+        "description": "Create a new Certificate Provisioning System (CPS) enrollment",
+        "tags": [
+          "SSL/TLS"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CPSEnrollmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful creation of enrollment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CPSEnrollment"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/imaging/v0/policies": {
+      "get": {
+        "summary": "List Image Manager policies",
+        "description": "Retrieve a list of Image Manager policies",
+        "tags": [
+          "Image Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of policies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ImagePolicy"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new Image Manager policy",
+        "description": "Create a new Image Manager policy",
+        "tags": [
+          "Image Management"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImagePolicyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful creation of policy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImagePolicy"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/firewall-rules/v1/configurations": {
+      "get": {
+        "summary": "List Firewall Rules configurations",
+        "description": "Retrieve a list of Firewall Rules configurations",
+        "tags": [
+          "Security"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of configurations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FirewallConfig"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new Firewall Rules configuration",
+        "description": "Create a new Firewall Rules configuration",
+        "tags": [
+          "Security"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FirewallConfigRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful creation of configuration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FirewallConfig"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PurgeRequest": {
+        "type": "object",
+        "required": [
+          "objects"
+        ],
+        "properties": {
+          "objects": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of URLs or CPCodes to purge"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "remove",
+              "invalidate"
+            ],
+            "default": "remove",
+            "description": "Purge action to perform"
+          }
+        }
+      },
+      "PurgeResponse": {
+        "type": "object",
+        "properties": {
+          "estimatedSeconds": {
+            "type": "integer",
+            "description": "Estimated time for the purge to complete"
+          },
+          "purgeId": {
+            "type": "string",
+            "description": "Unique identifier for the purge request"
+          }
+        }
+      },
+      "CPSEnrollment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the enrollment"
+          },
+          "commonName": {
+            "type": "string",
+            "description": "Common name for the certificate"
+          },
+          "sansCount": {
+            "type": "integer",
+            "description": "Number of Subject Alternative Names"
+          },
+          "validationStatus": {
+            "type": "string",
+            "description": "Current validation status of the enrollment"
+          }
+        }
+      },
+      "CPSEnrollmentRequest": {
+        "type": "object",
+        "required": [
+          "csr",
+          "org",
+          "adminContact"
+        ],
+        "properties": {
+          "csr": {
+            "type": "string",
+            "description": "Certificate Signing Request"
+          },
+          "org": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Organization name"
+              },
+              "addressLineOne": {
+                "type": "string",
+                "description": "First line of organization address"
+              },
+              "city": {
+                "type": "string",
+                "description": "City of organization"
+              },
+              "region": {
+                "type": "string",
+                "description": "Region/State of organization"
+              },
+              "postalCode": {
+                "type": "string",
+                "description": "Postal code of organization"
+              },
+              "country": {
+                "type": "string",
+                "description": "Country of organization"
+              }
+            }
+          },
+          "adminContact": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "description": "First name of admin contact"
+              },
+              "lastName": {
+                "type": "string",
+                "description": "Last name of admin contact"
+              },
+              "phone": {
+                "type": "string",
+                "description": "Phone number of admin contact"
+              },
+              "email": {
+                "type": "string",
+                "description": "Email of admin contact"
+              }
+            }
+          }
+        }
+      },
+      "ImagePolicy": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the policy"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the policy"
+          },
+          "outputFormats": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "jpg",
+                "png",
+                "webp"
+              ]
+            },
+            "description": "Supported output formats"
+          },
+          "quality": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Image quality setting"
+          }
+        }
+      },
+      "ImagePolicyRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "outputFormats",
+          "quality"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the policy"
+          },
+          "outputFormats": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "jpg",
+                "png",
+                "webp"
+              ]
+            },
+            "description": "Supported output formats"
+          },
+          "quality": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Image quality setting"
+          }
+        }
+      },
+      "FirewallConfig": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the configuration"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the configuration"
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FirewallRule"
+            },
+            "description": "List of firewall rules"
+          }
+        }
+      },
+      "FirewallConfigRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "rules"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the configuration"
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FirewallRule"
+            },
+            "description": "List of firewall rules"
+          }
+        }
+      },
+      "FirewallRule": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the rule"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the rule"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "allow",
+              "deny",
+              "alert"
+            ],
+            "description": "Action to take when rule matches"
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FirewallCondition"
+            },
+            "description": "List of conditions for the rule"
+          }
+        }
+      },
+      "FirewallCondition": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ip",
+              "geoLocation",
+              "requestHeader",
+              "requestMethod"
+            ],
+            "description": "Type of condition"
+          },
+          "value": {
+            "type": "string",
+            "description": "Value to match for the condition"
+          },
+          "operator": {
+            "type": "string",
+            "enum": [
+              "equals",
+              "contains",
+              "startsWith",
+              "endsWith"
+            ],
+            "description": "Operator for condition matching"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "edgeGridAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "Akamai EdgeGrid Authentication"
+      }
+    }
+  },
+  "security": [
+    {
+      "edgeGridAuth": []
+    }
+  ]
+}

@@ -1,0 +1,598 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Okta API",
+    "description": "The Okta API enables you to manage users, groups, applications, and more in your Okta organization.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Okta Developer Support",
+      "url": "https://developer.okta.com/support/",
+      "email": "developers@okta.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://{yourOktaDomain}/api/v1",
+      "variables": {
+        "yourOktaDomain": {
+          "default": "your-domain.okta.com",
+          "description": "Your Okta domain"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "summary": "List Users",
+        "description": "Lists users in your organization with pagination.",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Searches for users with a supported filtering expression",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Specifies the number of results returned",
+            "schema": {
+              "type": "integer",
+              "default": 200,
+              "maximum": 200
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oktaAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create User",
+        "description": "Creates a new user in your Okta organization",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oktaAuth": []
+          }
+        ]
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "summary": "Get User",
+        "description": "Gets a user by ID",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oktaAuth": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update User",
+        "description": "Updates a user's profile and/or credentials using the Profile object",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oktaAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete User",
+        "description": "Deletes a user permanently",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "security": [
+          {
+            "oktaAuth": []
+          }
+        ]
+      }
+    },
+    "/groups": {
+      "get": {
+        "summary": "List Groups",
+        "description": "Lists groups in your organization with pagination",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Searches for groups with a supported filtering expression",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Specifies the number of results returned",
+            "schema": {
+              "type": "integer",
+              "default": 200,
+              "maximum": 200
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Group"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oktaAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create Group",
+        "description": "Creates a new group in your Okta organization",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Group"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Group"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oktaAuth": []
+          }
+        ]
+      }
+    },
+    "/apps": {
+      "get": {
+        "summary": "List Applications",
+        "description": "Lists applications in your organization with pagination",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Searches for applications with a supported filtering expression",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Specifies the number of results returned",
+            "schema": {
+              "type": "integer",
+              "default": 200,
+              "maximum": 200
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Application"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oktaAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create Application",
+        "description": "Creates a new application in your Okta organization",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oktaAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "DEPROVISIONED",
+              "LOCKED_OUT",
+              "PASSWORD_EXPIRED",
+              "PROVISIONED",
+              "RECOVERY",
+              "STAGED",
+              "SUSPENDED"
+            ]
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "activated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "statusChanged": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastLogin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "passwordChanged": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "profile": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "login": {
+                "type": "string"
+              },
+              "mobilePhone": {
+                "type": "string"
+              }
+            }
+          },
+          "credentials": {
+            "type": "object",
+            "properties": {
+              "password": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "recovery_question": {
+                "type": "object",
+                "properties": {
+                  "question": {
+                    "type": "string"
+                  },
+                  "answer": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Group": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastMembershipUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "objectClass": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "type": {
+            "type": "string"
+          },
+          "profile": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Application": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE"
+            ]
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "accessibility": {
+            "type": "object",
+            "properties": {
+              "selfService": {
+                "type": "boolean"
+              },
+              "errorRedirectUrl": {
+                "type": "string"
+              },
+              "loginRedirectUrl": {
+                "type": "string"
+              }
+            }
+          },
+          "visibility": {
+            "type": "object",
+            "properties": {
+              "autoSubmitToolbar": {
+                "type": "boolean"
+              },
+              "hide": {
+                "type": "object",
+                "properties": {
+                  "iOS": {
+                    "type": "boolean"
+                  },
+                  "web": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "signOnMode": {
+            "type": "string"
+          },
+          "credentials": {
+            "type": "object",
+            "properties": {
+              "userNameTemplate": {
+                "type": "object",
+                "properties": {
+                  "template": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "signing": {
+                "type": "object",
+                "properties": {
+                  "kid": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "settings": {
+            "type": "object",
+            "properties": {
+              "app": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "oktaAuth": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}

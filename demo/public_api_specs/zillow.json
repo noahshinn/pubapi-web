@@ -1,0 +1,790 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Zillow API",
+    "description": "API for accessing Zillow's real estate data and services",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Zillow API Support",
+      "url": "https://www.zillow.com/api-support",
+      "email": "api-support@zillow.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.zillow.com/v1"
+    }
+  ],
+  "paths": {
+    "/properties": {
+      "get": {
+        "summary": "Search for properties",
+        "description": "Search for properties based on various criteria",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "query",
+            "description": "Location to search (city, state, zip code, or neighborhood)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "min_price",
+            "in": "query",
+            "description": "Minimum price",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "max_price",
+            "in": "query",
+            "description": "Maximum price",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "bedrooms",
+            "in": "query",
+            "description": "Number of bedrooms",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "bathrooms",
+            "in": "query",
+            "description": "Number of bathrooms",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "home_type",
+            "in": "query",
+            "description": "Type of home",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "house",
+                "apartment",
+                "condo",
+                "townhouse"
+              ]
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort order",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "price_asc",
+                "price_desc",
+                "date_asc",
+                "date_desc"
+              ]
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results per page",
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "maximum": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropertySearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "429": {
+            "description": "Too many requests"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/properties/{zpid}": {
+      "get": {
+        "summary": "Get property details",
+        "description": "Retrieve detailed information about a specific property",
+        "parameters": [
+          {
+            "name": "zpid",
+            "in": "path",
+            "description": "Zillow Property ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropertyDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Property not found"
+          },
+          "429": {
+            "description": "Too many requests"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/zestimate/{zpid}": {
+      "get": {
+        "summary": "Get Zestimate",
+        "description": "Retrieve Zillow's estimated market value for a property",
+        "parameters": [
+          {
+            "name": "zpid",
+            "in": "path",
+            "description": "Zillow Property ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Zestimate"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Property not found"
+          },
+          "429": {
+            "description": "Too many requests"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/mortgage/rates": {
+      "get": {
+        "summary": "Get mortgage rates",
+        "description": "Retrieve current mortgage rates",
+        "parameters": [
+          {
+            "name": "loan_type",
+            "in": "query",
+            "description": "Type of loan",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "30-year-fixed",
+                "15-year-fixed",
+                "5-1-arm"
+              ]
+            }
+          },
+          {
+            "name": "credit_score",
+            "in": "query",
+            "description": "Credit score range",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "excellent",
+                "good",
+                "fair",
+                "poor"
+              ]
+            }
+          },
+          {
+            "name": "loan_amount",
+            "in": "query",
+            "description": "Loan amount",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MortgageRates"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "429": {
+            "description": "Too many requests"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/mortgage/calculator": {
+      "post": {
+        "summary": "Calculate mortgage payments",
+        "description": "Calculate estimated mortgage payments based on input parameters",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MortgageCalculatorInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MortgageCalculatorOutput"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "429": {
+            "description": "Too many requests"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/agents": {
+      "get": {
+        "summary": "Search for agents",
+        "description": "Search for real estate agents in a specific area",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "query",
+            "description": "Location to search (city, state, or zip code)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "specialization",
+            "in": "query",
+            "description": "Agent specialization",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "buyer",
+                "seller",
+                "both"
+              ]
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results per page",
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "maximum": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentSearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "429": {
+            "description": "Too many requests"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PropertySearchResponse": {
+        "type": "object",
+        "properties": {
+          "total_results": {
+            "type": "integer"
+          },
+          "page": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "integer"
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PropertySummary"
+            }
+          }
+        }
+      },
+      "PropertySummary": {
+        "type": "object",
+        "properties": {
+          "zpid": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer"
+          },
+          "bedrooms": {
+            "type": "integer"
+          },
+          "bathrooms": {
+            "type": "number"
+          },
+          "home_type": {
+            "type": "string"
+          },
+          "square_feet": {
+            "type": "integer"
+          },
+          "lot_size": {
+            "type": "number"
+          },
+          "year_built": {
+            "type": "integer"
+          },
+          "days_on_zillow": {
+            "type": "integer"
+          },
+          "thumbnail_url": {
+            "type": "string"
+          }
+        }
+      },
+      "PropertyDetails": {
+        "type": "object",
+        "properties": {
+          "zpid": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer"
+          },
+          "bedrooms": {
+            "type": "integer"
+          },
+          "bathrooms": {
+            "type": "number"
+          },
+          "home_type": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "square_feet": {
+            "type": "integer"
+          },
+          "lot_size": {
+            "type": "number"
+          },
+          "year_built": {
+            "type": "integer"
+          },
+          "days_on_zillow": {
+            "type": "integer"
+          },
+          "zestimate": {
+            "type": "integer"
+          },
+          "rent_zestimate": {
+            "type": "integer"
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "schools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/School"
+            }
+          },
+          "photos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tax_history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaxHistory"
+            }
+          },
+          "price_history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PriceHistory"
+            }
+          }
+        }
+      },
+      "School": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "grades": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "integer"
+          },
+          "distance": {
+            "type": "number"
+          }
+        }
+      },
+      "TaxHistory": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer"
+          },
+          "tax_amount": {
+            "type": "number"
+          },
+          "assessed_value": {
+            "type": "integer"
+          }
+        }
+      },
+      "PriceHistory": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "price": {
+            "type": "integer"
+          },
+          "event": {
+            "type": "string"
+          }
+        }
+      },
+      "Zestimate": {
+        "type": "object",
+        "properties": {
+          "zpid": {
+            "type": "string"
+          },
+          "zestimate": {
+            "type": "integer"
+          },
+          "rent_zestimate": {
+            "type": "integer"
+          },
+          "valuation_range": {
+            "type": "object",
+            "properties": {
+              "low": {
+                "type": "integer"
+              },
+              "high": {
+                "type": "integer"
+              }
+            }
+          },
+          "last_updated": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "MortgageRates": {
+        "type": "object",
+        "properties": {
+          "loan_type": {
+            "type": "string"
+          },
+          "rate": {
+            "type": "number"
+          },
+          "apr": {
+            "type": "number"
+          }
+        }
+      },
+      "MortgageCalculatorInput": {
+        "type": "object",
+        "properties": {
+          "home_price": {
+            "type": "integer"
+          },
+          "down_payment": {
+            "type": "integer"
+          },
+          "loan_term": {
+            "type": "integer"
+          },
+          "interest_rate": {
+            "type": "number"
+          },
+          "property_tax": {
+            "type": "number"
+          },
+          "home_insurance": {
+            "type": "number"
+          },
+          "hoa_fees": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "home_price",
+          "down_payment",
+          "loan_term",
+          "interest_rate"
+        ]
+      },
+      "MortgageCalculatorOutput": {
+        "type": "object",
+        "properties": {
+          "monthly_payment": {
+            "type": "number"
+          },
+          "principal_and_interest": {
+            "type": "number"
+          },
+          "property_tax": {
+            "type": "number"
+          },
+          "home_insurance": {
+            "type": "number"
+          },
+          "hoa_fees": {
+            "type": "number"
+          },
+          "total_payment": {
+            "type": "number"
+          },
+          "amortization_schedule": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AmortizationEntry"
+            }
+          }
+        }
+      },
+      "AmortizationEntry": {
+        "type": "object",
+        "properties": {
+          "month": {
+            "type": "integer"
+          },
+          "balance": {
+            "type": "number"
+          },
+          "principal_payment": {
+            "type": "number"
+          },
+          "interest_payment": {
+            "type": "number"
+          },
+          "total_payment": {
+            "type": "number"
+          }
+        }
+      },
+      "AgentSearchResponse": {
+        "type": "object",
+        "properties": {
+          "total_results": {
+            "type": "integer"
+          },
+          "page": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "integer"
+          },
+          "agents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Agent"
+            }
+          }
+        }
+      },
+      "Agent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "photo_url": {
+            "type": "string"
+          },
+          "brokerage": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "specialization": {
+            "type": "string"
+          },
+          "years_of_experience": {
+            "type": "integer"
+          },
+          "active_listings": {
+            "type": "integer"
+          },
+          "recent_sales": {
+            "type": "integer"
+          },
+          "rating": {
+            "type": "number"
+          },
+          "review_count": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ]
+}

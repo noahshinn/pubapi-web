@@ -1,0 +1,329 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Fortinet API",
+    "description": "API for managing Fortinet security devices and services",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Fortinet Support",
+      "url": "https://www.fortinet.com/support",
+      "email": "support@fortinet.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.fortinet.com/v1"
+    }
+  ],
+  "paths": {
+    "/cmdb/system/interface": {
+      "get": {
+        "summary": "Get system interfaces",
+        "description": "Retrieve a list of all system interfaces",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InterfaceList"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create system interface",
+        "description": "Create a new system interface",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Interface"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Interface"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/cmdb/firewall/policy": {
+      "get": {
+        "summary": "Get firewall policies",
+        "description": "Retrieve a list of all firewall policies",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyList"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create firewall policy",
+        "description": "Create a new firewall policy",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Policy"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Policy"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/monitor/system/status": {
+      "get": {
+        "summary": "Get system status",
+        "description": "Retrieve the current system status",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemStatus"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/monitor/log/disk/event": {
+      "get": {
+        "summary": "Get event logs",
+        "description": "Retrieve event logs from disk",
+        "parameters": [
+          {
+            "name": "start-time",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Start time for log retrieval"
+          },
+          {
+            "name": "end-time",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "End time for log retrieval"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventLogList"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Interface": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "ip": {
+            "type": "string"
+          },
+          "netmask": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "up",
+              "down"
+            ]
+          }
+        }
+      },
+      "InterfaceList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Interface"
+        }
+      },
+      "Policy": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "srcintf": {
+            "type": "string"
+          },
+          "dstintf": {
+            "type": "string"
+          },
+          "srcaddr": {
+            "type": "string"
+          },
+          "dstaddr": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "accept",
+              "deny"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "enable",
+              "disable"
+            ]
+          }
+        }
+      },
+      "PolicyList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Policy"
+        }
+      },
+      "SystemStatus": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "cpu_usage": {
+            "type": "number"
+          },
+          "memory_usage": {
+            "type": "number"
+          },
+          "disk_usage": {
+            "type": "number"
+          },
+          "uptime": {
+            "type": "integer"
+          }
+        }
+      },
+      "EventLog": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "debug",
+              "info",
+              "notice",
+              "warning",
+              "error",
+              "critical",
+              "alert",
+              "emergency"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "EventLogList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/EventLog"
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

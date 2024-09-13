@@ -1,0 +1,485 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Dropbox API",
+    "description": "The Dropbox API allows developers to integrate Dropbox functionality into their applications.",
+    "version": "2.0.0",
+    "contact": {
+      "name": "Dropbox API Support",
+      "url": "https://www.dropbox.com/developers/support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.dropboxapi.com/2"
+    }
+  ],
+  "paths": {
+    "/files/list_folder": {
+      "post": {
+        "summary": "List folder contents",
+        "description": "Returns the contents of a folder.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListFolderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListFolderResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "files.metadata.read"
+            ]
+          }
+        ]
+      }
+    },
+    "/files/upload": {
+      "post": {
+        "summary": "Upload file",
+        "description": "Upload a file to a user's Dropbox.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Dropbox-API-Arg",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UploadArg"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileMetadata"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "files.content.write"
+            ]
+          }
+        ]
+      }
+    },
+    "/files/download": {
+      "post": {
+        "summary": "Download file",
+        "description": "Download a file from a user's Dropbox.",
+        "parameters": [
+          {
+            "name": "Dropbox-API-Arg",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DownloadArg"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "files.content.read"
+            ]
+          }
+        ]
+      }
+    },
+    "/files/delete_v2": {
+      "post": {
+        "summary": "Delete file",
+        "description": "Delete a file or folder.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteArg"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "files.content.write"
+            ]
+          }
+        ]
+      }
+    },
+    "/files/create_folder_v2": {
+      "post": {
+        "summary": "Create folder",
+        "description": "Create a folder at a given path.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFolderArg"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateFolderResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "files.content.write"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ListFolderRequest": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "The path to the folder you want to see the contents of."
+          },
+          "recursive": {
+            "type": "boolean",
+            "description": "If true, the list folder operation will be applied recursively to all subfolders."
+          },
+          "include_media_info": {
+            "type": "boolean",
+            "description": "If true, FileMetadata.media_info is set for photo and video."
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "ListFolderResult": {
+        "type": "object",
+        "properties": {
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Metadata"
+            }
+          },
+          "cursor": {
+            "type": "string"
+          },
+          "has_more": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Metadata": {
+        "type": "object",
+        "properties": {
+          ".tag": {
+            "type": "string",
+            "enum": [
+              "file",
+              "folder",
+              "deleted"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "path_lower": {
+            "type": "string"
+          },
+          "path_display": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "FileMetadata": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Metadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "client_modified": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "server_modified": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "rev": {
+                "type": "string"
+              },
+              "size": {
+                "type": "integer"
+              },
+              "media_info": {
+                "type": "object"
+              }
+            }
+          }
+        ]
+      },
+      "UploadArg": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path in the user's Dropbox to save the file."
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "add",
+              "overwrite",
+              "update"
+            ],
+            "default": "add"
+          },
+          "autorename": {
+            "type": "boolean",
+            "default": false
+          },
+          "client_modified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "mute": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "DownloadArg": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "The path of the file to download."
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "DeleteArg": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path in the user's Dropbox to delete."
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "DeleteResult": {
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          }
+        }
+      },
+      "CreateFolderArg": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path in the user's Dropbox to create."
+          },
+          "autorename": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "CreateFolderResult": {
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/FolderMetadata"
+          }
+        }
+      },
+      "FolderMetadata": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Metadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "shared_folder_id": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error_summary": {
+            "type": "string"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://www.dropbox.com/oauth2/authorize",
+            "tokenUrl": "https://api.dropboxapi.com/oauth2/token",
+            "scopes": {
+              "files.metadata.read": "Read file and folder metadata",
+              "files.content.read": "Read files",
+              "files.content.write": "Create, modify, and delete files"
+            }
+          }
+        }
+      }
+    }
+  }
+}

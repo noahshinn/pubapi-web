@@ -1,0 +1,288 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Microsoft API",
+    "description": "A comprehensive API for Microsoft services and products",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Microsoft Support",
+      "url": "https://support.microsoft.com",
+      "email": "support@microsoft.com"
+    },
+    "license": {
+      "name": "Microsoft License",
+      "url": "https://www.microsoft.com/en-us/legal/intellectualproperty/copyright/default.aspx"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.microsoft.com/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Office365",
+      "description": "Microsoft Office 365 related operations"
+    },
+    {
+      "name": "Azure",
+      "description": "Microsoft Azure related operations"
+    },
+    {
+      "name": "Windows",
+      "description": "Windows operating system related operations"
+    },
+    {
+      "name": "Xbox",
+      "description": "Xbox gaming related operations"
+    },
+    {
+      "name": "Dynamics365",
+      "description": "Dynamics 365 related operations"
+    }
+  ],
+  "paths": {
+    "/office365/users": {
+      "get": {
+        "summary": "Get all Office 365 users",
+        "tags": [
+          "Office365"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new Office 365 user",
+        "tags": [
+          "Office365"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully"
+          }
+        }
+      }
+    },
+    "/azure/resources": {
+      "get": {
+        "summary": "Get all Azure resources",
+        "tags": [
+          "Azure"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AzureResource"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/windows/updates": {
+      "get": {
+        "summary": "Get available Windows updates",
+        "tags": [
+          "Windows"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WindowsUpdate"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/xbox/games": {
+      "get": {
+        "summary": "Get Xbox games catalog",
+        "tags": [
+          "Xbox"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/XboxGame"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dynamics365/customers": {
+      "get": {
+        "summary": "Get all Dynamics 365 customers",
+        "tags": [
+          "Dynamics365"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Customer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          }
+        }
+      },
+      "AzureResource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          }
+        }
+      },
+      "WindowsUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "XboxGame": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "publisher": {
+            "type": "string"
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}

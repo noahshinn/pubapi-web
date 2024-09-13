@@ -1,0 +1,377 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Vonage API",
+    "description": "API for Vonage communication services",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Vonage API Support",
+      "url": "https://developer.vonage.com/",
+      "email": "support@vonage.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.vonage.com"
+    }
+  ],
+  "paths": {
+    "/sms/json": {
+      "post": {
+        "summary": "Send an SMS",
+        "operationId": "sendSMS",
+        "tags": [
+          "SMS"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SMSRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SMSResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    },
+    "/verify/json": {
+      "post": {
+        "summary": "Start verification process",
+        "operationId": "startVerification",
+        "tags": [
+          "Verify"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerifyResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    },
+    "/verify/check/json": {
+      "post": {
+        "summary": "Check verification code",
+        "operationId": "checkVerification",
+        "tags": [
+          "Verify"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyCheckRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerifyCheckResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    },
+    "/voice/json": {
+      "post": {
+        "summary": "Make a voice call",
+        "operationId": "makeVoiceCall",
+        "tags": [
+          "Voice"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VoiceCallRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceCallResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SMSRequest": {
+        "type": "object",
+        "required": [
+          "from",
+          "to",
+          "text"
+        ],
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "The sender ID"
+          },
+          "to": {
+            "type": "string",
+            "description": "The recipient's phone number"
+          },
+          "text": {
+            "type": "string",
+            "description": "The content of the SMS"
+          }
+        }
+      },
+      "SMSResponse": {
+        "type": "object",
+        "properties": {
+          "message-count": {
+            "type": "string",
+            "description": "The number of messages sent"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "to": {
+                  "type": "string"
+                },
+                "message-id": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "remaining-balance": {
+                  "type": "string"
+                },
+                "message-price": {
+                  "type": "string"
+                },
+                "network": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "VerifyRequest": {
+        "type": "object",
+        "required": [
+          "number",
+          "brand"
+        ],
+        "properties": {
+          "number": {
+            "type": "string",
+            "description": "The phone number to verify"
+          },
+          "brand": {
+            "type": "string",
+            "description": "The name of the company or app"
+          },
+          "code_length": {
+            "type": "integer",
+            "description": "The length of the verification code"
+          }
+        }
+      },
+      "VerifyResponse": {
+        "type": "object",
+        "properties": {
+          "request_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "VerifyCheckRequest": {
+        "type": "object",
+        "required": [
+          "request_id",
+          "code"
+        ],
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "description": "The ID of the Verify request"
+          },
+          "code": {
+            "type": "string",
+            "description": "The verification code"
+          }
+        }
+      },
+      "VerifyCheckResponse": {
+        "type": "object",
+        "properties": {
+          "request_id": {
+            "type": "string"
+          },
+          "event_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          }
+        }
+      },
+      "VoiceCallRequest": {
+        "type": "object",
+        "required": [
+          "to",
+          "from",
+          "text"
+        ],
+        "properties": {
+          "to": {
+            "type": "string",
+            "description": "The recipient's phone number"
+          },
+          "from": {
+            "type": "string",
+            "description": "The caller's phone number"
+          },
+          "text": {
+            "type": "string",
+            "description": "The message to be read out"
+          },
+          "voice_name": {
+            "type": "string",
+            "description": "The voice to use for text-to-speech"
+          },
+          "language": {
+            "type": "string",
+            "description": "The language of the message"
+          }
+        }
+      },
+      "VoiceCallResponse": {
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "string"
+          },
+          "message-id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "remaining-balance": {
+            "type": "string"
+          },
+          "message-price": {
+            "type": "string"
+          },
+          "network": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  }
+}

@@ -1,0 +1,289 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "AMD API",
+    "description": "API for Advanced Micro Devices (AMD) product information, financials, stock data, and company details",
+    "version": "1.0.0",
+    "contact": {
+      "name": "AMD API Support",
+      "email": "api-support@amd.com",
+      "url": "https://www.amd.com/en/support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.amd.com/v1"
+    }
+  ],
+  "paths": {
+    "/products": {
+      "get": {
+        "summary": "List all AMD products",
+        "description": "Returns a list of all AMD products",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Filter products by category",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "cpu",
+                "gpu",
+                "apu",
+                "embedded"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of items to return",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{productId}": {
+      "get": {
+        "summary": "Get product details",
+        "description": "Returns details for a specific AMD product",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the product to retrieve",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      }
+    },
+    "/financials": {
+      "get": {
+        "summary": "Get financial information",
+        "description": "Returns AMD's financial information",
+        "parameters": [
+          {
+            "name": "year",
+            "in": "query",
+            "description": "Filter financials by year",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "quarter",
+            "in": "query",
+            "description": "Filter financials by quarter",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Financials"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stock": {
+      "get": {
+        "summary": "Get stock information",
+        "description": "Returns current AMD stock information",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/company": {
+      "get": {
+        "summary": "Get company information",
+        "description": "Returns general information about AMD",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "cpu",
+              "gpu",
+              "apu",
+              "embedded"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "specifications": {
+            "type": "object"
+          },
+          "price": {
+            "type": "number"
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "Financials": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer"
+          },
+          "quarter": {
+            "type": "integer"
+          },
+          "revenue": {
+            "type": "number"
+          },
+          "netIncome": {
+            "type": "number"
+          },
+          "eps": {
+            "type": "number"
+          },
+          "cashFlow": {
+            "type": "number"
+          }
+        }
+      },
+      "StockInfo": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string"
+          },
+          "currentPrice": {
+            "type": "number"
+          },
+          "change": {
+            "type": "number"
+          },
+          "changePercentage": {
+            "type": "number"
+          },
+          "volume": {
+            "type": "integer"
+          },
+          "marketCap": {
+            "type": "number"
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CompanyInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "founded": {
+            "type": "string",
+            "format": "date"
+          },
+          "headquarters": {
+            "type": "string"
+          },
+          "ceo": {
+            "type": "string"
+          },
+          "employees": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
+          },
+          "website": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+    }
+  }
+}

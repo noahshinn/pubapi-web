@@ -1,0 +1,629 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Juniper Networks API",
+    "description": "API for managing and configuring Juniper Networks devices",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Juniper Networks Support",
+      "url": "https://support.juniper.net",
+      "email": "support@juniper.net"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.juniper.net/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Devices",
+      "description": "Operations related to network devices"
+    },
+    {
+      "name": "Configuration",
+      "description": "Device configuration management"
+    },
+    {
+      "name": "Monitoring",
+      "description": "Device monitoring and statistics"
+    },
+    {
+      "name": "Routing",
+      "description": "Routing protocols and tables"
+    },
+    {
+      "name": "Security",
+      "description": "Security policies and features"
+    },
+    {
+      "name": "VPNs",
+      "description": "Virtual Private Network management"
+    }
+  ],
+  "paths": {
+    "/devices": {
+      "get": {
+        "summary": "List all devices",
+        "tags": [
+          "Devices"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Device"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new device",
+        "tags": [
+          "Devices"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Device created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Device"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/devices/{deviceId}": {
+      "get": {
+        "summary": "Get device details",
+        "tags": [
+          "Devices"
+        ],
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Device"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update device details",
+        "tags": [
+          "Devices"
+        ],
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Device updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Device"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a device",
+        "tags": [
+          "Devices"
+        ],
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Device deleted successfully"
+          }
+        }
+      }
+    },
+    "/devices/{deviceId}/config": {
+      "get": {
+        "summary": "Get device configuration",
+        "tags": [
+          "Configuration"
+        ],
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceConfig"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update device configuration",
+        "tags": [
+          "Configuration"
+        ],
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceConfig"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Configuration updated successfully"
+          }
+        }
+      }
+    },
+    "/devices/{deviceId}/interfaces": {
+      "get": {
+        "summary": "List device interfaces",
+        "tags": [
+          "Configuration"
+        ],
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Interface"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/devices/{deviceId}/stats": {
+      "get": {
+        "summary": "Get device statistics",
+        "tags": [
+          "Monitoring"
+        ],
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceStats"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/devices/{deviceId}/routing": {
+      "get": {
+        "summary": "Get routing information",
+        "tags": [
+          "Routing"
+        ],
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoutingInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/devices/{deviceId}/security/policies": {
+      "get": {
+        "summary": "List security policies",
+        "tags": [
+          "Security"
+        ],
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SecurityPolicy"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/devices/{deviceId}/vpns": {
+      "get": {
+        "summary": "List VPNs",
+        "tags": [
+          "VPNs"
+        ],
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VPN"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Device": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "serialNumber": {
+            "type": "string"
+          },
+          "ipAddress": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "online",
+              "offline",
+              "maintenance"
+            ]
+          }
+        }
+      },
+      "DeviceInput": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "serialNumber": {
+            "type": "string"
+          },
+          "ipAddress": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "model",
+          "serialNumber",
+          "ipAddress"
+        ]
+      },
+      "DeviceConfig": {
+        "type": "object",
+        "properties": {
+          "hostname": {
+            "type": "string"
+          },
+          "interfaces": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Interface"
+            }
+          },
+          "routingProtocols": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "securityPolicies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SecurityPolicy"
+            }
+          }
+        }
+      },
+      "Interface": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "ipAddress": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "up",
+              "down"
+            ]
+          }
+        }
+      },
+      "DeviceStats": {
+        "type": "object",
+        "properties": {
+          "cpuUsage": {
+            "type": "number"
+          },
+          "memoryUsage": {
+            "type": "number"
+          },
+          "throughput": {
+            "type": "number"
+          },
+          "activeConnections": {
+            "type": "integer"
+          }
+        }
+      },
+      "RoutingInfo": {
+        "type": "object",
+        "properties": {
+          "protocols": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "routingTable": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "destination": {
+                  "type": "string"
+                },
+                "nextHop": {
+                  "type": "string"
+                },
+                "interface": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "SecurityPolicy": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "allow",
+              "deny"
+            ]
+          },
+          "sourceZone": {
+            "type": "string"
+          },
+          "destinationZone": {
+            "type": "string"
+          },
+          "sourceAddresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "destinationAddresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "applications": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "VPN": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "site-to-site",
+              "remote-access"
+            ]
+          },
+          "localGateway": {
+            "type": "string"
+          },
+          "remoteGateway": {
+            "type": "string"
+          },
+          "encryptionAlgorithm": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "up",
+              "down"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

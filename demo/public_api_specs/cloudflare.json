@@ -1,0 +1,988 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Cloudflare API",
+    "description": "API for managing Cloudflare services",
+    "version": "4.0.0",
+    "contact": {
+      "name": "Cloudflare Support",
+      "url": "https://support.cloudflare.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.cloudflare.com/client/v4"
+    }
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "summary": "User Details",
+        "description": "Get information about the logged-in user",
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIToken": []
+          }
+        ]
+      }
+    },
+    "/zones": {
+      "get": {
+        "summary": "List Zones",
+        "description": "List, search, sort, and filter zones",
+        "tags": [
+          "Zones"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "A domain name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status of the zone",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "active",
+                "pending",
+                "initializing",
+                "moved",
+                "deleted",
+                "deactivated"
+              ]
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of paginated results",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Number of zones per page",
+            "schema": {
+              "type": "integer",
+              "minimum": 5,
+              "maximum": 50
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Field to order zones by",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "name",
+                "status",
+                "account.id"
+              ]
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "description": "Direction to order zones",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          },
+          {
+            "name": "match",
+            "in": "query",
+            "description": "Whether to match all search requirements or at least one",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "all",
+                "any"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ZonesResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIToken": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create Zone",
+        "description": "Create a new zone",
+        "tags": [
+          "Zones"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ZoneCreation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ZoneResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIToken": []
+          }
+        ]
+      }
+    },
+    "/zones/{zone_identifier}": {
+      "get": {
+        "summary": "Zone Details",
+        "description": "Get zone details",
+        "tags": [
+          "Zones"
+        ],
+        "parameters": [
+          {
+            "name": "zone_identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The zone ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ZoneResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIToken": []
+          }
+        ]
+      },
+      "patch": {
+        "summary": "Edit Zone",
+        "description": "Edit zone properties",
+        "tags": [
+          "Zones"
+        ],
+        "parameters": [
+          {
+            "name": "zone_identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The zone ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ZoneEdit"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ZoneResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIToken": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete Zone",
+        "description": "Delete a zone",
+        "tags": [
+          "Zones"
+        ],
+        "parameters": [
+          {
+            "name": "zone_identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The zone ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ZoneDeleteResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIToken": []
+          }
+        ]
+      }
+    },
+    "/zones/{zone_identifier}/dns_records": {
+      "get": {
+        "summary": "List DNS Records",
+        "description": "List, search, sort, and filter a zone's DNS records",
+        "tags": [
+          "DNS Records"
+        ],
+        "parameters": [
+          {
+            "name": "zone_identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The zone ID"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "DNS record type"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "DNS record name"
+          },
+          {
+            "name": "content",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "DNS record content"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "Page number of paginated results"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 5,
+              "maximum": 100
+            },
+            "description": "Number of DNS records per page"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "type",
+                "name",
+                "content",
+                "ttl",
+                "proxied"
+              ]
+            },
+            "description": "Field to order records by"
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "description": "Direction to order records"
+          },
+          {
+            "name": "match",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "all",
+                "any"
+              ]
+            },
+            "description": "Whether to match all search requirements or at least one"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DNSRecordsResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIToken": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create DNS Record",
+        "description": "Create a new DNS record for a zone",
+        "tags": [
+          "DNS Records"
+        ],
+        "parameters": [
+          {
+            "name": "zone_identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The zone ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DNSRecordCreation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DNSRecordResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIToken": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "first_name": {
+                "type": "string"
+              },
+              "last_name": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "telephone": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "zipcode": {
+                "type": "string"
+              },
+              "created_on": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "modified_on": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "two_factor_authentication_enabled": {
+                "type": "boolean"
+              },
+              "suspended": {
+                "type": "boolean"
+              }
+            }
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ZonesResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Zone"
+            }
+          },
+          "result_info": {
+            "$ref": "#/components/schemas/ResultInfo"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ZoneResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/Zone"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "Zone": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "pending",
+              "initializing",
+              "moved",
+              "deleted",
+              "deactivated"
+            ]
+          },
+          "paused": {
+            "type": "boolean"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "full",
+              "partial"
+            ]
+          },
+          "development_mode": {
+            "type": "integer"
+          },
+          "name_servers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "original_name_servers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "original_registrar": {
+            "type": "string"
+          },
+          "original_dnshost": {
+            "type": "string"
+          },
+          "modified_on": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "created_on": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "activated_on": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "step": {
+                "type": "integer"
+              },
+              "custom_certificate_quota": {
+                "type": "integer"
+              },
+              "page_rule_quota": {
+                "type": "integer"
+              },
+              "phishing_detected": {
+                "type": "boolean"
+              },
+              "multiple_railguns_allowed": {
+                "type": "boolean"
+              }
+            }
+          },
+          "owner": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              }
+            }
+          },
+          "account": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "plan": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "price": {
+                "type": "number"
+              },
+              "currency": {
+                "type": "string"
+              },
+              "frequency": {
+                "type": "string"
+              },
+              "is_subscribed": {
+                "type": "boolean"
+              },
+              "can_subscribe": {
+                "type": "boolean"
+              },
+              "legacy_id": {
+                "type": "string"
+              },
+              "legacy_discount": {
+                "type": "boolean"
+              },
+              "externally_managed": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      },
+      "ZoneCreation": {
+        "type": "object",
+        "required": [
+          "name",
+          "account"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "account": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          "jump_start": {
+            "type": "boolean"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "full",
+              "partial"
+            ]
+          }
+        }
+      },
+      "ZoneEdit": {
+        "type": "object",
+        "properties": {
+          "paused": {
+            "type": "boolean"
+          },
+          "vanity_name_servers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "plan": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "ZoneDeleteResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "DNSRecordsResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DNSRecord"
+            }
+          },
+          "result_info": {
+            "$ref": "#/components/schemas/ResultInfo"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "DNSRecordResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/DNSRecord"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "DNSRecord": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "proxiable": {
+            "type": "boolean"
+          },
+          "proxied": {
+            "type": "boolean"
+          },
+          "ttl": {
+            "type": "integer"
+          },
+          "locked": {
+            "type": "boolean"
+          },
+          "zone_id": {
+            "type": "string"
+          },
+          "zone_name": {
+            "type": "string"
+          },
+          "created_on": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modified_on": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "data": {
+            "type": "object"
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "auto_added": {
+                "type": "boolean"
+              },
+              "managed_by_apps": {
+                "type": "boolean"
+              },
+              "managed_by_argo_tunnel": {
+                "type": "boolean"
+              },
+              "source": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "DNSRecordCreation": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "content"
+        ],
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "ttl": {
+            "type": "integer"
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "proxied": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ResultInfo": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer"
+          },
+          "per_page": {
+            "type": "integer"
+          },
+          "total_pages": {
+            "type": "integer"
+          },
+          "count": {
+            "type": "integer"
+          },
+          "total_count": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "APIToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
+      }
+    }
+  }
+}

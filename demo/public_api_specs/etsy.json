@@ -1,0 +1,590 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Etsy API",
+    "description": "API for interacting with Etsy's marketplace",
+    "version": "3.0.0",
+    "contact": {
+      "name": "Etsy Developer Support",
+      "url": "https://www.etsy.com/developers/",
+      "email": "developers@etsy.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://openapi.etsy.com/v3"
+    }
+  ],
+  "paths": {
+    "/application/shops/{shop_id}/listings": {
+      "get": {
+        "summary": "Get a Shop's Listings",
+        "description": "Retrieves a list of all active listings for a shop",
+        "parameters": [
+          {
+            "name": "shop_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 25,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListingsList"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a Listing",
+        "description": "Creates a new listing for a shop",
+        "parameters": [
+          {
+            "name": "shop_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListingInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Listing created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Listing"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/application/listings/{listing_id}": {
+      "get": {
+        "summary": "Get a Listing",
+        "description": "Retrieves a specific listing by ID",
+        "parameters": [
+          {
+            "name": "listing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Listing"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a Listing",
+        "description": "Updates a specific listing",
+        "parameters": [
+          {
+            "name": "listing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListingInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Listing updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Listing"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a Listing",
+        "description": "Deletes a specific listing",
+        "parameters": [
+          {
+            "name": "listing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Listing deleted successfully"
+          }
+        }
+      }
+    },
+    "/application/users/{user_id}": {
+      "get": {
+        "summary": "Get a User",
+        "description": "Retrieves a specific user by ID",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/application/shops/{shop_id}": {
+      "get": {
+        "summary": "Get a Shop",
+        "description": "Retrieves a specific shop by ID",
+        "parameters": [
+          {
+            "name": "shop_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Shop"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/application/listings/{listing_id}/images": {
+      "post": {
+        "summary": "Upload a Listing Image",
+        "description": "Uploads an image for a specific listing",
+        "parameters": [
+          {
+            "name": "listing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Image uploaded successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListingImage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/application/shops/{shop_id}/receipts": {
+      "get": {
+        "summary": "Get Shop Receipts",
+        "description": "Retrieves a list of receipts for a shop",
+        "parameters": [
+          {
+            "name": "shop_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 25,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReceiptList"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Listing": {
+        "type": "object",
+        "properties": {
+          "listing_id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "integer"
+          },
+          "shop_id": {
+            "type": "integer"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive",
+              "sold_out"
+            ]
+          },
+          "created_timestamp": {
+            "type": "integer"
+          },
+          "updated_timestamp": {
+            "type": "integer"
+          }
+        }
+      },
+      "ListingInput": {
+        "type": "object",
+        "required": [
+          "title",
+          "description",
+          "price",
+          "quantity"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "integer"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive"
+            ]
+          }
+        }
+      },
+      "ListingsList": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Listing"
+            }
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "integer"
+          },
+          "login_name": {
+            "type": "string"
+          },
+          "primary_email": {
+            "type": "string"
+          },
+          "created_timestamp": {
+            "type": "integer"
+          }
+        }
+      },
+      "Shop": {
+        "type": "object",
+        "properties": {
+          "shop_id": {
+            "type": "integer"
+          },
+          "shop_name": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "integer"
+          },
+          "creation_timestamp": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "announcement": {
+            "type": "string"
+          }
+        }
+      },
+      "ListingImage": {
+        "type": "object",
+        "properties": {
+          "listing_image_id": {
+            "type": "integer"
+          },
+          "listing_id": {
+            "type": "integer"
+          },
+          "rank": {
+            "type": "integer"
+          },
+          "url_75x75": {
+            "type": "string"
+          },
+          "url_170x135": {
+            "type": "string"
+          },
+          "url_570xN": {
+            "type": "string"
+          },
+          "url_fullxfull": {
+            "type": "string"
+          }
+        }
+      },
+      "Receipt": {
+        "type": "object",
+        "properties": {
+          "receipt_id": {
+            "type": "integer"
+          },
+          "order_id": {
+            "type": "integer"
+          },
+          "shop_id": {
+            "type": "integer"
+          },
+          "buyer_user_id": {
+            "type": "integer"
+          },
+          "creation_timestamp": {
+            "type": "integer"
+          },
+          "last_modified_timestamp": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "first_line": {
+            "type": "string"
+          },
+          "second_line": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "zip": {
+            "type": "string"
+          },
+          "country_id": {
+            "type": "integer"
+          },
+          "payment_method": {
+            "type": "string"
+          },
+          "payment_email": {
+            "type": "string"
+          },
+          "total_tax_cost": {
+            "type": "number"
+          },
+          "total_price": {
+            "type": "number"
+          },
+          "total_shipping_cost": {
+            "type": "number"
+          },
+          "currency_code": {
+            "type": "string"
+          },
+          "message_from_buyer": {
+            "type": "string"
+          }
+        }
+      },
+      "ReceiptList": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Receipt"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      },
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://www.etsy.com/oauth/connect",
+            "tokenUrl": "https://api.etsy.com/v3/public/oauth/token",
+            "scopes": {
+              "listings_r": "Read listings",
+              "listings_w": "Write listings",
+              "shops_r": "Read shops",
+              "shops_w": "Write shops",
+              "users_r": "Read user profile",
+              "transactions_r": "Read transactions",
+              "transactions_w": "Write transactions"
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "api_key": [],
+      "oauth2": []
+    }
+  ]
+}

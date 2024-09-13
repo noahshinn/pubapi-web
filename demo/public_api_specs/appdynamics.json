@@ -1,0 +1,494 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "AppDynamics API",
+    "description": "API for interacting with AppDynamics Application Performance Management platform",
+    "version": "1.0.0",
+    "contact": {
+      "name": "AppDynamics Support",
+      "url": "https://www.appdynamics.com/support",
+      "email": "support@appdynamics.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://your-account.saas.appdynamics.com/controller/rest"
+    }
+  ],
+  "paths": {
+    "/applications": {
+      "get": {
+        "summary": "Get all applications",
+        "description": "Retrieve a list of all applications monitored by AppDynamics",
+        "operationId": "getAllApplications",
+        "tags": [
+          "Applications"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Application"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/applications/{applicationId}": {
+      "get": {
+        "summary": "Get application by ID",
+        "description": "Retrieve details of a specific application",
+        "operationId": "getApplicationById",
+        "tags": [
+          "Applications"
+        ],
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Application not found"
+          }
+        }
+      }
+    },
+    "/applications/{applicationId}/metrics": {
+      "get": {
+        "summary": "Get application metrics",
+        "description": "Retrieve metrics for a specific application",
+        "operationId": "getApplicationMetrics",
+        "tags": [
+          "Metrics"
+        ],
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "metric-path",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "time-range-type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "BEFORE_NOW",
+                "BEFORE_TIME",
+                "AFTER_TIME",
+                "BETWEEN_TIMES"
+              ]
+            }
+          },
+          {
+            "name": "duration-in-mins",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start-time",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "end-time",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetricData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Application or metric not found"
+          }
+        }
+      }
+    },
+    "/applications/{applicationId}/business-transactions": {
+      "get": {
+        "summary": "Get business transactions",
+        "description": "Retrieve business transactions for a specific application",
+        "operationId": "getBusinessTransactions",
+        "tags": [
+          "Business Transactions"
+        ],
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BusinessTransaction"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Application not found"
+          }
+        }
+      }
+    },
+    "/applications/{applicationId}/nodes": {
+      "get": {
+        "summary": "Get application nodes",
+        "description": "Retrieve nodes for a specific application",
+        "operationId": "getApplicationNodes",
+        "tags": [
+          "Nodes"
+        ],
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Node"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Application not found"
+          }
+        }
+      }
+    },
+    "/applications/{applicationId}/events": {
+      "get": {
+        "summary": "Get application events",
+        "description": "Retrieve events for a specific application",
+        "operationId": "getApplicationEvents",
+        "tags": [
+          "Events"
+        ],
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "event-types",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "severities",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "time-range-type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "BEFORE_NOW",
+                "BEFORE_TIME",
+                "AFTER_TIME",
+                "BETWEEN_TIMES"
+              ]
+            }
+          },
+          {
+            "name": "duration-in-mins",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start-time",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "end-time",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Event"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Application not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Application": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "MetricData": {
+        "type": "object",
+        "properties": {
+          "metricPath": {
+            "type": "string"
+          },
+          "frequency": {
+            "type": "string"
+          },
+          "metricValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricValue"
+            }
+          }
+        }
+      },
+      "MetricValue": {
+        "type": "object",
+        "properties": {
+          "startTimeInMillis": {
+            "type": "integer"
+          },
+          "value": {
+            "type": "number"
+          },
+          "min": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          },
+          "current": {
+            "type": "number"
+          },
+          "sum": {
+            "type": "number"
+          },
+          "count": {
+            "type": "integer"
+          }
+        }
+      },
+      "BusinessTransaction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "entryPointType": {
+            "type": "string"
+          },
+          "internalName": {
+            "type": "string"
+          },
+          "tierId": {
+            "type": "integer"
+          },
+          "tierName": {
+            "type": "string"
+          }
+        }
+      },
+      "Node": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "tierId": {
+            "type": "integer"
+          },
+          "tierName": {
+            "type": "string"
+          },
+          "machineId": {
+            "type": "integer"
+          },
+          "machineName": {
+            "type": "string"
+          },
+          "machineOSType": {
+            "type": "string"
+          },
+          "machineAgentPresent": {
+            "type": "boolean"
+          },
+          "machineAgentVersion": {
+            "type": "string"
+          },
+          "appAgentPresent": {
+            "type": "boolean"
+          },
+          "appAgentVersion": {
+            "type": "string"
+          }
+        }
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string"
+          },
+          "subType": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "eventTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "affectedEntityType": {
+            "type": "string"
+          },
+          "affectedEntityName": {
+            "type": "string"
+          },
+          "affectedEntityId": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}
