@@ -25,6 +25,10 @@ type GenerateModel interface {
 	Generate(ctx context.Context, instruction string, text string, examples []*datapoint.GenerateDatapoint) (string, error)
 }
 
+type EmbeddingModel interface {
+	GetEmbedding(ctx context.Context, text string) ([]float64, error)
+}
+
 type GeneralModel interface {
 	BinaryClassifyModel
 	ClassifyModel

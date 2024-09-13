@@ -8,7 +8,6 @@ import (
 	"os"
 
 	"search_engine/index"
-	"search_engine/llm"
 	"search_engine/primitives/api"
 	"search_engine/search"
 )
@@ -32,10 +31,9 @@ func main() {
 		log.Fatalf("Error loading embedded specs: %v", err)
 	}
 
-	models := llm.AllModels(os.Getenv("OPENAI_API_KEY"))
 	api := api.DefaultAPI()
 	useVerification := !*disableVerification
-	results, err := search.Search(ctx, models.DefaultEmbeddingModel, specs, *query, api, &search.SearchOptions{
+	results, err := search.Search(ctx, specs, *query, api, &search.SearchOptions{
 		MaxConcurrency:  *maxConcurrency,
 		MaxNumResults:   *n,
 		UseVerification: &useVerification,

@@ -7,7 +7,6 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"search_engine/llm"
 	"search_engine/primitives/api"
 	"strings"
 	"sync"
@@ -68,7 +67,7 @@ func SummarizeSpec(ctx context.Context, spec *Document, api *api.API) (string, e
 	return api.Generate(ctx, instruction, text, nil)
 }
 
-func IndexSpecs(ctx context.Context, specsPath string, embeddingModel llm.EmbeddingModel, api *api.API, maxConcurrency int) ([]*Document, error) {
+func IndexSpecs(ctx context.Context, specsPath string, api *api.API, maxConcurrency int) ([]*Document, error) {
 	var documents []*Document
 	var mu sync.Mutex
 	var wg sync.WaitGroup
@@ -89,7 +88,7 @@ func IndexSpecs(ctx context.Context, specsPath string, embeddingModel llm.Embedd
 				semaphore <- struct{}{}
 				defer func() { <-semaphore }()
 
-				doc, err := processSpec(ctx, fileName, specsPath, embeddingModel, api)
+				doc, err := processSpec(ctx, fileName, specsPath, api)
 				if err != nil {
 					log.Printf("Error processing %s: %v", fileName, err)
 					return
@@ -105,7 +104,7 @@ func IndexSpecs(ctx context.Context, specsPath string, embeddingModel llm.Embedd
 	return documents, nil
 }
 
-func processSpec(ctx context.Context, fileName, dirPath string, embeddingModel llm.EmbeddingModel, api *api.API) (*Document, error) {
+func processSpec(ctx context.Context, fileName, dirPath string, api *api.API) (*Document, error) {
 	filePath := filepath.Join(dirPath, fileName)
 	specData, err := os.ReadFile(filePath)
 	if err != nil {
@@ -126,14 +125,14 @@ func processSpec(ctx context.Context, fileName, dirPath string, embeddingModel l
 	if err != nil {
 		return nil, fmt.Errorf("error summarizing spec %s: %w", fileName, err)
 	}
-	embedding, err := embeddingModel.Embedding(ctx, []string{summary})
+	embeddings, err := api.Embedding(ctx, summary)
 	if err != nil {
 		return nil, fmt.Errorf("error getting embedding for %s: %w", fileName, err)
 	}
 	return &Document{
 		Title:     title,
 		Summary:   summary,
-		Embedding: embedding[0],
+		Embedding: embeddings,
 		Spec:      specData,
 	}, nil
 }

@@ -15,6 +15,7 @@ type API struct {
 	ScoreModels          []models.ScoreModel
 	GenerateModels       []models.GenerateModel
 	ParseForceModels     []models.ParseForceModel
+	EmbeddingModels      []models.EmbeddingModel
 	RequestRouter        router.RequestRouter
 }
 
@@ -161,10 +162,22 @@ func (a *API) Generate(ctx context.Context, instruction string, text string, req
 	return model.Generate(ctx, instruction, text, examples)
 }
 
+func (a *API) Embedding(ctx context.Context, text string) ([]float64, error) {
+	embeddings, err := a.EmbeddingModels[0].GetEmbedding(ctx, text)
+	if err != nil {
+		return nil, err
+	}
+	return embeddings, nil
+}
+
 func DefaultAPI() *API {
 	generalModel, err := model.DefaultGeneralModel()
 	if err != nil {
 		panic(fmt.Errorf("failed to create default general model: %v", err))
+	}
+	embeddingModel, err := model.DefaultEmbeddingModel()
+	if err != nil {
+		panic(fmt.Errorf("failed to create default embedding model: %v", err))
 	}
 	return &API{
 		BinaryClassifyModels: []models.BinaryClassifyModel{generalModel},
@@ -172,6 +185,7 @@ func DefaultAPI() *API {
 		ScoreModels:          []models.ScoreModel{generalModel},
 		GenerateModels:       []models.GenerateModel{generalModel},
 		ParseForceModels:     []models.ParseForceModel{generalModel},
+		EmbeddingModels:      []models.EmbeddingModel{embeddingModel},
 		RequestRouter:        router.DefaultRequestRouter(),
 	}
 }

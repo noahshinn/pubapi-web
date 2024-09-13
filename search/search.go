@@ -9,7 +9,6 @@ import (
 	"sync"
 
 	"search_engine/index"
-	"search_engine/llm"
 	"search_engine/primitives/api"
 	"search_engine/utils/slicesx"
 	"sort"
@@ -38,12 +37,12 @@ func LoadEmbeddedSpecs(filePath string) ([]*index.Document, error) {
 	return specs, nil
 }
 
-func GetQueryEmbedding(ctx context.Context, query string, embeddingModel llm.EmbeddingModel) ([]float64, error) {
-	embeddings, err := embeddingModel.Embedding(ctx, []string{query})
+func GetQueryEmbedding(ctx context.Context, query string, api *api.API) ([]float64, error) {
+	embeddings, err := api.Embedding(ctx, query)
 	if err != nil {
 		return nil, err
 	}
-	return embeddings[0], nil
+	return embeddings, nil
 }
 
 func similaritySearch(queryEmbedding []float64, embeddedSpecs []*index.Document, n int, scoreFunc func(a, b []float64) float64) []*SearchResult {
@@ -129,8 +128,8 @@ type SearchOptions struct {
 const defaultMaxConcurrency = 8
 const defaultMaxNumResults = 5
 
-func Search(ctx context.Context, embeddingModel llm.EmbeddingModel, specs []*index.Document, query string, api *api.API, options *SearchOptions) ([]*SearchResult, error) {
-	queryEmbedding, err := GetQueryEmbedding(ctx, query, embeddingModel)
+func Search(ctx context.Context, specs []*index.Document, query string, api *api.API, options *SearchOptions) ([]*SearchResult, error) {
+	queryEmbedding, err := GetQueryEmbedding(ctx, query, api)
 	if err != nil {
 		return nil, err
 	}

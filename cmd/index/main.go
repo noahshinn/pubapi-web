@@ -9,7 +9,6 @@ import (
 	"os"
 
 	"search_engine/index"
-	"search_engine/llm"
 	"search_engine/primitives/api"
 )
 
@@ -26,15 +25,9 @@ func main() {
 	if *outputPath == "" {
 		log.Fatal("Please provide a path to output the indexed specs to using the -output-path flag")
 	}
-
-	apiKey := os.Getenv("OPENAI_API_KEY")
-	if apiKey == "" {
-		log.Fatal("Please provide an OpenAI API key using the OPENAI_API_KEY environment variable")
-	}
-	models := llm.AllModels(apiKey)
 	api := api.DefaultAPI()
 
-	indexedSpecs, err := index.IndexSpecs(ctx, *specsPath, models.DefaultEmbeddingModel, api, *maxConcurrency)
+	indexedSpecs, err := index.IndexSpecs(ctx, *specsPath, api, *maxConcurrency)
 	if err != nil {
 		log.Fatalf("Error indexing specs: %v", err)
 	}
