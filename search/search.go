@@ -11,15 +11,16 @@ import (
 	"search_engine/index"
 	"search_engine/primitives/api"
 	"search_engine/utils/slicesx"
+	"search_engine/www"
 	"sort"
 
 	"gonum.org/v1/gonum/mat"
 )
 
 type SearchResult struct {
-	Title      string
-	Similarity float64
-	Summary    string
+	WebPage *www.WebPage
+	Score   float64
+	Summary string
 }
 
 func LoadEmbeddedSpecs(filePath string) ([]*index.Document, error) {
@@ -50,26 +51,22 @@ func similaritySearch(queryEmbedding []float64, embeddedSpecs []*index.Document,
 	for i, spec := range embeddedSpecs {
 		similarities[i] = scoreFunc(queryEmbedding, spec.Embedding)
 	}
-
 	indices := make([]int, len(similarities))
 	for i := range indices {
 		indices[i] = i
 	}
-
 	sort.Slice(indices, func(i, j int) bool {
 		return similarities[indices[i]] > similarities[indices[j]]
 	})
-
 	results := make([]*SearchResult, min(n, len(embeddedSpecs)))
 	for i := range results {
 		idx := indices[i]
 		results[i] = &SearchResult{
-			Title:      embeddedSpecs[idx].Title,
-			Similarity: similarities[idx],
-			Summary:    embeddedSpecs[idx].Summary,
+			WebPage: embeddedSpecs[idx].WebPage,
+			Score:   similarities[idx],
+			Summary: embeddedSpecs[idx].Summary,
 		}
 	}
-
 	return results
 }
 

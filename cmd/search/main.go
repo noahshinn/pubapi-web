@@ -26,14 +26,14 @@ func main() {
 		os.Exit(1)
 	}
 
-	specs, err := index.LoadIndexedSpecs(*indexPath)
+	docs, err := index.LoadIndexedDocs(*indexPath)
 	if err != nil {
-		log.Fatalf("Error loading embedded specs: %v", err)
+		log.Fatalf("Error loading embedded docs: %v", err)
 	}
 
 	api := api.DefaultAPI()
 	useVerification := !*disableVerification
-	results, err := search.Search(ctx, specs, *query, api, &search.SearchOptions{
+	results, err := search.Search(ctx, docs, *query, api, &search.SearchOptions{
 		MaxConcurrency:  *maxConcurrency,
 		MaxNumResults:   *n,
 		UseVerification: &useVerification,
@@ -47,9 +47,9 @@ func main() {
 		fmt.Printf("Found %d results for query: '%s'\n", len(results), *query)
 		for i, result := range results {
 			if useVerification {
-				fmt.Printf("%d. %s\n", i+1, result.Title)
+				fmt.Printf("%d. %s\n", i+1, result.WebPage.Title)
 			} else {
-				fmt.Printf("%d. %s (score=%.4f)\n", i+1, result.Title, result.Similarity)
+				fmt.Printf("%d. %s (score=%.4f)\n", i+1, result.WebPage.Title, result.Score)
 			}
 		}
 	}

@@ -6,48 +6,43 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"path/filepath"
 	"search_engine/primitives/api"
+	"search_engine/www"
 	"strings"
 	"sync"
 )
 
 type Document struct {
-	Title     string          `json:"title"`
-	Summary   string          `json:"summary"`
-	Embedding []float64       `json:"embedding"`
-	Spec      json.RawMessage `json:"spec"`
+	WebPage   *www.WebPage `json:"web_page"`
+	Summary   string       `json:"summary"`
+	Embedding []float64    `json:"embedding"`
+	Address   int          `json:"address"`
 }
 
-func LoadIndexedSpecs(filePath string) ([]*Document, error) {
+func LoadIndexedDocs(filePath string) ([]*Document, error) {
 	file, err := os.Open(filePath)
 	if err != nil {
 		return nil, err
 	}
 	defer file.Close()
-	var specs []*Document
+	var docs []*Document
 	decoder := json.NewDecoder(file)
-	err = decoder.Decode(&specs)
+	err = decoder.Decode(&docs)
 	if err != nil {
 		return nil, err
 	}
-	return specs, nil
+	return docs, nil
 }
 
-func SummarizeSpec(ctx context.Context, spec *Document, api *api.API) (string, error) {
-	var openAPISpec map[string]interface{}
-	err := json.Unmarshal(spec.Spec, &openAPISpec)
-	if err != nil {
-		return "", err
-	}
-	info, _ := openAPISpec["info"].(map[string]interface{})
+func SummarizeDoc(ctx context.Context, doc *Document, api *api.API) (string, error) {
+	info, _ := doc.WebPage.Content["info"].(map[string]any)
 	title := ""
 	description := ""
 	if info != nil {
 		title, _ = info["title"].(string)
 		description, _ = info["description"].(string)
 	}
-	paths, _ := openAPISpec["paths"].(map[string]interface{})
+	paths, _ := doc.WebPage.Content["paths"].(map[string]any)
 	var sampleEndpoints []string
 	for path := range paths {
 		sampleEndpoints = append(sampleEndpoints, path)
@@ -67,72 +62,47 @@ func SummarizeSpec(ctx context.Context, spec *Document, api *api.API) (string, e
 	return api.Generate(ctx, instruction, text, nil)
 }
 
-func IndexSpecs(ctx context.Context, specsPath string, api *api.API, maxConcurrency int) ([]*Document, error) {
+func IndexWebPages(ctx context.Context, webPages []*www.WebPage, api *api.API, maxConcurrency int) ([]*Document, error) {
 	var documents []*Document
 	var mu sync.Mutex
 	var wg sync.WaitGroup
 
-	files, err := os.ReadDir(specsPath)
-	if err != nil {
-		return nil, fmt.Errorf("error reading directory: %w", err)
-	}
-	fmt.Printf("Indexing %d specs from %s\n", len(files), specsPath)
-
 	semaphore := make(chan struct{}, maxConcurrency)
 
-	for _, file := range files {
-		if !file.IsDir() && strings.HasSuffix(file.Name(), ".json") {
-			wg.Add(1)
-			go func(fileName string) {
-				defer wg.Done()
-				semaphore <- struct{}{}
-				defer func() { <-semaphore }()
+	for _, webPage := range webPages {
+		wg.Add(1)
+		go func(webPage *www.WebPage) {
+			defer wg.Done()
+			semaphore <- struct{}{}
+			defer func() { <-semaphore }()
 
-				doc, err := processSpec(ctx, fileName, specsPath, api)
-				if err != nil {
-					log.Printf("Error processing %s: %v", fileName, err)
-					return
-				}
+			doc, err := processWebPage(ctx, webPage, api)
+			if err != nil {
+				log.Printf("Error processing doc: %v", err)
+				return
+			}
 
-				mu.Lock()
-				documents = append(documents, doc)
-				mu.Unlock()
-			}(file.Name())
-		}
+			mu.Lock()
+			documents = append(documents, doc)
+			mu.Unlock()
+		}(webPage)
 	}
 	wg.Wait()
 	return documents, nil
 }
 
-func processSpec(ctx context.Context, fileName, dirPath string, api *api.API) (*Document, error) {
-	filePath := filepath.Join(dirPath, fileName)
-	specData, err := os.ReadFile(filePath)
+func processWebPage(ctx context.Context, webPage *www.WebPage, api *api.API) (*Document, error) {
+	summary, err := SummarizeDoc(ctx, &Document{WebPage: webPage}, api)
 	if err != nil {
-		return nil, fmt.Errorf("error reading file %s: %w", fileName, err)
-	}
-
-	var spec map[string]interface{}
-	if err := json.Unmarshal(specData, &spec); err != nil {
-		return nil, fmt.Errorf("error unmarshaling JSON from %s: %w", fileName, err)
-	}
-	title := ""
-	if info, ok := spec["info"].(map[string]interface{}); ok {
-		if t, ok := info["title"].(string); ok {
-			title = t
-		}
-	}
-	summary, err := SummarizeSpec(ctx, &Document{Spec: specData}, api)
-	if err != nil {
-		return nil, fmt.Errorf("error summarizing spec %s: %w", fileName, err)
+		return nil, fmt.Errorf("error summarizing doc: %w", err)
 	}
 	embeddings, err := api.Embedding(ctx, summary)
 	if err != nil {
-		return nil, fmt.Errorf("error getting embedding for %s: %w", fileName, err)
+		return nil, fmt.Errorf("error getting embedding for doc: %w", err)
 	}
 	return &Document{
-		Title:     title,
 		Summary:   summary,
 		Embedding: embeddings,
-		Spec:      specData,
+		WebPage:   webPage,
 	}, nil
 }
