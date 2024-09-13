@@ -1,4 +1,4 @@
-# A simple search engine for public API specs
+# A simple web network of public APIs
 
 ## To run
 
