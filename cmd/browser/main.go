@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
@@ -56,9 +57,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("\nGot %d results", len(results))
-	for _, result := range results {
-		fmt.Printf("\n%s (score: %f)", result.WebPage.Title, result.Score)
+	log.Printf("\nGot %d results", len(results))
+	topResult := results[0]
+	jsonSerialized, err := json.MarshalIndent(topResult.WebPage.Content, "", "  ")
+	if err != nil {
+		log.Fatal(err)
 	}
-	fmt.Println()
+	fmt.Printf("\n%s\n", string(jsonSerialized))
 }
