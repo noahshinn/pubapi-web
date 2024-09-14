@@ -47,9 +47,9 @@ func main() {
 		fmt.Printf("Found %d results for query: '%s'\n", len(results), *query)
 		for i, result := range results {
 			if useVerification {
-				fmt.Printf("%d. %s\n", i+1, result.WebPage.Title)
+				fmt.Printf("%d. %s\n", i+1, result.WebPageTitle)
 			} else {
-				fmt.Printf("%d. %s (score=%.4f)\n", i+1, result.WebPage.Title, result.Score)
+				fmt.Printf("%d. %s (score=%.4f)\n", i+1, result.WebPageTitle, result.Score)
 			}
 		}
 	}

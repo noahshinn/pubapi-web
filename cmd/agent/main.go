@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"search_engine/agent"
 	"search_engine/browser"
 	"search_engine/primitives/api"
 	"search_engine/search"
@@ -31,7 +32,7 @@ func main() {
 	a := api.DefaultAPI()
 	searchEngine, err := search.NewPubAPISearchEngine(a, www)
 	if err != nil {
-		log.Fatal(err)
+		panic(fmt.Errorf("error creating search engine: %w", err))
 	}
 	log.Println("Search engine is up and running")
 	log.Println("Refreshing index...")
@@ -39,26 +40,19 @@ func main() {
 		MaxConcurrency: *maxConcurrency,
 	})
 	if err != nil {
-		log.Fatal(err)
+		panic(fmt.Errorf("error refreshing index: %w", err))
 	}
 	log.Println("Index is refreshed")
-	b, err := browser.NewPubAPISpecBrowser(searchEngine, www, &browser.BrowserOptions{
+	br, err := browser.NewPubAPISpecBrowser(searchEngine, www, &browser.BrowserOptions{
 		MaxConcurrency: *maxConcurrency,
 	})
 	if err != nil {
-		log.Fatal(err)
+		panic(fmt.Errorf("error creating browser: %w", err))
 	}
-	log.Println("Browser is up and running")
-	useVerification := true
-	results, err := b.Search(ctx, *query, &search.SearchOptions{
-		MaxNumResults:   10,
-		MaxConcurrency:  *maxConcurrency,
-		UseVerification: &useVerification,
-	})
+	ag := agent.NewLLMBrowserAgent(a)
+	res, err := ag.Solve(ctx, *query, br)
 	if err != nil {
-		log.Fatal(err)
+		panic(fmt.Errorf("error solving: %w", err))
 	}
-	log.Printf("\nGot %d results", len(results))
-	topResult := results[0]
-	fmt.Printf("\n%s\n", topResult.WebPageTitle)
+	log.Println(res)
 }

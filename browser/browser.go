@@ -10,11 +10,13 @@ import (
 type Browser interface {
 	Search(ctx context.Context, query string, options *search.SearchOptions) ([]*search.SearchResult, error)
 	Navigate(ctx context.Context, address int) (string, error)
+	Execute(ctx context.Context, address int, endpoint string, body map[string]any) (string, error)
 }
 
 type PubAPISpecBrowser struct {
-	searchEngine search.SearchEngine
-	web          *www.WWW
+	searchEngine   search.SearchEngine
+	web            *www.WWW
+	maxConcurrency int
 }
 
 func (b *PubAPISpecBrowser) Search(ctx context.Context, query string, options *search.SearchOptions) ([]*search.SearchResult, error) {
@@ -37,6 +39,21 @@ func (b *PubAPISpecBrowser) Navigate(ctx context.Context, address int) (string, 
 	return string(jsonBytes), nil
 }
 
-func NewPubAPISpecBrowser(searchEngine search.SearchEngine, web *www.WWW) (Browser, error) {
-	return &PubAPISpecBrowser{searchEngine: searchEngine, web: web}, nil
+type BrowserOptions struct {
+	MaxConcurrency int
+}
+
+const defaultMaxConcurrency = 1
+
+func NewPubAPISpecBrowser(searchEngine search.SearchEngine, web *www.WWW, options *BrowserOptions) (Browser, error) {
+	maxConcurrency := defaultMaxConcurrency
+	if options != nil && options.MaxConcurrency > 0 {
+		maxConcurrency = options.MaxConcurrency
+	}
+	return &PubAPISpecBrowser{searchEngine: searchEngine, web: web, maxConcurrency: maxConcurrency}, nil
+}
+
+func (b *PubAPISpecBrowser) Execute(ctx context.Context, address int, endpoint string, body map[string]any) (string, error) {
+	// TODO: implement
+	return "", nil
 }

@@ -16,7 +16,7 @@ import (
 
 const OPENAI_API_URL = "https://api.openai.com/v1"
 const OPENAI_API_KEY_ENV_VAR = "OPENAI_API_KEY"
-const DEFAULT_OPENAI_MODEL = "gpt-4o"
+const DEFAULT_OPENAI_MODEL = "gpt-4o-2024-08-06"
 
 type OpenAIModel struct {
 	ApiKey      string

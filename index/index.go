@@ -34,7 +34,7 @@ func LoadIndexedDocs(filePath string) ([]*Document, error) {
 	return docs, nil
 }
 
-func SummarizeDoc(ctx context.Context, doc *Document, api *api.API) (string, error) {
+func summarizeDoc(ctx context.Context, doc *Document, api *api.API) (string, error) {
 	info, _ := doc.WebPage.Content["info"].(map[string]any)
 	title := ""
 	description := ""
@@ -62,21 +62,26 @@ func SummarizeDoc(ctx context.Context, doc *Document, api *api.API) (string, err
 	return api.Generate(ctx, instruction, text, nil)
 }
 
-func IndexWebPages(ctx context.Context, webPages []*www.WebPage, api *api.API, maxConcurrency int) ([]*Document, error) {
+type AddressAndWebPage struct {
+	Address int
+	WebPage *www.WebPage
+}
+
+func IndexWebPages(ctx context.Context, addressesAndWebPages []*AddressAndWebPage, api *api.API, maxConcurrency int) ([]*Document, error) {
 	var documents []*Document
 	var mu sync.Mutex
 	var wg sync.WaitGroup
 
 	semaphore := make(chan struct{}, maxConcurrency)
 
-	for _, webPage := range webPages {
+	for _, addressAndWebPage := range addressesAndWebPages {
 		wg.Add(1)
-		go func(webPage *www.WebPage) {
+		go func(addressAndWebPage *AddressAndWebPage) {
 			defer wg.Done()
 			semaphore <- struct{}{}
 			defer func() { <-semaphore }()
 
-			doc, err := processWebPage(ctx, webPage, api)
+			doc, err := processWebPage(ctx, addressAndWebPage.Address, addressAndWebPage.WebPage, api)
 			if err != nil {
 				log.Printf("Error processing doc: %v", err)
 				return
@@ -85,14 +90,14 @@ func IndexWebPages(ctx context.Context, webPages []*www.WebPage, api *api.API, m
 			mu.Lock()
 			documents = append(documents, doc)
 			mu.Unlock()
-		}(webPage)
+		}(addressAndWebPage)
 	}
 	wg.Wait()
 	return documents, nil
 }
 
-func processWebPage(ctx context.Context, webPage *www.WebPage, api *api.API) (*Document, error) {
-	summary, err := SummarizeDoc(ctx, &Document{WebPage: webPage}, api)
+func processWebPage(ctx context.Context, address int, webPage *www.WebPage, api *api.API) (*Document, error) {
+	summary, err := summarizeDoc(ctx, &Document{WebPage: webPage}, api)
 	if err != nil {
 		return nil, fmt.Errorf("error summarizing doc: %w", err)
 	}
@@ -104,5 +109,6 @@ func processWebPage(ctx context.Context, webPage *www.WebPage, api *api.API) (*D
 		Summary:   summary,
 		Embedding: embeddings,
 		WebPage:   webPage,
+		Address:   address,
 	}, nil
 }

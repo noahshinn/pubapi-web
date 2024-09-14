@@ -19,10 +19,10 @@ type SearchEngine interface {
 }
 
 type PubAPISearchEngine struct {
-	a     *api.API
+	api   *api.API
 	index []*index.Document
 	// a cache of json-serialized web pages to documents
-	c cache.DiskCache
+	cache cache.DiskCache
 }
 
 func (e *PubAPISearchEngine) Search(ctx context.Context, query string, options *SearchOptions) ([]*SearchResult, error) {
@@ -32,7 +32,7 @@ func (e *PubAPISearchEngine) Search(ctx context.Context, query string, options *
 	if len(e.index) == 0 {
 		return nil, errors.New("index is empty")
 	}
-	return Search(ctx, e.index, query, e.a, options)
+	return Search(ctx, e.index, query, e.api, options)
 }
 
 type RefreshIndexOptions struct {
@@ -71,7 +71,7 @@ func (e *PubAPISearchEngine) RefreshIndex(ctx context.Context, web *www.WWW, add
 				return
 			}
 			cacheKey := fmt.Sprintf("web-page-content-%s", string(webPageJsonBytes))
-			if doc, err := e.c.Get(cacheKey); err == nil {
+			if doc, err := e.cache.Get(cacheKey); err == nil {
 				docBytes, err := json.Marshal(doc)
 				if err != nil {
 					errChan <- err
@@ -85,13 +85,13 @@ func (e *PubAPISearchEngine) RefreshIndex(ctx context.Context, web *www.WWW, add
 				}
 				resultChan <- &d
 			} else {
-				docs, err := index.IndexWebPages(ctx, []*www.WebPage{webPage}, e.a, 1)
+				docs, err := index.IndexWebPages(ctx, []*index.AddressAndWebPage{{Address: addr, WebPage: webPage}}, e.api, 1)
 				if err != nil {
 					errChan <- err
 					return
 				}
 				doc := docs[0]
-				e.c.Set(cacheKey, doc)
+				e.cache.Set(cacheKey, doc)
 				resultChan <- doc
 			}
 		}(address)
@@ -105,7 +105,7 @@ func (e *PubAPISearchEngine) RefreshIndex(ctx context.Context, web *www.WWW, add
 		}
 	}
 	e.index = webIndex
-	err := e.c.SaveToDisk()
+	err := e.cache.SaveToDisk()
 	if err != nil {
 		return err
 	}
@@ -114,7 +114,7 @@ func (e *PubAPISearchEngine) RefreshIndex(ctx context.Context, web *www.WWW, add
 }
 
 func NewPubAPISearchEngine(a *api.API, web *www.WWW) (SearchEngine, error) {
-	se := &PubAPISearchEngine{a: a}
+	se := &PubAPISearchEngine{api: a}
 	cachePath, err := se.getRootCachePath()
 	if err != nil {
 		return nil, err
@@ -123,7 +123,7 @@ func NewPubAPISearchEngine(a *api.API, web *www.WWW) (SearchEngine, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &PubAPISearchEngine{a: a, c: c}, nil
+	return &PubAPISearchEngine{api: a, cache: c}, nil
 }
 
 func (e *PubAPISearchEngine) getRootCachePath() (string, error) {

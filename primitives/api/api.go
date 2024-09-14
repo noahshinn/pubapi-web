@@ -10,13 +10,13 @@ import (
 )
 
 type API struct {
-	BinaryClassifyModels []models.BinaryClassifyModel
-	ClassifyModels       []models.ClassifyModel
-	ScoreModels          []models.ScoreModel
-	GenerateModels       []models.GenerateModel
-	ParseForceModels     []models.ParseForceModel
-	EmbeddingModels      []models.EmbeddingModel
-	RequestRouter        router.RequestRouter
+	binaryClassifyModels []models.BinaryClassifyModel
+	classifyModels       []models.ClassifyModel
+	scoreModels          []models.ScoreModel
+	generateModels       []models.GenerateModel
+	parseForceModels     []models.ParseForceModel
+	embeddingModels      []models.EmbeddingModel
+	requestRouter        router.RequestRouter
 }
 
 type RequestOptions struct {
@@ -58,7 +58,7 @@ func (a *API) BinaryClassify(ctx context.Context, instruction string, text strin
 		Instruction: instruction,
 		Text:        text,
 	}
-	models := a.BinaryClassifyModels
+	models := a.binaryClassifyModels
 	var examples []*datapoint.BinaryClassifyDatapoint
 	if requestOptions != nil {
 		dp.Examples = requestOptions.Examples
@@ -67,7 +67,7 @@ func (a *API) BinaryClassify(ctx context.Context, instruction string, text strin
 			models = requestOptions.Models
 		}
 	}
-	model, err := a.RequestRouter.RouteBinaryClassify(ctx, *dp, models)
+	model, err := a.requestRouter.RouteBinaryClassify(ctx, *dp, models)
 	if err != nil {
 		return false, err
 	}
@@ -80,7 +80,7 @@ func (a *API) Classify(ctx context.Context, instruction string, text string, opt
 		Text:        text,
 		Options:     options,
 	}
-	models := a.ClassifyModels
+	models := a.classifyModels
 	var examples []*datapoint.ClassifyDatapoint
 	if requestOptions != nil {
 		dp.Examples = requestOptions.Examples
@@ -89,7 +89,7 @@ func (a *API) Classify(ctx context.Context, instruction string, text string, opt
 			models = requestOptions.Models
 		}
 	}
-	model, err := a.RequestRouter.RouteClassify(ctx, *dp, models)
+	model, err := a.requestRouter.RouteClassify(ctx, *dp, models)
 	if err != nil {
 		return 0, err
 	}
@@ -102,7 +102,7 @@ func (a *API) ParseForce(ctx context.Context, instruction string, text string, v
 		Text:        text,
 		V:           v,
 	}
-	models := a.ParseForceModels
+	models := a.parseForceModels
 	var examples []*datapoint.ParseForceDatapoint
 	if requestOptions != nil {
 		examples = requestOptions.Examples
@@ -111,7 +111,7 @@ func (a *API) ParseForce(ctx context.Context, instruction string, text string, v
 			models = requestOptions.Models
 		}
 	}
-	model, err := a.RequestRouter.RouteParseForce(ctx, *dp, models)
+	model, err := a.requestRouter.RouteParseForce(ctx, *dp, models)
 	if err != nil {
 		return err
 	}
@@ -125,7 +125,7 @@ func (a *API) Score(ctx context.Context, instruction string, text string, min in
 		Min:         min,
 		Max:         max,
 	}
-	models := a.ScoreModels
+	models := a.scoreModels
 	var examples []*datapoint.ScoreDatapoint
 	if requestOptions != nil {
 		dp.Examples = requestOptions.Examples
@@ -134,7 +134,7 @@ func (a *API) Score(ctx context.Context, instruction string, text string, min in
 			models = requestOptions.Models
 		}
 	}
-	model, err := a.RequestRouter.RouteScore(ctx, *dp, models)
+	model, err := a.requestRouter.RouteScore(ctx, *dp, models)
 	if err != nil {
 		return 0, err
 	}
@@ -146,7 +146,7 @@ func (a *API) Generate(ctx context.Context, instruction string, text string, req
 		Instruction: instruction,
 		Text:        text,
 	}
-	models := a.GenerateModels
+	models := a.generateModels
 	var examples []*datapoint.GenerateDatapoint
 	if requestOptions != nil {
 		dp.Examples = requestOptions.Examples
@@ -155,7 +155,7 @@ func (a *API) Generate(ctx context.Context, instruction string, text string, req
 			models = requestOptions.Models
 		}
 	}
-	model, err := a.RequestRouter.RouteGenerate(ctx, *dp, models)
+	model, err := a.requestRouter.RouteGenerate(ctx, *dp, models)
 	if err != nil {
 		return "", err
 	}
@@ -163,7 +163,7 @@ func (a *API) Generate(ctx context.Context, instruction string, text string, req
 }
 
 func (a *API) Embedding(ctx context.Context, text string) ([]float64, error) {
-	embeddings, err := a.EmbeddingModels[0].GetEmbedding(ctx, text)
+	embeddings, err := a.embeddingModels[0].GetEmbedding(ctx, text)
 	if err != nil {
 		return nil, err
 	}
@@ -180,12 +180,12 @@ func DefaultAPI() *API {
 		panic(fmt.Errorf("failed to create default embedding model: %v", err))
 	}
 	return &API{
-		BinaryClassifyModels: []models.BinaryClassifyModel{generalModel},
-		ClassifyModels:       []models.ClassifyModel{generalModel},
-		ScoreModels:          []models.ScoreModel{generalModel},
-		GenerateModels:       []models.GenerateModel{generalModel},
-		ParseForceModels:     []models.ParseForceModel{generalModel},
-		EmbeddingModels:      []models.EmbeddingModel{embeddingModel},
-		RequestRouter:        router.DefaultRequestRouter(),
+		binaryClassifyModels: []models.BinaryClassifyModel{generalModel},
+		classifyModels:       []models.ClassifyModel{generalModel},
+		scoreModels:          []models.ScoreModel{generalModel},
+		generateModels:       []models.GenerateModel{generalModel},
+		parseForceModels:     []models.ParseForceModel{generalModel},
+		embeddingModels:      []models.EmbeddingModel{embeddingModel},
+		requestRouter:        router.DefaultRequestRouter(),
 	}
 }

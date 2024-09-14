@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"search_engine/index"
 	"search_engine/primitives/api"
+	"search_engine/utils/slicesx"
 	"search_engine/www"
 )
 
@@ -50,7 +51,9 @@ func main() {
 		webPages = append(webPages, www.NewWebPage(path.Name(), specMap))
 	}
 
-	indexedDocs, err := index.IndexWebPages(ctx, webPages, api, *maxConcurrency)
+	indexedDocs, err := index.IndexWebPages(ctx, slicesx.Map(webPages, func(webPage *www.WebPage, _ int) *index.AddressAndWebPage {
+		return &index.AddressAndWebPage{Address: 0, WebPage: webPage}
+	}), api, *maxConcurrency)
 	if err != nil {
 		log.Fatalf("Error indexing docs: %v", err)
 	}
