@@ -11,6 +11,7 @@ import (
 type Cache interface {
 	Get(key string) (any, error)
 	Set(key string, value any) error
+	Clear() error
 }
 
 func GetCacheRootPath() (string, error) {
@@ -84,4 +85,9 @@ func (c *BasicDiskCache) SaveToDisk() error {
 
 func (c *BasicDiskCache) Path() string {
 	return c.diskPath
+}
+
+func (c *BasicDiskCache) Clear() error {
+	c.cache = make(map[string]any)
+	return c.SaveToDisk()
 }
