@@ -1,0 +1,138 @@
+{
+  "accounts": {
+    "acc_123": {
+      "account_id": "acc_123",
+      "customer_name": "Casey Wringer",
+      "email": "casey.wringer@email.com",
+      "phone_numbers": [
+        {
+          "phone_number": "+1-555-0123",
+          "plan": {
+            "id": "plan_1",
+            "name": "5G Unlimited Plus",
+            "data_limit": -1,
+            "talk_minutes": -1,
+            "text_messages": -1,
+            "price": 80.00,
+            "features": [
+              "Unlimited 5G Ultra Wideband",
+              "Unlimited Mobile Hotspot",
+              "Disney+ included",
+              "Apple Music included"
+            ]
+          },
+          "device": {
+            "id": "dev_1",
+            "model": "iPhone 14 Pro",
+            "manufacturer": "Apple",
+            "imei": "359269234531234",
+            "status": "active"
+          }
+        }
+      ],
+      "billing_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "payment_method": {
+        "id": "pm_1",
+        "type": "credit_card",
+        "last4": "4242",
+        "expiry_mm": 12,
+        "expiry_yy": 25
+      }
+    }
+  },
+  "usage": {
+    "+1-555-0123": {
+      "phone_number": "+1-555-0123",
+      "data_used": 15.6,
+      "data_remaining": -1,
+      "minutes_used": 250,
+      "texts_sent": 1250,
+      "billing_cycle_end": "2024-02-15T23:59:59Z"
+    }
+  },
+  "bills": {
+    "acc_123": [
+      {
+        "id": "bill_1",
+        "account_id": "acc_123",
+        "amount": 85.60,
+        "due_date": "2024-02-01T00:00:00Z",
+        "status": "paid",
+        "statement_date": "2024-01-15T00:00:00Z",
+        "items": [
+          {
+            "description": "5G Unlimited Plus Plan",
+            "amount": 80.00,
+            "type": "plan"
+          },
+          {
+            "description": "Taxes and Fees",
+            "amount": 5.60,
+            "type": "tax"
+          }
+        ]
+      },
+      {
+        "id": "bill_2",
+        "account_id": "acc_123",
+        "amount": 85.60,
+        "due_date": "2024-03-01T00:00:00Z",
+        "status": "pending",
+        "statement_date": "2024-02-15T00:00:00Z",
+        "items": [
+          {
+            "description": "5G Unlimited Plus Plan",
+            "amount": 80.00,
+            "type": "plan"
+          },
+          {
+            "description": "Taxes and Fees",
+            "amount": 5.60,
+            "type": "tax"
+          }
+        ]
+      }
+    ]
+  },
+  "plans": [
+    {
+      "id": "plan_1",
+      "name": "5G Unlimited Plus",
+      "data_limit": -1,
+      "talk_minutes": -1,
+      "text_messages": -1,
+      "price": 80.00,
+      "features": [
+        "Unlimited 5G Ultra Wideband",
+        "Unlimited Mobile Hotspot",
+        "Disney+ included",
+        "Apple Music included"
+      ]
+    },
+    {
+      "id": "plan_2",
+      "name": "5G Start",
+      "data_limit": 50,
+      "talk_minutes": -1,
+      "text_messages": -1,
+      "price": 65.00,
+      "features": [
+        "5G Nationwide",
+        "5GB Mobile Hotspot",
+        "Disney+ for 6 months"
+      ]
+    },
+    {
+      "id": "plan_3",
+      "name": "Basic",
+      "data_limit": 15,
+      "talk_minutes": 1000,
+      "text_messages": -1,
+      "price": 45.00,
+      "features": [
+        "5G Nationwide",
+        "No Mobile Hotspot"
+      ]
+    }
+  ]
+}

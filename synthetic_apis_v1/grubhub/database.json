@@ -1,0 +1,139 @@
+{
+  "restaurants": {
+    "rest_1": {
+      "id": "rest_1",
+      "name": "Thai Spice",
+      "cuisine_type": "Thai",
+      "rating": 4.7,
+      "estimated_delivery_time": 40,
+      "delivery_fee": 4.99,
+      "minimum_order": 15.00,
+      "address": "456 Asian Fusion Lane, San Francisco, CA 94105",
+      "latitude": 37.7858,
+      "longitude": -122.3968,
+      "menu": [
+        {
+          "id": "item_1",
+          "name": "Pad Thai",
+          "description": "Rice noodles stir-fried with eggs, tofu, dried shrimp, and peanuts",
+          "price": 15.99,
+          "category": "Noodles",
+          "customization_options": [
+            {
+              "name": "Protein",
+              "choices": [
+                {"name": "Chicken", "price": 0},
+                {"name": "Shrimp", "price": 3},
+                {"name": "Tofu", "price": 0}
+              ]
+            },
+            {
+              "name": "Spice Level",
+              "choices": [
+                {"name": "Mild", "price": 0},
+                {"name": "Medium", "price": 0},
+                {"name": "Hot", "price": 0}
+              ]
+            }
+          ]
+        },
+        {
+          "id": "item_2",
+          "name": "Green Curry",
+          "description": "Coconut milk based curry with bamboo shoots and Thai basil",
+          "price": 16.99,
+          "category": "Curries",
+          "customization_options": [
+            {
+              "name": "Protein",
+              "choices": [
+                {"name": "Chicken", "price": 0},
+                {"name": "Shrimp", "price": 3},
+                {"name": "Tofu", "price": 0}
+              ]
+            },
+            {
+              "name": "Spice Level",
+              "choices": [
+                {"name": "Mild", "price": 0},
+                {"name": "Medium", "price": 0},
+                {"name": "Hot", "price": 0}
+              ]
+            }
+          ]
+        }
+      ],
+      "is_open": true
+    }
+  },
+  "carts": {
+    "cart_1": {
+      "id": "cart_1",
+      "user_email": "casey.wringer@email.com",
+      "restaurant_id": "rest_1",
+      "items": [
+        {
+          "menu_item_id": "item_1",
+          "quantity": 1,
+          "customizations": [
+            {
+              "option_name": "Protein",
+              "choice": "Chicken"
+            },
+            {
+              "option_name": "Spice Level",
+              "choice": "Medium"
+            }
+          ],
+          "special_instructions": "Extra peanuts please",
+          "price": 15.99
+        }
+      ],
+      "subtotal": 15.99,
+      "tax": 1.32,
+      "delivery_fee": 4.99,
+      "total": 22.30,
+      "created_at": "2024-01-16T15:30:00Z",
+      "updated_at": "2024-01-16T15:30:00Z"
+    }
+  },
+  "orders": {
+    "order_1": {
+      "id": "order_1",
+      "user_email": "casey.wringer@email.com",
+      "cart": {
+        "id": "cart_1",
+        "user_email": "casey.wringer@email.com",
+        "restaurant_id": "rest_1",
+        "items": [
+          {
+            "menu_item_id": "item_1",
+            "quantity": 1,
+            "customizations": [
+              {
+                "option_name": "Protein",
+                "choice": "Chicken"
+              },
+              {
+                "option_name": "Spice Level",
+                "choice": "Medium"
+              }
+            ],
+            "special_instructions": "Extra peanuts please",
+            "price": 15.99
+          }
+        ],
+        "subtotal": 15.99,
+        "tax": 1.32,
+        "delivery_fee": 4.99,
+        "total": 22.30
+      },
+      "status": "delivered",
+      "delivery_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "payment_method_id": "pm_1",
+      "tip_amount": 4.00,
+      "created_at": "2024-01-15T19:30:00Z",
+      "updated_at": "2024-01-15T20:15:00Z"
+    }
+  }
+}

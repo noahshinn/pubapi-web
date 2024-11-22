@@ -1,0 +1,199 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Hulu Public API",
+    "version": "1.0.0",
+    "description": "API for streaming service"
+  },
+  "paths": {
+    "/api/v1/content/browse": {
+      "get": {
+        "summary": "Browse content catalog",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["shows", "movies", "originals"]
+            }
+          },
+          {
+            "name": "genre",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of content items",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Content"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/content/{contentId}": {
+      "get": {
+        "summary": "Get content details",
+        "parameters": [
+          {
+            "name": "contentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Content details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Content"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/watchlist": {
+      "get": {
+        "summary": "Get user's watchlist",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's watchlist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Content"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add to watchlist",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {"type": "string"},
+                  "contentId": {"type": "string"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Added to watchlist"
+          }
+        }
+      }
+    },
+    "/api/v1/continue-watching": {
+      "get": {
+        "summary": "Get user's continue watching list",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Continue watching list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WatchProgress"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Content": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "type": {"type": "string", "enum": ["movie", "series"]},
+          "description": {"type": "string"},
+          "releaseYear": {"type": "integer"},
+          "genre": {"type": "string"},
+          "rating": {"type": "string"},
+          "duration": {"type": "integer"},
+          "thumbnailUrl": {"type": "string"},
+          "streamUrl": {"type": "string"}
+        }
+      },
+      "WatchProgress": {
+        "type": "object",
+        "properties": {
+          "content": {"$ref": "#/components/schemas/Content"},
+          "progress": {"type": "integer"},
+          "lastWatched": {"type": "string"},
+          "episode": {
+            "type": "object",
+            "properties": {
+              "season": {"type": "integer"},
+              "episode": {"type": "integer"},
+              "title": {"type": "string"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

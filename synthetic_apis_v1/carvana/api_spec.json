@@ -1,0 +1,264 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Carvana Public API",
+    "version": "1.0.0",
+    "description": "API for online car buying and selling service"
+  },
+  "paths": {
+    "/api/v1/vehicles": {
+      "get": {
+        "summary": "Search available vehicles",
+        "parameters": [
+          {
+            "name": "make",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "year_min",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "year_max",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "price_min",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "price_max",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of vehicles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Vehicle"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/vehicles/{vehicleId}": {
+      "get": {
+        "summary": "Get vehicle details",
+        "parameters": [
+          {
+            "name": "vehicleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Vehicle details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vehicle"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orders": {
+      "get": {
+        "summary": "Get user's vehicle orders",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Place new vehicle order",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewOrder"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order created"
+          }
+        }
+      }
+    },
+    "/api/v1/trade-in/estimate": {
+      "post": {
+        "summary": "Get trade-in estimate",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TradeInRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Trade-in estimate",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TradeInEstimate"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Vehicle": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "make": {"type": "string"},
+          "model": {"type": "string"},
+          "year": {"type": "integer"},
+          "price": {"type": "number"},
+          "mileage": {"type": "integer"},
+          "color": {"type": "string"},
+          "vin": {"type": "string"},
+          "features": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "images": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "condition": {"type": "string"},
+          "carfax_link": {"type": "string"}
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "vehicle": {"$ref": "#/components/schemas/Vehicle"},
+          "user_email": {"type": "string"},
+          "status": {"type": "string"},
+          "delivery_date": {"type": "string"},
+          "payment_method": {"type": "string"},
+          "financing_details": {"$ref": "#/components/schemas/FinancingDetails"},
+          "trade_in": {"$ref": "#/components/schemas/TradeInDetails"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "NewOrder": {
+        "type": "object",
+        "properties": {
+          "vehicle_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "payment_method": {"type": "string"},
+          "financing_requested": {"type": "boolean"},
+          "trade_in_id": {"type": "string"}
+        }
+      },
+      "FinancingDetails": {
+        "type": "object",
+        "properties": {
+          "term_months": {"type": "integer"},
+          "apr": {"type": "number"},
+          "monthly_payment": {"type": "number"},
+          "down_payment": {"type": "number"}
+        }
+      },
+      "TradeInRequest": {
+        "type": "object",
+        "properties": {
+          "make": {"type": "string"},
+          "model": {"type": "string"},
+          "year": {"type": "integer"},
+          "mileage": {"type": "integer"},
+          "condition": {"type": "string"},
+          "zip_code": {"type": "string"}
+        }
+      },
+      "TradeInEstimate": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "value": {"type": "number"},
+          "valid_until": {"type": "string"}
+        }
+      },
+      "TradeInDetails": {
+        "type": "object",
+        "properties": {
+          "make": {"type": "string"},
+          "model": {"type": "string"},
+          "year": {"type": "integer"},
+          "value": {"type": "number"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "creators": {
+    "creator_1": {
+      "id": "creator_1",
+      "name": "Tech Tutorials with Alex",
+      "description": "Weekly programming tutorials and tech insights",
+      "category": "Technology",
+      "subscribers_count": 1250,
+      "monthly_income": 3750.00,
+      "tiers": [
+        {
+          "id": "tier_1",
+          "name": "Basic Support",
+          "price": 5.00,
+          "benefits": [
+            "Access to patron-only posts",
+            "Early access to tutorials"
+          ]
+        },
+        {
+          "id": "tier_2",
+          "name": "Premium Support",
+          "price": 15.00,
+          "benefits": [
+            "Access to patron-only posts",
+            "Early access to tutorials",
+            "Monthly live Q&A session",
+            "Source code access"
+          ]
+        },
+        {
+          "id": "tier_3",
+          "name": "VIP Support",
+          "price": 30.00,
+          "benefits": [
+            "Access to patron-only posts",
+            "Early access to tutorials",
+            "Weekly live Q&A session",
+            "Source code access",
+            "1-on-1 monthly mentoring session"
+          ]
+        }
+      ]
+    },
+    "creator_2": {
+      "id": "creator_2",
+      "name": "Digital Art Academy",
+      "description": "Digital art tutorials and workshops",
+      "category": "Art",
+      "subscribers_count": 850,
+      "monthly_income": 2550.00,
+      "tiers": [
+        {
+          "id": "tier_1",
+          "name": "Art Enthusiast",
+          "price": 5.00,
+          "benefits": [
+            "Access to patron-only posts",
+            "Monthly art prompts"
+          ]
+        },
+        {
+          "id": "tier_2",
+          "name": "Art Pro",
+          "price": 20.00,
+          "benefits": [
+            "Access to patron-only posts",
+            "Monthly art prompts",
+            "Process videos",
+            "PSD files"
+          ]
+        }
+      ]
+    }
+  },
+  "posts": {
+    "post_1": {
+      "id": "post_1",
+      "creator_id": "creator_1",
+      "title": "Advanced React Patterns",
+      "content": "In this tutorial, we'll explore advanced React patterns...",
+      "tier_access": "tier_2",
+      "created_at": "2024-01-15T10:00:00Z"
+    },
+    "post_2": {
+      "id": "post_2",
+      "creator_id": "creator_1",
+      "title": "Getting Started with Go",
+      "content": "Learn the basics of Go programming...",
+      "tier_access": "tier_1",
+      "created_at": "2024-01-16T15:30:00Z"
+    }
+  },
+  "subscriptions": {
+    "sub_1": {
+      "id": "sub_1",
+      "user_email": "casey.wringer@email.com",
+      "creator": {
+        "id": "creator_1",
+        "name": "Tech Tutorials with Alex"
+      },
+      "tier": {
+        "id": "tier_2",
+        "name": "Premium Support",
+        "price": 15.00
+      },
+      "status": "active",
+      "created_at": "2023-12-01T00:00:00Z",
+      "updated_at": "2023-12-01T00:00:00Z"
+    }
+  }
+}

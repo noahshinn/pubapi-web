@@ -1,0 +1,66 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "bio": "Tech enthusiast and software engineer. Writing about AI, programming, and tech culture.",
+      "following_count": 142,
+      "followers_count": 256,
+      "joined_at": "2023-01-15T00:00:00Z"
+    }
+  },
+  "articles": {
+    "art_1": {
+      "id": "art_1",
+      "title": "The Future of AI in Software Development",
+      "content": "As we venture into 2024, artificial intelligence continues to reshape how we approach software development...",
+      "author": {
+        "email": "casey.wringer@email.com",
+        "name": "Casey Wringer",
+        "bio": "Tech enthusiast and software engineer. Writing about AI, programming, and tech culture."
+      },
+      "tags": ["AI", "Programming", "Technology"],
+      "claps": 234,
+      "reading_time": 8,
+      "created_at": "2024-01-10T15:30:00Z",
+      "updated_at": "2024-01-10T15:30:00Z"
+    },
+    "art_2": {
+      "id": "art_2",
+      "title": "Building Scalable Microservices",
+      "content": "Microservices architecture has become the standard for building large-scale applications...",
+      "author": {
+        "email": "casey.wringer@email.com",
+        "name": "Casey Wringer",
+        "bio": "Tech enthusiast and software engineer. Writing about AI, programming, and tech culture."
+      },
+      "tags": ["Microservices", "Architecture", "Programming"],
+      "claps": 187,
+      "reading_time": 12,
+      "created_at": "2024-01-05T10:15:00Z",
+      "updated_at": "2024-01-05T10:15:00Z"
+    }
+  },
+  "comments": {
+    "com_1": {
+      "id": "com_1",
+      "article_id": "art_1",
+      "content": "Great insights on AI's impact on development! Looking forward to more articles on this topic.",
+      "author": {
+        "email": "reader@email.com",
+        "name": "John Reader"
+      },
+      "created_at": "2024-01-11T08:45:00Z"
+    },
+    "com_2": {
+      "id": "com_2",
+      "article_id": "art_1",
+      "content": "Would love to see more specific examples of AI tools in development workflows.",
+      "author": {
+        "email": "tech.enthusiast@email.com",
+        "name": "Maria Tech"
+      },
+      "created_at": "2024-01-12T14:20:00Z"
+    }
+  }
+}

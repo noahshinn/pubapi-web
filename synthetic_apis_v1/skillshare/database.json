@@ -1,0 +1,110 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "bio": "Software engineer passionate about learning new technologies",
+      "joined_at": "2023-06-15T10:00:00Z",
+      "interests": ["programming", "web development", "machine learning"],
+      "subscription_tier": "premium"
+    }
+  },
+  "courses": {
+    "course_1": {
+      "id": "course_1",
+      "title": "Web Development Fundamentals",
+      "description": "Learn the basics of web development with HTML, CSS, and JavaScript",
+      "instructor": {
+        "id": "inst_1",
+        "name": "John Smith",
+        "bio": "Senior Web Developer with 10 years of experience",
+        "rating": 4.8
+      },
+      "category": "Programming",
+      "subcategory": "Web Development",
+      "level": "Beginner",
+      "duration": 480,
+      "lessons": [
+        {
+          "id": "lesson_1",
+          "title": "Introduction to HTML",
+          "duration": 45,
+          "order": 1
+        },
+        {
+          "id": "lesson_2",
+          "title": "CSS Basics",
+          "duration": 50,
+          "order": 2
+        }
+      ],
+      "rating": 4.7,
+      "enrolled_count": 1500
+    },
+    "course_2": {
+      "id": "course_2",
+      "title": "Machine Learning Basics",
+      "description": "Introduction to machine learning concepts and Python",
+      "instructor": {
+        "id": "inst_2",
+        "name": "Emily Johnson",
+        "bio": "AI Researcher and Data Scientist",
+        "rating": 4.9
+      },
+      "category": "Data Science",
+      "subcategory": "Machine Learning",
+      "level": "Intermediate",
+      "duration": 600,
+      "lessons": [
+        {
+          "id": "lesson_1",
+          "title": "Python for ML",
+          "duration": 60,
+          "order": 1
+        },
+        {
+          "id": "lesson_2",
+          "title": "Introduction to NumPy",
+          "duration": 55,
+          "order": 2
+        }
+      ],
+      "rating": 4.8,
+      "enrolled_count": 1200
+    }
+  },
+  "enrollments": {
+    "enroll_1": {
+      "id": "enroll_1",
+      "user_email": "casey.wringer@email.com",
+      "course_id": "course_1",
+      "progress": 75,
+      "completed": false,
+      "enrolled_at": "2024-01-10T15:30:00Z"
+    },
+    "enroll_2": {
+      "id": "enroll_2",
+      "user_email": "casey.wringer@email.com",
+      "course_id": "course_2",
+      "progress": 25,
+      "completed": false,
+      "enrolled_at": "2024-01-15T09:45:00Z"
+    }
+  },
+  "lesson_progress": {
+    "enroll_1:lesson_1": {
+      "enrollment_id": "enroll_1",
+      "lesson_id": "lesson_1",
+      "completed": true,
+      "progress": 100,
+      "last_watched": "2024-01-12T16:20:00Z"
+    },
+    "enroll_1:lesson_2": {
+      "enrollment_id": "enroll_1",
+      "lesson_id": "lesson_2",
+      "completed": false,
+      "progress": 50,
+      "last_watched": "2024-01-14T18:15:00Z"
+    }
+  }
+}

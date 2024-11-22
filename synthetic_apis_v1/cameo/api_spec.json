@@ -1,0 +1,172 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Cameo Public API",
+    "version": "1.0.0",
+    "description": "API for celebrity video messaging platform"
+  },
+  "paths": {
+    "/api/v1/celebrities": {
+      "get": {
+        "summary": "Get list of celebrities",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "price_max",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of celebrities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Celebrity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bookings": {
+      "get": {
+        "summary": "Get user's video bookings",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of bookings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Booking"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new video booking",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewBooking"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Booking created"
+          }
+        }
+      }
+    },
+    "/api/v1/bookings/{bookingId}": {
+      "get": {
+        "summary": "Get booking details",
+        "parameters": [
+          {
+            "name": "bookingId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Booking details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Booking"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Celebrity": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "category": {"type": "string"},
+          "price": {"type": "number"},
+          "rating": {"type": "number"},
+          "response_time": {"type": "string"},
+          "bio": {"type": "string"},
+          "profile_image": {"type": "string"},
+          "sample_videos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Booking": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "celebrity": {"$ref": "#/components/schemas/Celebrity"},
+          "user_email": {"type": "string"},
+          "occasion": {"type": "string"},
+          "recipient_name": {"type": "string"},
+          "instructions": {"type": "string"},
+          "status": {"type": "string"},
+          "video_url": {"type": "string"},
+          "created_at": {"type": "string"},
+          "completed_at": {"type": "string"}
+        }
+      },
+      "NewBooking": {
+        "type": "object",
+        "properties": {
+          "celebrity_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "occasion": {"type": "string"},
+          "recipient_name": {"type": "string"},
+          "instructions": {"type": "string"}
+        },
+        "required": ["celebrity_id", "user_email", "occasion", "recipient_name", "instructions"]
+      }
+    }
+  }
+}

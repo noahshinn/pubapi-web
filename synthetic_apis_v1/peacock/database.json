@@ -1,0 +1,108 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "subscription_tier": "premium",
+      "watchlist": ["content_1", "content_3", "content_5"],
+      "watch_progress": [
+        {
+          "content_id": "content_1",
+          "progress_seconds": 3600,
+          "total_seconds": 7200,
+          "last_watched": "2024-01-15T20:30:00Z"
+        }
+      ]
+    }
+  },
+  "content": {
+    "content_1": {
+      "id": "content_1",
+      "title": "The Office (US)",
+      "type": "show",
+      "description": "A mockumentary on a group of typical office workers.",
+      "duration": 1320,
+      "release_year": 2005,
+      "rating": "TV-14",
+      "genres": ["Comedy", "Sitcom"],
+      "thumbnail_url": "https://peacock.com/thumbnails/the-office.jpg",
+      "stream_url": "https://stream.peacock.com/the-office",
+      "episodes": [
+        {
+          "id": "ep_1_1",
+          "title": "Pilot",
+          "season_num": 1,
+          "episode_num": 1,
+          "duration": 1320,
+          "description": "The first episode of The Office introduces the main characters.",
+          "thumbnail_url": "https://peacock.com/thumbnails/the-office-s1e1.jpg",
+          "stream_url": "https://stream.peacock.com/the-office/s1/e1"
+        }
+      ]
+    },
+    "content_2": {
+      "id": "content_2",
+      "title": "Oppenheimer",
+      "type": "movie",
+      "description": "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+      "duration": 10800,
+      "release_year": 2023,
+      "rating": "R",
+      "genres": ["Biography", "Drama", "History"],
+      "thumbnail_url": "https://peacock.com/thumbnails/oppenheimer.jpg",
+      "stream_url": "https://stream.peacock.com/oppenheimer"
+    },
+    "content_3": {
+      "id": "content_3",
+      "title": "Sunday Night Football",
+      "type": "sport",
+      "description": "Live NFL football coverage",
+      "duration": 12600,
+      "release_year": 2024,
+      "rating": "TV-PG",
+      "genres": ["Sports", "Football"],
+      "thumbnail_url": "https://peacock.com/thumbnails/snf.jpg",
+      "stream_url": "https://stream.peacock.com/snf-live"
+    },
+    "content_4": {
+      "id": "content_4",
+      "title": "NBC Nightly News",
+      "type": "news",
+      "description": "Daily evening news broadcast",
+      "duration": 1800,
+      "release_year": 2024,
+      "rating": "TV-G",
+      "genres": ["News"],
+      "thumbnail_url": "https://peacock.com/thumbnails/nightly-news.jpg",
+      "stream_url": "https://stream.peacock.com/nbc-news"
+    },
+    "content_5": {
+      "id": "content_5",
+      "title": "Brooklyn Nine-Nine",
+      "type": "show",
+      "description": "Comedy series following the exploits of Det. Jake Peralta and his colleagues.",
+      "duration": 1320,
+      "release_year": 2013,
+      "rating": "TV-14",
+      "genres": ["Comedy", "Crime"],
+      "thumbnail_url": "https://peacock.com/thumbnails/brooklyn-99.jpg",
+      "stream_url": "https://stream.peacock.com/brooklyn-99"
+    }
+  },
+  "progress": {
+    "casey.wringer@email.com:content_1": {
+      "content_id": "content_1",
+      "email": "casey.wringer@email.com",
+      "progress_seconds": 3600,
+      "total_seconds": 7200,
+      "last_watched": "2024-01-15T20:30:00Z"
+    },
+    "casey.wringer@email.com:content_2": {
+      "content_id": "content_2",
+      "email": "casey.wringer@email.com",
+      "progress_seconds": 5400,
+      "total_seconds": 10800,
+      "last_watched": "2024-01-14T21:15:00Z"
+    }
+  }
+}

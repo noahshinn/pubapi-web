@@ -1,0 +1,79 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "profile_image_url": "https://twitch-profiles.example.com/casey.wringer.jpg",
+      "created_at": "2023-01-15T00:00:00Z",
+      "is_broadcaster": false
+    }
+  },
+  "channels": {
+    "channel_1": {
+      "id": "channel_1",
+      "owner_email": "ninja@email.com",
+      "display_name": "Ninja",
+      "description": "Professional Fortnite Player",
+      "profile_image_url": "https://twitch-profiles.example.com/ninja.jpg",
+      "followers_count": 18000000,
+      "is_live": true,
+      "created_at": "2020-01-01T00:00:00Z"
+    },
+    "channel_2": {
+      "id": "channel_2",
+      "owner_email": "pokimane@email.com",
+      "display_name": "Pokimane",
+      "description": "Variety Streamer",
+      "profile_image_url": "https://twitch-profiles.example.com/pokimane.jpg",
+      "followers_count": 9000000,
+      "is_live": true,
+      "created_at": "2020-02-01T00:00:00Z"
+    }
+  },
+  "streams": {
+    "stream_1": {
+      "id": "stream_1",
+      "channel_id": "channel_1",
+      "title": "Fortnite Tournament Practice",
+      "game": "Fortnite",
+      "viewer_count": 45000,
+      "thumbnail_url": "https://twitch-thumbnails.example.com/stream_1.jpg",
+      "started_at": "2024-01-16T18:00:00Z",
+      "tags": ["competitive", "tournament", "english"]
+    },
+    "stream_2": {
+      "id": "stream_2",
+      "channel_id": "channel_2",
+      "title": "Valorant Ranked Games",
+      "game": "Valorant",
+      "viewer_count": 28000,
+      "thumbnail_url": "https://twitch-thumbnails.example.com/stream_2.jpg",
+      "started_at": "2024-01-16T19:00:00Z",
+      "tags": ["fps", "ranked", "english"]
+    }
+  },
+  "follows": {
+    "casey.wringer@email.com": [
+      {
+        "user_email": "casey.wringer@email.com",
+        "channel_id": "channel_1",
+        "created_at": "2023-06-15T00:00:00Z"
+      },
+      {
+        "user_email": "casey.wringer@email.com",
+        "channel_id": "channel_2",
+        "created_at": "2023-07-20T00:00:00Z"
+      }
+    ]
+  },
+  "chat_messages": {
+    "msg_1": {
+      "id": "msg_1",
+      "channel_id": "channel_1",
+      "user_email": "casey.wringer@email.com",
+      "message": "Great play!",
+      "emotes": ["PogChamp"],
+      "created_at": "2024-01-16T18:30:00Z"
+    }
+  }
+}

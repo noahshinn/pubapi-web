@@ -1,0 +1,76 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "genetic_profile": {
+        "id": "gp_123456",
+        "haplogroup": "H1c",
+        "neanderthal_percentage": 2.7,
+        "sample_id": "S123456789",
+        "genotyping_chip": "v5"
+      },
+      "ancestry": {
+        "populations": [
+          {
+            "population": "East Asian",
+            "percentage": 85.5,
+            "confidence": 0.98
+          },
+          {
+            "population": "Southeast Asian",
+            "percentage": 12.3,
+            "confidence": 0.95
+          },
+          {
+            "population": "European",
+            "percentage": 2.2,
+            "confidence": 0.90
+          }
+        ]
+      },
+      "relatives": [
+        {
+          "id": "rel_1",
+          "name": "Anonymous",
+          "relationship": "Third Cousin",
+          "shared_dna": 0.195,
+          "segments": 4,
+          "ancestry": "East Asian"
+        },
+        {
+          "id": "rel_2",
+          "name": "Anonymous",
+          "relationship": "Fourth Cousin",
+          "shared_dna": 0.087,
+          "segments": 2,
+          "ancestry": "East Asian"
+        }
+      ],
+      "health_reports": [
+        {
+          "trait": "Lactose Intolerance",
+          "status": "Likely",
+          "risk_factor": 0.85,
+          "description": "Decreased ability to digest lactose after infancy",
+          "recommendations": [
+            "Consider lactose-free alternatives",
+            "Try lactase enzyme supplements",
+            "Monitor dairy intake"
+          ]
+        },
+        {
+          "trait": "Caffeine Metabolism",
+          "status": "Fast Metabolizer",
+          "risk_factor": 0.2,
+          "description": "Likely to metabolize caffeine quickly",
+          "recommendations": [
+            "Standard caffeine consumption guidelines apply",
+            "Less likely to experience sleep disruption from caffeine"
+          ]
+        }
+      ],
+      "consented_to_health": true
+    }
+  }
+}

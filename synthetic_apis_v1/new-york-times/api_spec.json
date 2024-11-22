@@ -1,0 +1,242 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "New York Times Public API",
+    "version": "1.0.0",
+    "description": "API for news articles, subscriptions, and user preferences"
+  },
+  "paths": {
+    "/api/v1/articles": {
+      "get": {
+        "summary": "Get articles with optional filtering",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of articles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Article"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/articles/{articleId}": {
+      "get": {
+        "summary": "Get article details",
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Article details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{email}/preferences": {
+      "get": {
+        "summary": "Get user preferences",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User preferences",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserPreferences"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user preferences",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserPreferences"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated preferences"
+          }
+        }
+      }
+    },
+    "/api/v1/users/{email}/bookmarks": {
+      "get": {
+        "summary": "Get user bookmarks",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User bookmarks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Article"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add bookmark",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "articleId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Bookmark added"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Article": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "subtitle": {"type": "string"},
+          "content": {"type": "string"},
+          "author": {"type": "string"},
+          "category": {"type": "string"},
+          "publishDate": {"type": "string"},
+          "imageUrl": {"type": "string"},
+          "readTimeMinutes": {"type": "integer"}
+        }
+      },
+      "UserPreferences": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "preferredCategories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "newsletterSubscriptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notificationPreferences": {
+            "type": "object",
+            "properties": {
+              "breakingNews": {"type": "boolean"},
+              "dailyDigest": {"type": "boolean"},
+              "weeklyNewsletter": {"type": "boolean"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "homes": {
+    "home_1": {
+      "id": "home_1",
+      "name": "Main Residence",
+      "address": "789 Tech Avenue, San Francisco, CA 94105",
+      "user_id": "casey.wringer@email.com",
+      "devices": [
+        {
+          "id": "therm_1",
+          "name": "Living Room Thermostat",
+          "type": "thermostat",
+          "room": "Living Room",
+          "status": "online",
+          "battery": 98,
+          "last_update": "2024-01-16T10:30:00Z"
+        },
+        {
+          "id": "therm_2",
+          "name": "Bedroom Thermostat",
+          "type": "thermostat",
+          "room": "Master Bedroom",
+          "status": "online",
+          "battery": 92,
+          "last_update": "2024-01-16T10:30:00Z"
+        },
+        {
+          "id": "cam_1",
+          "name": "Front Door Camera",
+          "type": "camera",
+          "room": "Entrance",
+          "status": "online",
+          "battery": 85,
+          "last_update": "2024-01-16T10:30:00Z"
+        }
+      ]
+    }
+  },
+  "thermostats": {
+    "therm_1": {
+      "id": "therm_1",
+      "name": "Living Room Thermostat",
+      "type": "thermostat",
+      "room": "Living Room",
+      "home_id": "home_1",
+      "status": "online",
+      "battery": 98,
+      "last_update": "2024-01-16T10:30:00Z",
+      "current_temp": 72.5,
+      "target_temp": 73.0,
+      "humidity": 45,
+      "mode": "heat",
+      "fan_status": "auto"
+    },
+    "therm_2": {
+      "id": "therm_2",
+      "name": "Bedroom Thermostat",
+      "type": "thermostat",
+      "room": "Master Bedroom",
+      "home_id": "home_1",
+      "status": "online",
+      "battery": 92,
+      "last_update": "2024-01-16T10:30:00Z",
+      "current_temp": 70.5,
+      "target_temp": 70.0,
+      "humidity": 42,
+      "mode": "cool",
+      "fan_status": "auto"
+    }
+  }
+}

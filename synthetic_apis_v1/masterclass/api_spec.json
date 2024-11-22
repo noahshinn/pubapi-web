@@ -1,0 +1,185 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Masterclass Public API",
+    "version": "1.0.0",
+    "description": "API for online education platform"
+  },
+  "paths": {
+    "/api/v1/courses": {
+      "get": {
+        "summary": "Get available courses",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instructor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of courses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Course"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/courses/{courseId}": {
+      "get": {
+        "summary": "Get course details",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Course details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Course"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{email}/progress": {
+      "get": {
+        "summary": "Get user's learning progress",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's learning progress",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CourseProgress"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lessons/{lessonId}/complete": {
+      "post": {
+        "summary": "Mark lesson as completed",
+        "parameters": [
+          {
+            "name": "lessonId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompleteLessonRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Lesson marked as completed"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Course": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "instructor": {"type": "string"},
+          "category": {"type": "string"},
+          "description": {"type": "string"},
+          "duration": {"type": "integer"},
+          "lessons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Lesson"
+            }
+          }
+        }
+      },
+      "Lesson": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "duration": {"type": "integer"},
+          "description": {"type": "string"}
+        }
+      },
+      "CourseProgress": {
+        "type": "object",
+        "properties": {
+          "courseId": {"type": "string"},
+          "completedLessons": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "progress": {"type": "number"},
+          "lastAccessed": {"type": "string"}
+        }
+      },
+      "CompleteLessonRequest": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "courseId": {"type": "string"}
+        },
+        "required": ["email", "courseId"]
+      }
+    }
+  }
+}

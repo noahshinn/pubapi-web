@@ -1,0 +1,106 @@
+{
+  "stores": {
+    "store_1": {
+      "id": "store_1",
+      "name": "Starbucks - Market Street",
+      "address": "123 Market St, San Francisco, CA 94105",
+      "latitude": 37.7935,
+      "longitude": -122.3964,
+      "hours": "5:00 AM - 8:00 PM",
+      "features": ["Mobile Order", "Drive-Thru", "Nitro Cold Brew"],
+      "is_open": true
+    },
+    "store_2": {
+      "id": "store_2",
+      "name": "Starbucks - Union Square",
+      "address": "456 Powell St, San Francisco, CA 94102",
+      "latitude": 37.7881,
+      "longitude": -122.4082,
+      "hours": "5:30 AM - 9:00 PM",
+      "features": ["Mobile Order", "Nitro Cold Brew", "Reserve Bar"],
+      "is_open": true
+    }
+  },
+  "menu": {
+    "drink_1": {
+      "id": "drink_1",
+      "name": "Caramel Macchiato",
+      "category": "drinks",
+      "description": "Freshly steamed milk with vanilla-flavored syrup marked with espresso and caramel drizzle",
+      "price": 4.95,
+      "calories": 250,
+      "customization_options": [
+        {
+          "name": "Size",
+          "options": ["Tall", "Grande", "Venti"],
+          "max_selections": 1
+        },
+        {
+          "name": "Milk",
+          "options": ["Whole", "2%", "Nonfat", "Almond", "Oat"],
+          "max_selections": 1
+        },
+        {
+          "name": "Espresso Shots",
+          "options": ["1", "2", "3", "4"],
+          "max_selections": 1
+        }
+      ]
+    },
+    "food_1": {
+      "id": "food_1",
+      "name": "Bacon & Gouda Breakfast Sandwich",
+      "category": "food",
+      "description": "Applewood-smoked bacon, aged Gouda and a parmesan frittata on an artisan roll",
+      "price": 4.75,
+      "calories": 360,
+      "customization_options": []
+    }
+  },
+  "user_rewards": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "stars": 450,
+      "tier": "Gold",
+      "rewards_available": [
+        {
+          "id": "reward_1",
+          "name": "Free Handcrafted Drink",
+          "stars_required": 150,
+          "expires_at": "2024-02-15T00:00:00Z"
+        },
+        {
+          "id": "reward_2",
+          "name": "Free Breakfast Item",
+          "stars_required": 200,
+          "expires_at": "2024-02-28T00:00:00Z"
+        }
+      ]
+    }
+  },
+  "orders": {
+    "order_1": {
+      "id": "order_1",
+      "user_email": "casey.wringer@email.com",
+      "store": {
+        "id": "store_1",
+        "name": "Starbucks - Market Street"
+      },
+      "items": [
+        {
+          "menu_item_id": "drink_1",
+          "quantity": 1,
+          "customizations": {
+            "size": "Grande",
+            "milk": "Oat",
+            "espresso_shots": "2"
+          }
+        }
+      ],
+      "status": "completed",
+      "total": 4.95,
+      "stars_earned": 10,
+      "created_at": "2024-01-15T08:30:00Z"
+    }
+  }
+}

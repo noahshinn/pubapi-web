@@ -1,0 +1,187 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "FTD Flowers & Gifts API",
+    "version": "1.0.0",
+    "description": "API for flower and gift delivery service"
+  },
+  "paths": {
+    "/api/v1/products": {
+      "get": {
+        "summary": "Get available products",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["flowers", "plants", "gifts"]
+            }
+          },
+          {
+            "name": "occasion",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orders": {
+      "get": {
+        "summary": "Get user's orders",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Place new order",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewOrder"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order created"
+          }
+        }
+      }
+    },
+    "/api/v1/delivery-dates": {
+      "get": {
+        "summary": "Get available delivery dates",
+        "parameters": [
+          {
+            "name": "zip_code",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available delivery dates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "category": {"type": "string"},
+          "price": {"type": "number"},
+          "occasions": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "image_url": {"type": "string"}
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "product": {"$ref": "#/components/schemas/Product"},
+          "sender": {"$ref": "#/components/schemas/Person"},
+          "recipient": {"$ref": "#/components/schemas/Person"},
+          "delivery_date": {"type": "string"},
+          "message": {"type": "string"},
+          "status": {"type": "string"},
+          "total": {"type": "number"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "Person": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "email": {"type": "string"},
+          "phone": {"type": "string"},
+          "address": {"$ref": "#/components/schemas/Address"}
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "street": {"type": "string"},
+          "city": {"type": "string"},
+          "state": {"type": "string"},
+          "zip_code": {"type": "string"}
+        }
+      },
+      "NewOrder": {
+        "type": "object",
+        "properties": {
+          "product_id": {"type": "string"},
+          "sender_email": {"type": "string"},
+          "recipient": {"$ref": "#/components/schemas/Person"},
+          "delivery_date": {"type": "string"},
+          "message": {"type": "string"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,232 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Sun Basket Public API",
+    "version": "1.0.0",
+    "description": "API for meal kit delivery service"
+  },
+  "paths": {
+    "/api/v1/meal-plans": {
+      "get": {
+        "summary": "Get available meal plans",
+        "responses": {
+          "200": {
+            "description": "List of meal plans",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MealPlan"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/weekly-menu": {
+      "get": {
+        "summary": "Get weekly menu options",
+        "parameters": [
+          {
+            "name": "week",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Week starting date (defaults to next available week)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Weekly menu options",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WeeklyMenu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/subscriptions": {
+      "get": {
+        "summary": "Get user's subscription",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's subscription details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subscription"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create or update subscription",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Subscription created or updated"
+          }
+        }
+      }
+    },
+    "/api/v1/deliveries": {
+      "get": {
+        "summary": "Get user's deliveries",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of deliveries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Delivery"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "MealPlan": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "meals_per_week": {"type": "integer"},
+          "servings_per_meal": {"type": "integer"},
+          "price_per_serving": {"type": "number"},
+          "description": {"type": "string"},
+          "dietary_preferences": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "Recipe": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "prep_time": {"type": "integer"},
+          "calories": {"type": "integer"},
+          "protein": {"type": "integer"},
+          "carbs": {"type": "integer"},
+          "fat": {"type": "integer"},
+          "ingredients": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "dietary_tags": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "image_url": {"type": "string"}
+        }
+      },
+      "WeeklyMenu": {
+        "type": "object",
+        "properties": {
+          "week_of": {"type": "string", "format": "date"},
+          "recipes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Recipe"
+            }
+          }
+        }
+      },
+      "Subscription": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "meal_plan": {"$ref": "#/components/schemas/MealPlan"},
+          "dietary_preferences": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "delivery_day": {"type": "string"},
+          "status": {"type": "string"},
+          "next_delivery": {"type": "string", "format": "date"},
+          "payment_method": {"type": "string"}
+        }
+      },
+      "SubscriptionRequest": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "meal_plan_id": {"type": "string"},
+          "dietary_preferences": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "delivery_day": {"type": "string"},
+          "payment_method": {"type": "string"}
+        }
+      },
+      "Delivery": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "subscription_id": {"type": "string"},
+          "delivery_date": {"type": "string", "format": "date"},
+          "status": {"type": "string"},
+          "tracking_number": {"type": "string"},
+          "recipes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Recipe"
+            }
+          }
+        }
+      }
+    }
+  }
+}

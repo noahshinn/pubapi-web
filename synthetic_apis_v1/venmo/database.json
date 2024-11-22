@@ -1,0 +1,114 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "username": "caseyc",
+      "profile_picture": "https://example.com/profiles/caseyc.jpg",
+      "balance": 534.25,
+      "pending_balance": 0.00,
+      "friends": [
+        "alex.smith@email.com",
+        "maria.garcia@email.com",
+        "james.wilson@email.com"
+      ],
+      "created_at": "2023-01-15T00:00:00Z"
+    },
+    "alex.smith@email.com": {
+      "email": "alex.smith@email.com",
+      "name": "Alex Smith",
+      "username": "alexs",
+      "profile_picture": "https://example.com/profiles/alexs.jpg",
+      "balance": 245.50,
+      "pending_balance": 0.00,
+      "friends": [
+        "casey.wringer@email.com",
+        "maria.garcia@email.com"
+      ],
+      "created_at": "2023-02-01T00:00:00Z"
+    },
+    "maria.garcia@email.com": {
+      "email": "maria.garcia@email.com",
+      "name": "Maria Garcia",
+      "username": "mariag",
+      "profile_picture": "https://example.com/profiles/mariag.jpg",
+      "balance": 892.75,
+      "pending_balance": 0.00,
+      "friends": [
+        "casey.wringer@email.com",
+        "alex.smith@email.com",
+        "james.wilson@email.com"
+      ],
+      "created_at": "2023-01-20T00:00:00Z"
+    },
+    "james.wilson@email.com": {
+      "email": "james.wilson@email.com",
+      "name": "James Wilson",
+      "username": "jamesw",
+      "profile_picture": "https://example.com/profiles/jamesw.jpg",
+      "balance": 156.80,
+      "pending_balance": 0.00,
+      "friends": [
+        "casey.wringer@email.com",
+        "maria.garcia@email.com"
+      ],
+      "created_at": "2023-03-10T00:00:00Z"
+    }
+  },
+  "transactions": {
+    "tx_1": {
+      "id": "tx_1",
+      "sender": {
+        "email": "casey.wringer@email.com",
+        "name": "Casey Wringer",
+        "username": "caseyc"
+      },
+      "recipient": {
+        "email": "alex.smith@email.com",
+        "name": "Alex Smith",
+        "username": "alexs"
+      },
+      "amount": 25.50,
+      "note": "Lunch at Sushi Paradise",
+      "visibility": "public",
+      "status": "complete",
+      "created_at": "2024-01-15T12:30:00Z"
+    },
+    "tx_2": {
+      "id": "tx_2",
+      "sender": {
+        "email": "maria.garcia@email.com",
+        "name": "Maria Garcia",
+        "username": "mariag"
+      },
+      "recipient": {
+        "email": "casey.wringer@email.com",
+        "name": "Casey Wringer",
+        "username": "caseyc"
+      },
+      "amount": 45.00,
+      "note": "Movie tickets",
+      "visibility": "friends",
+      "status": "complete",
+      "created_at": "2024-01-16T19:45:00Z"
+    },
+    "tx_3": {
+      "id": "tx_3",
+      "sender": {
+        "email": "casey.wringer@email.com",
+        "name": "Casey Wringer",
+        "username": "caseyc"
+      },
+      "recipient": {
+        "email": "james.wilson@email.com",
+        "name": "James Wilson",
+        "username": "jamesw"
+      },
+      "amount": 15.75,
+      "note": "Coffee and pastries",
+      "visibility": "private",
+      "status": "complete",
+      "created_at": "2024-01-17T09:15:00Z"
+    }
+  }
+}

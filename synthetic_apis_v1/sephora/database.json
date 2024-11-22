@@ -1,0 +1,103 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "beauty_profile": {
+        "skin_type": "combination",
+        "skin_concerns": ["fine lines", "uneven texture"],
+        "hair_type": "2B",
+        "hair_concerns": ["frizz", "color protection"],
+        "makeup_preferences": {
+          "foundation_finish": "natural",
+          "coverage": "medium",
+          "foundation_shade": "medium neutral 128",
+          "lip_color_preference": "nude pink"
+        },
+        "allergies": ["fragrance"],
+        "preferred_brands": ["Rare Beauty", "Charlotte Tilbury", "The Ordinary"],
+        "updated_at": "2024-01-15T10:30:00Z"
+      },
+      "beauty_points": 750
+    }
+  },
+  "products": {
+    "prod_1": {
+      "id": "prod_1",
+      "name": "Soft Pinch Liquid Blush",
+      "brand": "Rare Beauty",
+      "category": "makeup",
+      "price": 23.00,
+      "size": "0.25 oz",
+      "description": "Weightless, long-lasting liquid blush that blends and builds beautifully for a natural-looking flush",
+      "ingredients": ["Hydrogenated Polyisobutene", "Hydrogenated Poly(C6-14 Olefin)", "Mica"],
+      "rating": 4.8,
+      "reviews_count": 1250,
+      "in_stock": true,
+      "created_at": "2023-01-01T00:00:00Z"
+    },
+    "prod_2": {
+      "id": "prod_2",
+      "name": "Niacinamide 10% + Zinc 1%",
+      "brand": "The Ordinary",
+      "category": "skincare",
+      "price": 6.00,
+      "size": "1 oz",
+      "description": "High-strength vitamin and mineral blemish formula",
+      "ingredients": ["Niacinamide", "Zinc PCA", "Glycerin"],
+      "rating": 4.5,
+      "reviews_count": 2800,
+      "in_stock": true,
+      "created_at": "2023-02-15T00:00:00Z"
+    },
+    "prod_3": {
+      "id": "prod_3",
+      "name": "Beautiful Skin Foundation",
+      "brand": "Charlotte Tilbury",
+      "category": "makeup",
+      "price": 46.00,
+      "size": "1 oz",
+      "description": "Medium coverage foundation with skincare benefits",
+      "ingredients": ["Water", "Cyclopentasiloxane", "Coconut Oil"],
+      "rating": 4.7,
+      "reviews_count": 950,
+      "in_stock": true,
+      "created_at": "2023-03-20T00:00:00Z"
+    }
+  },
+  "orders": {
+    "ord_1": {
+      "id": "ord_1",
+      "user_email": "casey.wringer@email.com",
+      "items": [
+        {
+          "product_id": "prod_1",
+          "quantity": 1,
+          "price": 23.00
+        },
+        {
+          "product_id": "prod_2",
+          "quantity": 2,
+          "price": 12.00
+        }
+      ],
+      "total": 35.00,
+      "status": "delivered",
+      "created_at": "2024-01-10T15:30:00Z"
+    },
+    "ord_2": {
+      "id": "ord_2",
+      "user_email": "casey.wringer@email.com",
+      "items": [
+        {
+          "product_id": "prod_3",
+          "quantity": 1,
+          "price": 46.00
+        }
+      ],
+      "total": 46.00,
+      "status": "processing",
+      "created_at": "2024-01-15T09:45:00Z"
+    }
+  }
+}

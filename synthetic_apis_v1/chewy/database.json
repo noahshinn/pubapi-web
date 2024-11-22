@@ -1,0 +1,99 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "pets": [
+        {
+          "id": "pet_1",
+          "name": "Luna",
+          "type": "Cat",
+          "breed": "Siamese",
+          "age": 3.5,
+          "weight": 8.5,
+          "created_at": "2022-06-15T10:00:00Z"
+        },
+        {
+          "id": "pet_2",
+          "name": "Max",
+          "type": "Dog",
+          "breed": "Golden Retriever",
+          "age": 2,
+          "weight": 65.0,
+          "created_at": "2023-01-20T14:30:00Z"
+        }
+      ],
+      "address": {
+        "street": "789 Tech Avenue",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94105"
+      },
+      "created_at": "2022-01-01T00:00:00Z"
+    }
+  },
+  "products": {
+    "prod_1": {
+      "id": "prod_1",
+      "name": "Royal Canin Siamese Adult Dry Cat Food",
+      "brand": "Royal Canin",
+      "category": "Cat Food",
+      "description": "Breed-specific nutrition for Siamese cats",
+      "price": 49.99,
+      "autoship_price": 44.99,
+      "in_stock": true,
+      "rating": 4.8,
+      "pet_types": ["Cat"],
+      "image_url": "https://example.com/royal-canin-siamese.jpg",
+      "created_at": "2023-01-01T00:00:00Z"
+    },
+    "prod_2": {
+      "id": "prod_2",
+      "name": "Blue Buffalo Life Protection Formula Adult Dog Food",
+      "brand": "Blue Buffalo",
+      "category": "Dog Food",
+      "description": "Natural dog food for adult dogs",
+      "price": 58.99,
+      "autoship_price": 53.09,
+      "in_stock": true,
+      "rating": 4.7,
+      "pet_types": ["Dog"],
+      "image_url": "https://example.com/blue-buffalo-adult.jpg",
+      "created_at": "2023-01-01T00:00:00Z"
+    }
+  },
+  "autoship": {
+    "auto_1": {
+      "id": "auto_1",
+      "user_email": "casey.wringer@email.com",
+      "product": {
+        "id": "prod_1",
+        "name": "Royal Canin Siamese Adult Dry Cat Food",
+        "price": 49.99,
+        "autoship_price": 44.99
+      },
+      "frequency_weeks": 4,
+      "next_delivery": "2024-02-15T00:00:00Z",
+      "quantity": 1,
+      "status": "active",
+      "created_at": "2023-06-15T00:00:00Z",
+      "updated_at": "2024-01-15T00:00:00Z"
+    },
+    "auto_2": {
+      "id": "auto_2",
+      "user_email": "casey.wringer@email.com",
+      "product": {
+        "id": "prod_2",
+        "name": "Blue Buffalo Life Protection Formula Adult Dog Food",
+        "price": 58.99,
+        "autoship_price": 53.09
+      },
+      "frequency_weeks": 6,
+      "next_delivery": "2024-02-28T00:00:00Z",
+      "quantity": 1,
+      "status": "active",
+      "created_at": "2023-06-15T00:00:00Z",
+      "updated_at": "2024-01-15T00:00:00Z"
+    }
+  }
+}

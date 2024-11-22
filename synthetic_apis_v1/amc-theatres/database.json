@@ -1,0 +1,105 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "payment_methods": ["pm_1"]
+    }
+  },
+  "theaters": {
+    "th_1": {
+      "id": "th_1",
+      "name": "AMC Metreon 16",
+      "address": "135 4th Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94103",
+      "latitude": 37.7847,
+      "longitude": -122.4036,
+      "amenities": ["IMAX", "Dolby Cinema", "RealD 3D", "Reserved Seating"]
+    },
+    "th_2": {
+      "id": "th_2",
+      "name": "AMC Kabuki 8",
+      "address": "1881 Post Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94115",
+      "latitude": 37.7851,
+      "longitude": -122.4309,
+      "amenities": ["Digital Projection", "Reserved Seating", "Wheelchair Accessible"]
+    }
+  },
+  "movies": {
+    "mov_1": {
+      "id": "mov_1",
+      "title": "Dune: Part Two",
+      "rating": "PG-13",
+      "runtime": 166,
+      "genre": "Science Fiction",
+      "synopsis": "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
+      "poster_url": "https://example.com/posters/dune2.jpg",
+      "trailer_url": "https://example.com/trailers/dune2.mp4",
+      "release_date": "2024-03-01T00:00:00Z"
+    },
+    "mov_2": {
+      "id": "mov_2",
+      "title": "Poor Things",
+      "rating": "R",
+      "runtime": 141,
+      "genre": "Drama/Comedy",
+      "synopsis": "The incredible tale about the fantastical evolution of Bella Baxter, a young woman brought back to life by the brilliant and unorthodox scientist Dr. Godwin Baxter.",
+      "poster_url": "https://example.com/posters/poor-things.jpg",
+      "trailer_url": "https://example.com/trailers/poor-things.mp4",
+      "release_date": "2024-01-19T00:00:00Z"
+    }
+  },
+  "showtimes": {
+    "st_1": {
+      "id": "st_1",
+      "movie_id": "mov_1",
+      "theater_id": "th_1",
+      "start_time": "2024-03-15T19:30:00Z",
+      "end_time": "2024-03-15T22:16:00Z",
+      "format": "IMAX",
+      "auditorium": "1",
+      "available_seats": 120,
+      "price": 21.99
+    },
+    "st_2": {
+      "id": "st_2",
+      "movie_id": "mov_2",
+      "theater_id": "th_2",
+      "start_time": "2024-03-15T20:00:00Z",
+      "end_time": "2024-03-15T22:21:00Z",
+      "format": "Digital",
+      "auditorium": "3",
+      "available_seats": 85,
+      "price": 16.99
+    }
+  },
+  "tickets": {
+    "tkt_1": {
+      "id": "tkt_1",
+      "user_email": "casey.wringer@email.com",
+      "movie": {
+        "id": "mov_1",
+        "title": "Dune: Part Two"
+      },
+      "theater": {
+        "id": "th_1",
+        "name": "AMC Metreon 16"
+      },
+      "showtime": {
+        "id": "st_1",
+        "start_time": "2024-03-15T19:30:00Z",
+        "format": "IMAX"
+      },
+      "seat_count": 2,
+      "total_price": 43.98,
+      "purchase_date": "2024-03-01T15:30:00Z",
+      "qr_code": "tkt_qr_1"
+    }
+  }
+}

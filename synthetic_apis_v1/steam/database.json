@@ -1,0 +1,115 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "username": "caseygamer92",
+      "library": [
+        {
+          "game": {
+            "id": "game_1",
+            "title": "Cyberpunk 2077",
+            "purchase_date": "2023-12-10T15:30:00Z",
+            "play_time": 42.5,
+            "last_played": "2024-01-15T22:15:00Z"
+          }
+        },
+        {
+          "game": {
+            "id": "game_2",
+            "title": "Elden Ring",
+            "purchase_date": "2023-11-25T18:45:00Z",
+            "play_time": 85.3,
+            "last_played": "2024-01-14T23:30:00Z"
+          }
+        }
+      ],
+      "friends": [
+        {
+          "id": "user_1",
+          "username": "gameMaster445",
+          "status": "online",
+          "current_game": "Cyberpunk 2077",
+          "last_online": "2024-01-16T20:00:00Z"
+        },
+        {
+          "id": "user_2",
+          "username": "pixelWarrior",
+          "status": "offline",
+          "current_game": null,
+          "last_online": "2024-01-15T18:30:00Z"
+        }
+      ],
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242",
+          "expiry_mm": 12,
+          "expiry_yy": 25,
+          "created_at": "2023-01-01T00:00:00Z"
+        }
+      ],
+      "wish_list": [
+        {
+          "id": "game_3",
+          "title": "Starfield",
+          "price": 59.99
+        }
+      ]
+    }
+  },
+  "games": {
+    "game_1": {
+      "id": "game_1",
+      "title": "Cyberpunk 2077",
+      "description": "Open-world action RPG set in Night City",
+      "price": 59.99,
+      "publisher": "CD Projekt Red",
+      "developer": "CD Projekt Red",
+      "release_date": "2020-12-10T00:00:00Z",
+      "categories": ["RPG", "Action", "Open World"],
+      "tags": ["Sci-fi", "Cyberpunk", "Single-player"],
+      "rating": 4.2,
+      "reviews_count": 258432,
+      "system_requirements": {
+        "minimum": "Windows 10, Intel Core i5-3570K, 8GB RAM, NVIDIA GeForce GTX 970",
+        "recommended": "Windows 10, Intel Core i7-4790, 12GB RAM, NVIDIA GeForce GTX 1060"
+      }
+    },
+    "game_2": {
+      "id": "game_2",
+      "title": "Elden Ring",
+      "description": "Action RPG in a vast open world",
+      "price": 59.99,
+      "publisher": "Bandai Namco",
+      "developer": "FromSoftware",
+      "release_date": "2022-02-25T00:00:00Z",
+      "categories": ["RPG", "Action", "Open World"],
+      "tags": ["Dark Fantasy", "Souls-like", "Difficult"],
+      "rating": 4.8,
+      "reviews_count": 456789,
+      "system_requirements": {
+        "minimum": "Windows 10, Intel Core i5-8400, 12GB RAM, NVIDIA GeForce GTX 1060",
+        "recommended": "Windows 10, Intel Core i7-8700K, 16GB RAM, NVIDIA GeForce GTX 1070"
+      }
+    }
+  },
+  "purchases": {
+    "purchase_1": {
+      "id": "purchase_1",
+      "user_email": "casey.wringer@email.com",
+      "game_id": "game_1",
+      "price": 59.99,
+      "payment_method_id": "pm_1",
+      "purchase_date": "2023-12-10T15:30:00Z"
+    },
+    "purchase_2": {
+      "id": "purchase_2",
+      "user_email": "casey.wringer@email.com",
+      "game_id": "game_2",
+      "price": 59.99,
+      "payment_method_id": "pm_1",
+      "purchase_date": "2023-11-25T18:45:00Z"
+    }
+  }
+}

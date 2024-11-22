@@ -1,0 +1,188 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Allstate Insurance API",
+    "version": "1.0.0",
+    "description": "API for insurance services"
+  },
+  "paths": {
+    "/api/v1/policies": {
+      "get": {
+        "summary": "Get user's insurance policies",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of policies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Policy"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/claims": {
+      "get": {
+        "summary": "Get user's claims",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of claims",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Claim"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "File new claim",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewClaim"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Claim created"
+          }
+        }
+      }
+    },
+    "/api/v1/quotes": {
+      "post": {
+        "summary": "Get insurance quote",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuoteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Insurance quote",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Quote"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Policy": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string"},
+          "status": {"type": "string"},
+          "coverage_amount": {"type": "number"},
+          "premium": {"type": "number"},
+          "start_date": {"type": "string"},
+          "end_date": {"type": "string"},
+          "details": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "Claim": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "policy_id": {"type": "string"},
+          "type": {"type": "string"},
+          "status": {"type": "string"},
+          "description": {"type": "string"},
+          "amount": {"type": "number"},
+          "date_of_incident": {"type": "string"},
+          "date_filed": {"type": "string"}
+        }
+      },
+      "NewClaim": {
+        "type": "object",
+        "properties": {
+          "policy_id": {"type": "string"},
+          "type": {"type": "string"},
+          "description": {"type": "string"},
+          "date_of_incident": {"type": "string"},
+          "estimated_amount": {"type": "number"}
+        }
+      },
+      "QuoteRequest": {
+        "type": "object",
+        "properties": {
+          "insurance_type": {"type": "string"},
+          "coverage_amount": {"type": "number"},
+          "personal_info": {
+            "type": "object",
+            "properties": {
+              "age": {"type": "integer"},
+              "location": {"type": "string"},
+              "property_details": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      },
+      "Quote": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "monthly_premium": {"type": "number"},
+          "coverage_details": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "valid_until": {"type": "string"}
+        }
+      }
+    }
+  }
+}

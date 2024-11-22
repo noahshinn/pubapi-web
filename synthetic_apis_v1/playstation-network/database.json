@@ -1,0 +1,112 @@
+{
+  "profiles": {
+    "casey.wringer@email.com": {
+      "psn_id": "CaseyGamer92",
+      "email": "casey.wringer@email.com",
+      "display_name": "Casey C.",
+      "avatar_url": "https://psn.com/avatars/casey_gamer92.jpg",
+      "level": 34,
+      "trophy_level": 28,
+      "plus_member": true,
+      "country": "US",
+      "created_at": "2020-03-15T00:00:00Z"
+    }
+  },
+  "games": {
+    "casey.wringer@email.com": [
+      {
+        "id": "game_1",
+        "title": "God of War Ragnarök",
+        "cover_url": "https://psn.com/games/gow-ragnarok.jpg",
+        "platform": "PS5",
+        "purchase_date": "2023-11-15T00:00:00Z",
+        "last_played": "2024-01-15T23:15:00Z",
+        "total_play_time": 3240,
+        "completion_rate": 78.5
+      },
+      {
+        "id": "game_2",
+        "title": "Horizon Forbidden West",
+        "cover_url": "https://psn.com/games/horizon-fw.jpg",
+        "platform": "PS5",
+        "purchase_date": "2023-08-20T00:00:00Z",
+        "last_played": "2024-01-10T18:30:00Z",
+        "total_play_time": 4560,
+        "completion_rate": 92.3
+      },
+      {
+        "id": "game_3",
+        "title": "Spider-Man 2",
+        "cover_url": "https://psn.com/games/spiderman-2.jpg",
+        "platform": "PS5",
+        "purchase_date": "2023-12-25T00:00:00Z",
+        "last_played": "2024-01-16T21:45:00Z",
+        "total_play_time": 1820,
+        "completion_rate": 45.8
+      }
+    ]
+  },
+  "trophies": {
+    "casey.wringer@email.com": [
+      {
+        "id": "trophy_1",
+        "game_id": "game_1",
+        "name": "Dragon Slayer",
+        "description": "Defeat the ancient dragon in God of War",
+        "type": "gold",
+        "rarity": "ultra_rare",
+        "earned": true,
+        "earned_at": "2024-01-02T19:23:45Z"
+      },
+      {
+        "id": "trophy_2",
+        "game_id": "game_2",
+        "name": "Machine Master",
+        "description": "Override all machine types in Horizon",
+        "type": "platinum",
+        "rarity": "rare",
+        "earned": true,
+        "earned_at": "2023-12-15T22:15:30Z"
+      },
+      {
+        "id": "trophy_3",
+        "game_id": "game_3",
+        "name": "City Savior",
+        "description": "Complete all main story missions",
+        "type": "gold",
+        "rarity": "common",
+        "earned": false
+      }
+    ]
+  },
+  "friends": {
+    "casey.wringer@email.com": [
+      {
+        "psn_id": "GamerPro99",
+        "display_name": "Alex Thompson",
+        "avatar_url": "https://psn.com/avatars/gamerpro99.jpg",
+        "online_status": "online",
+        "current_game": {
+          "id": "game_1",
+          "title": "God of War Ragnarök"
+        }
+      },
+      {
+        "psn_id": "NightOwl42",
+        "display_name": "Maria Rodriguez",
+        "avatar_url": "https://psn.com/avatars/nightowl42.jpg",
+        "online_status": "offline"
+      },
+      {
+        "psn_id": "GameMaster88",
+        "display_name": "James Lee",
+        "avatar_url": "https://psn.com/avatars/gamemaster88.jpg",
+        "online_status": "away",
+        "current_game": {
+          "id": "game_3",
+          "title": "Spider-Man 2"
+        }
+      }
+    ]
+  }
+}

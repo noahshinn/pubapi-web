@@ -1,0 +1,219 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SiriusXM Public API",
+    "version": "1.0.0",
+    "description": "API for satellite radio and streaming content service"
+  },
+  "paths": {
+    "/api/v1/stations": {
+      "get": {
+        "summary": "Get available stations",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of stations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Station"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/stations/{stationId}/now-playing": {
+      "get": {
+        "summary": "Get currently playing content for a station",
+        "parameters": [
+          {
+            "name": "stationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Currently playing content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NowPlaying"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/favorites": {
+      "get": {
+        "summary": "Get user's favorite stations and shows",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's favorites",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Favorites"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add to favorites",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddFavoriteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Favorite added successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/shows": {
+      "get": {
+        "summary": "Get available shows and podcasts",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of shows",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Show"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Station": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "category": {"type": "string"},
+          "channel": {"type": "string"},
+          "description": {"type": "string"},
+          "streaming_url": {"type": "string"}
+        }
+      },
+      "NowPlaying": {
+        "type": "object",
+        "properties": {
+          "station_id": {"type": "string"},
+          "track": {"type": "string"},
+          "artist": {"type": "string"},
+          "show": {"type": "string"},
+          "started_at": {"type": "string"},
+          "ends_at": {"type": "string"}
+        }
+      },
+      "Show": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "host": {"type": "string"},
+          "category": {"type": "string"},
+          "episodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Episode"
+            }
+          }
+        }
+      },
+      "Episode": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "duration": {"type": "integer"},
+          "air_date": {"type": "string"},
+          "description": {"type": "string"}
+        }
+      },
+      "Favorites": {
+        "type": "object",
+        "properties": {
+          "stations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Station"
+            }
+          },
+          "shows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Show"
+            }
+          }
+        }
+      },
+      "AddFavoriteRequest": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "content_id": {"type": "string"},
+          "content_type": {"type": "string"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Google Play Store API",
+    "version": "1.0.0",
+    "description": "API for Google Play Store services"
+  },
+  "paths": {
+    "/api/v1/apps": {
+      "get": {
+        "summary": "Get apps list with filters",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of apps",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/App"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/apps/{appId}": {
+      "get": {
+        "summary": "Get app details",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "App details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/App"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{email}/library": {
+      "get": {
+        "summary": "Get user's app library",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's app library",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserApp"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/purchases": {
+      "post": {
+        "summary": "Purchase an app",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Purchase successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Purchase"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "App": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "developer": {"type": "string"},
+          "category": {"type": "string"},
+          "price": {"type": "number"},
+          "rating": {"type": "number"},
+          "downloads": {"type": "string"},
+          "description": {"type": "string"},
+          "version": {"type": "string"},
+          "size": {"type": "string"},
+          "last_updated": {"type": "string"},
+          "requires_android": {"type": "string"}
+        }
+      },
+      "UserApp": {
+        "type": "object",
+        "properties": {
+          "app": {"$ref": "#/components/schemas/App"},
+          "purchased_at": {"type": "string"},
+          "last_used": {"type": "string"},
+          "auto_update": {"type": "boolean"}
+        }
+      },
+      "PurchaseRequest": {
+        "type": "object",
+        "properties": {
+          "app_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "payment_method": {"type": "string"}
+        },
+        "required": ["app_id", "user_email", "payment_method"]
+      },
+      "Purchase": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "app": {"$ref": "#/components/schemas/App"},
+          "user_email": {"type": "string"},
+          "amount": {"type": "number"},
+          "purchased_at": {"type": "string"}
+        }
+      }
+    }
+  }
+}

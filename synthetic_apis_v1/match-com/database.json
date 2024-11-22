@@ -1,0 +1,108 @@
+{
+  "profiles": {
+    "prof_1": {
+      "id": "prof_1",
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "age": 28,
+      "gender": "female",
+      "seeking": "male",
+      "location": {
+        "city": "San Francisco",
+        "state": "CA",
+        "country": "USA",
+        "latitude": 37.7749,
+        "longitude": -122.4194
+      },
+      "photos": [
+        "https://example.com/photos/casey1.jpg",
+        "https://example.com/photos/casey2.jpg"
+      ],
+      "bio": "Tech professional who loves hiking and trying new restaurants. Looking for someone who shares my passion for adventure and good food!",
+      "interests": [
+        "hiking",
+        "technology",
+        "food",
+        "travel",
+        "photography"
+      ],
+      "preferences": {
+        "age_range": {
+          "min": 26,
+          "max": 34
+        },
+        "distance": 25,
+        "seeking_gender": "male"
+      },
+      "created_at": "2023-06-15T10:00:00Z",
+      "updated_at": "2024-01-16T15:30:00Z"
+    },
+    "prof_2": {
+      "id": "prof_2",
+      "email": "michael.wong@email.com",
+      "name": "Michael Wong",
+      "age": 30,
+      "gender": "male",
+      "seeking": "female",
+      "location": {
+        "city": "San Francisco",
+        "state": "CA",
+        "country": "USA",
+        "latitude": 37.7833,
+        "longitude": -122.4167
+      },
+      "photos": [
+        "https://example.com/photos/michael1.jpg",
+        "https://example.com/photos/michael2.jpg"
+      ],
+      "bio": "Software engineer by day, amateur chef by night. Looking for someone to share cooking adventures with!",
+      "interests": [
+        "cooking",
+        "technology",
+        "hiking",
+        "music"
+      ],
+      "preferences": {
+        "age_range": {
+          "min": 25,
+          "max": 32
+        },
+        "distance": 20,
+        "seeking_gender": "female"
+      },
+      "created_at": "2023-07-20T14:30:00Z",
+      "updated_at": "2024-01-15T18:45:00Z"
+    }
+  },
+  "likes": {
+    "like_1": {
+      "id": "like_1",
+      "from_email": "michael.wong@email.com",
+      "to_profile_id": "prof_1",
+      "action": "like",
+      "created_at": "2024-01-15T19:00:00Z"
+    }
+  },
+  "conversations": {
+    "conv_1": {
+      "id": "conv_1",
+      "participants": ["casey.wringer@email.com", "michael.wong@email.com"],
+      "messages": [
+        {
+          "id": "msg_1",
+          "sender_id": "prof_1",
+          "content": "Hi Michael! I noticed you're also into hiking. What's your favorite trail in SF?",
+          "created_at": "2024-01-15T19:30:00Z"
+        },
+        {
+          "id": "msg_2",
+          "sender_id": "prof_2",
+          "content": "Hey Casey! I love the Lands End Trail - great views of the Golden Gate Bridge. Have you tried it?",
+          "created_at": "2024-01-15T19:35:00Z"
+        }
+      ],
+      "created_at": "2024-01-15T19:30:00Z",
+      "updated_at": "2024-01-15T19:35:00Z"
+    }
+  }
+}

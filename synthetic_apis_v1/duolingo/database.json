@@ -1,0 +1,121 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "username": "caseyc",
+      "total_xp": 15420,
+      "current_streak": 64,
+      "longest_streak": 85,
+      "learning_languages": [
+        {
+          "language": "Spanish",
+          "level": 16,
+          "xp": 15000,
+          "fluency_score": 68,
+          "units_complete": 12
+        },
+        {
+          "language": "Japanese",
+          "level": 1,
+          "xp": 420,
+          "fluency_score": 12,
+          "units_complete": 2
+        }
+      ],
+      "last_practice_date": "2024-01-16T08:30:00Z",
+      "freeze_remaining": 2
+    }
+  },
+  "courses": {
+    "es-from-en": {
+      "id": "es-from-en",
+      "language": "Spanish",
+      "from_language": "English",
+      "title": "Spanish from English",
+      "description": "Learn Spanish with bite-sized lessons",
+      "difficulty": "beginner",
+      "total_units": 25,
+      "skills": ["Speaking", "Writing", "Reading", "Listening"]
+    },
+    "ja-from-en": {
+      "id": "ja-from-en",
+      "language": "Japanese",
+      "from_language": "English",
+      "title": "Japanese from English",
+      "description": "Master Japanese characters and conversation",
+      "difficulty": "intermediate",
+      "total_units": 30,
+      "skills": ["Speaking", "Writing", "Reading", "Listening"]
+    }
+  },
+  "lessons": {
+    "es-basics-1": {
+      "id": "es-basics-1",
+      "course_id": "es-from-en",
+      "unit": 1,
+      "title": "Basics 1",
+      "type": "skill",
+      "xp_reward": 10,
+      "skills": ["vocabulary", "grammar"],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "translation",
+          "prompt": "The man",
+          "answer": "El hombre",
+          "options": ["El hombre", "La mujer", "El niño", "La niña"]
+        },
+        {
+          "id": "q2",
+          "type": "translation",
+          "prompt": "The woman drinks water",
+          "answer": "La mujer bebe agua",
+          "options": ["La mujer bebe agua", "El hombre bebe agua", "La mujer come pan", "El hombre come pan"]
+        }
+      ]
+    },
+    "ja-basics-1": {
+      "id": "ja-basics-1",
+      "course_id": "ja-from-en",
+      "unit": 1,
+      "title": "Hiragana 1",
+      "type": "skill",
+      "xp_reward": 10,
+      "skills": ["writing", "reading"],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "character_writing",
+          "prompt": "あ",
+          "answer": "a",
+          "options": ["a", "i", "u", "e", "o"]
+        },
+        {
+          "id": "q2",
+          "type": "character_reading",
+          "prompt": "い",
+          "answer": "i",
+          "options": ["a", "i", "u", "e", "o"]
+        }
+      ]
+    }
+  },
+  "progress": {
+    "es-basics-1": {
+      "user_email": "casey.wringer@email.com",
+      "lesson_id": "es-basics-1",
+      "score": 95,
+      "mistakes": 1,
+      "completed": true,
+      "completed_at": "2024-01-15T15:30:00Z"
+    },
+    "ja-basics-1": {
+      "user_email": "casey.wringer@email.com",
+      "lesson_id": "ja-basics-1",
+      "score": 85,
+      "mistakes": 3,
+      "completed": true,
+      "completed_at": "2024-01-16T08:30:00Z"
+    }
+  }
+}

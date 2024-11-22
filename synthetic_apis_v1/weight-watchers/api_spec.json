@@ -1,0 +1,243 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Weight Watchers Public API",
+    "version": "1.0.0",
+    "description": "API for weight management and wellness tracking"
+  },
+  "paths": {
+    "/api/v1/profile": {
+      "get": {
+        "summary": "Get user profile and progress",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User profile and progress information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/food-log": {
+      "get": {
+        "summary": "Get food log entries",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Food log entries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FoodLogEntry"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add food log entry",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewFoodLogEntry"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Food log entry created"
+          }
+        }
+      }
+    },
+    "/api/v1/foods/search": {
+      "get": {
+        "summary": "Search food database",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of matching foods",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Food"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/weight-log": {
+      "get": {
+        "summary": "Get weight log entries",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Weight log entries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeightLogEntry"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add weight log entry",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewWeightLogEntry"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Weight log entry created"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "name": {"type": "string"},
+          "start_date": {"type": "string", "format": "date"},
+          "starting_weight": {"type": "number"},
+          "current_weight": {"type": "number"},
+          "goal_weight": {"type": "number"},
+          "daily_points": {"type": "integer"},
+          "weekly_points": {"type": "integer"},
+          "height": {"type": "number"},
+          "activity_level": {"type": "string"}
+        }
+      },
+      "Food": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "points": {"type": "integer"},
+          "serving_size": {"type": "string"},
+          "calories": {"type": "integer"},
+          "protein": {"type": "number"},
+          "carbs": {"type": "number"},
+          "fat": {"type": "number"}
+        }
+      },
+      "FoodLogEntry": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "food": {"$ref": "#/components/schemas/Food"},
+          "servings": {"type": "number"},
+          "meal_type": {"type": "string"},
+          "points_used": {"type": "integer"},
+          "date": {"type": "string", "format": "date"},
+          "time": {"type": "string", "format": "time"}
+        }
+      },
+      "NewFoodLogEntry": {
+        "type": "object",
+        "properties": {
+          "food_id": {"type": "string"},
+          "servings": {"type": "number"},
+          "meal_type": {"type": "string"},
+          "date": {"type": "string", "format": "date"},
+          "time": {"type": "string", "format": "time"}
+        }
+      },
+      "WeightLogEntry": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "weight": {"type": "number"},
+          "date": {"type": "string", "format": "date"},
+          "notes": {"type": "string"}
+        }
+      },
+      "NewWeightLogEntry": {
+        "type": "object",
+        "properties": {
+          "weight": {"type": "number"},
+          "date": {"type": "string", "format": "date"},
+          "notes": {"type": "string"}
+        }
+      }
+    }
+  }
+}

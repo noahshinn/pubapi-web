@@ -1,0 +1,94 @@
+{
+  "passengers": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "first_name": "Casey",
+      "last_name": "Wringer",
+      "frequent_flyer_number": "AA123456",
+      "seat_preference": "window"
+    }
+  },
+  "flights": {
+    "AA100": {
+      "flight_number": "AA100",
+      "origin": {
+        "code": "SFO",
+        "name": "San Francisco International Airport",
+        "city": "San Francisco",
+        "country": "USA",
+        "latitude": 37.7749,
+        "longitude": -122.4194
+      },
+      "destination": {
+        "code": "JFK",
+        "name": "John F. Kennedy International Airport",
+        "city": "New York",
+        "country": "USA",
+        "latitude": 40.7128,
+        "longitude": -74.0060
+      },
+      "departure_time": "2024-01-20T10:00:00Z",
+      "arrival_time": "2024-01-20T18:30:00Z",
+      "duration": "5h 30m",
+      "aircraft": "Boeing 787-9",
+      "available_seats": 45,
+      "price": 450.00
+    },
+    "AA101": {
+      "flight_number": "AA101",
+      "origin": {
+        "code": "JFK",
+        "name": "John F. Kennedy International Airport",
+        "city": "New York",
+        "country": "USA",
+        "latitude": 40.7128,
+        "longitude": -74.0060
+      },
+      "destination": {
+        "code": "SFO",
+        "name": "San Francisco International Airport",
+        "city": "San Francisco",
+        "country": "USA",
+        "latitude": 37.7749,
+        "longitude": -122.4194
+      },
+      "departure_time": "2024-01-25T08:00:00Z",
+      "arrival_time": "2024-01-25T16:30:00Z",
+      "duration": "5h 30m",
+      "aircraft": "Boeing 787-9",
+      "available_seats": 32,
+      "price": 475.00
+    }
+  },
+  "reservations": {
+    "RES12345": {
+      "reservation_code": "RES12345",
+      "passenger": {
+        "email": "casey.wringer@email.com",
+        "first_name": "Casey",
+        "last_name": "Wringer",
+        "frequent_flyer_number": "AA123456",
+        "seat_preference": "window"
+      },
+      "flights": [
+        {
+          "flight_number": "AA100",
+          "origin": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "destination": {
+            "code": "JFK",
+            "name": "John F. Kennedy International Airport"
+          },
+          "departure_time": "2024-01-20T10:00:00Z",
+          "arrival_time": "2024-01-20T18:30:00Z"
+        }
+      ],
+      "status": "confirmed",
+      "total_price": 450.00,
+      "created_at": "2024-01-15T14:30:00Z",
+      "payment_method_id": "pm_1"
+    }
+  }
+}

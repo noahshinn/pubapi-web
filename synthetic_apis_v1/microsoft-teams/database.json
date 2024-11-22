@@ -1,0 +1,111 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "avatar_url": "https://teams.microsoft.com/avatars/casey.wringer.jpg",
+      "status": "available"
+    },
+    "john.doe@email.com": {
+      "email": "john.doe@email.com",
+      "name": "John Doe",
+      "avatar_url": "https://teams.microsoft.com/avatars/john.doe.jpg",
+      "status": "busy"
+    },
+    "alice.smith@email.com": {
+      "email": "alice.smith@email.com",
+      "name": "Alice Smith",
+      "avatar_url": "https://teams.microsoft.com/avatars/alice.smith.jpg",
+      "status": "away"
+    }
+  },
+  "chats": {
+    "chat_1": {
+      "id": "chat_1",
+      "type": "direct",
+      "participants": [
+        {
+          "email": "casey.wringer@email.com",
+          "name": "Casey Wringer"
+        },
+        {
+          "email": "john.doe@email.com",
+          "name": "John Doe"
+        }
+      ],
+      "messages": [
+        {
+          "id": "msg_1",
+          "sender": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer"
+          },
+          "content": "Hi John, can we discuss the project timeline?",
+          "sent_at": "2024-01-16T10:00:00Z",
+          "read_by": ["casey.wringer@email.com", "john.doe@email.com"]
+        }
+      ],
+      "created_at": "2024-01-16T10:00:00Z"
+    }
+  },
+  "teams": {
+    "team_1": {
+      "id": "team_1",
+      "name": "Product Development",
+      "description": "Team for product development and planning",
+      "members": [
+        {
+          "email": "casey.wringer@email.com",
+          "name": "Casey Wringer"
+        },
+        {
+          "email": "john.doe@email.com",
+          "name": "John Doe"
+        },
+        {
+          "email": "alice.smith@email.com",
+          "name": "Alice Smith"
+        }
+      ],
+      "channels": [
+        {
+          "id": "channel_1",
+          "name": "General",
+          "description": "General discussion",
+          "is_private": false
+        },
+        {
+          "id": "channel_2",
+          "name": "Project Planning",
+          "description": "Project planning and updates",
+          "is_private": false
+        }
+      ],
+      "created_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  "meetings": {
+    "meeting_1": {
+      "id": "meeting_1",
+      "title": "Weekly Sprint Planning",
+      "organizer": {
+        "email": "casey.wringer@email.com",
+        "name": "Casey Wringer"
+      },
+      "participants": [
+        {
+          "email": "john.doe@email.com",
+          "name": "John Doe"
+        },
+        {
+          "email": "alice.smith@email.com",
+          "name": "Alice Smith"
+        }
+      ],
+      "start_time": "2024-01-17T14:00:00Z",
+      "end_time": "2024-01-17T15:00:00Z",
+      "join_url": "https://teams.microsoft.com/meet/abc123",
+      "status": "scheduled"
+    }
+  }
+}

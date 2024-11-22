@@ -1,0 +1,172 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Rosetta Stone API",
+    "version": "1.0.0",
+    "description": "API for language learning platform"
+  },
+  "paths": {
+    "/api/v1/courses": {
+      "get": {
+        "summary": "Get available language courses",
+        "responses": {
+          "200": {
+            "description": "List of available courses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Course"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{email}/progress": {
+      "get": {
+        "summary": "Get user's learning progress",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's learning progress",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Progress"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lessons/{lessonId}/complete": {
+      "post": {
+        "summary": "Mark lesson as completed",
+        "parameters": [
+          {
+            "name": "lessonId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LessonCompletion"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Lesson completion recorded"
+          }
+        }
+      }
+    },
+    "/api/v1/practice-sessions": {
+      "post": {
+        "summary": "Start a practice session",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PracticeSession"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Practice session created"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Course": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "language": {"type": "string"},
+          "level": {"type": "string"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "duration_weeks": {"type": "integer"},
+          "lessons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Lesson"
+            }
+          }
+        }
+      },
+      "Lesson": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "type": {"type": "string"},
+          "duration_minutes": {"type": "integer"},
+          "order": {"type": "integer"}
+        }
+      },
+      "Progress": {
+        "type": "object",
+        "properties": {
+          "course_id": {"type": "string"},
+          "completed_lessons": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "current_streak": {"type": "integer"},
+          "total_points": {"type": "integer"},
+          "proficiency_level": {"type": "string"}
+        }
+      },
+      "LessonCompletion": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "score": {"type": "integer"},
+          "time_spent": {"type": "integer"},
+          "completed_at": {"type": "string"}
+        }
+      },
+      "PracticeSession": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "course_id": {"type": "string"},
+          "lesson_id": {"type": "string"},
+          "practice_type": {"type": "string"}
+        }
+      }
+    }
+  }
+}

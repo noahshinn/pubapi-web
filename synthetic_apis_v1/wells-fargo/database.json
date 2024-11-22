@@ -1,0 +1,83 @@
+{
+  "accounts": {
+    "acc_checking_1": {
+      "id": "acc_checking_1",
+      "user_email": "casey.wringer@email.com",
+      "type": "CHECKING",
+      "name": "Primary Checking",
+      "balance": 5420.15,
+      "currency": "USD",
+      "status": "ACTIVE",
+      "created_at": "2023-01-15T00:00:00Z",
+      "last_updated": "2024-01-16T10:30:00Z"
+    },
+    "acc_savings_1": {
+      "id": "acc_savings_1",
+      "user_email": "casey.wringer@email.com",
+      "type": "SAVINGS",
+      "name": "High-Yield Savings",
+      "balance": 25000.00,
+      "currency": "USD",
+      "status": "ACTIVE",
+      "created_at": "2023-01-15T00:00:00Z",
+      "last_updated": "2024-01-16T10:30:00Z"
+    },
+    "acc_credit_1": {
+      "id": "acc_credit_1",
+      "user_email": "casey.wringer@email.com",
+      "type": "CREDIT",
+      "name": "Rewards Credit Card",
+      "balance": -1250.30,
+      "currency": "USD",
+      "status": "ACTIVE",
+      "created_at": "2023-02-01T00:00:00Z",
+      "last_updated": "2024-01-16T10:30:00Z"
+    }
+  },
+  "transactions": {
+    "tx_1": {
+      "id": "tx_1",
+      "account_id": "acc_checking_1",
+      "date": "2024-01-15T15:30:00Z",
+      "description": "DoorDash Order",
+      "amount": -40.97,
+      "type": "DEBIT",
+      "category": "FOOD_DINING",
+      "status": "COMPLETED",
+      "reference": "doordash_ord_1"
+    },
+    "tx_2": {
+      "id": "tx_2",
+      "account_id": "acc_checking_1",
+      "date": "2024-01-15T09:00:00Z",
+      "description": "Salary Deposit",
+      "amount": 3500.00,
+      "type": "CREDIT",
+      "category": "INCOME",
+      "status": "COMPLETED",
+      "reference": "employer_tx_123"
+    }
+  },
+  "bills": {
+    "bill_1": {
+      "id": "bill_1",
+      "user_email": "casey.wringer@email.com",
+      "payee": "PG&E",
+      "amount": 125.50,
+      "due_date": "2024-02-01T00:00:00Z",
+      "status": "PENDING",
+      "autopay": true,
+      "account_id": "acc_checking_1"
+    },
+    "bill_2": {
+      "id": "bill_2",
+      "user_email": "casey.wringer@email.com",
+      "payee": "Xfinity",
+      "amount": 89.99,
+      "due_date": "2024-02-05T00:00:00Z",
+      "status": "PENDING",
+      "autopay": true,
+      "account_id": "acc_checking_1"
+    }
+  }
+}

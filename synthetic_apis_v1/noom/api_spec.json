@@ -1,0 +1,214 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Noom Public API",
+    "version": "1.0.0",
+    "description": "API for health tracking and wellness coaching"
+  },
+  "paths": {
+    "/api/v1/meals": {
+      "get": {
+        "summary": "Get user's meal logs",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of meal logs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MealLog"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Log a new meal",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMealLog"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Meal logged successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/weight-logs": {
+      "get": {
+        "summary": "Get user's weight logs",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of weight logs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeightLog"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Log a new weight",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewWeightLog"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Weight logged successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/coaching/messages": {
+      "get": {
+        "summary": "Get coaching messages",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of coaching messages",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CoachingMessage"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Send a message to coach",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCoachingMessage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Message sent successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "MealLog": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "meal_type": {"type": "string"},
+          "foods": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FoodItem"
+            }
+          },
+          "total_calories": {"type": "number"},
+          "logged_at": {"type": "string", "format": "date-time"}
+        }
+      },
+      "FoodItem": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "portion": {"type": "number"},
+          "unit": {"type": "string"},
+          "calories": {"type": "number"},
+          "protein": {"type": "number"},
+          "carbs": {"type": "number"},
+          "fat": {"type": "number"}
+        }
+      },
+      "WeightLog": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "weight": {"type": "number"},
+          "logged_at": {"type": "string", "format": "date-time"}
+        }
+      },
+      "CoachingMessage": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "coach_id": {"type": "string"},
+          "content": {"type": "string"},
+          "sent_at": {"type": "string", "format": "date-time"},
+          "is_from_coach": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}

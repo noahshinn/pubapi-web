@@ -1,0 +1,88 @@
+{
+  "users": {
+    "user_1": {
+      "id": "user_1",
+      "email": "casey.wringer@email.com",
+      "username": "caseyc",
+      "discriminator": "1234",
+      "avatar": "https://cdn.discord.com/avatars/user_1/avatar.png",
+      "status": "online",
+      "created_at": "2023-01-01T00:00:00Z"
+    }
+  },
+  "servers": {
+    "server_1": {
+      "id": "server_1",
+      "name": "Tech Enthusiasts",
+      "icon": "https://cdn.discord.com/icons/server_1/icon.png",
+      "owner_id": "user_1",
+      "member_count": 150,
+      "channels": [
+        {
+          "id": "channel_1",
+          "type": "text",
+          "name": "general",
+          "topic": "General discussion",
+          "server_id": "server_1",
+          "position": 0,
+          "created_at": "2023-01-01T00:00:00Z"
+        },
+        {
+          "id": "channel_2",
+          "type": "text",
+          "name": "programming",
+          "topic": "Programming discussions",
+          "server_id": "server_1",
+          "position": 1,
+          "created_at": "2023-01-01T00:00:00Z"
+        }
+      ],
+      "created_at": "2023-01-01T00:00:00Z"
+    },
+    "server_2": {
+      "id": "server_2",
+      "name": "Gaming Community",
+      "icon": "https://cdn.discord.com/icons/server_2/icon.png",
+      "owner_id": "user_2",
+      "member_count": 75,
+      "channels": [
+        {
+          "id": "channel_3",
+          "type": "text",
+          "name": "general",
+          "topic": "General gaming chat",
+          "server_id": "server_2",
+          "position": 0,
+          "created_at": "2023-01-02T00:00:00Z"
+        }
+      ],
+      "created_at": "2023-01-02T00:00:00Z"
+    }
+  },
+  "messages": {
+    "msg_1": {
+      "id": "msg_1",
+      "channel_id": "channel_1",
+      "author": {
+        "id": "user_1",
+        "username": "caseyc",
+        "discriminator": "1234"
+      },
+      "content": "Hey everyone! Just joined the server.",
+      "attachments": [],
+      "created_at": "2024-01-15T10:00:00Z"
+    },
+    "msg_2": {
+      "id": "msg_2",
+      "channel_id": "channel_2",
+      "author": {
+        "id": "user_1",
+        "username": "caseyc",
+        "discriminator": "1234"
+      },
+      "content": "Anyone working on interesting projects?",
+      "attachments": [],
+      "created_at": "2024-01-15T10:05:00Z"
+    }
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Paramount+ Public API",
+    "version": "1.0.0",
+    "description": "API for Paramount+ streaming service"
+  },
+  "paths": {
+    "/api/v1/catalog": {
+      "get": {
+        "summary": "Get streaming catalog",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["movies", "shows", "sports", "news"]
+            }
+          },
+          {
+            "name": "genre",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Content"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/watchlist": {
+      "get": {
+        "summary": "Get user's watchlist",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's watchlist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Content"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add to watchlist",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WatchlistItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Item added to watchlist"
+          }
+        }
+      }
+    },
+    "/api/v1/continue-watching": {
+      "get": {
+        "summary": "Get continue watching list",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Continue watching list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WatchProgress"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/watch/{contentId}": {
+      "post": {
+        "summary": "Update watch progress",
+        "parameters": [
+          {
+            "name": "contentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WatchProgress"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Watch progress updated"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Content": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "type": {"type": "string"},
+          "genre": {"type": "string"},
+          "description": {"type": "string"},
+          "duration": {"type": "integer"},
+          "rating": {"type": "string"},
+          "release_year": {"type": "integer"},
+          "thumbnail_url": {"type": "string"},
+          "stream_url": {"type": "string"}
+        }
+      },
+      "WatchlistItem": {
+        "type": "object",
+        "properties": {
+          "content_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "added_at": {"type": "string"}
+        }
+      },
+      "WatchProgress": {
+        "type": "object",
+        "properties": {
+          "content_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "position": {"type": "integer"},
+          "duration": {"type": "integer"},
+          "last_watched": {"type": "string"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MyFitnessPal Public API",
+    "version": "1.0.0",
+    "description": "API for fitness and nutrition tracking"
+  },
+  "paths": {
+    "/api/v1/food-diary": {
+      "get": {
+        "summary": "Get user's food diary entries",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Food diary entries for the specified date"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add food entry to diary",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FoodEntry"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Food entry created"
+          }
+        }
+      }
+    },
+    "/api/v1/foods/search": {
+      "get": {
+        "summary": "Search food database",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of matching foods",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Food"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/progress": {
+      "get": {
+        "summary": "Get user's progress data",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's progress data"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add progress entry",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressEntry"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Progress entry created"
+          }
+        }
+      }
+    },
+    "/api/v1/goals": {
+      "get": {
+        "summary": "Get user's fitness goals",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's fitness goals"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update fitness goals",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Goals"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Goals updated successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Food": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "brand": {"type": "string"},
+          "serving_size": {"type": "string"},
+          "calories": {"type": "integer"},
+          "protein": {"type": "number"},
+          "carbs": {"type": "number"},
+          "fat": {"type": "number"}
+        }
+      },
+      "FoodEntry": {
+        "type": "object",
+        "properties": {
+          "food_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "date": {"type": "string", "format": "date"},
+          "meal_type": {"type": "string"},
+          "servings": {"type": "number"}
+        }
+      },
+      "ProgressEntry": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "date": {"type": "string", "format": "date"},
+          "weight": {"type": "number"},
+          "body_fat": {"type": "number"},
+          "measurements": {
+            "type": "object",
+            "properties": {
+              "waist": {"type": "number"},
+              "chest": {"type": "number"},
+              "arms": {"type": "number"}
+            }
+          }
+        }
+      },
+      "Goals": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "target_weight": {"type": "number"},
+          "weekly_goal": {"type": "string"},
+          "activity_level": {"type": "string"},
+          "daily_calories": {"type": "integer"},
+          "macros": {
+            "type": "object",
+            "properties": {
+              "protein": {"type": "integer"},
+              "carbs": {"type": "integer"},
+              "fat": {"type": "integer"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

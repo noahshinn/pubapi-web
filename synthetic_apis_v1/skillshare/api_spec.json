@@ -1,0 +1,207 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Skillshare Public API",
+    "version": "1.0.0",
+    "description": "API for online learning platform"
+  },
+  "paths": {
+    "/api/v1/courses": {
+      "get": {
+        "summary": "Get courses",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of courses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Course"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/courses/{courseId}": {
+      "get": {
+        "summary": "Get course details",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Course details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Course"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/enrollments": {
+      "get": {
+        "summary": "Get user's enrolled courses",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of enrolled courses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Enrollment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Enroll in a course",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnrollmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Enrollment created"
+          }
+        }
+      }
+    },
+    "/api/v1/progress": {
+      "post": {
+        "summary": "Update course progress",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Progress updated"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Course": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "instructor": {"$ref": "#/components/schemas/Instructor"},
+          "category": {"type": "string"},
+          "duration": {"type": "integer"},
+          "lessons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Lesson"
+            }
+          },
+          "rating": {"type": "number"},
+          "enrolled_count": {"type": "integer"}
+        }
+      },
+      "Instructor": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "bio": {"type": "string"},
+          "rating": {"type": "number"}
+        }
+      },
+      "Lesson": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "duration": {"type": "integer"},
+          "video_url": {"type": "string"}
+        }
+      },
+      "Enrollment": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "course": {"$ref": "#/components/schemas/Course"},
+          "progress": {"type": "integer"},
+          "completed": {"type": "boolean"},
+          "enrolled_at": {"type": "string"}
+        }
+      },
+      "EnrollmentRequest": {
+        "type": "object",
+        "properties": {
+          "course_id": {"type": "string"},
+          "user_email": {"type": "string"}
+        }
+      },
+      "ProgressUpdate": {
+        "type": "object",
+        "properties": {
+          "enrollment_id": {"type": "string"},
+          "lesson_id": {"type": "string"},
+          "progress": {"type": "integer"}
+        }
+      }
+    }
+  }
+}

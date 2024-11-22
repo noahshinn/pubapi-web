@@ -1,0 +1,133 @@
+{
+  "meal_plans": {
+    "plan_1": {
+      "id": "plan_1",
+      "name": "Chef's Choice",
+      "meals_per_week": 3,
+      "servings_per_meal": 2,
+      "price_per_serving": 11.99,
+      "description": "Hand-picked seasonal recipes from our chefs",
+      "dietary_preferences": ["paleo", "mediterranean", "gluten-free"]
+    },
+    "plan_2": {
+      "id": "plan_2",
+      "name": "Vegetarian",
+      "meals_per_week": 2,
+      "servings_per_meal": 4,
+      "price_per_serving": 10.99,
+      "description": "Plant-based meals packed with organic produce",
+      "dietary_preferences": ["vegetarian", "dairy-free"]
+    }
+  },
+  "recipes": {
+    "recipe_1": {
+      "id": "recipe_1",
+      "name": "Mediterranean Chicken with Roasted Vegetables",
+      "description": "Herb-crusted chicken with colorful roasted vegetables",
+      "prep_time": 35,
+      "calories": 550,
+      "protein": 38,
+      "carbs": 42,
+      "fat": 28,
+      "ingredients": [
+        "Free-range chicken breast",
+        "Mixed bell peppers",
+        "Cherry tomatoes",
+        "Red onion",
+        "Olive oil",
+        "Mediterranean herbs"
+      ],
+      "dietary_tags": ["mediterranean", "gluten-free"],
+      "image_url": "https://sunbasket.com/recipes/med-chicken.jpg"
+    },
+    "recipe_2": {
+      "id": "recipe_2",
+      "name": "Quinoa Buddha Bowl",
+      "description": "Protein-rich quinoa bowl with roasted vegetables and tahini dressing",
+      "prep_time": 25,
+      "calories": 480,
+      "protein": 15,
+      "carbs": 65,
+      "fat": 22,
+      "ingredients": [
+        "Organic quinoa",
+        "Roasted sweet potato",
+        "Kale",
+        "Chickpeas",
+        "Tahini",
+        "Lemon"
+      ],
+      "dietary_tags": ["vegetarian", "vegan", "gluten-free"],
+      "image_url": "https://sunbasket.com/recipes/quinoa-bowl.jpg"
+    }
+  },
+  "subscriptions": {
+    "sub_1": {
+      "id": "sub_1",
+      "user_email": "casey.wringer@email.com",
+      "meal_plan": {
+        "id": "plan_1",
+        "name": "Chef's Choice",
+        "meals_per_week": 3,
+        "servings_per_meal": 2,
+        "price_per_serving": 11.99
+      },
+      "dietary_preferences": ["mediterranean", "gluten-free"],
+      "delivery_day": "Wednesday",
+      "status": "active",
+      "next_delivery": "2024-01-24T00:00:00Z",
+      "payment_method": "pm_1"
+    }
+  },
+  "weekly_menus": {
+    "week_1": {
+      "week_of": "2024-01-22T00:00:00Z",
+      "recipes": [
+        {
+          "id": "recipe_1",
+          "name": "Mediterranean Chicken with Roasted Vegetables"
+        },
+        {
+          "id": "recipe_2",
+          "name": "Quinoa Buddha Bowl"
+        }
+      ]
+    }
+  },
+  "deliveries": {
+    "del_1": {
+      "id": "del_1",
+      "subscription_id": "sub_1",
+      "delivery_date": "2024-01-17T00:00:00Z",
+      "status": "delivered",
+      "tracking_number": "1Z999AA1234567890",
+      "recipes": [
+        {
+          "id": "recipe_1",
+          "name": "Mediterranean Chicken with Roasted Vegetables"
+        },
+        {
+          "id": "recipe_2",
+          "name": "Quinoa Buddha Bowl"
+        }
+      ]
+    },
+    "del_2": {
+      "id": "del_2",
+      "subscription_id": "sub_1",
+      "delivery_date": "2024-01-24T00:00:00Z",
+      "status": "scheduled",
+      "tracking_number": "",
+      "recipes": [
+        {
+          "id": "recipe_1",
+          "name": "Mediterranean Chicken with Roasted Vegetables"
+        },
+        {
+          "id": "recipe_2",
+          "name": "Quinoa Buddha Bowl"
+        }
+      ]
+    }
+  }
+}

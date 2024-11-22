@@ -1,0 +1,101 @@
+{
+  "accounts": {
+    "acc_checking_1": {
+      "id": "acc_checking_1",
+      "user_email": "casey.wringer@email.com",
+      "type": "CHECKING",
+      "name": "Primary Checking",
+      "balance": 5428.92,
+      "currency": "USD",
+      "status": "ACTIVE",
+      "created_at": "2023-01-15T00:00:00Z",
+      "last_updated": "2024-01-16T10:30:00Z"
+    },
+    "acc_savings_1": {
+      "id": "acc_savings_1",
+      "user_email": "casey.wringer@email.com",
+      "type": "SAVINGS",
+      "name": "Emergency Fund",
+      "balance": 15750.00,
+      "currency": "USD",
+      "status": "ACTIVE",
+      "created_at": "2023-01-15T00:00:00Z",
+      "last_updated": "2024-01-16T10:30:00Z"
+    },
+    "acc_credit_1": {
+      "id": "acc_credit_1",
+      "user_email": "casey.wringer@email.com",
+      "type": "CREDIT",
+      "name": "Rewards Credit Card",
+      "balance": -1250.43,
+      "currency": "USD",
+      "status": "ACTIVE",
+      "created_at": "2023-01-15T00:00:00Z",
+      "last_updated": "2024-01-16T10:30:00Z"
+    }
+  },
+  "transactions": {
+    "tx_1": {
+      "id": "tx_1",
+      "account_id": "acc_checking_1",
+      "date": "2024-01-15T15:30:00Z",
+      "description": "DoorDash Order",
+      "amount": -40.97,
+      "type": "DEBIT",
+      "category": "FOOD_DINING",
+      "status": "COMPLETED",
+      "reference": "DD_ORD_1"
+    },
+    "tx_2": {
+      "id": "tx_2",
+      "account_id": "acc_checking_1",
+      "date": "2024-01-15T09:00:00Z",
+      "description": "Salary Deposit",
+      "amount": 3250.00,
+      "type": "CREDIT",
+      "category": "INCOME",
+      "status": "COMPLETED",
+      "reference": "DIR_DEP_1"
+    },
+    "tx_3": {
+      "id": "tx_3",
+      "account_id": "acc_savings_1",
+      "date": "2024-01-14T16:45:00Z",
+      "description": "Transfer from Checking",
+      "amount": 500.00,
+      "type": "CREDIT",
+      "category": "TRANSFER",
+      "status": "COMPLETED",
+      "reference": "TRF_1"
+    }
+  },
+  "bills": {
+    "bill_1": {
+      "id": "bill_1",
+      "user_email": "casey.wringer@email.com",
+      "payee": "PG&E",
+      "amount": 125.50,
+      "due_date": "2024-02-01T00:00:00Z",
+      "status": "PENDING",
+      "autopay": true
+    },
+    "bill_2": {
+      "id": "bill_2",
+      "user_email": "casey.wringer@email.com",
+      "payee": "Rent",
+      "amount": 2500.00,
+      "due_date": "2024-02-01T00:00:00Z",
+      "status": "PENDING",
+      "autopay": true
+    },
+    "bill_3": {
+      "id": "bill_3",
+      "user_email": "casey.wringer@email.com",
+      "payee": "AT&T",
+      "amount": 85.00,
+      "due_date": "2024-01-25T00:00:00Z",
+      "status": "PENDING",
+      "autopay": false
+    }
+  }
+}

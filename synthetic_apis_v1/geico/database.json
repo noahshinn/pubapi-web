@@ -1,0 +1,89 @@
+{
+  "policies": {
+    "POL-001": {
+      "policy_number": "POL-001",
+      "user_email": "casey.wringer@email.com",
+      "type": "auto",
+      "status": "active",
+      "vehicle": {
+        "year": 2020,
+        "make": "Toyota",
+        "model": "Camry",
+        "vin": "1HGCM82633A123456"
+      },
+      "coverage": {
+        "type": "full",
+        "liability_limit": 100000,
+        "deductible": 500,
+        "collision_cover": true,
+        "comprehensive_cover": true
+      },
+      "premium": 125.50,
+      "start_date": "2023-01-01T00:00:00Z",
+      "end_date": "2024-01-01T00:00:00Z"
+    },
+    "POL-002": {
+      "policy_number": "POL-002",
+      "user_email": "casey.wringer@email.com",
+      "type": "home",
+      "status": "active",
+      "coverage": {
+        "type": "standard",
+        "liability_limit": 300000,
+        "deductible": 1000,
+        "flood_coverage": false,
+        "earthquake_coverage": false
+      },
+      "premium": 185.75,
+      "start_date": "2023-03-15T00:00:00Z",
+      "end_date": "2024-03-15T00:00:00Z"
+    }
+  },
+  "claims": {
+    "CLM-001": {
+      "claim_number": "CLM-001",
+      "policy_number": "POL-001",
+      "user_email": "casey.wringer@email.com",
+      "type": "auto_accident",
+      "status": "approved",
+      "description": "Minor fender bender in parking lot",
+      "incident_date": "2023-06-15T14:30:00Z",
+      "filed_date": "2023-06-15T16:45:00Z",
+      "documents": [
+        {
+          "id": "DOC-001",
+          "type": "police_report",
+          "url": "https://storage.geico.com/claims/CLM-001/police_report.pdf",
+          "uploaded_at": "2023-06-15T16:45:00Z"
+        },
+        {
+          "id": "DOC-002",
+          "type": "photos",
+          "url": "https://storage.geico.com/claims/CLM-001/damage_photos.zip",
+          "uploaded_at": "2023-06-15T16:46:00Z"
+        }
+      ]
+    }
+  },
+  "quotes": {
+    "QTE-001": {
+      "quote_id": "QTE-001",
+      "user_email": "casey.wringer@email.com",
+      "vehicle": {
+        "year": 2022,
+        "make": "Honda",
+        "model": "CR-V",
+        "vin": "2HKRW2H54NH123456"
+      },
+      "coverage": {
+        "type": "full",
+        "liability_limit": 100000,
+        "deductible": 500,
+        "collision_cover": true,
+        "comprehensive_cover": true
+      },
+      "monthly_premium": 142.75,
+      "expires_at": "2024-02-15T00:00:00Z"
+    }
+  }
+}

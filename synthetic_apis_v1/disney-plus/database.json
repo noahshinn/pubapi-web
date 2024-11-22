@@ -1,0 +1,83 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "subscription_tier": "premium",
+      "subscription_end": "2024-12-31T23:59:59Z"
+    }
+  },
+  "profiles": {
+    "profile_1": {
+      "id": "profile_1",
+      "user_email": "casey.wringer@email.com",
+      "name": "Casey",
+      "avatar": "avatar_1.png",
+      "kids_mode": false
+    },
+    "profile_2": {
+      "id": "profile_2",
+      "user_email": "casey.wringer@email.com",
+      "name": "Family",
+      "avatar": "avatar_2.png",
+      "kids_mode": true
+    }
+  },
+  "content": {
+    "movie_1": {
+      "id": "movie_1",
+      "title": "Frozen",
+      "type": "movie",
+      "category": "disney",
+      "release_year": 2013,
+      "rating": "PG",
+      "duration": 6480,
+      "description": "When the newly crowned Queen Elsa accidentally uses her power to turn things into ice to curse her home in infinite winter, her sister Anna teams up with a mountain man, his playful reindeer, and a snowman to change the weather condition.",
+      "thumbnail_url": "/thumbnails/frozen.jpg",
+      "stream_url": "/streams/frozen"
+    },
+    "series_1": {
+      "id": "series_1",
+      "title": "The Mandalorian",
+      "type": "series",
+      "category": "starwars",
+      "release_year": 2019,
+      "rating": "TV-14",
+      "duration": 2400,
+      "description": "The travels of a lone bounty hunter in the outer reaches of the galaxy, far from the authority of the New Republic.",
+      "thumbnail_url": "/thumbnails/mandalorian.jpg",
+      "stream_url": "/streams/mandalorian"
+    },
+    "movie_2": {
+      "id": "movie_2",
+      "title": "Avengers: Endgame",
+      "type": "movie",
+      "category": "marvel",
+      "release_year": 2019,
+      "rating": "PG-13",
+      "duration": 10800,
+      "description": "After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
+      "thumbnail_url": "/thumbnails/endgame.jpg",
+      "stream_url": "/streams/endgame"
+    }
+  },
+  "watch_progress": {
+    "profile_1:movie_1": {
+      "content_id": "movie_1",
+      "profile_id": "profile_1",
+      "progress_seconds": 3600,
+      "total_seconds": 6480,
+      "last_watched": "2024-01-15T20:30:00Z"
+    },
+    "profile_1:series_1": {
+      "content_id": "series_1",
+      "profile_id": "profile_1",
+      "progress_seconds": 1800,
+      "total_seconds": 2400,
+      "last_watched": "2024-01-16T21:15:00Z"
+    }
+  },
+  "watchlist": {
+    "profile_1": ["movie_2", "series_1"]
+  }
+}

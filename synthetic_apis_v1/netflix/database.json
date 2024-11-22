@@ -1,0 +1,109 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "my_list": ["content_1", "content_3", "content_5"],
+      "watch_history": [
+        {
+          "content": {
+            "id": "content_1",
+            "title": "Stranger Things",
+            "type": "tv_series"
+          },
+          "watched_at": "2024-01-15T20:30:00Z",
+          "progress": 75,
+          "completed": false,
+          "episode_id": "st_s4_e5"
+        },
+        {
+          "content": {
+            "id": "content_2",
+            "title": "The Crown",
+            "type": "tv_series"
+          },
+          "watched_at": "2024-01-14T21:00:00Z",
+          "progress": 100,
+          "completed": true,
+          "episode_id": "tc_s5_e10"
+        }
+      ],
+      "preferences": ["Drama", "Sci-Fi", "Documentaries"],
+      "subscription": "premium",
+      "profile_image": "https://netflix.com/profiles/casey_wringer.jpg"
+    }
+  },
+  "content": {
+    "content_1": {
+      "id": "content_1",
+      "title": "Stranger Things",
+      "type": "tv_series",
+      "genre": "Sci-Fi",
+      "description": "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces and one strange little girl.",
+      "release_year": 2016,
+      "rating": "TV-14",
+      "duration": "4 Seasons",
+      "thumbnail": "https://netflix.com/thumbnails/stranger_things.jpg",
+      "stream_url": "https://netflix.com/watch/stranger_things",
+      "episodes": [
+        {
+          "id": "st_s4_e5",
+          "season_num": 4,
+          "episode_num": 5,
+          "title": "Chapter Five: Dear Billy",
+          "duration": "1h 16m",
+          "thumbnail": "https://netflix.com/thumbnails/st_s4_e5.jpg",
+          "stream_url": "https://netflix.com/watch/st_s4_e5"
+        }
+      ]
+    },
+    "content_2": {
+      "id": "content_2",
+      "title": "The Crown",
+      "type": "tv_series",
+      "genre": "Drama",
+      "description": "This drama follows the political rivalries and romance of Queen Elizabeth II's reign and the events that shaped the second half of the 20th century.",
+      "release_year": 2016,
+      "rating": "TV-MA",
+      "duration": "5 Seasons",
+      "thumbnail": "https://netflix.com/thumbnails/the_crown.jpg",
+      "stream_url": "https://netflix.com/watch/the_crown"
+    },
+    "content_3": {
+      "id": "content_3",
+      "title": "Inception",
+      "type": "movie",
+      "genre": "Action",
+      "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+      "release_year": 2010,
+      "rating": "PG-13",
+      "duration": "2h 28m",
+      "thumbnail": "https://netflix.com/thumbnails/inception.jpg",
+      "stream_url": "https://netflix.com/watch/inception"
+    },
+    "content_4": {
+      "id": "content_4",
+      "title": "Our Planet",
+      "type": "tv_series",
+      "genre": "Documentary",
+      "description": "Experience our planet's natural beauty and examine how climate change impacts all living creatures in this ambitious documentary of spectacular scope.",
+      "release_year": 2019,
+      "rating": "TV-PG",
+      "duration": "1 Season",
+      "thumbnail": "https://netflix.com/thumbnails/our_planet.jpg",
+      "stream_url": "https://netflix.com/watch/our_planet"
+    },
+    "content_5": {
+      "id": "content_5",
+      "title": "The Matrix",
+      "type": "movie",
+      "genre": "Sci-Fi",
+      "description": "A computer programmer discovers that reality as he knows it is a simulation created by machines, and joins a rebellion to break free.",
+      "release_year": 1999,
+      "rating": "R",
+      "duration": "2h 16m",
+      "thumbnail": "https://netflix.com/thumbnails/the_matrix.jpg",
+      "stream_url": "https://netflix.com/watch/the_matrix"
+    }
+  }
+}

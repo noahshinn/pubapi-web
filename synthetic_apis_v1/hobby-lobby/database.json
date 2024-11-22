@@ -1,0 +1,104 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "address": "789 Tech Avenue, San Francisco, CA 94105",
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242",
+          "expiry_mm": 12,
+          "expiry_yy": 25
+        }
+      ],
+      "created_at": "2023-01-01T00:00:00Z"
+    }
+  },
+  "products": {
+    "prod_1": {
+      "id": "prod_1",
+      "name": "Artist's Canvas Set (3-Pack)",
+      "description": "Premium quality canvas for acrylic and oil painting",
+      "category": "Art Supplies",
+      "price": 24.99,
+      "sale_price": 19.99,
+      "in_stock": true,
+      "stock_quantity": 50
+    },
+    "prod_2": {
+      "id": "prod_2",
+      "name": "Acrylic Paint Set",
+      "description": "12 vibrant colors, perfect for beginners",
+      "category": "Art Supplies",
+      "price": 29.99,
+      "in_stock": true,
+      "stock_quantity": 75
+    },
+    "prod_3": {
+      "id": "prod_3",
+      "name": "Decorative Wall Clock",
+      "description": "Vintage-style wall clock, perfect for home decor",
+      "category": "Home Decor",
+      "price": 39.99,
+      "sale_price": 29.99,
+      "in_stock": true,
+      "stock_quantity": 25
+    },
+    "prod_4": {
+      "id": "prod_4",
+      "name": "Yarn Bundle",
+      "description": "Soft cotton yarn in assorted colors",
+      "category": "Crafts",
+      "price": 19.99,
+      "in_stock": true,
+      "stock_quantity": 100
+    }
+  },
+  "orders": {
+    "ord_1": {
+      "id": "ord_1",
+      "user_email": "casey.wringer@email.com",
+      "items": [
+        {
+          "product_id": "prod_1",
+          "quantity": 2,
+          "product": {
+            "id": "prod_1",
+            "name": "Artist's Canvas Set (3-Pack)",
+            "price": 24.99,
+            "sale_price": 19.99
+          }
+        },
+        {
+          "product_id": "prod_2",
+          "quantity": 1,
+          "product": {
+            "id": "prod_2",
+            "name": "Acrylic Paint Set",
+            "price": 29.99
+          }
+        }
+      ],
+      "status": "delivered",
+      "total": 75.77,
+      "shipping_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "created_at": "2024-01-10T15:30:00Z"
+    }
+  },
+  "carts": {
+    "casey.wringer@email.com": [
+      {
+        "product_id": "prod_3",
+        "quantity": 1,
+        "product": {
+          "id": "prod_3",
+          "name": "Decorative Wall Clock",
+          "price": 39.99,
+          "sale_price": 29.99
+        }
+      }
+    ]
+  }
+}

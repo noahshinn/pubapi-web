@@ -1,0 +1,214 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "LinkedIn Premium API",
+    "version": "1.0.0",
+    "description": "API for LinkedIn Premium services"
+  },
+  "paths": {
+    "/api/v1/profile/insights": {
+      "get": {
+        "summary": "Get profile view insights",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "timeRange",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["7d", "30d", "90d"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile insights data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileInsights"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/jobs/recommendations": {
+      "get": {
+        "summary": "Get personalized job recommendations",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of job recommendations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Job"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/learning/courses": {
+      "get": {
+        "summary": "Get LinkedIn Learning course recommendations",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of course recommendations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Course"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/network/leads": {
+      "get": {
+        "summary": "Get sales navigator leads",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of sales leads",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Lead"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProfileInsights": {
+        "type": "object",
+        "properties": {
+          "profile_views": {"type": "integer"},
+          "search_appearances": {"type": "integer"},
+          "post_impressions": {"type": "integer"},
+          "viewer_breakdown": {
+            "type": "object",
+            "properties": {
+              "industries": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {"type": "string"},
+                    "count": {"type": "integer"}
+                  }
+                }
+              },
+              "companies": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {"type": "string"},
+                    "count": {"type": "integer"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Job": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "company": {"type": "string"},
+          "location": {"type": "string"},
+          "salary_range": {"type": "string"},
+          "description": {"type": "string"},
+          "match_score": {"type": "integer"},
+          "posted_at": {"type": "string"}
+        }
+      },
+      "Course": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "author": {"type": "string"},
+          "duration": {"type": "string"},
+          "level": {"type": "string"},
+          "description": {"type": "string"},
+          "completion_rate": {"type": "integer"},
+          "skills_covered": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "Lead": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "title": {"type": "string"},
+          "company": {"type": "string"},
+          "industry": {"type": "string"},
+          "connection_degree": {"type": "integer"},
+          "mutual_connections": {"type": "integer"},
+          "notes": {"type": "string"}
+        }
+      }
+    }
+  }
+}

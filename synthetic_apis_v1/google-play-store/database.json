@@ -1,0 +1,135 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242"
+        }
+      ],
+      "library": [
+        {
+          "app": {
+            "id": "app_1",
+            "name": "Spotify",
+            "developer": "Spotify AB",
+            "category": "Music & Audio",
+            "price": 0.00,
+            "rating": 4.5,
+            "downloads": "1B+",
+            "version": "8.8.0.347",
+            "size": "30MB",
+            "last_updated": "2024-01-10T00:00:00Z",
+            "requires_android": "8.0 and up"
+          },
+          "purchased_at": "2023-12-01T15:30:00Z",
+          "last_used": "2024-01-15T18:45:00Z",
+          "auto_update": true
+        },
+        {
+          "app": {
+            "id": "app_2",
+            "name": "
+            "name": "Netflix",
+            "developer": "Netflix, Inc.",
+            "category": "Entertainment",
+            "price": 0.00,
+            "rating": 4.4,
+            "downloads": "1B+",
+            "version": "8.83.0",
+            "size": "35MB",
+            "last_updated": "2024-01-12T00:00:00Z",
+            "requires_android": "8.0 and up"
+          },
+          "purchased_at": "2023-11-15T10:20:00Z",
+          "last_used": "2024-01-16T20:30:00Z",
+          "auto_update": true
+        }
+      ],
+      "wish_list": [
+        {
+          "id": "app_3",
+          "name": "Minecraft",
+          "developer": "Mojang",
+          "category": "Games",
+          "price": 7.99,
+          "rating": 4.5,
+          "downloads": "100M+",
+          "version": "1.20.0",
+          "size": "150MB",
+          "last_updated": "2024-01-05T00:00:00Z",
+          "requires_android": "8.0 and up"
+        }
+      ]
+    }
+  },
+  "apps": {
+    "app_1": {
+      "id": "app_1",
+      "name": "Spotify",
+      "developer": "Spotify AB",
+      "category": "Music & Audio",
+      "price": 0.00,
+      "rating": 4.5,
+      "downloads": "1B+",
+      "description": "Listen to your favorite music and podcasts.",
+      "version": "8.8.0.347",
+      "size": "30MB",
+      "last_updated": "2024-01-10T00:00:00Z",
+      "requires_android": "8.0 and up"
+    },
+    "app_2": {
+      "id": "app_2",
+      "name": "Netflix",
+      "developer": "Netflix, Inc.",
+      "category": "Entertainment",
+      "price": 0.00,
+      "rating": 4.4,
+      "downloads": "1B+",
+      "description": "Stream your favorite movies and TV shows.",
+      "version": "8.83.0",
+      "size": "35MB",
+      "last_updated": "2024-01-12T00:00:00Z",
+      "requires_android": "8.0 and up"
+    },
+    "app_3": {
+      "id": "app_3",
+      "name": "Minecraft",
+      "developer": "Mojang",
+      "category": "Games",
+      "price": 7.99,
+      "rating": 4.5,
+      "downloads": "100M+",
+      "description": "Create, explore, and survive in a blocky world.",
+      "version": "1.20.0",
+      "size": "150MB",
+      "last_updated": "2024-01-05T00:00:00Z",
+      "requires_android": "8.0 and up"
+    }
+  },
+  "purchases": {
+    "pur_1": {
+      "id": "pur_1",
+      "app": {
+        "id": "app_1",
+        "name": "Spotify"
+      },
+      "user_email": "casey.wringer@email.com",
+      "amount": 0.00,
+      "purchased_at": "2023-12-01T15:30:00Z"
+    },
+    "pur_2": {
+      "id": "pur_2",
+      "app": {
+        "id": "app_2",
+        "name": "Netflix"
+      },
+      "user_email": "casey.wringer@email.com",
+      "amount": 0.00,
+      "purchased_at": "2023-11-15T10:20:00Z"
+    }
+  }
+}

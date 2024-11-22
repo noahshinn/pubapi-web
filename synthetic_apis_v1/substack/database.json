@@ -1,0 +1,88 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "bio": "Tech enthusiast and avid reader",
+      "subscribed_since": "2023-01-15T00:00:00Z",
+      "is_writer": false
+    }
+  },
+  "publications": {
+    "pub_1": {
+      "id": "pub_1",
+      "name": "Tech Insights Weekly",
+      "description": "Deep dives into the latest technology trends",
+      "author": "Alex Thompson",
+      "subscribers": 15000,
+      "subscription_tier": "premium",
+      "price": 10.00,
+      "created_at": "2022-06-01T00:00:00Z"
+    },
+    "pub_2": {
+      "id": "pub_2",
+      "name": "Future of AI",
+      "description": "Exploring artificial intelligence developments",
+      "author": "Maria Garcia",
+      "subscribers": 25000,
+      "subscription_tier": "premium",
+      "price": 12.00,
+      "created_at": "2022-08-15T00:00:00Z"
+    }
+  },
+  "posts": {
+    "post_1": {
+      "id": "post_1",
+      "publication_id": "pub_1",
+      "title": "The Rise of Edge Computing",
+      "subtitle": "How edge computing is reshaping the internet",
+      "content": "Edge computing is revolutionizing how we process data...",
+      "author": "Alex Thompson",
+      "is_premium": true,
+      "likes": 342,
+      "comments": [],
+      "created_at": "2024-01-10T14:30:00Z"
+    },
+    "post_2": {
+      "id": "post_2",
+      "publication_id": "pub_2",
+      "title": "GPT-4 and Beyond",
+      "subtitle": "The future of large language models",
+      "content": "As we look towards the next generation of AI...",
+      "author": "Maria Garcia",
+      "is_premium": true,
+      "likes": 567,
+      "comments": [],
+      "created_at": "2024-01-15T09:15:00Z"
+    }
+  },
+  "subscriptions": {
+    "sub_1": {
+      "id": "sub_1",
+      "user_email": "casey.wringer@email.com",
+      "publication_id": "pub_1",
+      "plan": "premium",
+      "active": true,
+      "created_at": "2023-01-15T00:00:00Z",
+      "renewed_at": "2024-01-15T00:00:00Z"
+    },
+    "sub_2": {
+      "id": "sub_2",
+      "user_email": "casey.wringer@email.com",
+      "publication_id": "pub_2",
+      "plan": "premium",
+      "active": true,
+      "created_at": "2023-03-01T00:00:00Z",
+      "renewed_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  "comments": {
+    "comment_1": {
+      "id": "comment_1",
+      "post_id": "post_1",
+      "content": "Great insights on edge computing!",
+      "author": "Casey Wringer",
+      "created_at": "2024-01-11T16:45:00Z"
+    }
+  }
+}

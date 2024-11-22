@@ -1,0 +1,236 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Spotify Public API",
+    "version": "1.0.0",
+    "description": "API for music streaming service"
+  },
+  "paths": {
+    "/api/v1/playlists": {
+      "get": {
+        "summary": "Get user's playlists",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of playlists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Playlist"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new playlist",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPlaylist"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Playlist created"
+          }
+        }
+      }
+    },
+    "/api/v1/playlists/{playlistId}/tracks": {
+      "post": {
+        "summary": "Add track to playlist",
+        "parameters": [
+          {
+            "name": "playlistId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddTrackRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Track added to playlist"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove track from playlist",
+        "parameters": [
+          {
+            "name": "playlistId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveTrackRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Track removed from playlist"
+          }
+        }
+      }
+    },
+    "/api/v1/tracks/search": {
+      "get": {
+        "summary": "Search for tracks",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of matching tracks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Track"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/me/recently-played": {
+      "get": {
+        "summary": "Get user's recently played tracks",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of recently played tracks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlayHistory"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Track": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "artist": {"type": "string"},
+          "album": {"type": "string"},
+          "duration_ms": {"type": "integer"},
+          "preview_url": {"type": "string"}
+        }
+      },
+      "Playlist": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "owner_email": {"type": "string"},
+          "tracks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Track"
+            }
+          },
+          "created_at": {"type": "string"}
+        }
+      },
+      "NewPlaylist": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "owner_email": {"type": "string"}
+        }
+      },
+      "AddTrackRequest": {
+        "type": "object",
+        "properties": {
+          "track_id": {"type": "string"}
+        }
+      },
+      "RemoveTrackRequest": {
+        "type": "object",
+        "properties": {
+          "track_id": {"type": "string"}
+        }
+      },
+      "PlayHistory": {
+        "type": "object",
+        "properties": {
+          "track": {
+            "$ref": "#/components/schemas/Track"
+          },
+          "played_at": {"type": "string"}
+        }
+      }
+    }
+  }
+}

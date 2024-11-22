@@ -1,0 +1,228 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "KAYAK Public API",
+    "version": "1.0.0",
+    "description": "API for travel search and booking services"
+  },
+  "paths": {
+    "/api/v1/flights/search": {
+      "get": {
+        "summary": "Search for flights",
+        "parameters": [
+          {
+            "name": "origin",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "destination",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "departure_date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "return_date",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of available flights",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Flight"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hotels/search": {
+      "get": {
+        "summary": "Search for hotels",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "check_in",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "check_out",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "guests",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of available hotels",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Hotel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bookings": {
+      "get": {
+        "summary": "Get user's bookings",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of user's bookings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Booking"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new booking",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewBooking"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Booking created successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Flight": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "airline": {"type": "string"},
+          "flight_number": {"type": "string"},
+          "origin": {"type": "string"},
+          "destination": {"type": "string"},
+          "departure_time": {"type": "string"},
+          "arrival_time": {"type": "string"},
+          "price": {"type": "number"},
+          "seats_available": {"type": "integer"}
+        }
+      },
+      "Hotel": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "location": {"type": "string"},
+          "rating": {"type": "number"},
+          "price_per_night": {"type": "number"},
+          "amenities": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "Booking": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "type": {"type": "string"},
+          "status": {"type": "string"},
+          "details": {
+            "oneOf": [
+              {"$ref": "#/components/schemas/Flight"},
+              {"$ref": "#/components/schemas/Hotel"}
+            ]
+          },
+          "total_price": {"type": "number"},
+          "booking_date": {"type": "string"}
+        }
+      },
+      "NewBooking": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "type": {"type": "string"},
+          "item_id": {"type": "string"},
+          "payment_method": {"type": "string"}
+        },
+        "required": ["user_email", "type", "item_id", "payment_method"]
+      }
+    }
+  }
+}

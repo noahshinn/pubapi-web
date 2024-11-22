@@ -1,0 +1,125 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "username": "caseyc_gaming",
+      "library": [
+        {
+          "game": {
+            "id": "game_1",
+            "title": "Fortnite",
+            "description": "Battle Royale game",
+            "price": 0.00,
+            "publisher": "Epic Games",
+            "release_date": "2017-07-25T00:00:00Z",
+            "categories": ["Battle Royale", "Multiplayer", "Action"],
+            "rating": "T",
+            "size": 26.5
+          },
+          "purchase_date": "2023-06-15T14:30:00Z",
+          "play_time": 125.5,
+          "last_played": "2024-01-15T22:15:00Z",
+          "installed": true
+        },
+        {
+          "game": {
+            "id": "game_2",
+            "title": "Rocket League",
+            "description": "Soccer with cars",
+            "price": 19.99,
+            "publisher": "Psyonix",
+            "release_date": "2015-07-07T00:00:00Z",
+            "categories": ["Sports", "Racing", "Multiplayer"],
+            "rating": "E",
+            "size": 20.0
+          },
+          "purchase_date": "2023-08-20T10:00:00Z",
+          "play_time": 45.2,
+          "last_played": "2024-01-14T18:30:00Z",
+          "installed": true
+        }
+      ],
+      "friends": [
+        {
+          "id": "user_1",
+          "username": "gaming_pro",
+          "status": "online",
+          "current_game": "Fortnite",
+          "last_online": "2024-01-16T20:00:00Z"
+        },
+        {
+          "id": "user_2",
+          "username": "rocket_master",
+          "status": "offline",
+          "last_online": "2024-01-15T23:45:00Z"
+        }
+      ],
+      "achievements": [
+        {
+          "id": "ach_1",
+          "game_id": "game_1",
+          "name": "Victory Royale",
+          "description": "Win your first Battle Royale match",
+          "unlocked": true,
+          "unlocked_date": "2023-07-01T19:20:00Z",
+          "rarity": 35.5
+        },
+        {
+          "id": "ach_2",
+          "game_id": "game_2",
+          "name": "Aerial Artist",
+          "description": "Score an aerial goal",
+          "unlocked": true,
+          "unlocked_date": "2023-09-05T21:15:00Z",
+          "rarity": 25.2
+        }
+      ],
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242",
+          "expiry_mm": 12,
+          "expiry_yy": 25,
+          "created_at": "2023-06-15T14:00:00Z"
+        }
+      ]
+    }
+  },
+  "games": {
+    "game_1": {
+      "id": "game_1",
+      "title": "Fortnite",
+      "description": "Battle Royale game",
+      "price": 0.00,
+      "publisher": "Epic Games",
+      "release_date": "2017-07-25T00:00:00Z",
+      "categories": ["Battle Royale", "Multiplayer", "Action"],
+      "rating": "T",
+      "size": 26.5
+    },
+    "game_2": {
+      "id": "game_2",
+      "title": "Rocket League",
+      "description": "Soccer with cars",
+      "price": 19.99,
+      "publisher": "Psyonix",
+      "release_date": "2015-07-07T00:00:00Z",
+      "categories": ["Sports", "Racing", "Multiplayer"],
+      "rating": "E",
+      "size": 20.0
+    },
+    "game_3": {
+      "id": "game_3",
+      "title": "Fall Guys",
+      "description": "Ultimate Knockout party game",
+      "price": 19.99,
+      "sale_price": 9.99,
+      "publisher": "Mediatonic",
+      "release_date": "2020-08-04T00:00:00Z",
+      "categories": ["Party", "Multiplayer", "Battle Royale"],
+      "rating": "E",
+      "size": 15.0
+    }
+  }
+}

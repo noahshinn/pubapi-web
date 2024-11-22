@@ -1,0 +1,114 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "shipping_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242"
+        }
+      ],
+      "favorites": ["list_1", "list_3"]
+    }
+  },
+  "listings": {
+    "list_1": {
+      "id": "list_1",
+      "title": "Handmade Ceramic Mug",
+      "description": "Beautiful handcrafted ceramic mug with unique glazing pattern",
+      "price": 25.99,
+      "shipping_price": 4.99,
+      "seller": {
+        "id": "sell_1",
+        "shop_name": "CeramicArtistry",
+        "rating": 4.9,
+        "total_sales": 1250,
+        "location": "Portland, OR"
+      },
+      "category": "Home & Living",
+      "tags": ["ceramic", "handmade", "mug", "coffee", "tea"],
+      "images": [
+        "https://example.com/images/mug1.jpg",
+        "https://example.com/images/mug2.jpg"
+      ],
+      "created_at": "2024-01-10T15:30:00Z"
+    },
+    "list_2": {
+      "id": "list_2",
+      "title": "Vintage Leather Journal",
+      "description": "Handbound leather journal with recycled paper",
+      "price": 35.99,
+      "shipping_price": 3.99,
+      "seller": {
+        "id": "sell_2",
+        "shop_name": "VintageBindery",
+        "rating": 4.8,
+        "total_sales": 890,
+        "location": "Seattle, WA"
+      },
+      "category": "Paper & Books",
+      "tags": ["journal", "leather", "handmade", "vintage", "writing"],
+      "images": [
+        "https://example.com/images/journal1.jpg",
+        "https://example.com/images/journal2.jpg"
+      ],
+      "created_at": "2024-01-12T10:15:00Z"
+    },
+    "list_3": {
+      "id": "list_3",
+      "title": "Minimalist Silver Necklace",
+      "description": "Sterling silver geometric pendant necklace",
+      "price": 45.99,
+      "shipping_price": 2.99,
+      "seller": {
+        "id": "sell_3",
+        "shop_name": "ModernJewels",
+        "rating": 4.95,
+        "total_sales": 2100,
+        "location": "Austin, TX"
+      },
+      "category": "Jewelry",
+      "tags": ["silver", "necklace", "minimalist", "handmade", "geometric"],
+      "images": [
+        "https://example.com/images/necklace1.jpg",
+        "https://example.com/images/necklace2.jpg"
+      ],
+      "created_at": "2024-01-14T09:45:00Z"
+    }
+  },
+  "orders": {
+    "ord_1": {
+      "id": "ord_1",
+      "user_email": "casey.wringer@email.com",
+      "items": [
+        {
+          "listing_id": "list_1",
+          "quantity": 2,
+          "price": 25.99
+        }
+      ],
+      "total": 56.97,
+      "status": "delivered",
+      "shipping_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "created_at": "2024-01-15T14:30:00Z"
+    },
+    "ord_2": {
+      "id": "ord_2",
+      "user_email": "casey.wringer@email.com",
+      "items": [
+        {
+          "listing_id": "list_3",
+          "quantity": 1,
+          "price": 45.99
+        }
+      ],
+      "total": 48.98,
+      "status": "processing",
+      "shipping_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "created_at": "2024-01-16T16:45:00Z"
+    }
+  }
+}

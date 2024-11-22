@@ -1,0 +1,66 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "subscriptionType": "digital_all_access",
+      "preferences": {
+        "email": "casey.wringer@email.com",
+        "preferredCategories": [
+          "Technology",
+          "Business",
+          "Science"
+        ],
+        "newsletterSubscriptions": [
+          "Morning Briefing",
+          "Tech Newsletter"
+        ],
+        "notificationPreferences": {
+          "breakingNews": true,
+          "dailyDigest": true,
+          "weeklyNewsletter": false
+        }
+      },
+      "bookmarkedArticles": [
+        "article_1",
+        "article_2",
+        "article_3"
+      ]
+    }
+  },
+  "articles": {
+    "article_1": {
+      "id": "article_1",
+      "title": "The Future of AI: Breakthroughs and Challenges",
+      "subtitle": "How artificial intelligence is reshaping our world",
+      "content": "In recent developments, artificial intelligence continues to push boundaries...",
+      "author": "Dr. James Wilson",
+      "category": "Technology",
+      "publishDate": "2024-01-15T08:00:00Z",
+      "imageUrl": "https://nyt.com/images/ai-future.jpg",
+      "readTimeMinutes": 8
+    },
+    "article_2": {
+      "id": "article_2",
+      "title": "Global Markets React to Tech Sector Growth",
+      "subtitle": "Tech stocks surge amid positive earnings reports",
+      "content": "The technology sector showed remarkable resilience this quarter...",
+      "author": "Emily Rodriguez",
+      "category": "Business",
+      "publishDate": "2024-01-16T10:30:00Z",
+      "imageUrl": "https://nyt.com/images/market-growth.jpg",
+      "readTimeMinutes": 6
+    },
+    "article_3": {
+      "id": "article_3",
+      "title": "Breakthrough in Quantum Computing",
+      "subtitle": "Scientists achieve quantum supremacy milestone",
+      "content": "In a groundbreaking experiment, researchers have demonstrated...",
+      "author": "Dr. Casey Wringer",
+      "category": "Science",
+      "publishDate": "2024-01-16T14:15:00Z",
+      "imageUrl": "https://nyt.com/images/quantum-computing.jpg",
+      "readTimeMinutes": 10
+    }
+  }
+}

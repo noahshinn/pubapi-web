@@ -1,0 +1,88 @@
+{
+  "movies": {
+    "mov_1": {
+      "id": "mov_1",
+      "title": "The Matrix Resurrections",
+      "rating": "PG-13",
+      "duration": 148,
+      "genre": "Action/Sci-Fi",
+      "synopsis": "Return to a world of two realities: one, everyday life; the other, what lies behind it.",
+      "posterUrl": "https://example.com/matrix.jpg",
+      "trailerUrl": "https://example.com/matrix-trailer.mp4",
+      "releaseDate": "2024-01-01T00:00:00Z"
+    },
+    "mov_2": {
+      "id": "mov_2",
+      "title": "Dune: Part Two",
+      "rating": "PG-13",
+      "duration": 155,
+      "genre": "Sci-Fi/Adventure",
+      "synopsis": "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
+      "posterUrl": "https://example.com/dune.jpg",
+      "trailerUrl": "https://example.com/dune-trailer.mp4",
+      "releaseDate": "2024-03-01T00:00:00Z"
+    }
+  },
+  "theaters": {
+    "th_1": {
+      "id": "th_1",
+      "name": "AMC Empire 25",
+      "address": "234 W 42nd St",
+      "city": "New York",
+      "state": "NY",
+      "zipCode": "10036",
+      "amenities": ["IMAX", "Dolby Cinema", "Wheelchair Accessible"]
+    },
+    "th_2": {
+      "id": "th_2",
+      "name": "Regal Union Square",
+      "address": "850 Broadway",
+      "city": "New York",
+      "state": "NY",
+      "zipCode": "10003",
+      "amenities": ["RPX", "Wheelchair Accessible", "Stadium Seating"]
+    }
+  },
+  "showtimes": {
+    "st_1": {
+      "id": "st_1",
+      "movieId": "mov_1",
+      "theaterId": "th_1",
+      "datetime": "2024-01-16T19:30:00Z",
+      "screenNumber": 1,
+      "availableSeats": 120,
+      "price": 15.99
+    },
+    "st_2": {
+      "id": "st_2",
+      "movieId": "mov_1",
+      "theaterId": "th_1",
+      "datetime": "2024-01-16T22:00:00Z",
+      "screenNumber": 1,
+      "availableSeats": 150,
+      "price": 15.99
+    }
+  },
+  "tickets": {
+    "tick_1": {
+      "id": "tick_1",
+      "userEmail": "casey.wringer@email.com",
+      "movie": {
+        "id": "mov_1",
+        "title": "The Matrix Resurrections"
+      },
+      "theater": {
+        "id": "th_1",
+        "name": "AMC Empire 25"
+      },
+      "showtime": {
+        "id": "st_1",
+        "datetime": "2024-01-16T19:30:00Z"
+      },
+      "seatNumbers": ["F12", "F13"],
+      "purchaseDate": "2024-01-15T14:30:00Z",
+      "totalPrice": 31.98,
+      "qrCode": "qr_12345"
+    }
+  }
+}

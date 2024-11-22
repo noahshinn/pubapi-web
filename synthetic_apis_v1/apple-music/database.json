@@ -1,0 +1,155 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "subscription_type": "individual",
+      "join_date": "2023-01-15T00:00:00Z",
+      "playlists": [
+        {
+          "id": "pl_1",
+          "name": "Workout Mix",
+          "description": "High energy songs for the gym",
+          "owner": "casey.wringer@email.com",
+          "songs": [
+            {
+              "id": "s_1",
+              "title": "Blinding Lights",
+              "artist": "The Weeknd",
+              "album": "After Hours",
+              "duration": 200,
+              "genre": "Pop"
+            },
+            {
+              "id": "s_2",
+              "title": "Physical",
+              "artist": "Dua Lipa",
+              "album": "Future Nostalgia",
+              "duration": 193,
+              "genre": "Pop"
+            }
+          ],
+          "created_at": "2023-02-01T00:00:00Z"
+        },
+        {
+          "id": "pl_2",
+          "name": "Chill Vibes",
+          "description": "Relaxing music for work",
+          "owner": "casey.wringer@email.com",
+          "songs": [
+            {
+              "id": "s_3",
+              "title": "Circles",
+              "artist": "Post Malone",
+              "album": "Hollywood's Bleeding",
+              "duration": 215,
+              "genre": "Pop"
+            }
+          ],
+          "created_at": "2023-03-15T00:00:00Z"
+        }
+      ],
+      "liked_songs": [
+        {
+          "id": "s_1",
+          "title": "Blinding Lights",
+          "artist": "The Weeknd",
+          "album": "After Hours",
+          "duration": 200,
+          "genre": "Pop"
+        },
+        {
+          "id": "s_4",
+          "title": "Stay",
+          "artist": "The Kid LAROI & Justin Bieber",
+          "album": "F*CK LOVE 3: OVER YOU",
+          "duration": 141,
+          "genre": "Pop"
+        }
+      ]
+    }
+  },
+  "songs": {
+    "s_1": {
+      "id": "s_1",
+      "title": "Blinding Lights",
+      "artist": "The Weeknd",
+      "album": "After Hours",
+      "duration": 200,
+      "genre": "Pop",
+      "release_date": "2019-11-29T00:00:00Z"
+    },
+    "s_2": {
+      "id": "s_2",
+      "title": "Physical",
+      "artist": "Dua Lipa",
+      "album": "Future Nostalgia",
+      "duration": 193,
+      "genre": "Pop",
+      "release_date": "2020-01-30T00:00:00Z"
+    },
+    "s_3": {
+      "id": "s_3",
+      "title": "Circles",
+      "artist": "Post Malone",
+      "album": "Hollywood's Bleeding",
+      "duration": 215,
+      "genre": "Pop",
+      "release_date": "2019-08-30T00:00:00Z"
+    },
+    "s_4": {
+      "id": "s_4",
+      "title": "Stay",
+      "artist": "The Kid LAROI & Justin Bieber",
+      "album": "F*CK LOVE 3: OVER YOU",
+      "duration": 141,
+      "genre": "Pop",
+      "release_date": "2021-07-09T00:00:00Z"
+    }
+  },
+  "artists": {
+    "ar_1": {
+      "id": "ar_1",
+      "name": "The Weeknd",
+      "genres": ["Pop", "R&B"]
+    },
+    "ar_2": {
+      "id": "ar_2",
+      "name": "Dua Lipa",
+      "genres": ["Pop", "Dance"]
+    },
+    "ar_3": {
+      "id": "ar_3",
+      "name": "Post Malone",
+      "genres": ["Pop", "Hip Hop"]
+    }
+  },
+  "albums": {
+    "al_1": {
+      "id": "al_1",
+      "title": "After Hours",
+      "artist": "The Weeknd",
+      "release_date": "2020-03-20T00:00:00Z",
+      "tracks": [
+        {
+          "id": "s_1",
+          "title": "Blinding Lights",
+          "duration": 200
+        }
+      ]
+    },
+    "al_2": {
+      "id": "al_2",
+      "title": "Future Nostalgia",
+      "artist": "Dua Lipa",
+      "release_date": "2020-03-27T00:00:00Z",
+      "tracks": [
+        {
+          "id": "s_2",
+          "title": "Physical",
+          "duration": 193
+        }
+      ]
+    }
+  }
+}

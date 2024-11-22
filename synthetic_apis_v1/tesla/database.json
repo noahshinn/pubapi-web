@@ -1,0 +1,62 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "vehicle_ids": ["vehicle_1"]
+    }
+  },
+  "vehicles": {
+    "vehicle_1": {
+      "id": "vehicle_1",
+      "vin": "5YJ3E1EA8LF123456",
+      "model": "Model 3",
+      "name": "Casey's Tesla",
+      "color": "Red",
+      "purchase_date": "2023-06-15T00:00:00Z",
+      "user_email": "casey.wringer@email.com"
+    }
+  },
+  "vehicle_states": {
+    "vehicle_1": {
+      "battery_level": 75,
+      "charging_state": "Stopped",
+      "climate_state": {
+        "inside_temp": 22.5,
+        "is_climate_on": false,
+        "set_temp": 21.0
+      },
+      "drive_state": {
+        "speed": 0,
+        "latitude": 37.7749,
+        "longitude": -122.4194,
+        "heading": 90
+      },
+      "locked": true,
+      "sentry_mode": true,
+      "software_update": {
+        "status": "up_to_date",
+        "version": "2024.2.1"
+      }
+    }
+  },
+  "charging_schedules": {
+    "vehicle_1": {
+      "enabled": true,
+      "weekly_schedule": [
+        {
+          "day": 1,
+          "start_time": "01:00",
+          "end_time": "06:00",
+          "charge_limit": 90
+        },
+        {
+          "day": 4,
+          "start_time": "01:00",
+          "end_time": "06:00",
+          "charge_limit": 90
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Xbox Live API",
+    "version": "1.0.0",
+    "description": "API for Xbox Live gaming service"
+  },
+  "paths": {
+    "/api/v1/profile": {
+      "get": {
+        "summary": "Get user profile",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/friends": {
+      "get": {
+        "summary": "Get user's friends list",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of friends",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Friend"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/games": {
+      "get": {
+        "summary": "Get user's games library",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of games",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Game"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/achievements": {
+      "get": {
+        "summary": "Get user's achievements",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "game_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of achievements",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Achievement"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "gamertag": {"type": "string"},
+          "name": {"type": "string"},
+          "avatar_url": {"type": "string"},
+          "gamerscore": {"type": "integer"},
+          "reputation": {"type": "string"},
+          "account_tier": {"type": "string"},
+          "years_with_gold": {"type": "integer"}
+        }
+      },
+      "Friend": {
+        "type": "object",
+        "properties": {
+          "gamertag": {"type": "string"},
+          "name": {"type": "string"},
+          "avatar_url": {"type": "string"},
+          "online_status": {"type": "string"},
+          "current_activity": {"type": "string"},
+          "gamerscore": {"type": "integer"}
+        }
+      },
+      "Game": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "cover_url": {"type": "string"},
+          "last_played": {"type": "string"},
+          "achievement_progress": {
+            "type": "object",
+            "properties": {
+              "earned": {"type": "integer"},
+              "total": {"type": "integer"}
+            }
+          },
+          "install_status": {"type": "string"}
+        }
+      },
+      "Achievement": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "game_id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "gamerscore": {"type": "integer"},
+          "image_url": {"type": "string"},
+          "unlocked": {"type": "boolean"},
+          "unlock_time": {"type": "string"},
+          "rarity_percentage": {"type": "number"}
+        }
+      }
+    }
+  }
+}

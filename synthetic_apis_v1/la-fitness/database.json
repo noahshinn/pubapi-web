@@ -1,0 +1,108 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "address": {
+        "street": "789 Tech Avenue",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94105",
+        "latitude": 37.7849,
+        "longitude": -122.3968
+      },
+      "membership": "premium",
+      "join_date": "2023-06-15T00:00:00Z"
+    }
+  },
+  "locations": {
+    "loc_1": {
+      "id": "loc_1",
+      "name": "LA Fitness - SoMa",
+      "address": {
+        "street": "123 Market Street",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94105",
+        "latitude": 37.7897,
+        "longitude": -122.3997
+      },
+      "phone": "+1-555-9876",
+      "hours": {
+        "monday": "5:00 AM - 11:00 PM",
+        "tuesday": "5:00 AM - 11:00 PM",
+        "wednesday": "5:00 AM - 11:00 PM",
+        "thursday": "5:00 AM - 11:00 PM",
+        "friday": "5:00 AM - 10:00 PM",
+        "saturday": "7:00 AM - 8:00 PM",
+        "sunday": "7:00 AM - 8:00 PM"
+      },
+      "amenities": [
+        "Pool",
+        "Sauna",
+        "Basketball Court",
+        "Free Weights",
+        "Cardio Equipment",
+        "Personal Training",
+        "Group Classes",
+        "Locker Rooms"
+      ]
+    }
+  },
+  "classes": {
+    "class_1": {
+      "id": "class_1",
+      "name": "Yoga Flow",
+      "instructor": "Emily Johnson",
+      "start_time": "2024-01-17T08:00:00Z",
+      "end_time": "2024-01-17T09:00:00Z",
+      "capacity": 20,
+      "booked_count": 12,
+      "location_id": "loc_1",
+      "difficulty_level": "intermediate"
+    },
+    "class_2": {
+      "id": "class_2",
+      "name": "HIIT Training",
+      "instructor": "Mike Thompson",
+      "start_time": "2024-01-17T10:00:00Z",
+      "end_time": "2024-01-17T11:00:00Z",
+      "capacity": 15,
+      "booked_count": 8,
+      "location_id": "loc_1",
+      "difficulty_level": "advanced"
+    }
+  },
+  "bookings": {
+    "book_1": {
+      "id": "book_1",
+      "class": {
+        "id": "class_1",
+        "name": "Yoga Flow"
+      },
+      "user_email": "casey.wringer@email.com",
+      "status": "confirmed",
+      "created_at": "2024-01-15T14:30:00Z"
+    }
+  },
+  "memberships": {
+    "mem_1": {
+      "id": "mem_1",
+      "user_email": "casey.wringer@email.com",
+      "type": "premium",
+      "status": "active",
+      "start_date": "2023-06-15T00:00:00Z",
+      "end_date": "2024-06-14T23:59:59Z",
+      "home_location": {
+        "id": "loc_1",
+        "name": "LA Fitness - SoMa"
+      },
+      "payment_method": {
+        "type": "credit_card",
+        "last4": "4242",
+        "expiry": "12/25"
+      }
+    }
+  }
+}

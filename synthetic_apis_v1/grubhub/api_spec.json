@@ -1,0 +1,275 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Grubhub Public API",
+    "version": "1.0.0",
+    "description": "API for food delivery and restaurant discovery service"
+  },
+  "paths": {
+    "/api/v1/search": {
+      "get": {
+        "summary": "Search restaurants and dishes",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "cuisine",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "restaurants": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Restaurant"
+                      }
+                    },
+                    "dishes": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Dish"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/restaurants/{restaurantId}/menu": {
+      "get": {
+        "summary": "Get restaurant menu",
+        "parameters": [
+          {
+            "name": "restaurantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Restaurant menu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MenuItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cart": {
+      "get": {
+        "summary": "Get user's cart",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's cart",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add item to cart",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CartItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated cart"
+          }
+        }
+      }
+    },
+    "/api/v1/orders": {
+      "post": {
+        "summary": "Place order from cart",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order created"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Restaurant": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "cuisine_type": {"type": "string"},
+          "rating": {"type": "number"},
+          "estimated_delivery_time": {"type": "integer"},
+          "delivery_fee": {"type": "number"},
+          "minimum_order": {"type": "number"},
+          "address": {"type": "string"}
+        }
+      },
+      "MenuItem": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "price": {"type": "number"},
+          "category": {"type": "string"},
+          "customization_options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomizationOption"
+            }
+          }
+        }
+      },
+      "CustomizationOption": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "choices": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {"type": "string"},
+                "price": {"type": "number"}
+              }
+            }
+          }
+        }
+      },
+      "Cart": {
+        "type": "object",
+        "properties": {
+          "restaurant_id": {"type": "string"},
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItem"
+            }
+          },
+          "subtotal": {"type": "number"},
+          "tax": {"type": "number"},
+          "delivery_fee": {"type": "number"},
+          "total": {"type": "number"}
+        }
+      },
+      "CartItem": {
+        "type": "object",
+        "properties": {
+          "menu_item_id": {"type": "string"},
+          "quantity": {"type": "integer"},
+          "customizations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "option_name": {"type": "string"},
+                "choice": {"type": "string"}
+              }
+            }
+          },
+          "special_instructions": {"type": "string"}
+        }
+      },
+      "OrderRequest": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "delivery_address": {"type": "string"},
+          "payment_method_id": {"type": "string"},
+          "tip_amount": {"type": "number"}
+        }
+      },
+      "Dish": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "restaurant": {
+            "$ref": "#/components/schemas/Restaurant"
+          },
+          "price": {"type": "number"},
+          "description": {"type": "string"},
+          "image_url": {"type": "string"}
+        }
+      }
+    }
+  }
+}

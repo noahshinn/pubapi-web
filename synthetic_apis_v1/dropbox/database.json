@@ -1,0 +1,48 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "storage_used": 1048576,
+      "storage_limit": 10737418240
+    }
+  },
+  "files": {
+    "file_1": {
+      "id": "file_1",
+      "name": "Project Proposal.pdf",
+      "path": "/Work/Project Proposal.pdf",
+      "type": "file",
+      "size": 524288,
+      "modified": "2024-01-15T14:30:00Z",
+      "owner": "casey.wringer@email.com"
+    },
+    "file_2": {
+      "id": "file_2",
+      "name": "Family Photos",
+      "path": "/Personal/Family Photos",
+      "type": "folder",
+      "size": 0,
+      "modified": "2024-01-14T18:45:00Z",
+      "owner": "casey.wringer@email.com"
+    },
+    "file_3": {
+      "id": "file_3",
+      "name": "vacation.jpg",
+      "path": "/Personal/Family Photos/vacation.jpg",
+      "type": "file",
+      "size": 524288,
+      "modified": "2024-01-14T18:45:00Z",
+      "owner": "casey.wringer@email.com"
+    }
+  },
+  "share_links": {
+    "share_1": {
+      "id": "share_1",
+      "url": "https://dropbox.com/share/abc123",
+      "fileId": "file_1",
+      "expiration": "2024-02-15T00:00:00Z",
+      "created": "2024-01-15T14:35:00Z"
+    }
+  }
+}

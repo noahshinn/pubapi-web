@@ -1,0 +1,97 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "start_weight": 165.5,
+      "goal_weight": 145.0,
+      "height": 65.0,
+      "birthday": "1990-05-15",
+      "gender": "female",
+      "activity_level": "moderate",
+      "diet_preferences": ["vegetarian", "low-carb"],
+      "joined_at": "2024-01-01T00:00:00Z",
+      "coach_id": "coach_1"
+    }
+  },
+  "meal_logs": {
+    "casey.wringer@email.com": [
+      {
+        "id": "meal_1",
+        "user_email": "casey.wringer@email.com",
+        "meal_type": "breakfast",
+        "foods": [
+          {
+            "name": "Greek Yogurt",
+            "portion": 1,
+            "unit": "cup",
+            "calories": 130,
+            "protein": 12,
+            "carbs": 8,
+            "fat": 4
+          },
+          {
+            "name": "Blueberries",
+            "portion": 0.5,
+            "unit": "cup",
+            "calories": 40,
+            "protein": 0,
+            "carbs": 10,
+            "fat": 0
+          }
+        ],
+        "total_calories": 170,
+        "logged_at": "2024-01-16T08:30:00Z"
+      }
+    ]
+  },
+  "weight_logs": {
+    "casey.wringer@email.com": [
+      {
+        "id": "weight_1",
+        "user_email": "casey.wringer@email.com",
+        "weight": 165.5,
+        "logged_at": "2024-01-01T08:00:00Z"
+      },
+      {
+        "id": "weight_2",
+        "user_email": "casey.wringer@email.com",
+        "weight": 164.2,
+        "logged_at": "2024-01-08T08:00:00Z"
+      },
+      {
+        "id": "weight_3",
+        "user_email": "casey.wringer@email.com",
+        "weight": 163.1,
+        "logged_at": "2024-01-15T08:00:00Z"
+      }
+    ]
+  },
+  "coaches": {
+    "coach_1": {
+      "id": "coach_1",
+      "name": "Emily Rodriguez",
+      "specialties": ["weight loss", "nutrition", "vegetarian diet"]
+    }
+  },
+  "coaching_messages": {
+    "casey.wringer@email.com": [
+      {
+        "id": "msg_1",
+        "user_email": "casey.wringer@email.com",
+        "coach_id": "coach_1",
+        "content": "Great job on logging your meals consistently this week! I notice you're hitting your protein goals well.",
+        "sent_at": "2024-01-15T14:30:00Z",
+        "is_from_coach": true
+      },
+      {
+        "id": "msg_2",
+        "user_email": "casey.wringer@email.com",
+        "coach_id": "coach_1",
+        "content": "Thanks Emily! I've been trying to include more plant-based protein sources in my meals.",
+        "sent_at": "2024-01-15T15:00:00Z",
+        "is_from_coach": false
+      }
+    ]
+  }
+}

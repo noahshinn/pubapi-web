@@ -1,0 +1,108 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "drivers_license": "C1234567",
+      "license_state": "CA",
+      "insurance_policy": "INS789012",
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242",
+          "expiry_mm": 12,
+          "expiry_yy": 25
+        }
+      ]
+    }
+  },
+  "vehicles": {
+    "v_1": {
+      "id": "v_1",
+      "make": "Toyota",
+      "model": "Camry",
+      "year": 2023,
+      "category": "Sedan",
+      "daily_rate": 45.99,
+      "features": [
+        "Bluetooth",
+        "Backup Camera",
+        "Cruise Control"
+      ]
+    },
+    "v_2": {
+      "id": "v_2",
+      "make": "Honda",
+      "model": "CR-V",
+      "year": 2023,
+      "category": "SUV",
+      "daily_rate": 65.99,
+      "features": [
+        "All-Wheel Drive",
+        "Apple CarPlay",
+        "Lane Departure Warning"
+      ]
+    },
+    "v_3": {
+      "id": "v_3",
+      "make": "Ford",
+      "model": "F-150",
+      "year": 2023,
+      "category": "Truck",
+      "daily_rate": 85.99,
+      "features": [
+        "Tow Package",
+        "Bed Liner",
+        "4x4"
+      ]
+    }
+  },
+  "locations": {
+    "loc_1": {
+      "id": "loc_1",
+      "name": "Enterprise SFO Airport",
+      "address": "780 McDonnell Road",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94128",
+      "hours": "Mon-Sun 6:00 AM - 11:00 PM"
+    },
+    "loc_2": {
+      "id": "loc_2",
+      "name": "Enterprise Downtown SF",
+      "address": "325 Mason Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94102",
+      "hours": "Mon-Fri 7:30 AM - 6:00 PM"
+    }
+  },
+  "reservations": {
+    "res_1": {
+      "id": "res_1",
+      "user_email": "casey.wringer@email.com",
+      "vehicle": {
+        "id": "v_1",
+        "make": "Toyota",
+        "model": "Camry"
+      },
+      "pickup_location": {
+        "id": "loc_1",
+        "name": "Enterprise SFO Airport"
+      },
+      "return_location": {
+        "id": "loc_1",
+        "name": "Enterprise SFO Airport"
+      },
+      "pickup_date": "2024-01-20T10:00:00Z",
+      "return_date": "2024-01-23T10:00:00Z",
+      "status": "confirmed",
+      "total_cost": 137.97,
+      "payment_method": "pm_1",
+      "created_at": "2024-01-15T14:30:00Z",
+      "updated_at": "2024-01-15T14:30:00Z"
+    }
+  }
+}

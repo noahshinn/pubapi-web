@@ -1,0 +1,118 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "address": "789 Tech Avenue, San Francisco, CA 94105",
+      "account_number": "8675309",
+      "internet_plan": "gigabit",
+      "tv_package": "preferred",
+      "account_created": "2023-01-15T00:00:00Z",
+      "payment_method": "cc_1",
+      "auto_pay": true
+    }
+  },
+  "internet_plans": {
+    "performance": {
+      "name": "Performance",
+      "speed": "200 Mbps",
+      "data_limit": 1200,
+      "monthly_cost": 59.99
+    },
+    "blast": {
+      "name": "Blast! Pro",
+      "speed": "400 Mbps",
+      "data_limit": 1200,
+      "monthly_cost": 79.99
+    },
+    "gigabit": {
+      "name": "Gigabit",
+      "speed": "1000 Mbps",
+      "data_limit": 1200,
+      "monthly_cost": 99.99
+    }
+  },
+  "tv_packages": {
+    "basic": {
+      "name": "Basic",
+      "channels": 140,
+      "features": ["Local channels", "Limited cable networks"],
+      "monthly_cost": 30.00
+    },
+    "preferred": {
+      "name": "Preferred",
+      "channels": 220,
+      "features": ["Premium channels", "DVR service", "On-demand content"],
+      "monthly_cost": 89.99
+    }
+  },
+  "watchlists": {
+    "casey.wringer@email.com": [
+      {
+        "id": "w1",
+        "title": "Stranger Things",
+        "type": "show",
+        "added_date": "2024-01-10T15:30:00Z"
+      },
+      {
+        "id": "w2",
+        "title": "The Office",
+        "type": "show",
+        "added_date": "2024-01-12T18:45:00Z"
+      }
+    ]
+  },
+  "usage_history": {
+    "casey.wringer@email.com": [
+      {
+        "start_date": "2024-01-01T00:00:00Z",
+        "end_date": "2024-01-31T23:59:59Z",
+        "data_used": 450.5,
+        "data_limit": 1200.0
+      },
+      {
+        "start_date": "2023-12-01T00:00:00Z",
+        "end_date": "2023-12-31T23:59:59Z",
+        "data_used": 623.8,
+        "data_limit": 1200.0
+      }
+    ]
+  },
+  "billing_history": {
+    "casey.wringer@email.com": [
+      {
+        "id": "bill_1",
+        "date": "2024-01-01T00:00:00Z",
+        "amount": 189.98,
+        "status": "paid",
+        "services": [
+          {
+            "name": "Gigabit Internet",
+            "cost": 99.99
+          },
+          {
+            "name": "Preferred TV Package",
+            "cost": 89.99
+          }
+        ]
+      },
+      {
+        "id": "bill_2",
+        "date": "2023-12-01T00:00:00Z",
+        "amount": 189.98,
+        "status": "paid",
+        "services": [
+          {
+            "name": "Gigabit Internet",
+            "cost": 99.99
+          },
+          {
+            "name": "Preferred TV Package",
+            "cost": 89.99
+          }
+        ]
+      }
+    ]
+  }
+}

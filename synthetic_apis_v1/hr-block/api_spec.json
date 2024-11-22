@@ -1,0 +1,255 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "H&R Block Public API",
+    "version": "1.0.0",
+    "description": "API for tax preparation and filing services"
+  },
+  "paths": {
+    "/api/v1/tax-returns": {
+      "get": {
+        "summary": "Get user's tax returns history",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of tax returns",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TaxReturn"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Start new tax return",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTaxReturn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Tax return created"
+          }
+        }
+      }
+    },
+    "/api/v1/tax-returns/{returnId}": {
+      "get": {
+        "summary": "Get tax return details",
+        "parameters": [
+          {
+            "name": "returnId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tax return details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaxReturn"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/documents": {
+      "get": {
+        "summary": "Get user's tax documents",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of tax documents",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TaxDocument"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Upload tax document",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "tax_year": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Document uploaded"
+          }
+        }
+      }
+    },
+    "/api/v1/appointments": {
+      "get": {
+        "summary": "Get tax professional appointments",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of appointments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Schedule new appointment",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAppointment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Appointment scheduled"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TaxReturn": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "tax_year": {"type": "integer"},
+          "status": {"type": "string"},
+          "filing_type": {"type": "string"},
+          "total_income": {"type": "number"},
+          "total_deductions": {"type": "number"},
+          "total_tax": {"type": "number"},
+          "refund_amount": {"type": "number"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "NewTaxReturn": {
+        "type": "object",
+        "properties": {
+          "tax_year": {"type": "integer"},
+          "filing_type": {"type": "string"},
+          "user_email": {"type": "string"}
+        }
+      },
+      "TaxDocument": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string"},
+          "tax_year": {"type": "integer"},
+          "file_name": {"type": "string"},
+          "uploaded_at": {"type": "string"}
+        }
+      },
+      "Appointment": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "tax_professional": {
+            "type": "object",
+            "properties": {
+              "id": {"type": "string"},
+              "name": {"type": "string"},
+              "expertise": {"type": "string"}
+            }
+          },
+          "datetime": {"type": "string"},
+          "type": {"type": "string"},
+          "status": {"type": "string"}
+        }
+      },
+      "NewAppointment": {
+        "type": "object",
+        "properties": {
+          "tax_professional_id": {"type": "string"},
+          "datetime": {"type": "string"},
+          "type": {"type": "string"},
+          "user_email": {"type": "string"}
+        }
+      }
+    }
+  }
+}

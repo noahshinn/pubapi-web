@@ -1,0 +1,88 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "prime_member": true,
+      "address": "789 Tech Avenue, San Francisco, CA 94105",
+      "payment_methods": [
+        "pm_1"
+      ],
+      "join_date": "2023-01-15T00:00:00Z"
+    }
+  },
+  "products": {
+    "prod_1": {
+      "id": "prod_1",
+      "name": "Wireless Noise-Cancelling Headphones",
+      "description": "Premium wireless headphones with active noise cancellation",
+      "price": 299.99,
+      "category": "Electronics",
+      "rating": 4.7,
+      "reviews_count": 1250,
+      "in_stock": true,
+      "prime_eligible": true
+    },
+    "prod_2": {
+      "id": "prod_2",
+      "name": "Smart Watch Series 5",
+      "description": "Advanced fitness tracking and health monitoring",
+      "price": 399.99,
+      "category": "Electronics",
+      "rating": 4.8,
+      "reviews_count": 2300,
+      "in_stock": true,
+      "prime_eligible": true
+    },
+    "prod_3": {
+      "id": "prod_3",
+      "name": "Organic Green Tea - 100 Bags",
+      "description": "Premium organic green tea from Japan",
+      "price": 24.99,
+      "category": "Grocery",
+      "rating": 4.5,
+      "reviews_count": 850,
+      "in_stock": true,
+      "prime_eligible": true
+    }
+  },
+  "carts": {
+    "casey.wringer@email.com": {
+      "user_email": "casey.wringer@email.com",
+      "items": [
+        {
+          "product_id": "prod_1",
+          "quantity": 1,
+          "price": 299.99
+        }
+      ],
+      "subtotal": 299.99,
+      "shipping": 0,
+      "tax": 24.75,
+      "total": 324.74,
+      "updated_at": "2024-01-16T10:30:00Z"
+    }
+  },
+  "orders": {
+    "ord_1": {
+      "id": "ord_1",
+      "user_email": "casey.wringer@email.com",
+      "items": [
+        {
+          "product_id": "prod_2",
+          "quantity": 1,
+          "price": 399.99
+        }
+      ],
+      "status": "delivered",
+      "shipping_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "payment_method": "pm_1",
+      "subtotal": 399.99,
+      "shipping": 0,
+      "tax": 33.00,
+      "total": 432.99,
+      "created_at": "2024-01-10T15:30:00Z",
+      "updated_at": "2024-01-12T14:20:00Z"
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "membership": {
+        "plan": "premium",
+        "credits_remaining": 45,
+        "credits_reset_date": "2024-02-01T00:00:00Z",
+        "active": true,
+        "start_date": "2023-07-01T00:00:00Z",
+        "next_billing_date": "2024-02-01T00:00:00Z"
+      }
+    }
+  },
+  "studios": {
+    "studio_1": {
+      "id": "studio_1",
+      "name": "YogaFlow SF",
+      "categories": ["yoga", "meditation"],
+      "rating": 4.8,
+      "location": {
+        "address": "123 Market Street",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94105",
+        "latitude": 37.7929,
+        "longitude": -122.3971
+      },
+      "description": "Premium yoga studio in the heart of SF",
+      "amenities": ["showers", "lockers", "mats"]
+    },
+    "studio_2": {
+      "id": "studio_2",
+      "name": "CycleBeat",
+      "categories": ["cycling", "hiit"],
+      "rating": 4.7,
+      "location": {
+        "address": "456 Mission Street",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94105",
+        "latitude": 37.7876,
+        "longitude": -122.3999
+      },
+      "description": "High-energy cycling studio",
+      "amenities": ["showers", "lockers", "shoes"]
+    }
+  },
+  "instructors": {
+    "inst_1": {
+      "id": "inst_1",
+      "name": "Maya Rodriguez",
+      "bio": "500-hour certified yoga instructor",
+      "specialties": ["vinyasa", "meditation"],
+      "image_url": "https://example.com/maya.jpg"
+    },
+    "inst_2": {
+      "id": "inst_2",
+      "name": "James Wringer",
+      "bio": "Former professional cyclist",
+      "specialties": ["cycling", "hiit"],
+      "image_url": "https://example.com/james.jpg"
+    }
+  },
+  "classes": {
+    "class_1": {
+      "id": "class_1",
+      "studio_id": "studio_1",
+      "name": "Morning Flow",
+      "description": "Energizing vinyasa flow",
+      "instructor": {
+        "id": "inst_1",
+        "name": "Maya Rodriguez"
+      },
+      "category": "yoga",
+      "start_time": "2024-01-17T08:00:00Z",
+      "duration": 60,
+      "spots_total": 20,
+      "spots_available": 12,
+      "credits_required": 2
+    },
+    "class_2": {
+      "id": "class_2",
+      "studio_id": "studio_2",
+      "name": "Power Cycle",
+      "description": "High-intensity cycling class",
+      "instructor": {
+        "id": "inst_2",
+        "name": "James Wringer"
+      },
+      "category": "cycling",
+      "start_time": "2024-01-17T17:30:00Z",
+      "duration": 45,
+      "spots_total": 30,
+      "spots_available": 8,
+      "credits_required": 3
+    }
+  },
+  "bookings": {
+    "booking_1": {
+      "id": "booking_1",
+      "user_email": "casey.wringer@email.com",
+      "class": {
+        "id": "class_1",
+        "name": "Morning Flow",
+        "start_time": "2024-01-17T08:00:00Z"
+      },
+      "status": "confirmed",
+      "credits_used": 2,
+      "booked_at": "2024-01-15T10:00:00Z"
+    }
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Audible Public API",
+    "version": "1.0.0",
+    "description": "API for audiobook service"
+  },
+  "paths": {
+    "/api/v1/books": {
+      "get": {
+        "summary": "Get audiobooks catalog",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of audiobooks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/library": {
+      "get": {
+        "summary": "Get user's library",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's audiobook library",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LibraryBook"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/books/{bookId}/purchase": {
+      "post": {
+        "summary": "Purchase a book",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Purchase successful"
+          }
+        }
+      }
+    },
+    "/api/v1/progress": {
+      "post": {
+        "summary": "Update listening progress",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Progress updated successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/recommendations": {
+      "get": {
+        "summary": "Get personalized recommendations",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of recommended books",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Book": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "author": {"type": "string"},
+          "narrator": {"type": "string"},
+          "duration": {"type": "integer"},
+          "rating": {"type": "number"},
+          "price": {"type": "number"},
+          "summary": {"type": "string"},
+          "categories": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "LibraryBook": {
+        "type": "object",
+        "properties": {
+          "book": {"$ref": "#/components/schemas/Book"},
+          "progress": {"type": "integer"},
+          "purchaseDate": {"type": "string"},
+          "lastListened": {"type": "string"}
+        }
+      },
+      "PurchaseRequest": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "paymentMethodId": {"type": "string"}
+        }
+      },
+      "ProgressUpdate": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "bookId": {"type": "string"},
+          "progress": {"type": "integer"}
+        }
+      }
+    }
+  }
+}

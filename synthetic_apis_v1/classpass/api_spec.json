@@ -1,0 +1,252 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ClassPass Public API",
+    "version": "1.0.0",
+    "description": "API for fitness class booking platform"
+  },
+  "paths": {
+    "/api/v1/studios": {
+      "get": {
+        "summary": "Get nearby fitness studios",
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["yoga", "pilates", "hiit", "cycling", "strength", "dance"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of studios",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Studio"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/classes": {
+      "get": {
+        "summary": "Get available classes",
+        "parameters": [
+          {
+            "name": "studio_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of classes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Class"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bookings": {
+      "get": {
+        "summary": "Get user's bookings",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of bookings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Booking"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Book a class",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Booking confirmed"
+          }
+        }
+      }
+    },
+    "/api/v1/bookings/{bookingId}/cancel": {
+      "post": {
+        "summary": "Cancel a booking",
+        "parameters": [
+          {
+            "name": "bookingId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Booking cancelled"
+          }
+        }
+      }
+    },
+    "/api/v1/membership": {
+      "get": {
+        "summary": "Get user's membership details",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Membership details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Membership"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Studio": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "categories": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "rating": {"type": "number"},
+          "address": {"type": "string"},
+          "latitude": {"type": "number"},
+          "longitude": {"type": "number"}
+        }
+      },
+      "Class": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "studio_id": {"type": "string"},
+          "name": {"type": "string"},
+          "instructor": {"type": "string"},
+          "category": {"type": "string"},
+          "start_time": {"type": "string"},
+          "duration": {"type": "integer"},
+          "spots_available": {"type": "integer"},
+          "credits_required": {"type": "integer"}
+        }
+      },
+      "Booking": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "class": {"$ref": "#/components/schemas/Class"},
+          "status": {"type": "string"},
+          "credits_used": {"type": "integer"},
+          "booked_at": {"type": "string"}
+        }
+      },
+      "BookingRequest": {
+        "type": "object",
+        "properties": {
+          "class_id": {"type": "string"},
+          "user_email": {"type": "string"}
+        }
+      },
+      "Membership": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "plan": {"type": "string"},
+          "credits_remaining": {"type": "integer"},
+          "credits_reset_date": {"type": "string"},
+          "active": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}

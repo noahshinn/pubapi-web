@@ -1,0 +1,257 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Fandango Public API",
+    "version": "1.0.0",
+    "description": "API for movie tickets and cinema information"
+  },
+  "paths": {
+    "/api/v1/movies": {
+      "get": {
+        "summary": "Get currently showing movies",
+        "parameters": [
+          {
+            "name": "zipCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Movie"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/theaters": {
+      "get": {
+        "summary": "Get nearby theaters",
+        "parameters": [
+          {
+            "name": "zipCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of theaters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Theater"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/showtimes": {
+      "get": {
+        "summary": "Get movie showtimes",
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "theaterId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of showtimes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Showtime"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tickets": {
+      "post": {
+        "summary": "Purchase tickets",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TicketPurchase"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Ticket purchase successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ticket"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tickets/{email}": {
+      "get": {
+        "summary": "Get user's tickets",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of user's tickets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ticket"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Movie": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "rating": {"type": "string"},
+          "duration": {"type": "integer"},
+          "genre": {"type": "string"},
+          "synopsis": {"type": "string"},
+          "posterUrl": {"type": "string"},
+          "trailerUrl": {"type": "string"},
+          "releaseDate": {"type": "string", "format": "date"}
+        }
+      },
+      "Theater": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "address": {"type": "string"},
+          "city": {"type": "string"},
+          "state": {"type": "string"},
+          "zipCode": {"type": "string"},
+          "amenities": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "Showtime": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "movieId": {"type": "string"},
+          "theaterId": {"type": "string"},
+          "datetime": {"type": "string", "format": "date-time"},
+          "screenNumber": {"type": "integer"},
+          "availableSeats": {"type": "integer"},
+          "price": {"type": "number"}
+        }
+      },
+      "TicketPurchase": {
+        "type": "object",
+        "properties": {
+          "showtimeId": {"type": "string"},
+          "email": {"type": "string"},
+          "quantity": {"type": "integer"},
+          "seatNumbers": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "paymentMethod": {"type": "string"}
+        }
+      },
+      "Ticket": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "movie": {"$ref": "#/components/schemas/Movie"},
+          "theater": {"$ref": "#/components/schemas/Theater"},
+          "showtime": {"$ref": "#/components/schemas/Showtime"},
+          "seatNumbers": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "purchaseDate": {"type": "string", "format": "date-time"},
+          "totalPrice": {"type": "number"},
+          "qrCode": {"type": "string"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "enrolled_courses": {
+        "course_1": "2024-01-01T00:00:00Z",
+        "course_2": "2024-01-10T00:00:00Z"
+      },
+      "preferences": ["Cooking", "Business", "Technology"]
+    }
+  },
+  "courses": {
+    "course_1": {
+      "id": "course_1",
+      "title": "The Art of Home Cooking",
+      "instructor": "Gordon Ramsay",
+      "category": "Cooking",
+      "description": "Master the fundamentals of home cooking with world-renowned chef Gordon Ramsay",
+      "duration": 720,
+      "lessons": [
+        {
+          "id": "lesson_1_1",
+          "title": "Kitwringer Setup and Essential Tools",
+          "duration": 45,
+          "description": "Learn about the essential tools and equipment needed for a home kitwringer",
+          "video_url": "https://masterclass.com/videos/kitwringer-setup",
+          "resources": ["Kitwringer Equipment Guide", "Shopping List"]
+        },
+        {
+          "id": "lesson_1_2",
+          "title": "Knife Skills",
+          "duration": 60,
+          "description": "Master the basic knife skills needed for efficient cooking",
+          "video_url": "https://masterclass.com/videos/knife-skills",
+          "resources": ["Knife Techniques PDF", "Practice Exercises"]
+        }
+      ],
+      "price": 99.99,
+      "rating": 4.8,
+      "students": 15000,
+      "created_at": "2023-06-15T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    },
+    "course_2": {
+      "id": "course_2",
+      "title": "Business Strategy and Leadership",
+      "instructor": "Howard Schultz",
+      "category": "Business",
+      "description": "Learn business strategy and leadership from former Starbucks CEO",
+      "duration": 660,
+      "lessons": [
+        {
+          "id": "lesson_2_1",
+          "title": "Building a Vision",
+          "duration": 55,
+          "description": "Learn how to create and communicate a compelling business vision",
+          "video_url": "https://masterclass.com/videos/building-vision",
+          "resources": ["Vision Statement Template", "Case Studies"]
+        },
+        {
+          "id": "lesson_2_2",
+          "title": "Leading with Purpose",
+          "duration": 50,
+          "description": "Discover how to lead with purpose and inspire teams",
+          "video_url": "https://masterclass.com/videos/leading-purpose",
+          "resources": ["Leadership Framework", "Team Exercise Guide"]
+        }
+      ],
+      "price": 99.99,
+      "rating": 4.7,
+      "students": 12000,
+      "created_at": "2023-08-01T00:00:00Z",
+      "updated_at": "2024-01-05T00:00:00Z"
+    }
+  },
+  "course_progress": {
+    "casey.wringer@email.com": {
+      "course_1": {
+        "user_email": "casey.wringer@email.com",
+        "course_id": "course_1",
+        "completed_lessons": ["lesson_1_1"],
+        "progress": 50.0,
+        "last_accessed": "2024-01-15T10:30:00Z"
+      },
+      "course_2": {
+        "user_email": "casey.wringer@email.com",
+        "course_id": "course_2",
+        "completed_lessons": [],
+        "progress": 0.0,
+        "last_accessed": "2024-01-10T15:45:00Z"
+      }
+    }
+  }
+}

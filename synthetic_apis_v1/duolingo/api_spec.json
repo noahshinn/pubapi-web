@@ -1,0 +1,219 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Duolingo Public API",
+    "version": "1.0.0",
+    "description": "API for language learning platform"
+  },
+  "paths": {
+    "/api/v1/profile": {
+      "get": {
+        "summary": "Get user profile and learning progress",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User profile with learning stats",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserProfile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/courses": {
+      "get": {
+        "summary": "Get available language courses",
+        "parameters": [
+          {
+            "name": "from_language",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of available courses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Course"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lessons": {
+      "get": {
+        "summary": "Get available lessons for a course",
+        "parameters": [
+          {
+            "name": "course_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of lessons",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Lesson"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/progress": {
+      "post": {
+        "summary": "Submit lesson progress",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LessonProgress"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Progress recorded successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/streaks": {
+      "get": {
+        "summary": "Get user's streak information",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's streak information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Streak"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserProfile": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "username": {"type": "string"},
+          "total_xp": {"type": "integer"},
+          "current_streak": {"type": "integer"},
+          "longest_streak": {"type": "integer"},
+          "learning_languages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LanguageProgress"
+            }
+          }
+        }
+      },
+      "LanguageProgress": {
+        "type": "object",
+        "properties": {
+          "language": {"type": "string"},
+          "level": {"type": "integer"},
+          "xp": {"type": "integer"},
+          "fluency_score": {"type": "integer"}
+        }
+      },
+      "Course": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "language": {"type": "string"},
+          "from_language": {"type": "string"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "difficulty": {"type": "string"},
+          "total_units": {"type": "integer"}
+        }
+      },
+      "Lesson": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "course_id": {"type": "string"},
+          "unit": {"type": "integer"},
+          "title": {"type": "string"},
+          "type": {"type": "string"},
+          "xp_reward": {"type": "integer"},
+          "skills": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "LessonProgress": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "lesson_id": {"type": "string"},
+          "score": {"type": "integer"},
+          "mistakes": {"type": "integer"},
+          "completed": {"type": "boolean"}
+        }
+      },
+      "Streak": {
+        "type": "object",
+        "properties": {
+          "current_streak": {"type": "integer"},
+          "longest_streak": {"type": "integer"},
+          "last_practice_date": {"type": "string"},
+          "freeze_remaining": {"type": "integer"}
+        }
+      }
+    }
+  }
+}

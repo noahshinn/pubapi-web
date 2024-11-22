@@ -1,0 +1,234 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "GoodRx Public API",
+    "version": "1.0.0",
+    "description": "API for prescription drug prices and pharmacy services"
+  },
+  "paths": {
+    "/api/v1/drugs/search": {
+      "get": {
+        "summary": "Search for medications",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "zipCode",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of matching medications",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Drug"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/drugs/{drugId}/prices": {
+      "get": {
+        "summary": "Get prices for specific medication",
+        "parameters": [
+          {
+            "name": "drugId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "zipCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of prices at different pharmacies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DrugPrice"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/prescriptions": {
+      "get": {
+        "summary": "Get user's prescriptions",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of user's prescriptions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Prescription"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new prescription",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPrescription"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Prescription added successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/coupons/{drugId}": {
+      "get": {
+        "summary": "Get discount coupon for medication",
+        "parameters": [
+          {
+            "name": "drugId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pharmacyId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Discount coupon details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Coupon"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Drug": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "genericName": {"type": "string"},
+          "form": {"type": "string"},
+          "strength": {"type": "string"},
+          "manufacturer": {"type": "string"}
+        }
+      },
+      "DrugPrice": {
+        "type": "object",
+        "properties": {
+          "pharmacy": {"$ref": "#/components/schemas/Pharmacy"},
+          "price": {"type": "number"},
+          "quantity": {"type": "integer"},
+          "discountAvailable": {"type": "boolean"}
+        }
+      },
+      "Pharmacy": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "address": {"type": "string"},
+          "phone": {"type": "string"},
+          "hours": {"type": "string"}
+        }
+      },
+      "Prescription": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "drug": {"$ref": "#/components/schemas/Drug"},
+          "prescriber": {"type": "string"},
+          "quantity": {"type": "integer"},
+          "refills": {"type": "integer"},
+          "expirationDate": {"type": "string"}
+        }
+      },
+      "NewPrescription": {
+        "type": "object",
+        "properties": {
+          "drugId": {"type": "string"},
+          "prescriber": {"type": "string"},
+          "quantity": {"type": "integer"},
+          "refills": {"type": "integer"},
+          "expirationDate": {"type": "string"}
+        }
+      },
+      "Coupon": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "discountPrice": {"type": "number"},
+          "originalPrice": {"type": "number"},
+          "expirationDate": {"type": "string"},
+          "barcodeData": {"type": "string"}
+        }
+      }
+    }
+  }
+}

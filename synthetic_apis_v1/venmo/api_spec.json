@@ -1,0 +1,167 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Venmo Public API",
+    "version": "1.0.0",
+    "description": "API for peer-to-peer payment service"
+  },
+  "paths": {
+    "/api/v1/transactions": {
+      "get": {
+        "summary": "Get user's transactions",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of transactions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Transaction"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new transaction",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTransaction"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Transaction created"
+          }
+        }
+      }
+    },
+    "/api/v1/balance": {
+      "get": {
+        "summary": "Get user's balance",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's balance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Balance"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/friends": {
+      "get": {
+        "summary": "Get user's friends",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of friends",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "name": {"type": "string"},
+          "username": {"type": "string"},
+          "profile_picture": {"type": "string"}
+        }
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "sender": {"$ref": "#/components/schemas/User"},
+          "recipient": {"$ref": "#/components/schemas/User"},
+          "amount": {"type": "number"},
+          "note": {"type": "string"},
+          "visibility": {"type": "string"},
+          "created_at": {"type": "string"},
+          "status": {"type": "string"}
+        }
+      },
+      "NewTransaction": {
+        "type": "object",
+        "properties": {
+          "sender_email": {"type": "string"},
+          "recipient_email": {"type": "string"},
+          "amount": {"type": "number"},
+          "note": {"type": "string"},
+          "visibility": {"type": "string"}
+        },
+        "required": ["sender_email", "recipient_email", "amount"]
+      },
+      "Balance": {
+        "type": "object",
+        "properties": {
+          "available": {"type": "number"},
+          "pending": {"type": "number"}
+        }
+      }
+    }
+  }
+}

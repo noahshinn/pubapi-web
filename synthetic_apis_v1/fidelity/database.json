@@ -1,0 +1,97 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "accounts": [
+        {
+          "id": "acc_401k",
+          "type": "401(k)",
+          "name": "Company 401(k)",
+          "balance": 158750.23,
+          "positions": [
+            {
+              "symbol": "VFIAX",
+              "quantity": 250.45,
+              "current_price": 445.82,
+              "market_value": 111654.20,
+              "cost_basis": 98500.00,
+              "gain_loss": 13154.20,
+              "gain_loss_percent": 13.35
+            },
+            {
+              "symbol": "VBTLX",
+              "quantity": 450.75,
+              "current_price": 104.65,
+              "market_value": 47096.03,
+              "cost_basis": 45075.00,
+              "gain_loss": 2021.03,
+              "gain_loss_percent": 4.48
+            }
+          ]
+        },
+        {
+          "id": "acc_roth",
+          "type": "Roth IRA",
+          "name": "Roth IRA",
+          "balance": 42500.89,
+          "positions": [
+            {
+              "symbol": "VTI",
+              "quantity": 125.35,
+              "current_price": 239.45,
+              "market_value": 30015.11,
+              "cost_basis": 25070.00,
+              "gain_loss": 4945.11,
+              "gain_loss_percent": 19.73
+            },
+            {
+              "symbol": "VXUS",
+              "quantity": 85.20,
+              "current_price": 146.78,
+              "market_value": 12485.78,
+              "cost_basis": 11500.00,
+              "gain_loss": 985.78,
+              "gain_loss_percent": 8.57
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "transactions": {
+    "tx_1": {
+      "id": "tx_1",
+      "account_id": "acc_401k",
+      "type": "BUY",
+      "symbol": "VFIAX",
+      "quantity": 50.45,
+      "price": 435.82,
+      "amount": 21987.11,
+      "date": "2024-01-02T15:30:00Z"
+    },
+    "tx_2": {
+      "id": "tx_2",
+      "account_id": "acc_roth",
+      "type": "BUY",
+      "symbol": "VTI",
+      "quantity": 25.35,
+      "price": 235.45,
+      "amount": 5968.66,
+      "date": "2024-01-10T14:15:00Z"
+    }
+  },
+  "trade_orders": {
+    "order_1": {
+      "id": "order_1",
+      "account_id": "acc_401k",
+      "symbol": "VFIAX",
+      "order_type": "MARKET",
+      "quantity": 50.45,
+      "price": 435.82,
+      "time_in_force": "DAY",
+      "status": "EXECUTED",
+      "created_at": "2024-01-02T15:29:45Z"
+    }
+  }
+}

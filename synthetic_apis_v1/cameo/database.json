@@ -1,0 +1,98 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "profile_picture": "https://example.com/profiles/casey.jpg",
+      "registered_at": "2023-06-15T00:00:00Z",
+      "favorite_stars": ["celeb_1", "celeb_3"],
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242",
+          "expiry_mm": 12,
+          "expiry_yy": 25,
+          "created_at": "2023-06-15T00:00:00Z"
+        }
+      ]
+    }
+  },
+  "celebrities": {
+    "celeb_1": {
+      "id": "celeb_1",
+      "name": "Tom Wilson",
+      "category": "Actor",
+      "price": 150.00,
+      "rating": 4.8,
+      "response_time": "2-3 days",
+      "bio": "Known for roles in major sci-fi films and TV shows",
+      "profile_image": "https://example.com/celebs/tom.jpg",
+      "sample_videos": [
+        "https://example.com/videos/tom_1.mp4",
+        "https://example.com/videos/tom_2.mp4"
+      ],
+      "is_available": true
+    },
+    "celeb_2": {
+      "id": "celeb_2",
+      "name": "Jessica Martinez",
+      "category": "Musician",
+      "price": 200.00,
+      "rating": 4.9,
+      "response_time": "1-2 days",
+      "bio": "Grammy-nominated singer-songwriter",
+      "profile_image": "https://example.com/celebs/jessica.jpg",
+      "sample_videos": [
+        "https://example.com/videos/jessica_1.mp4",
+        "https://example.com/videos/jessica_2.mp4"
+      ],
+      "is_available": true
+    },
+    "celeb_3": {
+      "id": "celeb_3",
+      "name": "Mike Chang",
+      "category": "Athlete",
+      "price": 175.00,
+      "rating": 4.7,
+      "response_time": "3-4 days",
+      "bio": "Olympic gold medalist and fitness influencer",
+      "profile_image": "https://example.com/celebs/mike.jpg",
+      "sample_videos": [
+        "https://example.com/videos/mike_1.mp4",
+        "https://example.com/videos/mike_2.mp4"
+      ],
+      "is_available": true
+    }
+  },
+  "bookings": {
+    "book_1": {
+      "id": "book_1",
+      "celebrity": {
+        "id": "celeb_1",
+        "name": "Tom Wilson"
+      },
+      "user_email": "casey.wringer@email.com",
+      "occasion": "Birthday",
+      "recipient_name": "David Wringer",
+      "instructions": "Please wish my brother David a happy 30th birthday! He's a huge fan of your sci-fi work.",
+      "status": "completed",
+      "video_url": "https://example.com/videos/booking_1.mp4",
+      "created_at": "2024-01-10T14:30:00Z",
+      "completed_at": "2024-01-12T16:45:00Z"
+    },
+    "book_2": {
+      "id": "book_2",
+      "celebrity": {
+        "id": "celeb_3",
+        "name": "Mike Chang"
+      },
+      "user_email": "casey.wringer@email.com",
+      "occasion": "Graduation",
+      "recipient_name": "Emily Wong",
+      "instructions": "Congratulate Emily on graduating medical school! She's been following your fitness journey for years.",
+      "status": "pending",
+      "created_at": "2024-01-15T09:15:00Z"
+    }
+  }
+}

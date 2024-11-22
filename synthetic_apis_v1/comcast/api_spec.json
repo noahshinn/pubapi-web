@@ -1,0 +1,228 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Comcast Public API",
+    "version": "1.0.0",
+    "description": "API for Comcast internet and TV services"
+  },
+  "paths": {
+    "/api/v1/account/services": {
+      "get": {
+        "summary": "Get user's subscribed services",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of subscribed services",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Services"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/account/usage": {
+      "get": {
+        "summary": "Get internet usage statistics",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Internet usage details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternetUsage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tv/watchlist": {
+      "get": {
+        "summary": "Get user's TV watchlist",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's watchlist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WatchlistItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add item to watchlist",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddWatchlistItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Item added to watchlist"
+          }
+        }
+      }
+    },
+    "/api/v1/billing/history": {
+      "get": {
+        "summary": "Get billing history",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Billing history",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BillingRecord"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Services": {
+        "type": "object",
+        "properties": {
+          "internet": {
+            "type": "object",
+            "properties": {
+              "plan": {"type": "string"},
+              "speed": {"type": "string"},
+              "monthly_cost": {"type": "number"}
+            }
+          },
+          "tv": {
+            "type": "object",
+            "properties": {
+              "package": {"type": "string"},
+              "channels": {"type": "integer"},
+              "monthly_cost": {"type": "number"}
+            }
+          },
+          "total_monthly_cost": {"type": "number"}
+        }
+      },
+      "InternetUsage": {
+        "type": "object",
+        "properties": {
+          "current_period": {
+            "type": "object",
+            "properties": {
+              "start_date": {"type": "string"},
+              "end_date": {"type": "string"},
+              "data_used": {"type": "number"},
+              "data_limit": {"type": "number"}
+            }
+          },
+          "previous_periods": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "month": {"type": "string"},
+                "data_used": {"type": "number"}
+              }
+            }
+          }
+        }
+      },
+      "WatchlistItem": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "type": {"type": "string"},
+          "added_date": {"type": "string"}
+        }
+      },
+      "AddWatchlistItem": {
+        "type": "object",
+        "properties": {
+          "content_id": {"type": "string"},
+          "user_email": {"type": "string"}
+        },
+        "required": ["content_id", "user_email"]
+      },
+      "BillingRecord": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "date": {"type": "string"},
+          "amount": {"type": "number"},
+          "status": {"type": "string"},
+          "services": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {"type": "string"},
+                "cost": {"type": "number"}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

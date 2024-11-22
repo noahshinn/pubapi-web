@@ -1,0 +1,146 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "address": {
+        "street": "789 Tech Avenue",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94105",
+        "country": "USA"
+      },
+      "rewards": {
+        "tier": "gold",
+        "points": 50000,
+        "nights_this_year": 25,
+        "benefits": [
+          "Room upgrades",
+          "Late checkout",
+          "Executive lounge access",
+          "Bonus points on stays"
+        ],
+        "join_date": "2022-03-15T00:00:00Z"
+      }
+    }
+  },
+  "hotels": {
+    "sf_hilton": {
+      "id": "sf_hilton",
+      "name": "Hilton San Francisco Union Square",
+      "address": {
+        "street": "333 O'Farrell Street",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94102",
+        "country": "USA",
+        "latitude": 37.7859,
+        "longitude": -122.4097
+      },
+      "rating": 4.5,
+      "amenities": [
+        "Pool",
+        "Fitness Center",
+        "Restaurant",
+        "Business Center",
+        "Spa",
+        "Room Service"
+      ],
+      "rooms": [
+        {
+          "type": "standard",
+          "price": 299.99,
+          "beds": "1 King",
+          "max_occupancy": 2,
+          "description": "City view, 300 sq ft"
+        },
+        {
+          "type": "deluxe",
+          "price": 399.99,
+          "beds": "2 Queen",
+          "max_occupancy": 4,
+          "description": "Bay view, 400 sq ft"
+        },
+        {
+          "type": "suite",
+          "price": 599.99,
+          "beds": "1 King",
+          "max_occupancy": 3,
+          "description": "Luxury suite, 600 sq ft"
+        }
+      ]
+    },
+    "ny_hilton": {
+      "id": "ny_hilton",
+      "name": "New York Hilton Midtown",
+      "address": {
+        "street": "1335 Avenue of the Americas",
+        "city": "New York",
+        "state": "NY",
+        "zip_code": "10019",
+        "country": "USA",
+        "latitude": 40.7622,
+        "longitude": -73.9779
+      },
+      "rating": 4.7,
+      "amenities": [
+        "Fitness Center",
+        "Restaurant",
+        "Business Center",
+        "Executive Lounge",
+        "Room Service"
+      ],
+      "rooms": [
+        {
+          "type": "standard",
+          "price": 349.99,
+          "beds": "1 King",
+          "max_occupancy": 2,
+          "description": "City view, 320 sq ft"
+        },
+        {
+          "type": "executive",
+          "price": 449.99,
+          "beds": "2 Queen",
+          "max_occupancy": 4,
+          "description": "Executive floor, 400 sq ft"
+        }
+      ]
+    }
+  },
+  "bookings": {
+    "book_1": {
+      "id": "book_1",
+      "user_email": "casey.wringer@email.com",
+      "hotel": {
+        "id": "sf_hilton",
+        "name": "Hilton San Francisco Union Square"
+      },
+      "room_type": "deluxe",
+      "check_in": "2024-02-15T15:00:00Z",
+      "check_out": "2024-02-18T11:00:00Z",
+      "guests": 2,
+      "status": "confirmed",
+      "total_price": 1199.97,
+      "created_at": "2024-01-10T08:30:00Z",
+      "updated_at": "2024-01-10T08:30:00Z"
+    },
+    "book_2": {
+      "id": "book_2",
+      "user_email": "casey.wringer@email.com",
+      "hotel": {
+        "id": "ny_hilton",
+        "name": "New York Hilton Midtown"
+      },
+      "room_type": "executive",
+      "check_in": "2024-03-20T15:00:00Z",
+      "check_out": "2024-03-25T11:00:00Z",
+      "guests": 3,
+      "status": "confirmed",
+      "total_price": 2249.95,
+      "created_at": "2024-01-15T14:45:00Z",
+      "updated_at": "2024-01-15T14:45:00Z"
+    }
+  }
+}

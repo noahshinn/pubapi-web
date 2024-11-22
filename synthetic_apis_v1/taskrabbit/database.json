@@ -1,0 +1,107 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "location": {
+        "address": "789 Tech Avenue, San Francisco, CA 94105",
+        "latitude": 37.7849,
+        "longitude": -122.3968
+      },
+      "joined_at": "2023-01-15T00:00:00Z"
+    }
+  },
+  "categories": {
+    "cat_1": {
+      "id": "cat_1",
+      "name": "Furniture Assembly",
+      "description": "Assembly of furniture items",
+      "base_rate": 35.00
+    },
+    "cat_2": {
+      "id": "cat_2",
+      "name": "Moving Help",
+      "description": "Assistance with moving items",
+      "base_rate": 40.00
+    },
+    "cat_3": {
+      "id": "cat_3",
+      "name": "Mounting",
+      "description": "TV and art mounting services",
+      "base_rate": 45.00
+    }
+  },
+  "taskers": {
+    "tasker_1": {
+      "id": "tasker_1",
+      "name": "John Smith",
+      "categories": ["cat_1", "cat_2"],
+      "hourly_rate": 45.00,
+      "rating": 4.9,
+      "reviews_count": 127,
+      "completed_tasks": 156,
+      "location": {
+        "latitude": 37.7855,
+        "longitude": -122.3974
+      },
+      "available": true,
+      "joined_at": "2022-06-15T00:00:00Z"
+    },
+    "tasker_2": {
+      "id": "tasker_2",
+      "name": "Maria Garcia",
+      "categories": ["cat_2", "cat_3"],
+      "hourly_rate": 50.00,
+      "rating": 4.8,
+      "reviews_count": 89,
+      "completed_tasks": 102,
+      "location": {
+        "latitude": 37.7840,
+        "longitude": -122.3960
+      },
+      "available": true,
+      "joined_at": "2022-08-20T00:00:00Z"
+    }
+  },
+  "tasks": {
+    "task_1": {
+      "id": "task_1",
+      "category": "Furniture Assembly",
+      "description": "Assemble IKEA desk and chair",
+      "status": "completed",
+      "client_email": "casey.wringer@email.com",
+      "tasker_id": "tasker_1",
+      "location": {
+        "address": "789 Tech Avenue, San Francisco, CA 94105",
+        "latitude": 37.7849,
+        "longitude": -122.3968
+      },
+      "scheduled_time": "2024-01-10T14:00:00Z",
+      "estimated_hours": 2.5,
+      "hourly_rate": 45.00,
+      "total_cost": 112.50,
+      "created_at": "2024-01-08T10:00:00Z",
+      "updated_at": "2024-01-10T16:30:00Z"
+    },
+    "task_2": {
+      "id": "task_2",
+      "category": "Mounting",
+      "description": "Mount 65\" TV on living room wall",
+      "status": "pending",
+      "client_email": "casey.wringer@email.com",
+      "tasker_id": "tasker_2",
+      "location": {
+        "address": "789 Tech Avenue, San Francisco, CA 94105",
+        "latitude": 37.7849,
+        "longitude": -122.3968
+      },
+      "scheduled_time": "2024-01-20T15:00:00Z",
+      "estimated_hours": 1.5,
+      "hourly_rate": 50.00,
+      "total_cost": 75.00,
+      "created_at": "2024-01-15T09:00:00Z",
+      "updated_at": "2024-01-15T09:00:00Z"
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "subscription_end": "2024-12-31T23:59:59Z",
+      "library": [
+        {
+          "book": {
+            "id": "book1",
+            "title": "The Midnight Library",
+            "author": "Matt Haig",
+            "description": "Between life and death there is a library...",
+            "genre": "Fiction",
+            "rating": 4.5,
+            "page_count": 304,
+            "published_date": "2020-08-13T00:00:00Z"
+          },
+          "added_date": "2024-01-01T10:00:00Z",
+          "reading_progress": 75,
+          "last_read": "2024-01-15T20:30:00Z"
+        },
+        {
+          "book": {
+            "id": "book2",
+            "title": "Atomic Habits",
+            "author": "James Clear",
+            "description": "An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+            "genre": "Self-Help",
+            "rating": 4.8,
+            "page_count": 320,
+            "published_date": "2018-10-16T00:00:00Z"
+          },
+          "added_date": "2024-01-05T15:20:00Z",
+          "reading_progress": 30,
+          "last_read": "2024-01-16T08:45:00Z"
+        }
+      ],
+      "reading_history": [
+        {
+          "email": "casey.wringer@email.com",
+          "book_id": "book1",
+          "progress": 75,
+          "timestamp": "2024-01-15T20:30:00Z"
+        },
+        {
+          "email": "casey.wringer@email.com",
+          "book_id": "book2",
+          "progress": 30,
+          "timestamp": "2024-01-16T08:45:00Z"
+        }
+      ]
+    }
+  },
+  "books": {
+    "book1": {
+      "id": "book1",
+      "title": "The Midnight Library",
+      "author": "Matt Haig",
+      "description": "Between life and death there is a library...",
+      "genre": "Fiction",
+      "rating": 4.5,
+      "page_count": 304,
+      "published_date": "2020-08-13T00:00:00Z"
+    },
+    "book2": {
+      "id": "book2",
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "description": "An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+      "genre": "Self-Help",
+      "rating": 4.8,
+      "page_count": 320,
+      "published_date": "2018-10-16T00:00:00Z"
+    },
+    "book3": {
+      "id": "book3",
+      "title": "Project Hail Mary",
+      "author": "Andy Weir",
+      "description": "A lone astronaut must save humanity from a disaster...",
+      "genre": "Science Fiction",
+      "rating": 4.9,
+      "page_count": 496,
+      "published_date": "2021-05-04T00:00:00Z"
+    },
+    "book4": {
+      "id": "book4",
+      "title": "The Psychology of Money",
+      "author": "Morgan Housel",
+      "description": "Timeless lessons on wealth, greed, and happiness",
+      "genre": "Finance",
+      "rating": 4.7,
+      "page_count": 256,
+      "published_date": "2020-09-08T00:00:00Z"
+    }
+  }
+}

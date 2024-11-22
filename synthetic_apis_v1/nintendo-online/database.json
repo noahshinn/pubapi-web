@@ -1,0 +1,83 @@
+{
+  "profiles": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "nickname": "CaseyGamer",
+      "avatar": "https://nintendo.com/avatars/mario.png",
+      "friend_code": "SW-1234-5678-9012",
+      "membership_status": "active",
+      "membership_expiry": "2024-12-31T23:59:59Z"
+    }
+  },
+  "friends": {
+    "casey.wringer@email.com": [
+      {
+        "friend_code": "SW-2345-6789-0123",
+        "nickname": "Luigi123",
+        "avatar": "https://nintendo.com/avatars/luigi.png",
+        "online_status": "online",
+        "current_game": "The Legend of Zelda: Tears of the Kingdom"
+      },
+      {
+        "friend_code": "SW-3456-7890-1234",
+        "nickname": "PeachPrincess",
+        "avatar": "https://nintendo.com/avatars/peach.png",
+        "online_status": "offline"
+      }
+    ]
+  },
+  "games": {
+    "casey.wringer@email.com": [
+      {
+        "id": "ZELDA-TOTK",
+        "title": "The Legend of Zelda: Tears of the Kingdom",
+        "last_played": "2024-01-16T15:30:00Z",
+        "play_time": 4320,
+        "has_save_data": true
+      },
+      {
+        "id": "MARIO-KART8",
+        "title": "Mario Kart 8 Deluxe",
+        "last_played": "2024-01-15T20:45:00Z",
+        "play_time": 1260,
+        "has_save_data": true
+      },
+      {
+        "id": "SUPER-MARIO-ODYSSEY",
+        "title": "Super Mario Odyssey",
+        "last_played": "2024-01-10T18:20:00Z",
+        "play_time": 1800,
+        "has_save_data": true
+      }
+    ]
+  },
+  "save_data": {
+    "casey.wringer@email.com": {
+      "ZELDA-TOTK": {
+        "game_id": "ZELDA-TOTK",
+        "last_saved": "2024-01-16T15:30:00Z",
+        "cloud_sync": true,
+        "save_size": 52428800
+      },
+      "MARIO-KART8": {
+        "game_id": "MARIO-KART8",
+        "last_saved": "2024-01-15T20:45:00Z",
+        "cloud_sync": true,
+        "save_size": 1048576
+      },
+      "SUPER-MARIO-ODYSSEY": {
+        "game_id": "SUPER-MARIO-ODYSSEY",
+        "last_saved": "2024-01-10T18:20:00Z",
+        "cloud_sync": true,
+        "save_size": 2097152
+      }
+    }
+  },
+  "status": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "status": "online",
+      "current_game": "The Legend of Zelda: Tears of the Kingdom"
+    }
+  }
+}

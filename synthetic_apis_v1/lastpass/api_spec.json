@@ -1,0 +1,211 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "LastPass Public API",
+    "version": "1.0.0",
+    "description": "API for password management service"
+  },
+  "paths": {
+    "/api/v1/vault": {
+      "get": {
+        "summary": "Get user's encrypted vault",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Encrypted vault data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vault"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/vault/items": {
+      "post": {
+        "summary": "Add new vault item",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewVaultItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Item created successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/vault/items/{itemId}": {
+      "put": {
+        "summary": "Update vault item",
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VaultItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Item updated successfully"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete vault item",
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Item deleted successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/security-check": {
+      "post": {
+        "summary": "Check password strength and duplicates",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Security check results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SecurityCheckResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Vault": {
+        "type": "object",
+        "properties": {
+          "encrypted_data": {
+            "type": "string"
+          },
+          "last_modified": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "VaultItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["login", "secure_note", "credit_card", "bank_account"]
+          },
+          "name": {
+            "type": "string"
+          },
+          "encrypted_data": {
+            "type": "string"
+          },
+          "last_modified": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "NewVaultItem": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["login", "secure_note", "credit_card", "bank_account"]
+          },
+          "name": {
+            "type": "string"
+          },
+          "encrypted_data": {
+            "type": "string"
+          }
+        }
+      },
+      "SecurityCheckResult": {
+        "type": "object",
+        "properties": {
+          "strength": {
+            "type": "string",
+            "enum": ["weak", "medium", "strong"]
+          },
+          "duplicate_count": {
+            "type": "integer"
+          },
+          "compromised": {
+            "type": "boolean"
+          },
+          "suggestions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

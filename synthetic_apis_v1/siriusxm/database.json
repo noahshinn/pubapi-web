@@ -1,0 +1,106 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "subscription_plan": "All Access",
+      "favorite_stations": ["s_1", "s_3", "s_5"],
+      "favorite_shows": ["show_2", "show_4"],
+      "last_login": "2024-01-16T10:30:00Z"
+    }
+  },
+  "stations": {
+    "s_1": {
+      "id": "s_1",
+      "name": "The Highway",
+      "category": "Country",
+      "channel": "56",
+      "description": "Today's Country Hits",
+      "streaming_url": "https://stream.siriusxm.com/highway"
+    },
+    "s_2": {
+      "id": "s_2",
+      "name": "Symphony Hall",
+      "category": "Classical",
+      "channel": "76",
+      "description": "Classical Music",
+      "streaming_url": "https://stream.siriusxm.com/symphony"
+    },
+    "s_3": {
+      "id": "s_3",
+      "name": "BPM",
+      "category": "Electronic",
+      "channel": "51",
+      "description": "Electronic Dance Music",
+      "streaming_url": "https://stream.siriusxm.com/bpm"
+    },
+    "s_4": {
+      "id": "s_4",
+      "name": "The Coffee House",
+      "category": "Singer-Songwriter",
+      "channel": "14",
+      "description": "Acoustic Singer-Songwriters",
+      "streaming_url": "https://stream.siriusxm.com/coffeehouse"
+    },
+    "s_5": {
+      "id": "s_5",
+      "name": "Howard 100",
+      "category": "Talk & Entertainment",
+      "channel": "100",
+      "description": "Howard Stern",
+      "streaming_url": "https://stream.siriusxm.com/howard100"
+    }
+  },
+  "shows": {
+    "show_1": {
+      "id": "show_1",
+      "title": "The Morning Mashup",
+      "description": "Pop culture and entertainment news",
+      "host": "Nicole Ryan, Ryan Sampson, Stanley T",
+      "category": "Entertainment",
+      "episodes": [
+        {
+          "id": "ep_1",
+          "title": "Celebrity Interviews and Top Hits",
+          "duration": 10800,
+          "air_date": "2024-01-16T13:00:00Z",
+          "description": "Latest celebrity interviews and top 40 hits"
+        }
+      ]
+    },
+    "show_2": {
+      "id": "show_2",
+      "title": "Howard Stern Show",
+      "description": "Long-running talk show with Howard Stern",
+      "host": "Howard Stern",
+      "category": "Talk & Entertainment",
+      "episodes": [
+        {
+          "id": "ep_2",
+          "title": "Celebrity Guest Special",
+          "duration": 14400,
+          "air_date": "2024-01-16T12:00:00Z",
+          "description": "Interview with A-list celebrity guest"
+        }
+      ]
+    }
+  },
+  "now_playing": {
+    "s_1": {
+      "station_id": "s_1",
+      "track": "Cruise",
+      "artist": "Florida Georgia Line",
+      "show": null,
+      "started_at": "2024-01-16T20:15:00Z",
+      "ends_at": "2024-01-16T20:19:00Z"
+    },
+    "s_5": {
+      "station_id": "s_5",
+      "track": null,
+      "artist": null,
+      "show": "The Howard Stern Show",
+      "started_at": "2024-01-16T12:00:00Z",
+      "ends_at": "2024-01-16T16:00:00Z"
+    }
+  }
+}

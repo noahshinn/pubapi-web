@@ -1,0 +1,118 @@
+{
+  "contacts": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "status": "At work 👩‍💻",
+      "profile_picture": "https://example.com/profiles/casey.jpg",
+      "last_seen": "2024-01-16T20:30:00Z",
+      "online": true
+    },
+    "alex.smith@email.com": {
+      "email": "alex.smith@email.com",
+      "name": "Alex Smith",
+      "phone": "+1-555-0124",
+      "status": "Available",
+      "profile_picture": "https://example.com/profiles/alex.jpg",
+      "last_seen": "2024-01-16T20:25:00Z",
+      "online": false
+    },
+    "maria.garcia@email.com": {
+      "email": "maria.garcia@email.com",
+      "name": "Maria Garcia",
+      "phone": "+1-555-0125",
+      "status": "In a meeting",
+      "profile_picture": "https://example.com/profiles/maria.jpg",
+      "last_seen": "2024-01-16T19:45:00Z",
+      "online": false
+    }
+  },
+  "chats": {
+    "chat_1": {
+      "id": "chat_1",
+      "name": "Casey and Alex",
+      "type": "individual",
+      "participants": [
+        {
+          "email": "casey.wringer@email.com",
+          "name": "Casey Wringer"
+        },
+        {
+          "email": "alex.smith@email.com",
+          "name": "Alex Smith"
+        }
+      ],
+      "created_at": "2024-01-15T10:00:00Z",
+      "updated_at": "2024-01-16T20:30:00Z"
+    },
+    "chat_2": {
+      "id": "chat_2",
+      "name": "Work Group",
+      "type": "group",
+      "participants": [
+        {
+          "email": "casey.wringer@email.com",
+          "name": "Casey Wringer"
+        },
+        {
+          "email": "alex.smith@email.com",
+          "name": "Alex Smith"
+        },
+        {
+          "email": "maria.garcia@email.com",
+          "name": "Maria Garcia"
+        }
+      ],
+      "created_at": "2024-01-15T11:00:00Z",
+      "updated_at": "2024-01-16T19:45:00Z"
+    }
+  },
+  "messages": {
+    "chat_1": [
+      {
+        "id": "msg_1",
+        "chat_id": "chat_1",
+        "sender": {
+          "email": "casey.wringer@email.com",
+          "name": "Casey Wringer"
+        },
+        "content": "Hey Alex, how's the project going?",
+        "type": "text",
+        "timestamp": "2024-01-16T20:15:00Z",
+        "read": true
+      },
+      {
+        "id": "msg_2",
+        "chat_id": "chat_1",
+        "sender": {
+          "email": "alex.smith@email.com",
+          "name": "Alex Smith"
+        },
+        "content": "Hi Casey! Making good progress. Will send you the update soon.",
+        "type": "text",
+        "timestamp": "2024-01-16T20:20:00Z",
+        "read": true
+      }
+    ],
+    "chat_2": [
+      {
+        "id": "msg_3",
+        "chat_id": "chat_2",
+        "sender": {
+          "email": "maria.garcia@email.com",
+          "name": "Maria Garcia"
+        },
+        "content": "Team meeting at 3 PM today",
+        "type": "text",
+        "timestamp": "2024-01-16T19:45:00Z",
+        "read": true
+      }
+    ]
+  },
+  "user_chats": {
+    "casey.wringer@email.com": ["chat_1", "chat_2"],
+    "alex.smith@email.com": ["chat_1", "chat_2"],
+    "maria.garcia@email.com": ["chat_2"]
+  }
+}

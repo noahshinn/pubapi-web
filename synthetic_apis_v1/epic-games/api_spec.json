@@ -1,0 +1,226 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Epic Games Public API",
+    "version": "1.0.0",
+    "description": "API for Epic Games platform"
+  },
+  "paths": {
+    "/api/v1/games": {
+      "get": {
+        "summary": "Get available games in store",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onSale",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of games",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Game"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/library": {
+      "get": {
+        "summary": "Get user's game library",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's game library",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LibraryGame"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/friends": {
+      "get": {
+        "summary": "Get user's friends list",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's friends list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Friend"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/achievements/{gameId}": {
+      "get": {
+        "summary": "Get user's achievements for a game",
+        "parameters": [
+          {
+            "name": "gameId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's achievements",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Achievement"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/purchases": {
+      "post": {
+        "summary": "Purchase a game",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Purchase successful"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Game": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "price": {"type": "number"},
+          "salePrice": {"type": "number"},
+          "publisher": {"type": "string"},
+          "releaseDate": {"type": "string"},
+          "categories": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "rating": {"type": "string"},
+          "size": {"type": "number"}
+        }
+      },
+      "LibraryGame": {
+        "type": "object",
+        "properties": {
+          "game": {"$ref": "#/components/schemas/Game"},
+          "purchaseDate": {"type": "string"},
+          "playTime": {"type": "number"},
+          "lastPlayed": {"type": "string"},
+          "installed": {"type": "boolean"}
+        }
+      },
+      "Friend": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "username": {"type": "string"},
+          "status": {"type": "string"},
+          "currentGame": {"type": "string"},
+          "lastOnline": {"type": "string"}
+        }
+      },
+      "Achievement": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "unlocked": {"type": "boolean"},
+          "unlockedDate": {"type": "string"},
+          "rarity": {"type": "number"}
+        }
+      },
+      "PurchaseRequest": {
+        "type": "object",
+        "properties": {
+          "gameId": {"type": "string"},
+          "userEmail": {"type": "string"},
+          "paymentMethodId": {"type": "string"}
+        },
+        "required": ["gameId", "userEmail", "paymentMethodId"]
+      }
+    }
+  }
+}

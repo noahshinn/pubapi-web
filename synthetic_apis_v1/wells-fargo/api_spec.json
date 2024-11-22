@@ -1,0 +1,228 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Wells Fargo Banking API",
+    "version": "1.0.0",
+    "description": "API for banking services"
+  },
+  "paths": {
+    "/api/v1/accounts": {
+      "get": {
+        "summary": "Get user's accounts",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of accounts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Account"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/accounts/{accountId}/transactions": {
+      "get": {
+        "summary": "Get account transactions",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of transactions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Transaction"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/transfers": {
+      "post": {
+        "summary": "Make a transfer between accounts",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransferRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Transfer completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transfer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bills": {
+      "get": {
+        "summary": "Get upcoming bills",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of bills",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Bill"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Pay a bill",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BillPaymentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Bill payment completed"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Account": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string"},
+          "name": {"type": "string"},
+          "balance": {"type": "number"},
+          "currency": {"type": "string"},
+          "status": {"type": "string"}
+        }
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "date": {"type": "string"},
+          "description": {"type": "string"},
+          "amount": {"type": "number"},
+          "type": {"type": "string"},
+          "category": {"type": "string"},
+          "status": {"type": "string"}
+        }
+      },
+      "TransferRequest": {
+        "type": "object",
+        "properties": {
+          "fromAccountId": {"type": "string"},
+          "toAccountId": {"type": "string"},
+          "amount": {"type": "number"},
+          "description": {"type": "string"}
+        }
+      },
+      "Transfer": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "fromAccount": {"$ref": "#/components/schemas/Account"},
+          "toAccount": {"$ref": "#/components/schemas/Account"},
+          "amount": {"type": "number"},
+          "status": {"type": "string"},
+          "timestamp": {"type": "string"}
+        }
+      },
+      "Bill": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "payee": {"type": "string"},
+          "amount": {"type": "number"},
+          "dueDate": {"type": "string"},
+          "status": {"type": "string"},
+          "autopay": {"type": "boolean"}
+        }
+      },
+      "BillPaymentRequest": {
+        "type": "object",
+        "properties": {
+          "billId": {"type": "string"},
+          "accountId": {"type": "string"},
+          "amount": {"type": "number"},
+          "scheduledDate": {"type": "string"}
+        }
+      }
+    }
+  }
+}

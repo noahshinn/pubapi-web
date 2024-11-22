@@ -1,0 +1,94 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "address": "789 Tech Avenue, San Francisco, CA 94105",
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242",
+          "expiry_mm": 12,
+          "expiry_yy": 25
+        }
+      ]
+    }
+  },
+  "products": {
+    "prod_1": {
+      "id": "prod_1",
+      "name": "Dozen Red Roses",
+      "description": "Classic bouquet of fresh red roses",
+      "category": "romance",
+      "price": 49.99,
+      "image_url": "https://example.com/roses.jpg",
+      "available": true
+    },
+    "prod_2": {
+      "id": "prod_2",
+      "name": "Birthday Surprise",
+      "description": "Colorful mix of seasonal flowers",
+      "category": "birthday",
+      "price": 59.99,
+      "image_url": "https://example.com/birthday.jpg",
+      "available": true
+    },
+    "prod_3": {
+      "id": "prod_3",
+      "name": "Sympathy Peace Lily",
+      "description": "Elegant peace lily plant",
+      "category": "sympathy",
+      "price": 65.99,
+      "image_url": "https://example.com/peace-lily.jpg",
+      "available": true
+    }
+  },
+  "orders": {
+    "ord_1": {
+      "id": "ord_1",
+      "user_email": "casey.wringer@email.com",
+      "product": {
+        "id": "prod_1",
+        "name": "Dozen Red Roses",
+        "price": 49.99
+      },
+      "recipient": {
+        "name": "John Smith",
+        "address": "123 Main St",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94105",
+        "phone": "+1-555-9876"
+      },
+      "message": "Happy Anniversary!",
+      "delivery_date": "2024-02-14T00:00:00Z",
+      "status": "confirmed",
+      "total": 62.98,
+      "created_at": "2024-01-15T10:30:00Z"
+    },
+    "ord_2": {
+      "id": "ord_2",
+      "user_email": "casey.wringer@email.com",
+      "product": {
+        "id": "prod_2",
+        "name": "Birthday Surprise",
+        "price": 59.99
+      },
+      "recipient": {
+        "name": "Mary Johnson",
+        "address": "456 Oak Ave",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94110",
+        "phone": "+1-555-5555"
+      },
+      "message": "Happy Birthday!",
+      "delivery_date": "2024-01-20T00:00:00Z",
+      "status": "pending",
+      "total": 72.98,
+      "created_at": "2024-01-16T15:45:00Z"
+    }
+  }
+}

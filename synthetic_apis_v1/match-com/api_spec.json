@@ -1,0 +1,279 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Match.com Public API",
+    "version": "1.0.0",
+    "description": "API for Match.com dating service"
+  },
+  "paths": {
+    "/api/v1/profile": {
+      "get": {
+        "summary": "Get user profile",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user profile",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Profile updated successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/matches": {
+      "get": {
+        "summary": "Get potential matches",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of potential matches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Profile"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/likes": {
+      "post": {
+        "summary": "Like or pass on a profile",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LikeAction"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Like recorded successfully"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get likes received",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of received likes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Like"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/conversations": {
+      "get": {
+        "summary": "Get user's conversations",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of conversations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Conversation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "email": {"type": "string"},
+          "name": {"type": "string"},
+          "age": {"type": "integer"},
+          "gender": {"type": "string"},
+          "seeking": {"type": "string"},
+          "location": {
+            "type": "object",
+            "properties": {
+              "city": {"type": "string"},
+              "state": {"type": "string"},
+              "country": {"type": "string"}
+            }
+          },
+          "photos": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "bio": {"type": "string"},
+          "interests": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "preferences": {
+            "$ref": "#/components/schemas/Preferences"
+          }
+        }
+      },
+      "Preferences": {
+        "type": "object",
+        "properties": {
+          "age_range": {
+            "type": "object",
+            "properties": {
+              "min": {"type": "integer"},
+              "max": {"type": "integer"}
+            }
+          },
+          "distance": {"type": "integer"},
+          "seeking_gender": {"type": "string"}
+        }
+      },
+      "ProfileUpdate": {
+        "type": "object",
+        "properties": {
+          "bio": {"type": "string"},
+          "interests": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "preferences": {
+            "$ref": "#/components/schemas/Preferences"
+          }
+        }
+      },
+      "LikeAction": {
+        "type": "object",
+        "properties": {
+          "from_email": {"type": "string"},
+          "to_profile_id": {"type": "string"},
+          "action": {"type": "string", "enum": ["like", "pass"]}
+        }
+      },
+      "Like": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "from_profile": {"$ref": "#/components/schemas/Profile"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "Conversation": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "participants": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/Profile"}
+          },
+          "last_message": {"$ref": "#/components/schemas/Message"},
+          "created_at": {"type": "string"},
+          "updated_at": {"type": "string"}
+        }
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "sender_id": {"type": "string"},
+          "content": {"type": "string"},
+          "created_at": {"type": "string"}
+        }
+      }
+    }
+  }
+}

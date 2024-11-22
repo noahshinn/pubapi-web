@@ -1,0 +1,201 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Fidelity Investment API",
+    "version": "1.0.0",
+    "description": "API for investment and portfolio management"
+  },
+  "paths": {
+    "/api/v1/portfolio": {
+      "get": {
+        "summary": "Get user's portfolio summary",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Portfolio summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Portfolio"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/accounts": {
+      "get": {
+        "summary": "Get user's investment accounts",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of accounts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Account"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/trades": {
+      "post": {
+        "summary": "Place a trade order",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TradeOrder"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Trade order placed successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/transactions": {
+      "get": {
+        "summary": "Get account transactions",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of transactions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Transaction"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Portfolio": {
+        "type": "object",
+        "properties": {
+          "total_value": {"type": "number"},
+          "total_gain_loss": {"type": "number"},
+          "total_gain_loss_percent": {"type": "number"},
+          "accounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Account"
+            }
+          }
+        }
+      },
+      "Account": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string"},
+          "name": {"type": "string"},
+          "balance": {"type": "number"},
+          "positions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Position"
+            }
+          }
+        }
+      },
+      "Position": {
+        "type": "object",
+        "properties": {
+          "symbol": {"type": "string"},
+          "quantity": {"type": "number"},
+          "current_price": {"type": "number"},
+          "market_value": {"type": "number"},
+          "gain_loss": {"type": "number"},
+          "gain_loss_percent": {"type": "number"}
+        }
+      },
+      "TradeOrder": {
+        "type": "object",
+        "properties": {
+          "account_id": {"type": "string"},
+          "symbol": {"type": "string"},
+          "order_type": {"type": "string"},
+          "quantity": {"type": "number"},
+          "price": {"type": "number"},
+          "time_in_force": {"type": "string"}
+        }
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "account_id": {"type": "string"},
+          "type": {"type": "string"},
+          "symbol": {"type": "string"},
+          "quantity": {"type": "number"},
+          "price": {"type": "number"},
+          "amount": {"type": "number"},
+          "date": {"type": "string", "format": "date-time"}
+        }
+      }
+    }
+  }
+}

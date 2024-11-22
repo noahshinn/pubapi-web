@@ -1,0 +1,103 @@
+{
+  "meal_plans": {
+    "plan_1": {
+      "id": "plan_1",
+      "name": "Classic Plan",
+      "meals_per_week": 3,
+      "servings_per_meal": 2,
+      "price_per_serving": 11.99,
+      "description": "Perfect for couples or small families"
+    },
+    "plan_2": {
+      "id": "plan_2",
+      "name": "Family Plan",
+      "meals_per_week": 4,
+      "servings_per_meal": 4,
+      "price_per_serving": 9.99,
+      "description": "Great for families with kids"
+    },
+    "plan_3": {
+      "id": "plan_3",
+      "name": "Veggie Plan",
+      "meals_per_week": 3,
+      "servings_per_meal": 2,
+      "price_per_serving": 10.99,
+      "description": "Plant-based meals for vegetarians"
+    }
+  },
+  "recipes": {
+    "recipe_1": {
+      "id": "recipe_1",
+      "name": "Tuscan Chicken Pasta",
+      "description": "Creamy pasta with sun-dried tomatoes and spinach",
+      "prep_time": 35,
+      "difficulty": "easy",
+      "calories": 850,
+      "ingredients": [
+        "chicken breast",
+        "penne pasta",
+        "sun-dried tomatoes",
+        "spinach",
+        "heavy cream"
+      ],
+      "tags": ["italian", "pasta", "chicken"],
+      "image_url": "https://hellofresh.com/images/tuscan-chicken-pasta.jpg"
+    },
+    "recipe_2": {
+      "id": "recipe_2",
+      "name": "Vegetarian Buddha Bowl",
+      "description": "Healthy bowl with quinoa, roasted vegetables, and tahini dressing",
+      "prep_time": 40,
+      "difficulty": "medium",
+      "calories": 650,
+      "ingredients": [
+        "quinoa",
+        "sweet potato",
+        "chickpeas",
+        "kale",
+        "tahini"
+      ],
+      "tags": ["vegetarian", "healthy", "bowl"],
+      "image_url": "https://hellofresh.com/images/buddha-bowl.jpg"
+    }
+  },
+  "subscriptions": {
+    "sub_1": {
+      "id": "sub_1",
+      "user_email": "casey.wringer@email.com",
+      "meal_plan": {
+        "id": "plan_1",
+        "name": "Classic Plan",
+        "meals_per_week": 3,
+        "servings_per_meal": 2,
+        "price_per_serving": 11.99
+      },
+      "delivery_day": "wednesday",
+      "status": "active",
+      "next_delivery": "2024-01-24T00:00:00Z",
+      "dietary_preferences": ["low_carb"],
+      "created_at": "2023-12-01T00:00:00Z",
+      "updated_at": "2024-01-17T00:00:00Z"
+    }
+  },
+  "weekly_selections": {
+    "sel_1": {
+      "id": "sel_1",
+      "user_email": "casey.wringer@email.com",
+      "week": "2024-01-22T00:00:00Z",
+      "recipes": [
+        {
+          "id": "recipe_1",
+          "name": "Tuscan Chicken Pasta"
+        },
+        {
+          "id": "recipe_2",
+          "name": "Vegetarian Buddha Bowl"
+        }
+      ],
+      "delivery_status": "scheduled",
+      "delivery_date": "2024-01-24T00:00:00Z",
+      "created_at": "2024-01-15T00:00:00Z"
+    }
+  }
+}

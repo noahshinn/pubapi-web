@@ -1,0 +1,138 @@
+{
+  "profiles": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "gamertag": "TechNinja85",
+      "name": "Casey Wringer",
+      "avatar_url": "https://xbox.images.com/avatars/techninja85.jpg",
+      "gamerscore": 24680,
+      "reputation": "Good Player",
+      "account_tier": "Xbox Game Pass Ultimate",
+      "years_with_gold": 3
+    }
+  },
+  "friends": {
+    "casey.wringer@email.com": [
+      {
+        "gamertag": "CyberKnight",
+        "name": "Alex Thompson",
+        "avatar_url": "https://xbox.images.com/avatars/cyberknight.jpg",
+        "online_status": "online",
+        "current_activity": "Playing Halo Infinite",
+        "gamerscore": 32150
+      },
+      {
+        "gamertag": "PixelPirate",
+        "name": "Maria Rodriguez",
+        "avatar_url": "https://xbox.images.com/avatars/pixelpirate.jpg",
+        "online_status": "offline",
+        "current_activity": "Last seen 2 hours ago",
+        "gamerscore": 28900
+      }
+    ]
+  },
+  "games": {
+    "casey.wringer@email.com": [
+      {
+        "id": "game_1",
+        "title": "Halo Infinite",
+        "description": "The legendary Halo series returns with the most expansive Master Chief campaign yet.",
+        "cover_url": "https://xbox.images.com/games/halo-infinite.jpg",
+        "last_played": "2024-01-15T20:30:00Z",
+        "achievement_progress": {
+          "earned": 28,
+          "total": 50
+        },
+        "install_status": "installed"
+      },
+      {
+        "id": "game_2",
+        "title": "Forza Horizon 5",
+        "description": "Lead breathtaking expeditions across the vibrant and ever-evolving open world landscapes of Mexico.",
+        "cover_url": "https://xbox.images.com/games/forza-horizon-5.jpg",
+        "last_played": "2024-01-14T18:45:00Z",
+        "achievement_progress": {
+          "earned": 42,
+          "total": 75
+        },
+        "install_status": "installed"
+      },
+      {
+        "id": "game_3",
+        "title": "Starfield",
+        "description": "Embark on an epic journey through space in Bethesda Game Studios' first new universe in 25 years.",
+        "cover_url": "https://xbox.images.com/games/starfield.jpg",
+        "last_played": "2024-01-16T21:15:00Z",
+        "achievement_progress": {
+          "earned": 15,
+          "total": 65
+        },
+        "install_status": "installed"
+      }
+    ]
+  },
+  "achievements": {
+    "casey.wringer@email.com": {
+      "game_1": [
+        {
+          "id": "ach_1",
+          "game_id": "game_1",
+          "name": "Campaign Complete",
+          "description": "Complete the main campaign on any difficulty",
+          "gamerscore": 50,
+          "image_url": "https://xbox.images.com/achievements/halo-campaign.jpg",
+          "unlocked": true,
+          "unlock_time": "2024-01-10T22:15:00Z",
+          "rarity_percentage": 45.2
+        },
+        {
+          "id": "ach_2",
+          "game_id": "game_1",
+          "name": "Legendary Hero",
+          "description": "Complete the campaign on Legendary difficulty",
+          "gamerscore": 100,
+          "image_url": "https://xbox.images.com/achievements/halo-legendary.jpg",
+          "unlocked": false,
+          "rarity_percentage": 5.8
+        }
+      ],
+      "game_2": [
+        {
+          "id": "ach_3",
+          "game_id": "game_2",
+          "name": "Welcome to Mexico",
+          "description": "Complete your first Horizon Festival showcase event",
+          "gamerscore": 25,
+          "image_url": "https://xbox.images.com/achievements/forza-welcome.jpg",
+          "unlocked": true,
+          "unlock_time": "2024-01-05T19:30:00Z",
+          "rarity_percentage": 92.5
+        },
+        {
+          "id": "ach_4",
+          "game_id": "game_2",
+          "name": "Speed Demon",
+          "description": "Reach a speed of 250 mph in any car",
+          "gamerscore": 50,
+          "image_url": "https://xbox.images.com/achievements/forza-speed.jpg",
+          "unlocked": true,
+          "unlock_time": "2024-01-12T20:45:00Z",
+          "rarity_percentage": 28.3
+        }
+      ],
+      "game_3": [
+        {
+          "id": "ach_5",
+          "game_id": "game_3",
+          "name": "Space Explorer",
+          "description": "Visit 10 different solar systems",
+          "gamerscore": 75,
+          "image_url": "https://xbox.images.com/achievements/starfield-explorer.jpg",
+          "unlocked": true,
+          "unlock_time": "2024-01-16T23:10:00Z",
+          "rarity_percentage": 15.7
+        }
+      ]
+    }
+  }
+}

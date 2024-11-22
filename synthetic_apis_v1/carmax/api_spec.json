@@ -1,0 +1,216 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "CarMax Public API",
+    "version": "1.0.0",
+    "description": "API for car buying and selling service"
+  },
+  "paths": {
+    "/api/v1/inventory": {
+      "get": {
+        "summary": "Search available cars",
+        "parameters": [
+          {
+            "name": "make",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "maxPrice",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "maxMileage",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of available cars",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Car"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/saved-cars": {
+      "get": {
+        "summary": "Get user's saved cars",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of saved cars",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SavedCar"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Save a car to user's list",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveCarRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Car saved successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/appointments": {
+      "get": {
+        "summary": "Get user's test drive appointments",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of appointments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Schedule a test drive",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppointmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Appointment scheduled successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Car": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "make": {"type": "string"},
+          "model": {"type": "string"},
+          "year": {"type": "integer"},
+          "price": {"type": "number"},
+          "mileage": {"type": "number"},
+          "color": {"type": "string"},
+          "vin": {"type": "string"},
+          "features": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "images": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "SavedCar": {
+        "type": "object",
+        "properties": {
+          "car": {"$ref": "#/components/schemas/Car"},
+          "savedAt": {"type": "string"},
+          "notes": {"type": "string"}
+        }
+      },
+      "SaveCarRequest": {
+        "type": "object",
+        "properties": {
+          "carId": {"type": "string"},
+          "userEmail": {"type": "string"},
+          "notes": {"type": "string"}
+        }
+      },
+      "Appointment": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "car": {"$ref": "#/components/schemas/Car"},
+          "datetime": {"type": "string"},
+          "location": {"type": "string"},
+          "status": {"type": "string"}
+        }
+      },
+      "AppointmentRequest": {
+        "type": "object",
+        "properties": {
+          "carId": {"type": "string"},
+          "userEmail": {"type": "string"},
+          "datetime": {"type": "string"},
+          "location": {"type": "string"}
+        }
+      }
+    }
+  }
+}

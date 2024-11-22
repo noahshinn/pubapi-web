@@ -1,0 +1,110 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "prescriptions": [
+        {
+          "id": "presc_1",
+          "drug": {
+            "id": "drug_1",
+            "name": "Lisinopril",
+            "genericName": "Lisinopril",
+            "form": "tablet",
+            "strength": "10mg",
+            "manufacturer": "Prinston Pharmaceutical"
+          },
+          "prescriber": "Dr. James Wilson",
+          "quantity": 30,
+          "refills": 3,
+          "expirationDate": "2024-12-31T00:00:00Z",
+          "createdAt": "2024-01-01T00:00:00Z"
+        },
+        {
+          "id": "presc_2",
+          "drug": {
+            "id": "drug_2",
+            "name": "Metformin",
+            "genericName": "Metformin HCL",
+            "form": "tablet",
+            "strength": "500mg",
+            "manufacturer": "Aurobindo Pharma"
+          },
+          "prescriber": "Dr. Emily Martinez",
+          "quantity": 60,
+          "refills": 5,
+          "expirationDate": "2024-12-31T00:00:00Z",
+          "createdAt": "2024-01-05T00:00:00Z"
+        }
+      ],
+      "searchHistory": [
+        {
+          "query": "lisinopril",
+          "timestamp": "2024-01-15T14:30:00Z"
+        },
+        {
+          "query": "metformin",
+          "timestamp": "2024-01-16T09:15:00Z"
+        }
+      ]
+    }
+  },
+  "drugs": {
+    "drug_1": {
+      "id": "drug_1",
+      "name": "Lisinopril",
+      "genericName": "Lisinopril",
+      "form": "tablet",
+      "strength": "10mg",
+      "manufacturer": "Prinston Pharmaceutical",
+      "categories": ["blood pressure", "ACE inhibitor"]
+    },
+    "drug_2": {
+      "id": "drug_2",
+      "name": "Metformin",
+      "genericName": "Metformin HCL",
+      "form": "tablet",
+      "strength": "500mg",
+      "manufacturer": "Aurobindo Pharma",
+      "categories": ["diabetes", "blood sugar"]
+    }
+  },
+  "pharmacies": {
+    "pharm_1": {
+      "id": "pharm_1",
+      "name": "CVS Pharmacy",
+      "address": "123 Main St, San Francisco, CA 94105",
+      "phone": "+1-555-0111",
+      "hours": "8AM-10PM",
+      "zipCode": "94105"
+    },
+    "pharm_2": {
+      "id": "pharm_2",
+      "name": "Walgreens",
+      "address": "456 Market St, San Francisco, CA 94105",
+      "phone": "+1-555-0222",
+      "hours": "24 hours",
+      "zipCode": "94105"
+    }
+  },
+  "coupons": {
+    "coupon_1": {
+      "id": "coupon_1",
+      "drugId": "drug_1",
+      "pharmacyId": "pharm_1",
+      "discountPrice": 4.99,
+      "originalPrice": 15.99,
+      "expirationDate": "2024-12-31T00:00:00Z",
+      "barcodeData": "1234567890"
+    },
+    "coupon_2": {
+      "id": "coupon_2",
+      "drugId": "drug_2",
+      "pharmacyId": "pharm_2",
+      "discountPrice": 9.99,
+      "originalPrice": 25.99,
+      "expirationDate": "2024-12-31T00:00:00Z",
+      "barcodeData": "0987654321"
+    }
+  }
+}

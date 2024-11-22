@@ -1,0 +1,68 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "address": "789 Tech Avenue",
+      "zip_code": "94105",
+      "join_date": "2023-01-15T00:00:00Z",
+      "verified_id": true,
+      "background_check": true
+    }
+  },
+  "caregivers": {
+    "cg_1": {
+      "id": "cg_1",
+      "user_email": "maria.garcia@email.com",
+      "service_types": ["childcare", "petcare"],
+      "hourly_rate": 25.00,
+      "years_experience": 5,
+      "bio": "Experienced childcare provider with a love for children and pets",
+      "availability": ["weekday_mornings", "weekday_afternoons"],
+      "rating": 4.8,
+      "reviews_count": 45,
+      "certifications": ["CPR", "First Aid"]
+    },
+    "cg_2": {
+      "id": "cg_2",
+      "user_email": "john.smith@email.com",
+      "service_types": ["seniorcare"],
+      "hourly_rate": 30.00,
+      "years_experience": 8,
+      "bio": "Certified nursing assistant specializing in senior care",
+      "availability": ["weekdays", "weekends"],
+      "rating": 4.9,
+      "reviews_count": 62,
+      "certifications": ["CNA", "CPR", "First Aid"]
+    }
+  },
+  "job_postings": {
+    "job_1": {
+      "id": "job_1",
+      "user_email": "casey.wringer@email.com",
+      "service_type": "childcare",
+      "title": "After-school care needed for two children",
+      "description": "Looking for someone to watch our 7 and 9 year old after school",
+      "requirements": "Must have own transportation and experience with school-age children",
+      "schedule": "Mon-Fri 3pm-6pm",
+      "hourly_rate": 28.00,
+      "location": "San Francisco",
+      "zip_code": "94105",
+      "status": "open",
+      "created_at": "2024-01-15T10:00:00Z",
+      "updated_at": "2024-01-15T10:00:00Z"
+    }
+  },
+  "applications": {
+    "app_1": {
+      "id": "app_1",
+      "job_id": "job_1",
+      "caregiver_id": "cg_1",
+      "cover_letter": "I would love to help with your children's after-school care. I have 5 years of experience...",
+      "status": "pending",
+      "created_at": "2024-01-15T14:30:00Z",
+      "updated_at": "2024-01-15T14:30:00Z"
+    }
+  }
+}

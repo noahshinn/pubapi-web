@@ -1,0 +1,95 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "credit_scores": {
+        "transunion": {
+          "score": 745,
+          "last_updated": "2024-01-15T00:00:00Z"
+        },
+        "equifax": {
+          "score": 742,
+          "last_updated": "2024-01-15T00:00:00Z"
+        }
+      },
+      "credit_factors": [
+        {
+          "name": "Credit Card Use",
+          "impact": "positive",
+          "description": "Your credit utilization is 15%, which is excellent",
+          "recommendation": "Continue keeping your credit utilization below 30%"
+        },
+        {
+          "name": "Payment History",
+          "impact": "positive",
+          "description": "100% on-time payments in the last 24 months",
+          "recommendation": "Maintain your perfect payment history"
+        },
+        {
+          "name": "Credit Age",
+          "impact": "neutral",
+          "description": "Average account age is 4 years",
+          "recommendation": "Keep your oldest accounts open to build credit history"
+        }
+      ],
+      "credit_report": {
+        "accounts": [
+          {
+            "name": "Premium Bank Credit Card",
+            "type": "credit_card",
+            "balance": 1250.00,
+            "credit_limit": 8000.00,
+            "payment_status": "current",
+            "payment_history": [
+              {
+                "date": "2024-01-01T00:00:00Z",
+                "status": "paid",
+                "amount": 1500.00
+              },
+              {
+                "date": "2023-12-01T00:00:00Z",
+                "status": "paid",
+                "amount": 2000.00
+              }
+            ]
+          },
+          {
+            "name": "Auto Loan",
+            "type": "installment",
+            "balance": 15000.00,
+            "credit_limit": 25000.00,
+            "payment_status": "current",
+            "payment_history": [
+              {
+                "date": "2024-01-01T00:00:00Z",
+                "status": "paid",
+                "amount": 450.00
+              },
+              {
+                "date": "2023-12-01T00:00:00Z",
+                "status": "paid",
+                "amount": 450.00
+              }
+            ]
+          }
+        ],
+        "inquiries": [
+          {
+            "date": "2023-11-15T00:00:00Z",
+            "creditor": "Premium Bank",
+            "type": "credit_card"
+          }
+        ],
+        "personal_info": {
+          "name": "Casey Wringer",
+          "addresses": [
+            "789 Tech Avenue, San Francisco, CA 94105"
+          ],
+          "employers": [
+            "Tech Corp Inc."
+          ]
+        }
+      }
+    }
+  }
+}

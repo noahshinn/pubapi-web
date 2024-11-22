@@ -1,0 +1,123 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "name": "Casey Wringer",
+      "email": "casey.wringer@email.com",
+      "phone": "+1-555-0123",
+      "address": {
+        "street": "789 Tech Avenue",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94105"
+      }
+    }
+  },
+  "products": {
+    "prod_1": {
+      "id": "prod_1",
+      "name": "Classic Rose Bouquet",
+      "description": "One dozen red roses arranged with baby's breath",
+      "category": "flowers",
+      "price": 59.99,
+      "occasions": ["romance", "anniversary", "valentine"],
+      "image_url": "https://ftd.com/images/classic-rose-bouquet.jpg"
+    },
+    "prod_2": {
+      "id": "prod_2",
+      "name": "Birthday Bright™ Bouquet",
+      "description": "Vibrant mix of gerbera daisies, roses, and lilies",
+      "category": "flowers",
+      "price": 49.99,
+      "occasions": ["birthday", "congratulations"],
+      "image_url": "https://ftd.com/images/birthday-bright-bouquet.jpg"
+    },
+    "prod_3": {
+      "id": "prod_3",
+      "name": "Peace Lily Plant",
+      "description": "Elegant peace lily plant in decorative pot",
+      "category": "plants",
+      "price": 39.99,
+      "occasions": ["sympathy", "housewarming"],
+      "image_url": "https://ftd.com/images/peace-lily.jpg"
+    },
+    "prod_4": {
+      "id": "prod_4",
+      "name": "Chocolate & Fruit Basket",
+      "description": "Premium chocolates and fresh seasonal fruits",
+      "category": "gifts",
+      "price": 69.99,
+      "occasions": ["thank you", "get well", "birthday"],
+      "image_url": "https://ftd.com/images/chocolate-fruit-basket.jpg"
+    }
+  },
+  "orders": {
+    "ord_1": {
+      "id": "ord_1",
+      "product": {
+        "id": "prod_1",
+        "name": "Classic Rose Bouquet",
+        "price": 59.99
+      },
+      "sender": {
+        "name": "Casey Wringer",
+        "email": "casey.wringer@email.com",
+        "phone": "+1-555-0123",
+        "address": {
+          "street": "789 Tech Avenue",
+          "city": "San Francisco",
+          "state": "CA",
+          "zip_code": "94105"
+        }
+      },
+      "recipient": {
+        "name": "John Smith",
+        "phone": "+1-555-0456",
+        "address": {
+          "street": "123 Main St",
+          "city": "New York",
+          "state": "NY",
+          "zip_code": "10001"
+        }
+      },
+      "delivery_date": "2024-02-14",
+      "message": "Happy Valentine's Day!",
+      "status": "confirmed",
+      "total": 59.99,
+      "created_at": "2024-01-15T10:30:00Z"
+    },
+    "ord_2": {
+      "id": "ord_2",
+      "product": {
+        "id": "prod_3",
+        "name": "Peace Lily Plant",
+        "price": 39.99
+      },
+      "sender": {
+        "name": "Casey Wringer",
+        "email": "casey.wringer@email.com",
+        "phone": "+1-555-0123",
+        "address": {
+          "street": "789 Tech Avenue",
+          "city": "San Francisco",
+          "state": "CA",
+          "zip_code": "94105"
+        }
+      },
+      "recipient": {
+        "name": "Emma Johnson",
+        "phone": "+1-555-0789",
+        "address": {
+          "street": "456 Oak Ave",
+          "city": "Chicago",
+          "state": "IL",
+          "zip_code": "60601"
+        }
+      },
+      "delivery_date": "2024-01-20",
+      "message": "Congratulations on your new home!",
+      "status": "pending",
+      "total": 39.99,
+      "created_at": "2024-01-16T15:45:00Z"
+    }
+  }
+}

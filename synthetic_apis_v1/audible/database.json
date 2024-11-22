@@ -1,0 +1,86 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "membership_type": "Premium Plus",
+      "credits": 2,
+      "library": [
+        {
+          "book": {
+            "id": "book_1",
+            "title": "Project Hail Mary",
+            "author": "Andy Weir",
+            "narrator": "Ray Porter",
+            "duration": 63000,
+            "progress": 45000,
+            "purchase_date": "2023-12-01T10:00:00Z",
+            "last_listened": "2024-01-15T14:30:00Z"
+          }
+        },
+        {
+          "book": {
+            "id": "book_2",
+            "title": "Atomic Habits",
+            "author": "James Clear",
+            "narrator": "James Clear",
+            "duration": 45000,
+            "progress": 45000,
+            "purchase_date": "2023-11-15T08:00:00Z",
+            "last_listened": "2023-12-20T19:15:00Z"
+          }
+        }
+      ],
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242",
+          "expiry_mm": 12,
+          "expiry_yy": 25
+        }
+      ]
+    }
+  },
+  "books": {
+    "book_1": {
+      "id": "book_1",
+      "title": "Project Hail Mary",
+      "author": "Andy Weir",
+      "narrator": "Ray Porter",
+      "duration": 63000,
+      "rating": 4.8,
+      "price": 29.99,
+      "summary": "A lone astronaut must save humanity from extinction in this thrilling science fiction adventure.",
+      "categories": ["Science Fiction", "Adventure", "Space"],
+      "cover_url": "https://images.audible.com/project-hail-mary.jpg",
+      "release_date": "2021-05-04"
+    },
+    "book_2": {
+      "id": "book_2",
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "narrator": "James Clear",
+      "duration": 45000,
+      "rating": 4.9,
+      "price": 24.99,
+      "summary": "Transform your life with tiny changes in behavior, starting now.",
+      "categories": ["Self Development", "Psychology", "Productivity"],
+      "cover_url": "https://images.audible.com/atomic-habits.jpg",
+      "release_date": "2018-10-16"
+    },
+    "book_3": {
+      "id": "book_3",
+      "title": "The Psychology of Money",
+      "author": "Morgan Housel",
+      "narrator": "Chris Hill",
+      "duration": 51000,
+      "rating": 4.7,
+      "price": 19.99,
+      "summary": "Timeless lessons on wealth, greed, and happiness.",
+      "categories": ["Business", "Finance", "Psychology"],
+      "cover_url": "https://images.audible.com/psychology-of-money.jpg",
+      "release_date": "2020-09-08"
+    }
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Credit Karma Public API",
+    "version": "1.0.0",
+    "description": "API for credit score monitoring and financial recommendations"
+  },
+  "paths": {
+    "/api/v1/credit-scores": {
+      "get": {
+        "summary": "Get user's credit scores",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Credit scores from different bureaus",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditScores"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/credit-factors": {
+      "get": {
+        "summary": "Get credit score factors",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Credit factors affecting score",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CreditFactor"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/recommendations": {
+      "get": {
+        "summary": "Get financial product recommendations",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personalized financial recommendations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FinancialProduct"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/credit-report": {
+      "get": {
+        "summary": "Get detailed credit report",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detailed credit report",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditReport"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreditScores": {
+        "type": "object",
+        "properties": {
+          "transunion": {
+            "type": "object",
+            "properties": {
+              "score": {"type": "integer"},
+              "last_updated": {"type": "string"}
+            }
+          },
+          "equifax": {
+            "type": "object",
+            "properties": {
+              "score": {"type": "integer"},
+              "last_updated": {"type": "string"}
+            }
+          }
+        }
+      },
+      "CreditFactor": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "impact": {"type": "string"},
+          "description": {"type": "string"},
+          "recommendation": {"type": "string"}
+        }
+      },
+      "FinancialProduct": {
+        "type": "object",
+        "properties": {
+          "type": {"type": "string"},
+          "provider": {"type": "string"},
+          "name": {"type": "string"},
+          "apr": {"type": "number"},
+          "terms": {"type": "string"},
+          "approval_odds": {"type": "string"},
+          "benefits": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "CreditReport": {
+        "type": "object",
+        "properties": {
+          "accounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreditAccount"
+            }
+          },
+          "inquiries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreditInquiry"
+            }
+          },
+          "personal_info": {
+            "$ref": "#/components/schemas/PersonalInfo"
+          }
+        }
+      },
+      "CreditAccount": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "type": {"type": "string"},
+          "balance": {"type": "number"},
+          "credit_limit": {"type": "number"},
+          "payment_status": {"type": "string"},
+          "payment_history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentHistory"
+            }
+          }
+        }
+      },
+      "PaymentHistory": {
+        "type": "object",
+        "properties": {
+          "date": {"type": "string"},
+          "status": {"type": "string"},
+          "amount": {"type": "number"}
+        }
+      },
+      "CreditInquiry": {
+        "type": "object",
+        "properties": {
+          "date": {"type": "string"},
+          "creditor": {"type": "string"},
+          "type": {"type": "string"}
+        }
+      },
+      "PersonalInfo": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "addresses": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "employers": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      }
+    }
+  }
+}

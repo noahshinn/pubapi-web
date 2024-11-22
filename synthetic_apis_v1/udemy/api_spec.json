@@ -1,0 +1,245 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Udemy Public API",
+    "version": "1.0.0",
+    "description": "API for online learning platform"
+  },
+  "paths": {
+    "/api/v1/courses": {
+      "get": {
+        "summary": "Get available courses",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of courses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Course"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/courses/{courseId}": {
+      "get": {
+        "summary": "Get course details",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Course details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{email}/courses": {
+      "get": {
+        "summary": "Get user's enrolled courses",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of enrolled courses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EnrolledCourse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/courses/{courseId}/enroll": {
+      "post": {
+        "summary": "Enroll in a course",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnrollmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Enrollment successful"
+          }
+        }
+      }
+    },
+    "/api/v1/courses/{courseId}/progress": {
+      "put": {
+        "summary": "Update course progress",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Progress updated successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Course": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "instructor": {"type": "string"},
+          "category": {"type": "string"},
+          "price": {"type": "number"},
+          "rating": {"type": "number"},
+          "students_count": {"type": "integer"}
+        }
+      },
+      "CourseDetail": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "instructor": {"type": "string"},
+          "category": {"type": "string"},
+          "price": {"type": "number"},
+          "rating": {"type": "number"},
+          "students_count": {"type": "integer"},
+          "curriculum": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Section"
+            }
+          }
+        }
+      },
+      "Section": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "lectures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Lecture"
+            }
+          }
+        }
+      },
+      "Lecture": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "duration": {"type": "integer"},
+          "type": {"type": "string"}
+        }
+      },
+      "EnrolledCourse": {
+        "type": "object",
+        "properties": {
+          "course": {"$ref": "#/components/schemas/Course"},
+          "progress": {"type": "number"},
+          "last_accessed": {"type": "string"},
+          "completion_certificate": {"type": "string"}
+        }
+      },
+      "EnrollmentRequest": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "payment_method": {"type": "string"}
+        }
+      },
+      "ProgressUpdate": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "lecture_id": {"type": "string"},
+          "completed": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}

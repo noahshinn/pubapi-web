@@ -1,0 +1,152 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "avatar": "https://example.com/avatars/casey.jpg",
+      "subscriptions": [
+        {
+          "id": "channel_1",
+          "name": "TechTalks",
+          "description": "Latest in technology and gadgets",
+          "subscribers": 1200000,
+          "avatar_url": "https://example.com/channels/techtalks.jpg",
+          "verified": true,
+          "created_at": "2020-01-15T00:00:00Z"
+        },
+        {
+          "id": "channel_2",
+          "name": "CookingWithJoy",
+          "description": "Easy and delicious recipes",
+          "subscribers": 800000,
+          "avatar_url": "https://example.com/channels/cookingwithjoy.jpg",
+          "verified": true,
+          "created_at": "2019-06-20T00:00:00Z"
+        }
+      ],
+      "playlists": [
+        {
+          "id": "pl_1",
+          "title": "Favorite Tech Reviews",
+          "description": "Best tech review videos",
+          "visibility": "private",
+          "video_count": 2,
+          "videos": [
+            {
+              "id": "vid_1",
+              "title": "iPhone 15 Pro Review",
+              "description": "Comprehensive review of the latest iPhone",
+              "thumbnail_url": "https://example.com/thumbnails/iphone15.jpg",
+              "channel": {
+                "id": "channel_1",
+                "name": "TechTalks"
+              },
+              "views": 1500000,
+              "likes": 125000,
+              "duration": 915,
+              "published_at": "2023-12-15T10:00:00Z"
+            },
+            {
+              "id": "vid_2",
+              "title": "MacBook Pro M3 Review",
+              "description": "In-depth look at the new MacBook Pro",
+              "thumbnail_url": "https://example.com/thumbnails/macbookm3.jpg",
+              "channel": {
+                "id": "channel_1",
+                "name": "TechTalks"
+              },
+              "views": 1200000,
+              "likes": 98000,
+              "duration": 1140,
+              "published_at": "2023-12-20T14:00:00Z"
+            }
+          ],
+          "created_at": "2023-12-15T15:00:00Z",
+          "updated_at": "2023-12-20T14:30:00Z"
+        },
+        {
+          "id": "pl_2",
+          "title": "Cooking Basics",
+          "description": "Essential cooking tutorials",
+          "visibility": "public",
+          "video_count": 1,
+          "videos": [
+            {
+              "id": "vid_3",
+              "title": "Perfect Pasta Basics",
+              "description": "Learn to cook pasta like a pro",
+              "thumbnail_url": "https://example.com/thumbnails/pasta.jpg",
+              "channel": {
+                "id": "channel_2",
+                "name": "CookingWithJoy"
+              },
+              "views": 750000,
+              "likes": 65000,
+              "duration": 720,
+              "published_at": "2023-12-18T16:00:00Z"
+            }
+          ],
+          "created_at": "2023-12-18T17:00:00Z",
+          "updated_at": "2023-12-18T17:00:00Z"
+        }
+      ],
+      "watch_history": [
+        {
+          "id": "vid_1",
+          "title": "iPhone 15 Pro Review",
+          "watched_at": "2024-01-15T20:00:00Z"
+        },
+        {
+          "id": "vid_3",
+          "title": "Perfect Pasta Basics",
+          "watched_at": "2024-01-14T19:30:00Z"
+        }
+      ],
+      "joined_at": "2020-03-15T00:00:00Z"
+    }
+  },
+  "videos": {
+    "vid_1": {
+      "id": "vid_1",
+      "title": "iPhone 15 Pro Review",
+      "description": "Comprehensive review of the latest iPhone",
+      "thumbnail_url": "https://example.com/thumbnails/iphone15.jpg",
+      "channel": {
+        "id": "channel_1",
+        "name": "TechTalks"
+      },
+      "views": 1500000,
+      "likes": 125000,
+      "duration": 915,
+      "published_at": "2023-12-15T10:00:00Z"
+    },
+    "vid_2": {
+      "id": "vid_2",
+      "title": "MacBook Pro M3 Review",
+      "description": "In-depth look at the new MacBook Pro",
+      "thumbnail_url": "https://example.com/thumbnails/macbookm3.jpg",
+      "channel": {
+        "id": "channel_1",
+        "name": "TechTalks"
+      },
+      "views": 1200000,
+      "likes": 98000,
+      "duration": 1140,
+      "published_at": "2023-12-20T14:00:00Z"
+    },
+    "vid_3": {
+      "id": "vid_3",
+      "title": "Perfect Pasta Basics",
+      "description": "Learn to cook pasta like a pro",
+      "thumbnail_url": "https://example.com/thumbnails/pasta.jpg",
+      "channel": {
+        "id": "channel_2",
+        "name": "CookingWithJoy"
+      },
+      "views": 750000,
+      "likes": 65000,
+      "duration": 720,
+      "published_at": "2023-12-18T16:00:00Z"
+    }
+  }
+}

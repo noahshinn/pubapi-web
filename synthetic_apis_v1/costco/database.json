@@ -1,0 +1,98 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "address": {
+        "street": "789 Tech Avenue",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94105",
+        "latitude": 37.7849,
+        "longitude": -122.3968
+      },
+      "membership": {
+        "id": "mem_123456",
+        "type": "executive",
+        "status": "active",
+        "expiration_date": "2025-01-15T00:00:00Z",
+        "member_since": "2020-03-15T00:00:00Z",
+        "auto_renewal": true
+      }
+    }
+  },
+  "products": {
+    "prod_1": {
+      "id": "prod_1",
+      "name": "Kirkland Signature Paper Towels",
+      "category": "household",
+      "price": 19.99,
+      "item_number": "123456",
+      "description": "12-roll package, 2-ply premium paper towels",
+      "in_stock": true,
+      "is_member_only": false
+    },
+    "prod_2": {
+      "id": "prod_2",
+      "name": "Organic Bananas",
+      "category": "produce",
+      "price": 1.99,
+      "item_number": "789012",
+      "description": "3 lb bag of organic bananas",
+      "in_stock": true,
+      "is_member_only": false
+    },
+    "prod_3": {
+      "id": "prod_3",
+      "name": "Executive Member Only Wine",
+      "category": "wine",
+      "price": 99.99,
+      "item_number": "345678",
+      "description": "Premium wine selection",
+      "in_stock": true,
+      "is_member_only": true
+    }
+  },
+  "warehouses": {
+    "wh_1": {
+      "id": "wh_1",
+      "name": "San Francisco Warehouse",
+      "address": {
+        "street": "450 10th Street",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94103",
+        "latitude": 37.7749,
+        "longitude": -122.4194
+      },
+      "phone": "+1-555-9876",
+      "hours": "Mon-Fri: 10AM-8:30PM, Sat-Sun: 9:30AM-6PM",
+      "services": ["pharmacy", "optical", "tire_center", "food_court"]
+    }
+  },
+  "orders": {
+    "ord_1": {
+      "id": "ord_1",
+      "user_email": "casey.wringer@email.com",
+      "items": [
+        {
+          "product_id": "prod_1",
+          "quantity": 2,
+          "price": 19.99
+        },
+        {
+          "product_id": "prod_2",
+          "quantity": 3,
+          "price": 1.99
+        }
+      ],
+      "total": 45.95,
+      "tax": 3.79,
+      "warehouse_id": "wh_1",
+      "status": "completed",
+      "order_date": "2024-01-15T14:30:00Z",
+      "updated_at": "2024-01-15T14:30:00Z"
+    }
+  }
+}

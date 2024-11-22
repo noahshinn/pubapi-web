@@ -1,0 +1,233 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "TaskRabbit Public API",
+    "version": "1.0.0",
+    "description": "API for home services and tasks marketplace"
+  },
+  "paths": {
+    "/api/v1/taskers": {
+      "get": {
+        "summary": "Get available taskers",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of available taskers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tasker"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tasks": {
+      "get": {
+        "summary": "Get user's tasks",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of tasks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new task",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTask"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Task created"
+          }
+        }
+      }
+    },
+    "/api/v1/tasks/{taskId}": {
+      "get": {
+        "summary": "Get task details",
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/categories": {
+      "get": {
+        "summary": "Get available task categories",
+        "responses": {
+          "200": {
+            "description": "List of categories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Category"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Tasker": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "hourly_rate": {"type": "number"},
+          "rating": {"type": "number"},
+          "reviews_count": {"type": "integer"},
+          "completed_tasks": {"type": "integer"}
+        }
+      },
+      "Task": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "category": {"type": "string"},
+          "description": {"type": "string"},
+          "status": {"type": "string"},
+          "client": {
+            "$ref": "#/components/schemas/User"
+          },
+          "tasker": {
+            "$ref": "#/components/schemas/Tasker"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "scheduled_time": {"type": "string"},
+          "estimated_duration": {"type": "integer"},
+          "total_cost": {"type": "number"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "name": {"type": "string"},
+          "phone": {"type": "string"}
+        }
+      },
+      "Location": {
+        "type": "object",
+        "properties": {
+          "address": {"type": "string"},
+          "latitude": {"type": "number"},
+          "longitude": {"type": "number"}
+        }
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "base_rate": {"type": "number"}
+        }
+      },
+      "NewTask": {
+        "type": "object",
+        "properties": {
+          "category_id": {"type": "string"},
+          "description": {"type": "string"},
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "scheduled_time": {"type": "string"},
+          "estimated_duration": {"type": "integer"},
+          "tasker_id": {"type": "string"},
+          "user_email": {"type": "string"}
+        }
+      }
+    }
+  }
+}

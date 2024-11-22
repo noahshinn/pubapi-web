@@ -1,0 +1,130 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "address": {
+        "street": "789 Tech Avenue",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94105"
+      },
+      "created_at": "2023-01-01T00:00:00Z"
+    }
+  },
+  "service_categories": {
+    "plumbing": {
+      "id": "plumbing",
+      "name": "Plumbing",
+      "description": "Plumbing installation and repairs",
+      "subcategories": [
+        "Leak Repair",
+        "Pipe Installation",
+        "Water Heater",
+        "Drain Cleaning"
+      ]
+    },
+    "electrical": {
+      "id": "electrical",
+      "name": "Electrical",
+      "description": "Electrical installation and repairs",
+      "subcategories": [
+        "Wiring",
+        "Lighting",
+        "Panel Upgrade",
+        "Generator Installation"
+      ]
+    },
+    "landscaping": {
+      "id": "landscaping",
+      "name": "Landscaping",
+      "description": "Landscape design and maintenance",
+      "subcategories": [
+        "Lawn Care",
+        "Tree Service",
+        "Garden Design",
+        "Irrigation"
+      ]
+    }
+  },
+  "contractors": {
+    "cont_1": {
+      "id": "cont_1",
+      "name": "Bay Area Plumbing Pros",
+      "services": ["plumbing"],
+      "rating": 4.8,
+      "review_count": 156,
+      "verified": true,
+      "service_area": ["94105", "94107", "94108"],
+      "address": {
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94105"
+      }
+    },
+    "cont_2": {
+      "id": "cont_2",
+      "name": "Elite Electric Services",
+      "services": ["electrical"],
+      "rating": 4.9,
+      "review_count": 89,
+      "verified": true,
+      "service_area": ["94105", "94107", "94108"],
+      "address": {
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94107"
+      }
+    }
+  },
+  "projects": {
+    "proj_1": {
+      "id": "proj_1",
+      "user_email": "casey.wringer@email.com",
+      "service_category": "plumbing",
+      "description": "Leaking kitwringer sink needs repair",
+      "status": "completed",
+      "budget_range": {
+        "min": 100,
+        "max": 500
+      },
+      "timeline": "As soon as possible",
+      "contractor": {
+        "id": "cont_1",
+        "name": "Bay Area Plumbing Pros"
+      },
+      "created_at": "2024-01-10T14:30:00Z",
+      "updated_at": "2024-01-11T16:45:00Z"
+    },
+    "proj_2": {
+      "id": "proj_2",
+      "user_email": "casey.wringer@email.com",
+      "service_category": "electrical",
+      "description": "Need to install new light fixtures in living room",
+      "status": "scheduled",
+      "budget_range": {
+        "min": 200,
+        "max": 800
+      },
+      "timeline": "Next week",
+      "contractor": {
+        "id": "cont_2",
+        "name": "Elite Electric Services"
+      },
+      "created_at": "2024-01-15T09:00:00Z",
+      "updated_at": "2024-01-15T10:30:00Z"
+    }
+  },
+  "reviews": {
+    "rev_1": {
+      "id": "rev_1",
+      "contractor_id": "cont_1",
+      "project_id": "proj_1",
+      "user_email": "casey.wringer@email.com",
+      "rating": 5,
+      "comment": "Excellent service! Fixed the leak quickly and professionally.",
+      "created_at": "2024-01-12T10:00:00Z"
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "preferred_seat": "window",
+      "frequent_flyer": ["UA123456", "AA789012"],
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242",
+          "expiry_mm": 12,
+          "expiry_yy": 25
+        }
+      ]
+    }
+  },
+  "flights": {
+    "flight_1": {
+      "id": "flight_1",
+      "airline": "United Airlines",
+      "flight_number": "UA123",
+      "origin": {
+        "city": "San Francisco",
+        "country": "USA",
+        "airport": "SFO"
+      },
+      "destination": {
+        "city": "New York",
+        "country": "USA",
+        "airport": "JFK"
+      },
+      "departure_time": "2024-02-01T10:00:00Z",
+      "arrival_time": "2024-02-01T18:30:00Z",
+      "price": 399.99,
+      "seats_available": 45,
+      "class": "economy"
+    },
+    "flight_2": {
+      "id": "flight_2",
+      "airline": "American Airlines",
+      "flight_number": "AA456",
+      "origin": {
+        "city": "San Francisco",
+        "country": "USA",
+        "airport": "SFO"
+      },
+      "destination": {
+        "city": "Chicago",
+        "country": "USA",
+        "airport": "ORD"
+      },
+      "departure_time": "2024-02-02T08:15:00Z",
+      "arrival_time": "2024-02-02T14:45:00Z",
+      "price": 299.99,
+      "seats_available": 32,
+      "class": "economy"
+    }
+  },
+  "hotels": {
+    "hotel_1": {
+      "id": "hotel_1",
+      "name": "Grand Hyatt New York",
+      "location": {
+        "city": "New York",
+        "country": "USA"
+      },
+      "rating": 4.5,
+      "price_per_night": 299.99,
+      "amenities": [
+        "WiFi",
+        "Pool",
+        "Gym",
+        "Restaurant",
+        "Room Service"
+      ],
+      "room_types": [
+        "Standard",
+        "Deluxe",
+        "Suite"
+      ]
+    },
+    "hotel_2": {
+      "id": "hotel_2",
+      "name": "Chicago Marriott Downtown",
+      "location": {
+        "city": "Chicago",
+        "country": "USA"
+      },
+      "rating": 4.3,
+      "price_per_night": 249.99,
+      "amenities": [
+        "WiFi",
+        "Gym",
+        "Restaurant",
+        "Business Center"
+      ],
+      "room_types": [
+        "Standard",
+        "Executive",
+        "Suite"
+      ]
+    }
+  },
+  "bookings": {
+    "booking_1": {
+      "id": "booking_1",
+      "user_email": "casey.wringer@email.com",
+      "type": "flight",
+      "status": "confirmed",
+      "details": {
+        "id": "flight_1",
+        "airline": "United Airlines",
+        "flight_number": "UA123"
+      },
+      "total_price": 399.99,
+      "booking_date": "2024-01-15T14:30:00Z"
+    },
+    "booking_2": {
+      "id": "booking_2",
+      "user_email": "casey.wringer@email.com",
+      "type": "hotel",
+      "status": "confirmed",
+      "details": {
+        "id": "hotel_1",
+        "name": "Grand Hyatt New York"
+      },
+      "total_price": 899.97,
+      "booking_date": "2024-01-15T14:35:00Z"
+    }
+  }
+}

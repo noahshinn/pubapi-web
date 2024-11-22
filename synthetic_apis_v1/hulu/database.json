@@ -1,0 +1,122 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "subscriptionPlan": "premium",
+      "watchlist": ["content_1", "content_3", "content_5"],
+      "watchProgress": [
+        {
+          "contentId": "content_2",
+          "progress": 3600,
+          "lastWatched": "2024-01-15T20:30:00Z",
+          "season": 1,
+          "episode": 5
+        },
+        {
+          "contentId": "content_4",
+          "progress": 1800,
+          "lastWatched": "2024-01-16T21:15:00Z"
+        }
+      ],
+      "preferences": {
+        "subtitleLanguage": "English",
+        "audioLanguage": "English",
+        "maturityRating": "TV-MA",
+        "favoriteGenres": ["Drama", "Sci-Fi", "Comedy"]
+      }
+    }
+  },
+  "content": {
+    "content_1": {
+      "id": "content_1",
+      "title": "The Last Journey",
+      "type": "movie",
+      "description": "A thrilling sci-fi adventure about space exploration",
+      "releaseYear": 2023,
+      "genre": "Sci-Fi",
+      "rating": "PG-13",
+      "duration": 142,
+      "thumbnailUrl": "/images/last-journey.jpg",
+      "streamUrl": "/streams/last-journey"
+    },
+    "content_2": {
+      "id": "content_2",
+      "title": "Tech Valley",
+      "type": "series",
+      "description": "A drama series about Silicon Valley startups",
+      "releaseYear": 2023,
+      "genre": "Drama",
+      "rating": "TV-MA",
+      "episodes": [
+        {
+          "id": "tv_s1e1",
+          "season": 1,
+          "episode": 1,
+          "title": "Pilot",
+          "duration": 45,
+          "streamUrl": "/streams/tech-valley/s1e1"
+        },
+        {
+          "id": "tv_s1e2",
+          "season": 1,
+          "episode": 2,
+          "title": "The Pitch",
+          "duration": 42,
+          "streamUrl": "/streams/tech-valley/s1e2"
+        }
+      ]
+    },
+    "content_3": {
+      "id": "content_3",
+      "title": "Cosmic Laughter",
+      "type": "movie",
+      "description": "A comedy about an alien trying to understand human humor",
+      "releaseYear": 2023,
+      "genre": "Comedy",
+      "rating": "PG-13",
+      "duration": 115,
+      "thumbnailUrl": "/images/cosmic-laughter.jpg",
+      "streamUrl": "/streams/cosmic-laughter"
+    },
+    "content_4": {
+      "id": "content_4",
+      "title": "The Algorithm",
+      "type": "movie",
+      "description": "A thriller about artificial intelligence",
+      "releaseYear": 2024,
+      "genre": "Thriller",
+      "rating": "R",
+      "duration": 128,
+      "thumbnailUrl": "/images/algorithm.jpg",
+      "streamUrl": "/streams/algorithm"
+    },
+    "content_5": {
+      "id": "content_5",
+      "title": "Future Foods",
+      "type": "series",
+      "description": "Documentary series about sustainable food technology",
+      "releaseYear": 2023,
+      "genre": "Documentary",
+      "rating": "TV-PG",
+      "episodes": [
+        {
+          "id": "ff_s1e1",
+          "season": 1,
+          "episode": 1,
+          "title": "Lab-Grown Revolution",
+          "duration": 50,
+          "streamUrl": "/streams/future-foods/s1e1"
+        },
+        {
+          "id": "ff_s1e2",
+          "season": 1,
+          "episode": 2,
+          "title": "Vertical Farming",
+          "duration": 48,
+          "streamUrl": "/streams/future-foods/s1e2"
+        }
+      ]
+    }
+  }
+}

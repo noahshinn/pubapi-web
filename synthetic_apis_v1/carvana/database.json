@@ -1,0 +1,89 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "address": "789 Tech Avenue, San Francisco, CA 94105",
+      "license_number": "D1234567",
+      "license_state": "CA",
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242",
+          "expiry_mm": 12,
+          "expiry_yy": 25
+        }
+      ]
+    }
+  },
+  "vehicles": {
+    "v_1": {
+      "id": "v_1",
+      "make": "Toyota",
+      "model": "RAV4",
+      "year": 2022,
+      "price": 29999.00,
+      "mileage": 15000,
+      "color": "Silver",
+      "vin": "1HGCM82633A123456",
+      "features": [
+        "Backup Camera",
+        "Bluetooth",
+        "Lane Departure Warning",
+        "Apple CarPlay"
+      ],
+      "images": [
+        "rav4_front.jpg",
+        "rav4_side.jpg",
+        "rav4_interior.jpg"
+      ],
+      "condition": "Excellent",
+      "carfax_link": "https://www.carfax.com/VehicleHistory/p/Report.cfx?vin=1HGCM82633A123456",
+      "available": true
+    },
+    "v_2": {
+      "id": "v_2",
+      "make": "Honda",
+      "model": "Civic",
+      "year": 2021,
+      "price": 24999.00,
+      "mileage": 22000,
+      "color": "Blue",
+      "vin": "2HGES16575H123456",
+      "features": [
+        "Sunroof",
+        "Honda Sensing",
+        "Heated Seats",
+        "Android Auto"
+      ],
+      "images": [
+        "civic_front.jpg",
+        "civic_side.jpg",
+        "civic_interior.jpg"
+      ],
+      "condition": "Very Good",
+      "carfax_link": "https://www.carfax.com/VehicleHistory/p/Report.cfx?vin=2HGES16575H123456",
+      "available": true
+    }
+  },
+  "orders": {
+    "ord_1": {
+      "id": "ord_1",
+      "vehicle_id": "v_3",
+      "user_email": "casey.wringer@email.com",
+      "status": "completed",
+      "delivery_date": "2023-12-15T14:00:00Z",
+      "payment_method": "pm_1",
+      "financing_details": {
+        "term_months": 72,
+        "apr": 3.99,
+        "monthly_payment": 458.33,
+        "down_payment": 5000.00
+      },
+      "created_at": "2023-12-01T10:30:00Z",
+      "updated_at": "2023-12-15T14:30:00Z"
+    }
+  }
+}

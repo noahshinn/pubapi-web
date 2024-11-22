@@ -1,0 +1,178 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Geico Insurance API",
+    "version": "1.0.0",
+    "description": "API for insurance quotes and policy management"
+  },
+  "paths": {
+    "/api/v1/quotes/auto": {
+      "post": {
+        "summary": "Get auto insurance quote",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutoQuoteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Insurance quote",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InsuranceQuote"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/policies": {
+      "get": {
+        "summary": "Get user's policies",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of policies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Policy"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/claims": {
+      "get": {
+        "summary": "Get user's claims",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of claims",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Claim"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "File new claim",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewClaim"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Claim filed successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AutoQuoteRequest": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "vehicle": {
+            "type": "object",
+            "properties": {
+              "year": {"type": "integer"},
+              "make": {"type": "string"},
+              "model": {"type": "string"},
+              "vin": {"type": "string"}
+            }
+          },
+          "coverage_type": {"type": "string"},
+          "deductible": {"type": "number"}
+        }
+      },
+      "InsuranceQuote": {
+        "type": "object",
+        "properties": {
+          "quote_id": {"type": "string"},
+          "monthly_premium": {"type": "number"},
+          "coverage_details": {"type": "object"},
+          "expires_at": {"type": "string"}
+        }
+      },
+      "Policy": {
+        "type": "object",
+        "properties": {
+          "policy_number": {"type": "string"},
+          "type": {"type": "string"},
+          "status": {"type": "string"},
+          "premium": {"type": "number"},
+          "coverage": {"type": "object"},
+          "start_date": {"type": "string"},
+          "end_date": {"type": "string"}
+        }
+      },
+      "Claim": {
+        "type": "object",
+        "properties": {
+          "claim_number": {"type": "string"},
+          "policy_number": {"type": "string"},
+          "type": {"type": "string"},
+          "status": {"type": "string"},
+          "description": {"type": "string"},
+          "incident_date": {"type": "string"},
+          "filed_date": {"type": "string"}
+        }
+      },
+      "NewClaim": {
+        "type": "object",
+        "properties": {
+          "policy_number": {"type": "string"},
+          "type": {"type": "string"},
+          "description": {"type": "string"},
+          "incident_date": {"type": "string"}
+        }
+      }
+    }
+  }
+}

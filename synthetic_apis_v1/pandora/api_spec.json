@@ -1,0 +1,204 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Pandora Public API",
+    "version": "1.0.0",
+    "description": "API for music streaming and radio stations"
+  },
+  "paths": {
+    "/api/v1/stations": {
+      "get": {
+        "summary": "Get user's stations",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of user's stations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Station"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new station",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewStation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Station created"
+          }
+        }
+      }
+    },
+    "/api/v1/stations/{stationId}/tracks": {
+      "get": {
+        "summary": "Get next tracks for station",
+        "parameters": [
+          {
+            "name": "stationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of upcoming tracks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Track"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tracks/{trackId}/feedback": {
+      "post": {
+        "summary": "Submit feedback for track",
+        "parameters": [
+          {
+            "name": "trackId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Feedback"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Feedback recorded"
+          }
+        }
+      }
+    },
+    "/api/v1/profile": {
+      "get": {
+        "summary": "Get user profile and preferences",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Station": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "seed_artist": {"type": "string"},
+          "created_at": {"type": "string"},
+          "last_played": {"type": "string"}
+        }
+      },
+      "NewStation": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "seed_artist": {"type": "string"},
+          "user_email": {"type": "string"}
+        }
+      },
+      "Track": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "artist": {"type": "string"},
+          "album": {"type": "string"},
+          "duration": {"type": "integer"},
+          "cover_art": {"type": "string"}
+        }
+      },
+      "Feedback": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["thumbs_up", "thumbs_down", "skip"]
+          },
+          "user_email": {"type": "string"}
+        }
+      },
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "name": {"type": "string"},
+          "subscription_type": {"type": "string"},
+          "preferences": {
+            "type": "object",
+            "properties": {
+              "audio_quality": {"type": "string"},
+              "explicit_content_filter": {"type": "boolean"},
+              "discovery_level": {"type": "string"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

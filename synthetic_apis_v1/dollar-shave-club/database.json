@@ -1,0 +1,105 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "shipping_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "payment_method": "pm_1",
+      "created_at": "2023-06-15T10:00:00Z"
+    }
+  },
+  "products": {
+    "razor_1": {
+      "id": "razor_1",
+      "name": "The Executive",
+      "description": "Six-blade razor with precision trimmer",
+      "category": "razors",
+      "price": 9.99,
+      "subscription_price": 7.99,
+      "image_url": "https://example.com/images/executive.jpg",
+      "in_stock": true
+    },
+    "razor_2": {
+      "id": "razor_2",
+      "name": "The 4X",
+      "description": "Four-blade razor for a close shave",
+      "category": "razors",
+      "price": 7.99,
+      "subscription_price": 5.99,
+      "image_url": "https://example.com/images/4x.jpg",
+      "in_stock": true
+    },
+    "cream_1": {
+      "id": "cream_1",
+      "name": "Dr. Carver's Shave Butter",
+      "description": "Premium shaving cream",
+      "category": "shaving",
+      "price": 8.99,
+      "subscription_price": 6.99,
+      "image_url": "https://example.com/images/shave-butter.jpg",
+      "in_stock": true
+    }
+  },
+  "subscriptions": {
+    "sub_1": {
+      "id": "sub_1",
+      "user_email": "casey.wringer@email.com",
+      "product": {
+        "id": "razor_1",
+        "name": "The Executive"
+      },
+      "frequency": "monthly",
+      "next_delivery": "2024-02-15T00:00:00Z",
+      "status": "active",
+      "created_at": "2024-01-15T10:00:00Z"
+    },
+    "sub_2": {
+      "id": "sub_2",
+      "user_email": "casey.wringer@email.com",
+      "product": {
+        "id": "cream_1",
+        "name": "Dr. Carver's Shave Butter"
+      },
+      "frequency": "bimonthly",
+      "next_delivery": "2024-03-15T00:00:00Z",
+      "status": "active",
+      "created_at": "2024-01-15T10:00:00Z"
+    }
+  },
+  "orders": {
+    "ord_1": {
+      "id": "ord_1",
+      "subscription_id": "sub_1",
+      "items": [
+        {
+          "product_id": "razor_1",
+          "name": "The Executive",
+          "quantity": 1,
+          "price": 7.99
+        }
+      ],
+      "status": "delivered",
+      "total": 7.99,
+      "shipping_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "tracking_number": "1Z999AA1234567890",
+      "created_at": "2024-01-15T10:00:00Z"
+    },
+    "ord_2": {
+      "id": "ord_2",
+      "subscription_id": "sub_2",
+      "items": [
+        {
+          "product_id": "cream_1",
+          "name": "Dr. Carver's Shave Butter",
+          "quantity": 1,
+          "price": 6.99
+        }
+      ],
+      "status": "shipped",
+      "total": 6.99,
+      "shipping_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "tracking_number": "1Z999AA1234567891",
+      "created_at": "2024-01-15T10:00:00Z"
+    }
+  }
+}

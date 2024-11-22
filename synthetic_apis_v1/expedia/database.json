@@ -1,0 +1,121 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "address": {
+        "street": "789 Tech Avenue",
+        "city": "San Francisco",
+        "state": "CA",
+        "country": "USA",
+        "zip_code": "94105"
+      },
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242",
+          "expiry_mm": 12,
+          "expiry_yy": 25
+        }
+      ]
+    }
+  },
+  "hotels": {
+    "hotel_1": {
+      "id": "hotel_1",
+      "name": "Grand Hyatt San Francisco",
+      "rating": 4.5,
+      "address": {
+        "street": "345 Stockton Street",
+        "city": "San Francisco",
+        "state": "CA",
+        "country": "USA",
+        "zip_code": "94108"
+      },
+      "price_per_night": 299.99,
+      "amenities": [
+        "WiFi",
+        "Pool",
+        "Spa",
+        "Restaurant",
+        "Fitness Center"
+      ],
+      "room_types": [
+        {
+          "id": "room_1",
+          "type": "Deluxe King",
+          "price": 299.99,
+          "capacity": 2,
+          "available": true
+        },
+        {
+          "id": "room_2",
+          "type": "Executive Suite",
+          "price": 499.99,
+          "capacity": 4,
+          "available": true
+        }
+      ]
+    }
+  },
+  "flights": {
+    "flight_1": {
+      "id": "flight_1",
+      "airline": "United Airlines",
+      "flight_number": "UA123",
+      "origin": "SFO",
+      "destination": "JFK",
+      "departure_time": "2024-02-01T10:00:00Z",
+      "arrival_time": "2024-02-01T18:30:00Z",
+      "price": 399.99,
+      "seats_available": 45,
+      "class": "Economy"
+    },
+    "flight_2": {
+      "id": "flight_2",
+      "airline": "Delta Airlines",
+      "flight_number": "DL456",
+      "origin": "SFO",
+      "destination": "LAX",
+      "departure_time": "2024-02-02T08:00:00Z",
+      "arrival_time": "2024-02-02T09:30:00Z",
+      "price": 199.99,
+      "seats_available": 32,
+      "class": "Economy"
+    }
+  },
+  "bookings": {
+    "booking_1": {
+      "id": "booking_1",
+      "type": "hotel",
+      "user_email": "casey.wringer@email.com",
+      "status": "confirmed",
+      "hotel": {
+        "id": "hotel_1",
+        "name": "Grand Hyatt San Francisco"
+      },
+      "check_in": "2024-02-15T15:00:00Z",
+      "check_out": "2024-02-18T11:00:00Z",
+      "guests": 2,
+      "total_price": 899.97,
+      "payment_method": "pm_1",
+      "created_at": "2024-01-15T18:30:00Z"
+    },
+    "booking_2": {
+      "id": "booking_2",
+      "type": "flight",
+      "user_email": "casey.wringer@email.com",
+      "status": "confirmed",
+      "flight": {
+        "id": "flight_1",
+        "airline": "United Airlines",
+        "flight_number": "UA123"
+      },
+      "total_price": 399.99,
+      "payment_method": "pm_1",
+      "created_at": "2024-01-16T14:20:00Z"
+    }
+  }
+}

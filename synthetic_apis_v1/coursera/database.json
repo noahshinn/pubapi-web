@@ -1,0 +1,142 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "join_date": "2023-06-15T00:00:00Z",
+      "interests": ["Computer Science", "Data Science", "Machine Learning"],
+      "certifications": ["Python Programming", "Data Analysis Fundamentals"]
+    }
+  },
+  "courses": {
+    "course_1": {
+      "id": "course_1",
+      "title": "Introduction to Machine Learning",
+      "description": "Learn the fundamentals of machine learning algorithms and applications",
+      "category": "Computer Science",
+      "difficulty": "intermediate",
+      "instructor": "Dr. James Wilson",
+      "duration_weeks": 8,
+      "rating": 4.7,
+      "modules": [
+        {
+          "id": "module_1",
+          "title": "Supervised Learning",
+          "description": "Introduction to supervised learning algorithms",
+          "content": "Video lectures and interactive exercises",
+          "duration": 120,
+          "order": 1,
+          "quiz_id": "quiz_1"
+        },
+        {
+          "id": "module_2",
+          "title": "Unsupervised Learning",
+          "description": "Introduction to clustering and dimensionality reduction",
+          "content": "Video lectures and programming assignments",
+          "duration": 150,
+          "order": 2,
+          "quiz_id": "quiz_2"
+        }
+      ]
+    },
+    "course_2": {
+      "id": "course_2",
+      "title": "Data Science with Python",
+      "description": "Comprehensive course on data analysis using Python",
+      "category": "Data Science",
+      "difficulty": "beginner",
+      "instructor": "Dr. Emily Rodriguez",
+      "duration_weeks": 6,
+      "rating": 4.8,
+      "modules": [
+        {
+          "id": "module_3",
+          "title": "Python Basics",
+          "description": "Introduction to Python programming",
+          "content": "Video lectures and coding exercises",
+          "duration": 90,
+          "order": 1,
+          "quiz_id": "quiz_3"
+        },
+        {
+          "id": "module_4",
+          "title": "Data Analysis with Pandas",
+          "description": "Working with data using Pandas library",
+          "content": "Video lectures and data projects",
+          "duration": 180,
+          "order": 2,
+          "quiz_id": "quiz_4"
+        }
+      ]
+    }
+  },
+  "enrollments": {
+    "enroll_1": {
+      "id": "enroll_1",
+      "course_id": "course_1",
+      "user_email": "casey.wringer@email.com",
+      "status": "active",
+      "enrolled_at": "2024-01-10T00:00:00Z",
+      "last_accessed": "2024-01-16T14:30:00Z",
+      "progress": {
+        "completed_modules": ["module_1"],
+        "completion_percentage": 50.0,
+        "current_module": "module_2",
+        "last_quiz_score": 95.0,
+        "quiz_attempts": [
+          {
+            "quiz_id": "quiz_1",
+            "score": 95.0,
+            "timestamp": "2024-01-15T16:00:00Z"
+          }
+        ]
+      }
+    },
+    "enroll_2": {
+      "id": "enroll_2",
+      "course_id": "course_2",
+      "user_email": "casey.wringer@email.com",
+      "status": "completed",
+      "enrolled_at": "2023-12-01T00:00:00Z",
+      "last_accessed": "2023-12-30T18:45:00Z",
+      "progress": {
+        "completed_modules": ["module_3", "module_4"],
+        "completion_percentage": 100.0,
+        "current_module": "module_4",
+        "last_quiz_score": 98.0,
+        "quiz_attempts": [
+          {
+            "quiz_id": "quiz_3",
+            "score": 92.0,
+            "timestamp": "2023-12-15T15:30:00Z"
+          },
+          {
+            "quiz_id": "quiz_4",
+            "score": 98.0,
+            "timestamp": "2023-12-30T18:45:00Z"
+          }
+        ]
+      }
+    }
+  },
+  "quizzes": {
+    "quiz_1": {
+      "id": "quiz_1",
+      "questions": [
+        {
+          "id": "q1",
+          "text": "What is supervised learning?",
+          "options": [
+            "Learning without labels",
+            "Learning with labeled data",
+            "Learning without data",
+            "Learning without supervision"
+          ],
+          "answer": 1,
+          "points": 10
+        }
+      ],
+      "pass_score": 80.0
+    }
+  }
+}

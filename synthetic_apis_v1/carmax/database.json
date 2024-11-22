@@ -1,0 +1,97 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "saved_cars": [
+        {
+          "car": {
+            "id": "car_1",
+            "make": "Honda",
+            "model": "Civic",
+            "year": 2021,
+            "price": 22500,
+            "mileage": 15000,
+            "color": "Silver",
+            "vin": "1HGCM82633A123456",
+            "features": [
+              "Backup Camera",
+              "Bluetooth",
+              "Apple CarPlay",
+              "Lane Departure Warning"
+            ],
+            "images": [
+              "https://carmax-images.s3.amazonaws.com/car_1_front.jpg",
+              "https://carmax-images.s3.amazonaws.com/car_1_interior.jpg"
+            ],
+            "added_at": "2024-01-10T10:00:00Z"
+          },
+          "saved_at": "2024-01-15T14:30:00Z",
+          "notes": "Great fuel economy, perfect for commuting"
+        }
+      ]
+    }
+  },
+  "cars": {
+    "car_1": {
+      "id": "car_1",
+      "make": "Honda",
+      "model": "Civic",
+      "year": 2021,
+      "price": 22500,
+      "mileage": 15000,
+      "color": "Silver",
+      "vin": "1HGCM82633A123456",
+      "features": [
+        "Backup Camera",
+        "Bluetooth",
+        "Apple CarPlay",
+        "Lane Departure Warning"
+      ],
+      "images": [
+        "https://carmax-images.s3.amazonaws.com/car_1_front.jpg",
+        "https://carmax-images.s3.amazonaws.com/car_1_interior.jpg"
+      ],
+      "added_at": "2024-01-10T10:00:00Z"
+    },
+    "car_2": {
+      "id": "car_2",
+      "make": "Toyota",
+      "model": "RAV4",
+      "year": 2022,
+      "price": 28900,
+      "mileage": 12000,
+      "color": "Blue",
+      "vin": "2T3RFREV5NW123456",
+      "features": [
+        "All-Wheel Drive",
+        "Sunroof",
+        "Toyota Safety Sense",
+        "Wireless Charging"
+      ],
+      "images": [
+        "https://carmax-images.s3.amazonaws.com/car_2_front.jpg",
+        "https://carmax-images.s3.amazonaws.com/car_2_interior.jpg"
+      ],
+      "added_at": "2024-01-12T15:00:00Z"
+    }
+  },
+  "appointments": {
+    "apt_1": {
+      "id": "apt_1",
+      "car": {
+        "id": "car_2",
+        "make": "Toyota",
+        "model": "RAV4",
+        "year": 2022
+      },
+      "user_email": "casey.wringer@email.com",
+      "datetime": "2024-01-20T14:00:00Z",
+      "location": "CarMax San Francisco",
+      "status": "confirmed",
+      "created_at": "2024-01-16T10:00:00Z",
+      "updated_at": "2024-01-16T10:30:00Z"
+    }
+  }
+}

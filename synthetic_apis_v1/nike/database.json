@@ -1,0 +1,75 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "shipping_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "shoe_size": "8.5",
+      "clothing_size": "M",
+      "joined_at": "2023-01-15T00:00:00Z"
+    }
+  },
+  "products": {
+    "prod_1": {
+      "id": "prod_1",
+      "name": "Nike Air Zoom Pegasus 38",
+      "category": "running",
+      "gender": "women",
+      "price": 120.00,
+      "sizes": ["6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10"],
+      "colors": ["Black/White", "White/Flash Crimson", "Football Grey"],
+      "description": "The Nike Air Zoom Pegasus 38 continues to put a spring in your step with the same responsive foam as its predecessor."
+    },
+    "prod_2": {
+      "id": "prod_2",
+      "name": "Nike Dri-FIT Running Tank",
+      "category": "apparel",
+      "gender": "women",
+      "price": 35.00,
+      "sizes": ["XS", "S", "M", "L", "XL"],
+      "colors": ["Black", "White", "Pink"],
+      "description": "The Nike Dri-FIT Running Tank helps keep you cool and dry during your run."
+    }
+  },
+  "orders": {
+    "ord_1": {
+      "id": "ord_1",
+      "user_email": "casey.wringer@email.com",
+      "items": [
+        {
+          "product_id": "prod_1",
+          "size": "8.5",
+          "color": "Black/White",
+          "quantity": 1,
+          "price": 120.00
+        }
+      ],
+      "status": "delivered",
+      "total": 120.00,
+      "shipping_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "tracking_number": "1Z999AA1234567890",
+      "created_at": "2024-01-10T15:30:00Z",
+      "updated_at": "2024-01-15T12:00:00Z"
+    }
+  },
+  "activities": {
+    "act_1": {
+      "id": "act_1",
+      "user_email": "casey.wringer@email.com",
+      "type": "running",
+      "duration": 45,
+      "distance": 5.2,
+      "calories": 513,
+      "date": "2024-01-15T08:00:00Z"
+    },
+    "act_2": {
+      "id": "act_2",
+      "user_email": "casey.wringer@email.com",
+      "type": "walking",
+      "duration": 30,
+      "distance": 2.1,
+      "calories": 156,
+      "date": "2024-01-16T17:30:00Z"
+    }
+  }
+}

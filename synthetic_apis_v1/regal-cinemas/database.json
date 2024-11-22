@@ -1,0 +1,116 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242"
+        }
+      ]
+    }
+  },
+  "theaters": {
+    "th_1": {
+      "id": "th_1",
+      "name": "Regal City Center",
+      "address": "123 Main Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94105",
+      "latitude": 37.7897,
+      "longitude": -122.3972,
+      "amenities": ["IMAX", "Dolby Atmos", "Recliner Seats"]
+    },
+    "th_2": {
+      "id": "th_2",
+      "name": "Regal Bay Plaza",
+      "address": "456 Market Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94111",
+      "latitude": 37.7937,
+      "longitude": -122.3965,
+      "amenities": ["RPX", "Recliner Seats"]
+    }
+  },
+  "movies": {
+    "mov_1": {
+      "id": "mov_1",
+      "title": "The Matrix Resurrections",
+      "rating": "PG-13",
+      "runtime": 148,
+      "genre": "Action/Sci-Fi",
+      "synopsis": "Return to a world of two realities: one, everyday life; the other, what lies behind it.",
+      "poster_url": "https://example.com/matrix.jpg",
+      "trailer_url": "https://example.com/matrix-trailer.mp4",
+      "release_date": "2024-01-15T00:00:00Z"
+    },
+    "mov_2": {
+      "id": "mov_2",
+      "title": "Dune: Part Two",
+      "rating": "PG-13",
+      "runtime": 155,
+      "genre": "Sci-Fi/Adventure",
+      "synopsis": "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
+      "poster_url": "https://example.com/dune.jpg",
+      "trailer_url": "https://example.com/dune-trailer.mp4",
+      "release_date": "2024-01-16T00:00:00Z"
+    }
+  },
+  "showtimes": {
+    "st_1": {
+      "id": "st_1",
+      "movie_id": "mov_1",
+      "theater_id": "th_1",
+      "start_time": "2024-01-16T19:00:00Z",
+      "end_time": "2024-01-16T21:28:00Z",
+      "screen": "IMAX 1",
+      "format": "IMAX 3D",
+      "price": 24.99,
+      "available_seats": 120
+    },
+    "st_2": {
+      "id": "st_2",
+      "movie_id": "mov_2",
+      "theater_id": "th_2",
+      "start_time": "2024-01-16T20:00:00Z",
+      "end_time": "2024-01-16T22:35:00Z",
+      "screen": "RPX 1",
+      "format": "RPX",
+      "price": 19.99,
+      "available_seats": 85
+    }
+  },
+  "tickets": {
+    "tkt_1": {
+      "id": "tkt_1",
+      "showtime": {
+        "id": "st_1",
+        "movie_id": "mov_1",
+        "theater_id": "th_1",
+        "start_time": "2024-01-15T19:00:00Z",
+        "end_time": "2024-01-15T21:28:00Z",
+        "screen": "IMAX 1",
+        "format": "IMAX 3D",
+        "price": 24.99,
+        "available_seats": 118
+      },
+      "movie": {
+        "id": "mov_1",
+        "title": "The Matrix Resurrections"
+      },
+      "theater": {
+        "id": "th_1",
+        "name": "Regal City Center"
+      },
+      "user_email": "casey.wringer@email.com",
+      "seat_count": 2,
+      "total_price": 49.98,
+      "purchase_date": "2024-01-15T10:30:00Z",
+      "qr_code": "tkt_qr_1"
+    }
+  }
+}

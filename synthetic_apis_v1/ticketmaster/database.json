@@ -1,0 +1,117 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242"
+        }
+      ]
+    }
+  },
+  "events": {
+    "evt_1": {
+      "id": "evt_1",
+      "name": "Taylor Swift | The Eras Tour",
+      "category": "Concert",
+      "venue": {
+        "id": "venue_1",
+        "name": "Levi's Stadium",
+        "address": "4900 Marie P DeBartolo Way",
+        "city": "Santa Clara",
+        "state": "CA",
+        "capacity": 68500
+      },
+      "datetime": "2024-07-15T19:00:00Z",
+      "description": "Taylor Swift brings her record-breaking Eras Tour to Levi's Stadium",
+      "image_url": "https://example.com/events/taylor-swift-eras.jpg",
+      "price_ranges": [
+        {
+          "category": "VIP",
+          "price": 899.99,
+          "available": 100
+        },
+        {
+          "category": "Floor",
+          "price": 499.99,
+          "available": 1000
+        },
+        {
+          "category": "Lower Bowl",
+          "price": 299.99,
+          "available": 5000
+        }
+      ],
+      "available_tickets": 6100
+    },
+    "evt_2": {
+      "id": "evt_2",
+      "name": "SF Giants vs LA Dodgers",
+      "category": "Sports",
+      "venue": {
+        "id": "venue_2",
+        "name": "Oracle Park",
+        "address": "24 Willie Mays Plaza",
+        "city": "San Francisco",
+        "state": "CA",
+        "capacity": 41915
+      },
+      "datetime": "2024-06-20T19:15:00Z",
+      "description": "Rivalry game between the San Francisco Giants and Los Angeles Dodgers",
+      "image_url": "https://example.com/events/giants-dodgers.jpg",
+      "price_ranges": [
+        {
+          "category": "Premium",
+          "price": 150.00,
+          "available": 500
+        },
+        {
+          "category": "Field Club",
+          "price": 95.00,
+          "available": 1000
+        },
+        {
+          "category": "View Reserve",
+          "price": 45.00,
+          "available": 2000
+        }
+      ],
+      "available_tickets": 3500
+    }
+  },
+  "orders": {
+    "ord_1": {
+      "id": "ord_1",
+      "user_email": "casey.wringer@email.com",
+      "event": {
+        "id": "evt_1",
+        "name": "Taylor Swift | The Eras Tour"
+      },
+      "tickets": [
+        {
+          "id": "tkt_1",
+          "section": "Lower Bowl",
+          "row": "15",
+          "seat": "12",
+          "price": 299.99,
+          "barcode": "123456789"
+        },
+        {
+          "id": "tkt_2",
+          "section": "Lower Bowl",
+          "row": "15",
+          "seat": "13",
+          "price": 299.99,
+          "barcode": "123456790"
+        }
+      ],
+      "total": 599.98,
+      "status": "confirmed",
+      "created_at": "2024-01-15T10:30:00Z"
+    }
+  }
+}

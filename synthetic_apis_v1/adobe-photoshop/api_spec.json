@@ -1,0 +1,203 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Adobe Photoshop Cloud API",
+    "version": "1.0.0",
+    "description": "API for Adobe Photoshop cloud services"
+  },
+  "paths": {
+    "/api/v1/projects": {
+      "get": {
+        "summary": "Get user's projects",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of projects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new project",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewProject"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Project created"
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{projectId}/layers": {
+      "get": {
+        "summary": "Get project layers",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of layers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Layer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new layer",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewLayer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Layer added"
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{projectId}/export": {
+      "post": {
+        "summary": "Export project",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportOptions"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Export URL"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Project": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "dimensions": {
+            "type": "object",
+            "properties": {
+              "width": {"type": "integer"},
+              "height": {"type": "integer"}
+            }
+          },
+          "created_at": {"type": "string"},
+          "updated_at": {"type": "string"},
+          "thumbnail_url": {"type": "string"}
+        }
+      },
+      "Layer": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "type": {"type": "string"},
+          "visible": {"type": "boolean"},
+          "opacity": {"type": "number"},
+          "blend_mode": {"type": "string"}
+        }
+      },
+      "NewProject": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "width": {"type": "integer"},
+          "height": {"type": "integer"},
+          "color_mode": {"type": "string"}
+        }
+      },
+      "NewLayer": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "type": {"type": "string"},
+          "content": {"type": "string"}
+        }
+      },
+      "ExportOptions": {
+        "type": "object",
+        "properties": {
+          "format": {"type": "string"},
+          "quality": {"type": "integer"},
+          "include_layers": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}

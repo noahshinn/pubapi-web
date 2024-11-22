@@ -1,0 +1,102 @@
+{
+  "accounts": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "devices": [
+        {
+          "id": "dev_1",
+          "phone_number": "+1-555-0123",
+          "model": "iPhone 14 Pro",
+          "status": "active",
+          "plan_id": "plan_1"
+        },
+        {
+          "id": "dev_2",
+          "phone_number": "+1-555-0124",
+          "model": "iPad Pro 12.9",
+          "status": "active",
+          "plan_id": "plan_2"
+        }
+      ],
+      "usage": {
+        "data_used": 15.7,
+        "data_limit": 50.0,
+        "voice_minutes": 245,
+        "texts_sent": 1250,
+        "billing_cycle_end": "2024-02-15T00:00:00Z"
+      },
+      "bills": [
+        {
+          "id": "bill_1",
+          "amount": 145.99,
+          "due_date": "2024-02-01T00:00:00Z",
+          "status": "pending",
+          "statement_date": "2024-01-15T00:00:00Z",
+          "items": [
+            {
+              "description": "Unlimited Elite Plan - Phone",
+              "amount": 85.00
+            },
+            {
+              "description": "iPad Data Plan",
+              "amount": 45.00
+            },
+            {
+              "description": "Device Protection",
+              "amount": 15.99
+            }
+          ]
+        },
+        {
+          "id": "bill_2",
+          "amount": 145.99,
+          "due_date": "2024-01-01T00:00:00Z",
+          "status": "paid",
+          "statement_date": "2023-12-15T00:00:00Z",
+          "items": [
+            {
+              "description": "Unlimited Elite Plan - Phone",
+              "amount": 85.00
+            },
+            {
+              "description": "iPad Data Plan",
+              "amount": 45.00
+            },
+            {
+              "description": "Device Protection",
+              "amount": 15.99
+            }
+          ]
+        }
+      ],
+      "created_at": "2023-01-01T00:00:00Z"
+    }
+  },
+  "plans": [
+    {
+      "id": "plan_1",
+      "name": "Unlimited Elite",
+      "data_limit": 50.0,
+      "price": 85.00,
+      "features": [
+        "Unlimited talk, text, and data",
+        "HD Streaming",
+        "5G Access",
+        "Mobile Hotspot 40GB",
+        "HBO Max Included"
+      ]
+    },
+    {
+      "id": "plan_2",
+      "name": "Tablet Data Plan",
+      "data_limit": 25.0,
+      "price": 45.00,
+      "features": [
+        "Unlimited data",
+        "5G Access",
+        "Mobile Hotspot 15GB"
+      ]
+    }
+  ]
+}

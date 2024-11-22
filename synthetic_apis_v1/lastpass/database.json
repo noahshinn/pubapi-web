@@ -1,0 +1,52 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "encrypted_key": "encrypted_master_key_data",
+      "key_iterations": 100000,
+      "last_login": "2024-01-16T10:30:00Z",
+      "two_factor_enabled": true,
+      "security_questions": [
+        "What was your first pet's name?",
+        "In what city were you born?"
+      ]
+    }
+  },
+  "vaults": {
+    "casey.wringer@email.com": {
+      "user_email": "casey.wringer@email.com",
+      "vault_items": [
+        {
+          "id": "item_1",
+          "type": "login",
+          "name": "Gmail Account",
+          "encrypted_data": "encrypted_login_credentials_for_gmail",
+          "last_modified": "2024-01-15T08:00:00Z"
+        },
+        {
+          "id": "item_2",
+          "type": "login",
+          "name": "DoorDash Account",
+          "encrypted_data": "encrypted_login_credentials_for_doordash",
+          "last_modified": "2024-01-15T09:00:00Z"
+        },
+        {
+          "id": "item_3",
+          "type": "credit_card",
+          "name": "Personal Credit Card",
+          "encrypted_data": "encrypted_credit_card_details",
+          "last_modified": "2024-01-15T10:00:00Z"
+        },
+        {
+          "id": "item_4",
+          "type": "secure_note",
+          "name": "Passport Information",
+          "encrypted_data": "encrypted_passport_details",
+          "last_modified": "2024-01-15T11:00:00Z"
+        }
+      ],
+      "last_modified": "2024-01-16T10:30:00Z",
+      "vault_version": 1
+    }
+  }
+}

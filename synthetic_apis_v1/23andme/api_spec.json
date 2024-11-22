@@ -1,0 +1,177 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "23andMe Public API",
+    "version": "1.0.0",
+    "description": "API for genetic testing and ancestry services"
+  },
+  "paths": {
+    "/api/v1/profile": {
+      "get": {
+        "summary": "Get user's genetic profile",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's genetic profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GeneticProfile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ancestry": {
+      "get": {
+        "summary": "Get user's ancestry composition",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's ancestry composition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AncestryComposition"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/relatives": {
+      "get": {
+        "summary": "Get user's DNA relatives",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of DNA relatives",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Relative"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/health-reports": {
+      "get": {
+        "summary": "Get user's health reports",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of health reports",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HealthReport"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GeneticProfile": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "haplogroup": {"type": "string"},
+          "neanderthal_percentage": {"type": "number"},
+          "sample_id": {"type": "string"},
+          "genotyping_chip": {"type": "string"}
+        }
+      },
+      "AncestryComposition": {
+        "type": "object",
+        "properties": {
+          "populations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "population": {"type": "string"},
+                "percentage": {"type": "number"},
+                "confidence": {"type": "number"}
+              }
+            }
+          }
+        }
+      },
+      "Relative": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "relationship": {"type": "string"},
+          "shared_dna": {"type": "number"},
+          "segments": {"type": "integer"},
+          "ancestry": {"type": "string"}
+        }
+      },
+      "HealthReport": {
+        "type": "object",
+        "properties": {
+          "trait": {"type": "string"},
+          "status": {"type": "string"},
+          "risk_factor": {"type": "number"},
+          "description": {"type": "string"},
+          "recommendations": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      }
+    }
+  }
+}

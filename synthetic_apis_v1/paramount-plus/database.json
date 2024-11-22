@@ -1,0 +1,78 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "subscription_tier": "premium",
+      "join_date": "2023-06-15T00:00:00Z"
+    }
+  },
+  "content": {
+    "movie_1": {
+      "id": "movie_1",
+      "title": "Top Gun: Maverick",
+      "type": "movie",
+      "genre": "action",
+      "description": "After thirty years, Maverick is still pushing the envelope as a top naval aviator.",
+      "duration": 7860,
+      "rating": "PG-13",
+      "release_year": 2022,
+      "thumbnail_url": "/images/top-gun-maverick.jpg",
+      "stream_url": "/streams/top-gun-maverick"
+    },
+    "show_1": {
+      "id": "show_1",
+      "title": "Yellowstone",
+      "type": "show",
+      "genre": "drama",
+      "description": "A ranching family in Montana faces off against others encroaching on their land.",
+      "rating": "TV-MA",
+      "release_year": 2018,
+      "thumbnail_url": "/images/yellowstone.jpg",
+      "episodes": [
+        {
+          "id": "s1e1",
+          "title": "Daybreak",
+          "season_num": 1,
+          "episode_num": 1,
+          "duration": 3600,
+          "description": "John Dutton tries to protect his ranch from developers and other threats.",
+          "stream_url": "/streams/yellowstone/s1e1",
+          "air_date": "2018-06-20T00:00:00Z"
+        }
+      ]
+    }
+  },
+  "watchlist": {
+    "casey.wringer@email.com": [
+      {
+        "content_id": "movie_1",
+        "user_email": "casey.wringer@email.com",
+        "added_at": "2024-01-15T14:30:00Z"
+      },
+      {
+        "content_id": "show_1",
+        "user_email": "casey.wringer@email.com",
+        "added_at": "2024-01-16T18:45:00Z"
+      }
+    ]
+  },
+  "watch_progress": {
+    "casey.wringer@email.com": [
+      {
+        "content_id": "movie_1",
+        "user_email": "casey.wringer@email.com",
+        "position": 3600,
+        "duration": 7860,
+        "last_watched": "2024-01-15T20:00:00Z"
+      },
+      {
+        "content_id": "s1e1",
+        "user_email": "casey.wringer@email.com",
+        "position": 1800,
+        "duration": 3600,
+        "last_watched": "2024-01-16T21:30:00Z"
+      }
+    ]
+  }
+}

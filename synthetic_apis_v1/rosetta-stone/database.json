@@ -1,0 +1,111 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "preferred_langs": ["Spanish", "Mandarin"],
+      "learning_goals": ["Business Communication", "Travel"],
+      "daily_goal_mins": 30,
+      "subscription_type": "premium",
+      "joined_at": "2023-06-15T00:00:00Z"
+    }
+  },
+  "courses": {
+    "spanish_101": {
+      "id": "spanish_101",
+      "language": "Spanish",
+      "level": "Beginner",
+      "title": "Spanish Fundamentals",
+      "description": "Learn basic Spanish conversation and grammar",
+      "duration_weeks": 12,
+      "lessons": [
+        {
+          "id": "sp101_l1",
+          "title": "Basic Greetings",
+          "type": "conversation",
+          "duration_minutes": 20,
+          "order": 1,
+          "content": [
+            {
+              "type": "text",
+              "data": "¡Hola! ¿Cómo estás?",
+              "solution": "Hello! How are you?"
+            }
+          ]
+        },
+        {
+          "id": "sp101_l2",
+          "title": "Numbers 1-20",
+          "type": "vocabulary",
+          "duration_minutes": 25,
+          "order": 2,
+          "content": [
+            {
+              "type": "text",
+              "data": "uno, dos, tres...",
+              "solution": "one, two, three..."
+            }
+          ]
+        }
+      ]
+    },
+    "mandarin_101": {
+      "id": "mandarin_101",
+      "language": "Mandarin",
+      "level": "Beginner",
+      "title": "Mandarin Basics",
+      "description": "Introduction to Mandarin Chinese",
+      "duration_weeks": 12,
+      "lessons": [
+        {
+          "id": "man101_l1",
+          "title": "Basic Greetings",
+          "type": "conversation",
+          "duration_minutes": 20,
+          "order": 1,
+          "content": [
+            {
+              "type": "text",
+              "data": "你好！",
+              "solution": "Hello!"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "user_progress": {
+    "casey.wringer@email.com": [
+      {
+        "user_email": "casey.wringer@email.com",
+        "course_id": "spanish_101",
+        "completed_lessons": ["sp101_l1"],
+        "current_streak": 5,
+        "total_points": 150,
+        "proficiency_level": "Beginner",
+        "last_activity": "2024-01-16T14:30:00Z"
+      },
+      {
+        "user_email": "casey.wringer@email.com",
+        "course_id": "mandarin_101",
+        "completed_lessons": [],
+        "current_streak": 0,
+        "total_points": 0,
+        "proficiency_level": "Beginner",
+        "last_activity": "2024-01-16T14:30:00Z"
+      }
+    ]
+  },
+  "practice_sessions": {
+    "ps_1": {
+      "id": "ps_1",
+      "user_email": "casey.wringer@email.com",
+      "course_id": "spanish_101",
+      "lesson_id": "sp101_l1",
+      "practice_type": "review",
+      "started_at": "2024-01-16T14:00:00Z",
+      "ended_at": "2024-01-16T14:20:00Z",
+      "score": 95
+    }
+  }
+}

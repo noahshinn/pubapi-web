@@ -1,0 +1,143 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "title": "Senior Software Engineer",
+      "company": "TechCorp Inc.",
+      "location": "San Francisco Bay Area",
+      "industry": "Software Development",
+      "about": "Passionate about building scalable systems and mentoring junior developers",
+      "skills": [
+        "Go",
+        "Python",
+        "System Design",
+        "Cloud Architecture",
+        "Team Leadership"
+      ],
+      "experience": [
+        "Senior Software Engineer at TechCorp Inc.",
+        "Software Engineer at StartupCo",
+        "Junior Developer at BigTech"
+      ],
+      "education": [
+        "M.S. Computer Science, Stanford University",
+        "B.S. Computer Science, UC Berkeley"
+      ],
+      "premium_tier": "Executive",
+      "subscribed_since": "2023-01-15T00:00:00Z"
+    }
+  },
+  "profile_insights": {
+    "casey.wringer@email.com": {
+      "profile_views": 450,
+      "search_appearances": 890,
+      "post_impressions": 2300,
+      
+      "viewer_breakdown": {
+        "industries": [
+          {
+            "name": "Software Development",
+            "count": 180
+          },
+          {
+            "name": "Information Technology",
+            "count": 120
+          },
+          {
+            "name": "Financial Services",
+            "count": 90
+          }
+        ],
+        "companies": [
+          {
+            "name": "Google",
+            "count": 45
+          },
+          {
+            "name": "Microsoft",
+            "count": 38
+          },
+          {
+            "name": "Amazon",
+            "count": 32
+          }
+        ]
+      }
+    }
+  },
+  "jobs": [
+    {
+      "id": "job_1",
+      "title": "Principal Software Engineer",
+      "company": "TechGiant Corp",
+      "location": "San Francisco, CA",
+      "salary_range": "$180,000 - $250,000",
+      "description": "Leading technical initiatives and mentoring team members",
+      "match_score": 95,
+      "posted_at": "2024-01-15T00:00:00Z"
+    },
+    {
+      "id": "job_2",
+      "title": "Engineering Manager",
+      "company": "InnovateNow",
+      "location": "Remote",
+      "salary_range": "$160,000 - $220,000",
+      "description": "Managing team of senior engineers and driving technical strategy",
+      "match_score": 88,
+      "posted_at": "2024-01-14T00:00:00Z"
+    }
+  ],
+  "courses": [
+    {
+      "id": "course_1",
+      "title": "Advanced System Design",
+      "author": "Tech Leader Academy",
+      "duration": "8 hours",
+      "level": "Advanced",
+      "description": "Learn to design scalable distributed systems",
+      "completion_rate": 85,
+      "skills_covered": [
+        "System Design",
+        "Scalability",
+        "Distributed Systems"
+      ]
+    },
+    {
+      "id": "course_2",
+      "title": "Leadership in Tech",
+      "author": "Management Experts",
+      "duration": "6 hours",
+      "level": "Intermediate",
+      "description": "Develop essential leadership skills for tech managers",
+      "completion_rate": 92,
+      "skills_covered": [
+        "Team Leadership",
+        "Communication",
+        "Project Management"
+      ]
+    }
+  ],
+  "leads": [
+    {
+      "id": "lead_1",
+      "name": "John Smith",
+      "title": "CTO",
+      "company": "Future Technologies",
+      "industry": "Software Development",
+      "connection_degree": 2,
+      "mutual_connections": 15,
+      "notes": "Interested in cloud architecture solutions"
+    },
+    {
+      "id": "lead_2",
+      "name": "Emily Johnson",
+      "title": "VP of Engineering",
+      "company": "ScaleUp Solutions",
+      "industry": "Information Technology",
+      "connection_degree": 2,
+      "mutual_connections": 8,
+      "notes": "Looking for senior engineers"
+    }
+  ]
+}

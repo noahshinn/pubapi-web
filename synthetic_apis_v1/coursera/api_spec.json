@@ -1,0 +1,203 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Coursera Public API",
+    "version": "1.0.0",
+    "description": "API for online learning platform"
+  },
+  "paths": {
+    "/api/v1/courses": {
+      "get": {
+        "summary": "Get available courses",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "difficulty",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["beginner", "intermediate", "advanced"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of courses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Course"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/enrollments": {
+      "get": {
+        "summary": "Get user's enrolled courses",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of enrolled courses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Enrollment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Enroll in a course",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnrollmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Enrollment successful"
+          }
+        }
+      }
+    },
+    "/api/v1/progress/{enrollmentId}": {
+      "get": {
+        "summary": "Get course progress",
+        "parameters": [
+          {
+            "name": "enrollmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Course progress details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Progress"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update course progress",
+        "parameters": [
+          {
+            "name": "enrollmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Progress updated successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Course": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "category": {"type": "string"},
+          "difficulty": {"type": "string"},
+          "instructor": {"type": "string"},
+          "duration_weeks": {"type": "integer"},
+          "rating": {"type": "number"}
+        }
+      },
+      "Enrollment": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "course_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "status": {"type": "string"},
+          "enrolled_at": {"type": "string"},
+          "last_accessed": {"type": "string"}
+        }
+      },
+      "Progress": {
+        "type": "object",
+        "properties": {
+          "enrollment_id": {"type": "string"},
+          "completed_modules": {"type": "array", "items": {"type": "string"}},
+          "completion_percentage": {"type": "number"},
+          "current_module": {"type": "string"},
+          "last_quiz_score": {"type": "number"}
+        }
+      },
+      "EnrollmentRequest": {
+        "type": "object",
+        "properties": {
+          "course_id": {"type": "string"},
+          "user_email": {"type": "string"}
+        },
+        "required": ["course_id", "user_email"]
+      },
+      "ProgressUpdate": {
+        "type": "object",
+        "properties": {
+          "completed_module": {"type": "string"},
+          "quiz_score": {"type": "number"}
+        }
+      }
+    }
+  }
+}

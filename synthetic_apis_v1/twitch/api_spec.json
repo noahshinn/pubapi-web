@@ -1,0 +1,200 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Twitch Public API",
+    "version": "1.0.0",
+    "description": "API for live streaming service"
+  },
+  "paths": {
+    "/api/v1/streams": {
+      "get": {
+        "summary": "Get live streams",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of live streams",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Stream"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/channels/{channelId}/follow": {
+      "post": {
+        "summary": "Follow a channel",
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Follow successful"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Unfollow a channel",
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Unfollow successful"
+          }
+        }
+      }
+    },
+    "/api/v1/users/{email}/following": {
+      "get": {
+        "summary": "Get user's followed channels",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of followed channels",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Channel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/channels/{channelId}/chat": {
+      "post": {
+        "summary": "Send chat message",
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatMessage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Message sent successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Stream": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "channel": {"$ref": "#/components/schemas/Channel"},
+          "game": {"type": "string"},
+          "viewers": {"type": "integer"},
+          "started_at": {"type": "string"},
+          "thumbnail_url": {"type": "string"}
+        }
+      },
+      "Channel": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "display_name": {"type": "string"},
+          "description": {"type": "string"},
+          "profile_image_url": {"type": "string"},
+          "followers_count": {"type": "integer"},
+          "is_live": {"type": "boolean"}
+        }
+      },
+      "ChatMessage": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "message": {"type": "string"},
+          "emotes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

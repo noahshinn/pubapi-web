@@ -1,0 +1,93 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "ssn": "***-**-1234",
+      "date_of_birth": "1990-05-15",
+      "filing_status": "single",
+      "address": {
+        "street": "789 Tech Avenue",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94105"
+      },
+      "phone": "+1-555-0123",
+      "dependents": []
+    }
+  },
+  "tax_returns": {
+    "tr_2023": {
+      "id": "tr_2023",
+      "user_email": "casey.wringer@email.com",
+      "tax_year": 2023,
+      "status": "in_progress",
+      "filing_type": "1040",
+      "total_income": 125000.00,
+      "total_deductions": 12550.00,
+      "total_tax": 22375.00,
+      "refund_amount": 1500.00,
+      "created_at": "2024-01-15T10:00:00Z",
+      "updated_at": "2024-01-15T10:00:00Z"
+    },
+    "tr_2022": {
+      "id": "tr_2022",
+      "user_email": "casey.wringer@email.com",
+      "tax_year": 2022,
+      "status": "filed",
+      "filing_type": "1040",
+      "total_income": 115000.00,
+      "total_deductions": 12950.00,
+      "total_tax": 20125.00,
+      "refund_amount": 2200.00,
+      "created_at": "2023-02-01T15:30:00Z",
+      "updated_at": "2023-03-15T09:45:00Z"
+    }
+  },
+  "tax_documents": {
+    "doc_1": {
+      "id": "doc_1",
+      "type": "W2",
+      "tax_year": 2023,
+      "file_name": "w2_2023.pdf",
+      "user_email": "casey.wringer@email.com",
+      "uploaded_at": "2024-01-15T10:00:00Z"
+    },
+    "doc_2": {
+      "id": "doc_2",
+      "type": "1099-INT",
+      "tax_year": 2023,
+      "file_name": "1099int_2023.pdf",
+      "user_email": "casey.wringer@email.com",
+      "uploaded_at": "2024-01-15T10:05:00Z"
+    }
+  },
+  "tax_professionals": {
+    "tp_1": {
+      "id": "tp_1",
+      "name": "John Smith",
+      "expertise": "Individual Returns",
+      "years_experience": 15
+    },
+    "tp_2": {
+      "id": "tp_2",
+      "name": "Maria Rodriguez",
+      "expertise": "Small Business",
+      "years_experience": 12
+    }
+  },
+  "appointments": {
+    "apt_1": {
+      "id": "apt_1",
+      "user_email": "casey.wringer@email.com",
+      "tax_professional": {
+        "id": "tp_1",
+        "name": "John Smith",
+        "expertise": "Individual Returns"
+      },
+      "datetime": "2024-02-01T14:00:00Z",
+      "type": "tax_review",
+      "status": "scheduled"
+    }
+  }
+}

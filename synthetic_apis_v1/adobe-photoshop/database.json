@@ -1,0 +1,106 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "subscription": "Creative Cloud All Apps",
+      "storage_used": 5368709120,
+      "storage_limit": 107374182400,
+      "last_login": "2024-01-16T10:30:00Z",
+      "created_at": "2023-01-01T00:00:00Z"
+    }
+  },
+  "projects": {
+    "proj_1": {
+      "id": "proj_1",
+      "user_email": "casey.wringer@email.com",
+      "name": "Website Banner Design",
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "color_mode": "RGB",
+      "layers": [
+        {
+          "id": "layer_1",
+          "name": "Background",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1.0,
+          "blend_mode": "normal",
+          "position": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "id": "layer_2",
+          "name": "Logo",
+          "type": "shape",
+          "visible": true,
+          "opacity": 1.0,
+          "blend_mode": "normal",
+          "position": {
+            "x": 50,
+            "y": 50
+          }
+        },
+        {
+          "id": "layer_3",
+          "name": "Headline Text",
+          "type": "text",
+          "visible": true,
+          "opacity": 0.9,
+          "blend_mode": "normal",
+          "content": "Welcome to Our Site",
+          "position": {
+            "x": 200,
+            "y": 150
+          }
+        }
+      ],
+      "created_at": "2024-01-15T14:30:00Z",
+      "updated_at": "2024-01-16T09:45:00Z",
+      "thumbnail_url": "https://storage.adobe.com/thumbnails/proj_1.jpg"
+    },
+    "proj_2": {
+      "id": "proj_2",
+      "user_email": "casey.wringer@email.com",
+      "name": "Social Media Post",
+      "dimensions": {
+        "width": 1080,
+        "height": 1080
+      },
+      "color_mode": "RGB",
+      "layers": [
+        {
+          "id": "layer_1",
+          "name": "Background Pattern",
+          "type": "raster",
+          "visible": true,
+          "opacity": 0.8,
+          "blend_mode": "multiply",
+          "position": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "id": "layer_2",
+          "name": "Product Image",
+          "type": "raster",
+          "visible": true,
+          "opacity": 1.0,
+          "blend_mode": "normal",
+          "position": {
+            "x": 270,
+            "y": 270
+          }
+        }
+      ],
+      "created_at": "2024-01-16T11:20:00Z",
+      "updated_at": "2024-01-16T11:45:00Z",
+      "thumbnail_url": "https://storage.adobe.com/thumbnails/proj_2.jpg"
+    }
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Nintendo Online API",
+    "version": "1.0.0",
+    "description": "API for Nintendo Online gaming services"
+  },
+  "paths": {
+    "/api/v1/profile": {
+      "get": {
+        "summary": "Get user profile",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User profile information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/friends": {
+      "get": {
+        "summary": "Get friend list",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of friends",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Friend"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/games": {
+      "get": {
+        "summary": "Get user's games library",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of games",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Game"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/games/{gameId}/save-data": {
+      "get": {
+        "summary": "Get game save data",
+        "parameters": [
+          {
+            "name": "gameId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Game save data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SaveData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/online-status": {
+      "post": {
+        "summary": "Update online status",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OnlineStatus"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Status updated successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "nickname": {"type": "string"},
+          "avatar": {"type": "string"},
+          "friend_code": {"type": "string"},
+          "membership_status": {"type": "string"},
+          "membership_expiry": {"type": "string"}
+        }
+      },
+      "Friend": {
+        "type": "object",
+        "properties": {
+          "friend_code": {"type": "string"},
+          "nickname": {"type": "string"},
+          "avatar": {"type": "string"},
+          "online_status": {"type": "string"},
+          "current_game": {"type": "string"}
+        }
+      },
+      "Game": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "last_played": {"type": "string"},
+          "play_time": {"type": "integer"},
+          "has_save_data": {"type": "boolean"}
+        }
+      },
+      "SaveData": {
+        "type": "object",
+        "properties": {
+          "game_id": {"type": "string"},
+          "last_saved": {"type": "string"},
+          "cloud_sync": {"type": "boolean"},
+          "save_size": {"type": "integer"}
+        }
+      },
+      "OnlineStatus": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "status": {"type": "string"},
+          "current_game": {"type": "string"}
+        }
+      }
+    }
+  }
+}

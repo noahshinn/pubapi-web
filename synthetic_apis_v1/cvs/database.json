@@ -1,0 +1,91 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "address": {
+        "street": "789 Tech Avenue",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94105",
+        "latitude": 37.7849,
+        "longitude": -122.3968
+      },
+      "date_of_birth": "1990-05-15",
+      "insurance_card": "BCBS-1234567",
+      "preferred_store": "store_1",
+      "created_at": "2023-01-01T00:00:00Z"
+    }
+  },
+  "prescriptions": {
+    "rx_1": {
+      "id": "rx_1",
+      "user_email": "casey.wringer@email.com",
+      "name": "Lisinopril",
+      "dosage": "10mg",
+      "quantity": 30,
+      "refills_remaining": 2,
+      "last_filled": "2024-01-01T00:00:00Z",
+      "expires": "2024-12-31T00:00:00Z",
+      "status": "active",
+      "prescriber": "Dr. Johnson",
+      "pharmacy_notes": "Take once daily"
+    },
+    "rx_2": {
+      "id": "rx_2",
+      "user_email": "casey.wringer@email.com",
+      "name": "Atorvastatin",
+      "dosage": "20mg",
+      "quantity": 30,
+      "refills_remaining": 3,
+      "last_filled": "2024-01-05T00:00:00Z",
+      "expires": "2024-12-31T00:00:00Z",
+      "status": "active",
+      "prescriber": "Dr. Johnson",
+      "pharmacy_notes": "Take with evening meal"
+    }
+  },
+  "stores": {
+    "store_1": {
+      "id": "store_1",
+      "name": "CVS Pharmacy #1234",
+      "address": {
+        "street": "800 Market Street",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94102",
+        "latitude": 37.7851,
+        "longitude": -122.3968
+      },
+      "phone": "+1-555-9876",
+      "hours": "8:00 AM - 10:00 PM",
+      "has_pharmacy": true,
+      "has_clinic": true,
+      "services": ["Pharmacy", "MinuteClinic", "Photo", "COVID Testing"]
+    }
+  },
+  "appointments": {
+    "apt_1": {
+      "id": "apt_1",
+      "user_email": "casey.wringer@email.com",
+      "type": "vaccination",
+      "datetime": "2024-01-20T14:30:00Z",
+      "store_id": "store_1",
+      "status": "scheduled",
+      "notes": "Flu shot appointment",
+      "created_at": "2024-01-10T00:00:00Z"
+    }
+  },
+  "refill_requests": {
+    "ref_1": {
+      "id": "ref_1",
+      "prescription_id": "rx_1",
+      "user_email": "casey.wringer@email.com",
+      "store_id": "store_1",
+      "preferred_date": "2024-01-25T00:00:00Z",
+      "status": "pending",
+      "created_at": "2024-01-15T00:00:00Z"
+    }
+  }
+}
