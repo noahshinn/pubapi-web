@@ -1,0 +1,241 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Nike",
+    "version": "1.0.0",
+    "description": "API for Nike's e-commerce and fitness tracking platform"
+  },
+  "paths": {
+    "/api/v1/products": {
+      "get": {
+        "summary": "Get product catalog",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["running", "basketball", "training", "lifestyle"]
+            }
+          },
+          {
+            "name": "gender",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["men", "women", "unisex"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/workouts": {
+      "get": {
+        "summary": "Get user's workout history",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of workouts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Workout"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Log new workout",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewWorkout"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Workout logged successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/orders": {
+      "get": {
+        "summary": "Get user's order history",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Place new order",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewOrder"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order placed successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "category": {"type": "string"},
+          "gender": {"type": "string"},
+          "price": {"type": "number"},
+          "colors": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "sizes": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "description": {"type": "string"},
+          "images": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "Workout": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string"},
+          "duration": {"type": "integer"},
+          "distance": {"type": "number"},
+          "calories": {"type": "integer"},
+          "date": {"type": "string"},
+          "shoes": {
+            "$ref": "#/components/schemas/Product"
+          }
+        }
+      },
+      "NewWorkout": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "type": {"type": "string"},
+          "duration": {"type": "integer"},
+          "distance": {"type": "number"},
+          "shoe_id": {"type": "string"}
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            }
+          },
+          "total": {"type": "number"},
+          "status": {"type": "string"},
+          "shipping_address": {"type": "string"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "OrderItem": {
+        "type": "object",
+        "properties": {
+          "product": {
+            "$ref": "#/components/schemas/Product"
+          },
+          "size": {"type": "string"},
+          "color": {"type": "string"},
+          "quantity": {"type": "integer"}
+        }
+      },
+      "NewOrder": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "product_id": {"type": "string"},
+                "size": {"type": "string"},
+                "color": {"type": "string"},
+                "quantity": {"type": "integer"}
+              }
+            }
+          },
+          "shipping_address": {"type": "string"}
+        }
+      }
+    }
+  }
+}

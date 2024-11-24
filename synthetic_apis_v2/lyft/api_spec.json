@@ -1,0 +1,232 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Lyft",
+    "version": "1.0.0",
+    "description": "API for ride-hailing service"
+  },
+  "paths": {
+    "/api/v1/rides/estimate": {
+      "post": {
+        "summary": "Get ride estimate",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RideEstimateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ride estimate details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RideEstimate"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rides": {
+      "post": {
+        "summary": "Request a ride",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RideRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Ride created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ride"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get user's ride history",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of rides",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ride"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rides/{rideId}": {
+      "get": {
+        "summary": "Get ride status and details",
+        "parameters": [
+          {
+            "name": "rideId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ride details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ride"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/drivers/nearby": {
+      "get": {
+        "summary": "Get nearby drivers",
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of nearby drivers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Driver"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Location": {
+        "type": "object",
+        "properties": {
+          "latitude": {"type": "number"},
+          "longitude": {"type": "number"},
+          "address": {"type": "string"}
+        }
+      },
+      "RideEstimateRequest": {
+        "type": "object",
+        "properties": {
+          "pickup": {"$ref": "#/components/schemas/Location"},
+          "dropoff": {"$ref": "#/components/schemas/Location"},
+          "ride_type": {"type": "string"}
+        }
+      },
+      "RideEstimate": {
+        "type": "object",
+        "properties": {
+          "ride_type": {"type": "string"},
+          "estimated_price": {"type": "number"},
+          "estimated_duration": {"type": "integer"},
+          "estimated_distance": {"type": "number"},
+          "surge_multiplier": {"type": "number"}
+        }
+      },
+      "RideRequest": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "pickup": {"$ref": "#/components/schemas/Location"},
+          "dropoff": {"$ref": "#/components/schemas/Location"},
+          "ride_type": {"type": "string"},
+          "payment_method_id": {"type": "string"}
+        }
+      },
+      "Driver": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "vehicle": {"$ref": "#/components/schemas/Vehicle"},
+          "rating": {"type": "number"},
+          "location": {"$ref": "#/components/schemas/Location"}
+        }
+      },
+      "Vehicle": {
+        "type": "object",
+        "properties": {
+          "make": {"type": "string"},
+          "model": {"type": "string"},
+          "year": {"type": "integer"},
+          "color": {"type": "string"},
+          "license_plate": {"type": "string"}
+        }
+      },
+      "Ride": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "driver": {"$ref": "#/components/schemas/Driver"},
+          "pickup": {"$ref": "#/components/schemas/Location"},
+          "dropoff": {"$ref": "#/components/schemas/Location"},
+          "status": {"type": "string"},
+          "ride_type": {"type": "string"},
+          "price": {"type": "number"},
+          "created_at": {"type": "string"},
+          "updated_at": {"type": "string"}
+        }
+      }
+    }
+  }
+}

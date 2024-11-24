@@ -1,0 +1,85 @@
+{
+    "accounts": {
+        "acc_1": {
+            "id": "acc_1",
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "address": "789 Tech Avenue, San Francisco, CA 94105",
+            "phone": "+1-555-0123",
+            "internet_plan": "Gigabit Pro",
+            "tv_plan": "X1 Preferred Pro Double Play",
+            "internet_usage": {
+                "total_usage_gb": 756.3,
+                "data_cap_gb": 1229.0,
+                "remaining_gb": 472.7,
+                "current_speed_mbps": 940.5,
+                "billing_cycle_end": "2024-02-15T00:00:00Z"
+            },
+            "bills": [
+                {
+                    "id": "bill_1",
+                    "amount": 189.99,
+                    "due_date": "2024-02-01T00:00:00Z",
+                    "status": "pending",
+                    "services": [
+                        {
+                            "name": "Internet",
+                            "amount": 89.99
+                        },
+                        {
+                            "name": "TV",
+                            "amount": 100.00
+                        }
+                    ]
+                },
+                {
+                    "id": "bill_2",
+                    "amount": 189.99,
+                    "due_date": "2024-01-01T00:00:00Z",
+                    "status": "paid",
+                    "services": [
+                        {
+                            "name": "Internet",
+                            "amount": 89.99
+                        },
+                        {
+                            "name": "TV",
+                            "amount": 100.00
+                        }
+                    ]
+                }
+            ],
+            "recordings": [
+                {
+                    "id": "rec_1",
+                    "show_name": "House of the Dragon",
+                    "channel": "HBO",
+                    "start_time": "2024-01-20T20:00:00Z",
+                    "duration_minutes": 60,
+                    "status": "scheduled",
+                    "series_recording": true
+                },
+                {
+                    "id": "rec_2",
+                    "show_name": "NFL Sunday Night Football",
+                    "channel": "NBC",
+                    "start_time": "2024-01-21T20:20:00Z",
+                    "duration_minutes": 180,
+                    "status": "scheduled",
+                    "series_recording": false
+                }
+            ],
+            "support_tickets": [
+                {
+                    "id": "ticket_1",
+                    "subject": "Internet Connection Issues",
+                    "description": "Experiencing intermittent connection drops",
+                    "status": "open",
+                    "priority": "high",
+                    "created_at": "2024-01-15T14:30:00Z",
+                    "updated_at": "2024-01-15T14:30:00Z"
+                }
+            ]
+        }
+    }
+}

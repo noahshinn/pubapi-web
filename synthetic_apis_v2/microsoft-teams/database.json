@@ -1,0 +1,124 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "avatar": "https://example.com/avatars/casey.jpg",
+            "status": "Working from home",
+            "presence": "online",
+            "last_seen": "2024-01-16T20:00:00Z"
+        },
+        "sarah.chen@email.com": {
+            "email": "sarah.chen@email.com",
+            "name": "Sarah Chen",
+            "avatar": "https://example.com/avatars/sarah.jpg",
+            "status": "In a meeting",
+            "presence": "busy",
+            "last_seen": "2024-01-16T19:55:00Z"
+        },
+        "mike.ross@email.com": {
+            "email": "mike.ross@email.com",
+            "name": "Mike Ross",
+            "avatar": "https://example.com/avatars/mike.jpg",
+            "status": "Available",
+            "presence": "online",
+            "last_seen": "2024-01-16T19:58:00Z"
+        }
+    },
+    "teams": {
+        "team_1": {
+            "id": "team_1",
+            "name": "Product Development",
+            "description": "Core product development team",
+            "members": [
+                {
+                    "email": "casey.wringer@email.com",
+                    "name": "Casey Wringer"
+                },
+                {
+                    "email": "sarah.chen@email.com",
+                    "name": "Sarah Chen"
+                }
+            ],
+            "channels": [
+                {
+                    "id": "channel_1",
+                    "name": "General",
+                    "description": "General discussion",
+                    "type": "standard"
+                },
+                {
+                    "id": "channel_2",
+                    "name": "Development",
+                    "description": "Technical discussions",
+                    "type": "standard"
+                }
+            ],
+            "created_at": "2023-12-01T00:00:00Z"
+        }
+    },
+    "chats": {
+        "chat_1": {
+            "id": "chat_1",
+            "type": "direct",
+            "participants": [
+                {
+                    "email": "casey.wringer@email.com",
+                    "name": "Casey Wringer"
+                },
+                {
+                    "email": "sarah.chen@email.com",
+                    "name": "Sarah Chen"
+                }
+            ],
+            "last_message": {
+                "id": "msg_1",
+                "content": "Can we review the latest designs?",
+                "sender": {
+                    "email": "casey.wringer@email.com",
+                    "name": "Casey Wringer"
+                },
+                "sent_at": "2024-01-16T19:45:00Z"
+            },
+            "created_at": "2024-01-15T10:00:00Z"
+        }
+    },
+    "meetings": {
+        "meeting_1": {
+            "id": "meeting_1",
+            "title": "Weekly Sprint Planning",
+            "description": "Plan tasks for the upcoming sprint",
+            "start_time": "2024-01-17T14:00:00Z",
+            "end_time": "2024-01-17T15:00:00Z",
+            "organizer": {
+                "email": "casey.wringer@email.com",
+                "name": "Casey Wringer"
+            },
+            "participants": [
+                {
+                    "email": "sarah.chen@email.com",
+                    "name": "Sarah Chen"
+                },
+                {
+                    "email": "mike.ross@email.com",
+                    "name": "Mike Ross"
+                }
+            ],
+            "join_url": "https://teams.microsoft.com/meet/abc123",
+            "status": "scheduled"
+        }
+    },
+    "messages": {
+        "msg_1": {
+            "id": "msg_1",
+            "chat_id": "chat_1",
+            "content": "Can we review the latest designs?",
+            "sender": {
+                "email": "casey.wringer@email.com",
+                "name": "Casey Wringer"
+            },
+            "type": "text",
+            "sent_at": "2024-01-16T19:45:00Z"
+        }
+    }
+}

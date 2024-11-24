@@ -1,0 +1,154 @@
+{
+  "accounts": {
+    "acc_123": {
+      "account_id": "acc_123",
+      "owner": {
+        "name": "Casey Wringer",
+        "email": "casey.wringer@email.com",
+        "phone": "+1-555-0123"
+      },
+      "plan": {
+        "id": "plan_unlimited",
+        "name": "5G Unlimited",
+        "data_limit": -1,
+        "talk_minutes": -1,
+        "text_messages": -1,
+        "price": 80.00,
+        "features": [
+          "5G Ultra Wideband",
+          "Mobile Hotspot",
+          "Disney+ Bundle",
+          "Apple Music"
+        ]
+      },
+      "lines": [
+        {
+          "phone_number": "+1-555-0123",
+          "device": {
+            "model": "iPhone 15 Pro",
+            "manufacturer": "Apple",
+            "imei": "359269104816940",
+            "status": "active"
+          },
+          "plan": {
+            "id": "plan_unlimited",
+            "name": "5G Unlimited"
+          },
+          "status": "active"
+        },
+        {
+          "phone_number": "+1-555-0124",
+          "device": {
+            "model": "iPad Pro",
+            "manufacturer": "Apple",
+            "imei": "359269104816941",
+            "status": "active"
+          },
+          "plan": {
+            "id": "plan_tablet",
+            "name": "Unlimited Tablet"
+          },
+          "status": "active"
+        }
+      ],
+      "autopay": true,
+      "paperless_billing": true
+    }
+  },
+  "usage": {
+    "+1-555-0123": {
+      "billing_cycle": {
+        "start_date": "2024-01-01T00:00:00Z",
+        "end_date": "2024-01-31T23:59:59Z"
+      },
+      "data_used": 15.6,
+      "data_remaining": -1,
+      "talk_minutes_used": 324,
+      "text_messages_sent": 856
+    },
+    "+1-555-0124": {
+      "billing_cycle": {
+        "start_date": "2024-01-01T00:00:00Z",
+        "end_date": "2024-01-31T23:59:59Z"
+      },
+      "data_used": 8.2,
+      "data_remaining": -1,
+      "talk_minutes_used": 0,
+      "text_messages_sent": 0
+    }
+  },
+  "bills": {
+    "acc_123": [
+      {
+        "id": "bill_dec2023",
+        "billing_date": "2023-12-01T00:00:00Z",
+        "due_date": "2023-12-25T00:00:00Z",
+        "amount": 110.00,
+        "status": "paid",
+        "items": [
+          {
+            "description": "5G Unlimited Plan",
+            "amount": 80.00
+          },
+          {
+            "description": "Tablet Line Access",
+            "amount": 20.00
+          },
+          {
+            "description": "Device Protection",
+            "amount": 10.00
+          }
+        ]
+      },
+      {
+        "id": "bill_jan2024",
+        "billing_date": "2024-01-01T00:00:00Z",
+        "due_date": "2024-01-25T00:00:00Z",
+        "amount": 110.00,
+        "status": "pending",
+        "items": [
+          {
+            "description": "5G Unlimited Plan",
+            "amount": 80.00
+          },
+          {
+            "description": "Tablet Line Access",
+            "amount": 20.00
+          },
+          {
+            "description": "Device Protection",
+            "amount": 10.00
+          }
+        ]
+      }
+    ]
+  },
+  "plans": {
+    "plan_unlimited": {
+      "id": "plan_unlimited",
+      "name": "5G Unlimited",
+      "data_limit": -1,
+      "talk_minutes": -1,
+      "text_messages": -1,
+      "price": 80.00,
+      "features": [
+        "5G Ultra Wideband",
+        "Mobile Hotspot",
+        "Disney+ Bundle",
+        "Apple Music"
+      ]
+    },
+    "plan_tablet": {
+      "id": "plan_tablet",
+      "name": "Unlimited Tablet",
+      "data_limit": -1,
+      "talk_minutes": 0,
+      "text_messages": 0,
+      "price": 20.00,
+      "features": [
+        "5G Ultra Wideband",
+        "Mobile Hotspot"
+      ]
+    }
+  }
+}

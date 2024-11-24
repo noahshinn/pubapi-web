@@ -1,0 +1,94 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "shipping_address": "789 Tech Avenue, San Francisco, CA 94105",
+            "workout_stats": {
+                "total_workouts": 15,
+                "total_distance": 75.5,
+                "total_duration": 720
+            }
+        }
+    },
+    "products": {
+        "shoe_1": {
+            "id": "shoe_1",
+            "name": "Nike Air Zoom Pegasus 38",
+            "category": "running",
+            "gender": "unisex",
+            "price": 120.00,
+            "colors": ["black/white", "blue/white", "red/black"],
+            "sizes": ["7", "8", "9", "10", "11", "12"],
+            "description": "The Nike Air Zoom Pegasus 38 continues to put a spring in your step.",
+            "images": [
+                "pegasus38_1.jpg",
+                "pegasus38_2.jpg"
+            ]
+        },
+        "shoe_2": {
+            "id": "shoe_2",
+            "name": "Nike Metcon 7",
+            "category": "training",
+            "gender": "unisex",
+            "price": 130.00,
+            "colors": ["black/volt", "white/gray"],
+            "sizes": ["8", "9", "10", "11"],
+            "description": "The Nike Metcon 7 is the most versatile training shoe.",
+            "images": [
+                "metcon7_1.jpg",
+                "metcon7_2.jpg"
+            ]
+        }
+    },
+    "workouts": {
+        "workout_1": {
+            "id": "workout_1",
+            "user_email": "casey.wringer@email.com",
+            "type": "run",
+            "duration": 45,
+            "distance": 5.2,
+            "calories": 450,
+            "date": "2024-01-15T08:30:00Z",
+            "shoes": {
+                "id": "shoe_1",
+                "name": "Nike Air Zoom Pegasus 38"
+            }
+        },
+        "workout_2": {
+            "id": "workout_2",
+            "user_email": "casey.wringer@email.com",
+            "type": "training",
+            "duration": 60,
+            "distance": 0,
+            "calories": 380,
+            "date": "2024-01-16T17:00:00Z",
+            "shoes": {
+                "id": "shoe_2",
+                "name": "Nike Metcon 7"
+            }
+        }
+    },
+    "orders": {
+        "order_1": {
+            "id": "order_1",
+            "user_email": "casey.wringer@email.com",
+            "items": [
+                {
+                    "product": {
+                        "id": "shoe_1",
+                        "name": "Nike Air Zoom Pegasus 38",
+                        "price": 120.00
+                    },
+                    "size": "10",
+                    "color": "black/white",
+                    "quantity": 1
+                }
+            ],
+            "total": 120.00,
+            "status": "delivered",
+            "shipping_address": "789 Tech Avenue, San Francisco, CA 94105",
+            "created_at": "2024-01-10T15:30:00Z"
+        }
+    }
+}

@@ -1,0 +1,276 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chewy",
+    "version": "1.0.0",
+    "description": "API for pet supplies and services"
+  },
+  "paths": {
+    "/api/v1/pets": {
+      "get": {
+        "summary": "Get user's pets",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of user's pets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new pet",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPet"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Pet added successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/products": {
+      "get": {
+        "summary": "Get products",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pet_type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "brand",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orders": {
+      "get": {
+        "summary": "Get user's orders",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Place new order",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewOrder"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order created successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/autoship": {
+      "get": {
+        "summary": "Get user's autoship subscriptions",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of autoship subscriptions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AutoshipSubscription"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Pet": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "type": {"type": "string"},
+          "breed": {"type": "string"},
+          "birth_date": {"type": "string"},
+          "weight": {"type": "number"},
+          "dietary_restrictions": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "NewPet": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "name": {"type": "string"},
+          "type": {"type": "string"},
+          "breed": {"type": "string"},
+          "birth_date": {"type": "string"},
+          "weight": {"type": "number"}
+        }
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "brand": {"type": "string"},
+          "category": {"type": "string"},
+          "pet_type": {"type": "string"},
+          "price": {"type": "number"},
+          "autoship_eligible": {"type": "boolean"},
+          "in_stock": {"type": "boolean"},
+          "description": {"type": "string"},
+          "rating": {"type": "number"}
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            }
+          },
+          "status": {"type": "string"},
+          "total": {"type": "number"},
+          "shipping_address": {"type": "string"},
+          "tracking_number": {"type": "string"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "OrderItem": {
+        "type": "object",
+        "properties": {
+          "product_id": {"type": "string"},
+          "quantity": {"type": "integer"},
+          "price": {"type": "number"}
+        }
+      },
+      "NewOrder": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            }
+          },
+          "shipping_address": {"type": "string"}
+        }
+      },
+      "AutoshipSubscription": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "product_id": {"type": "string"},
+          "quantity": {"type": "integer"},
+          "frequency_days": {"type": "integer"},
+          "next_delivery": {"type": "string"},
+          "shipping_address": {"type": "string"},
+          "status": {"type": "string"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "playlists": [
+        {
+          "id": "pl_1",
+          "name": "Workout Mix",
+          "description": "High energy songs for the gym",
+          "creator": "casey.wringer@email.com",
+          "songs": [
+            {
+              "id": "s_1",
+              "title": "Stronger",
+              "artist": {
+                "id": "ar_1",
+                "name": "Kanye West",
+                "genres": ["Hip-Hop", "Rap"]
+              }
+            },
+            {
+              "id": "s_2",
+              "title": "Eye of the Tiger",
+              "artist": {
+                "id": "ar_2",
+                "name": "Survivor",
+                "genres": ["Rock"]
+              }
+            }
+          ],
+          "createdAt": "2024-01-01T10:00:00Z",
+          "updatedAt": "2024-01-15T15:30:00Z"
+        },
+        {
+          "id": "pl_2",
+          "name": "Chill Vibes",
+          "description": "Relaxing tunes",
+          "creator": "casey.wringer@email.com",
+          "songs": [
+            {
+              "id": "s_3",
+              "title": "Circles",
+              "artist": {
+                "id": "ar_3",
+                "name": "Post Malone",
+                "genres": ["Pop", "Hip-Hop"]
+              }
+            }
+          ],
+          "createdAt": "2024-01-05T14:20:00Z",
+          "updatedAt": "2024-01-16T09:15:00Z"
+        }
+      ],
+      "library": {
+        "songs": [
+          {
+            "id": "s_1",
+            "title": "Stronger",
+            "artist": {
+              "id": "ar_1",
+              "name": "Kanye West",
+              "genres": ["Hip-Hop", "Rap"]
+            },
+            "album": {
+              "id": "al_1",
+              "title": "Graduation",
+              "releaseDate": "2007-09-11T00:00:00Z",
+              "genre": "Hip-Hop",
+              "trackCount": 13
+            },
+            "duration": 312,
+            "releaseDate": "2007-09-11T00:00:00Z",
+            "genre": "Hip-Hop"
+          },
+          {
+            "id": "s_2",
+            "title": "Eye of the Tiger",
+            "artist": {
+              "id": "ar_2",
+              "name": "Survivor",
+              "genres": ["Rock"]
+            },
+            "album": {
+              "id": "al_2",
+              "title": "Eye of the Tiger",
+              "releaseDate": "1982-05-29T00:00:00Z",
+              "genre": "Rock",
+              "trackCount": 9
+            },
+            "duration": 245,
+            "releaseDate": "1982-05-29T00:00:00Z",
+            "genre": "Rock"
+          },
+          {
+            "id": "s_3",
+            "title": "Circles",
+            "artist": {
+              "id": "ar_3",
+              "name": "Post Malone",
+              "genres": ["Pop", "Hip-Hop"]
+            },
+            "album": {
+              "id": "al_3",
+              "title": "Hollywood's Bleeding",
+              "releaseDate": "2019-09-06T00:00:00Z",
+              "genre": "Pop",
+              "trackCount": 17
+            },
+            "duration": 215,
+            "releaseDate": "2019-09-06T00:00:00Z",
+            "genre": "Pop"
+          }
+        ]
+      }
+    }
+  }
+}

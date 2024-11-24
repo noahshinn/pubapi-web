@@ -1,0 +1,64 @@
+{
+    "flights": {
+        "UA123": {
+            "flight_number": "UA123",
+            "origin": "SFO",
+            "destination": "JFK",
+            "departure_time": "2024-01-20T10:00:00Z",
+            "arrival_time": "2024-01-20T18:30:00Z",
+            "aircraft_type": "Boeing 787-9",
+            "available_seats": 150,
+            "price": 450.00,
+            "cabin_classes": ["economy", "premium_economy", "business"]
+        },
+        "UA456": {
+            "flight_number": "UA456",
+            "origin": "JFK",
+            "destination": "LAX",
+            "departure_time": "2024-01-21T08:00:00Z",
+            "arrival_time": "2024-01-21T11:30:00Z",
+            "aircraft_type": "Boeing 777-300ER",
+            "available_seats": 200,
+            "price": 350.00,
+            "cabin_classes": ["economy", "premium_economy", "business", "first"]
+        }
+    },
+    "passengers": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "first_name": "Casey",
+            "last_name": "Wringer",
+            "date_of_birth": "1990-05-15T00:00:00Z",
+            "frequent_flyer_number": "UA1234567",
+            "passport_number": "P123456789"
+        }
+    },
+    "reservations": {
+        "RES12345": {
+            "reservation_number": "RES12345",
+            "passenger": {
+                "email": "casey.wringer@email.com",
+                "first_name": "Casey",
+                "last_name": "Wringer",
+                "date_of_birth": "1990-05-15T00:00:00Z",
+                "frequent_flyer_number": "UA1234567"
+            },
+            "flights": [
+                {
+                    "flight_number": "UA123",
+                    "origin": "SFO",
+                    "destination": "JFK",
+                    "departure_time": "2024-01-20T10:00:00Z",
+                    "arrival_time": "2024-01-20T18:30:00Z",
+                    "aircraft_type": "Boeing 787-9"
+                }
+            ],
+            "status": "confirmed",
+            "total_price": 450.00,
+            "cabin_class": "economy",
+            "created_at": "2024-01-15T14:30:00Z",
+            "checked_in": false,
+            "seat_assignments": ["12A"]
+        }
+    }
+}

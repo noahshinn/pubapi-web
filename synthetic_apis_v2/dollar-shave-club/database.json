@@ -1,0 +1,128 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "shipping_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "payment_method": "pm_1234567890",
+      "subscribed_date": "2023-06-15T10:00:00Z"
+    }
+  },
+  "products": {
+    "razor_exec": {
+      "id": "razor_exec",
+      "name": "The Executive",
+      "description": "Six stainless steel blades and a trimmer edge for precise grooming",
+      "category": "razors",
+      "price": 9.99,
+      "image_url": "https://assets.dollarshaveclub.com/executive.jpg",
+      "in_stock": true
+    },
+    "razor_4x": {
+      "id": "razor_4x",
+      "name": "The 4X",
+      "description": "Four stainless steel blades for a close, comfortable shave",
+      "category": "razors",
+      "price": 7.99,
+      "image_url": "https://assets.dollarshaveclub.com/4x.jpg",
+      "in_stock": true
+    },
+    "shave_butter": {
+      "id": "shave_butter",
+      "name": "Shave Butter",
+      "description": "Ultra-smooth shaving cream alternative for a comfortable shave",
+      "category": "shave",
+      "price": 8.99,
+      "image_url": "https://assets.dollarshaveclub.com/butter.jpg",
+      "in_stock": true
+    },
+    "post_shave": {
+      "id": "post_shave",
+      "name": "Post Shave Cream",
+      "description": "Soothing aftershave cream to prevent irritation",
+      "category": "shave",
+      "price": 9.99,
+      "image_url": "https://assets.dollarshaveclub.com/post-shave.jpg",
+      "in_stock": true
+    },
+    "body_wash": {
+      "id": "body_wash",
+      "name": "Body Cleanser",
+      "description": "Hydrating body wash with natural ingredients",
+      "category": "shower",
+      "price": 9.99,
+      "image_url": "https://assets.dollarshaveclub.com/body-wash.jpg",
+      "in_stock": true
+    }
+  },
+  "subscriptions": {
+    "sub_1": {
+      "id": "sub_1",
+      "user_email": "casey.wringer@email.com",
+      "product": {
+        "id": "razor_exec",
+        "name": "The Executive",
+        "price": 9.99
+      },
+      "frequency": "monthly",
+      "next_delivery": "2024-02-15T10:00:00Z",
+      "status": "active",
+      "created_at": "2023-06-15T10:00:00Z"
+    },
+    "sub_2": {
+      "id": "sub_2",
+      "user_email": "casey.wringer@email.com",
+      "product": {
+        "id": "shave_butter",
+        "name": "Shave Butter",
+        "price": 8.99
+      },
+      "frequency": "monthly",
+      "next_delivery": "2024-02-15T10:00:00Z",
+      "status": "active",
+      "created_at": "2023-07-01T14:30:00Z"
+    }
+  },
+  "orders": {
+    "ord_1": {
+      "id": "ord_1",
+      "user_email": "casey.wringer@email.com",
+      "items": [
+        {
+          "product_id": "razor_exec",
+          "name": "The Executive",
+          "quantity": 1,
+          "price": 9.99
+        },
+        {
+          "product_id": "shave_butter",
+          "name": "Shave Butter",
+          "quantity": 1,
+          "price": 8.99
+        }
+      ],
+      "total": 18.98,
+      "status": "delivered",
+      "shipping_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "tracking_number": "1Z999AA1234567890",
+      "created_at": "2024-01-15T10:00:00Z"
+    },
+    "ord_2": {
+      "id": "ord_2",
+      "user_email": "casey.wringer@email.com",
+      "items": [
+        {
+          "product_id": "post_shave",
+          "name": "Post Shave Cream",
+          "quantity": 1,
+          "price": 9.99
+        }
+      ],
+      "total": 9.99,
+      "status": "shipped",
+      "shipping_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "tracking_number": "1Z999AA1234567891",
+      "created_at": "2024-01-25T15:30:00Z"
+    }
+  }
+}

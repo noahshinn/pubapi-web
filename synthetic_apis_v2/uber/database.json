@@ -1,0 +1,117 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "phone": "+1-555-0123",
+            "rating": 4.85,
+            "payment_methods": [
+                {
+                    "id": "pm_1",
+                    "type": "credit_card",
+                    "last4": "4242",
+                    "expiry_mm": 12,
+                    "expiry_yy": 25
+                }
+            ]
+        }
+    },
+    "drivers": {
+        "drv_1": {
+            "id": "drv_1",
+            "name": "Michael Chen",
+            "phone": "+1-555-0201",
+            "rating": 4.92,
+            "car_model": "Toyota Camry 2022",
+            "car_color": "Silver",
+            "license_plate": "ABC123",
+            "location": {
+                "latitude": 37.7749,
+                "longitude": -122.4194,
+                "address": "123 Market St, San Francisco, CA 94105"
+            },
+            "available": true,
+            "last_updated": "2024-01-16T20:00:00Z"
+        },
+        "drv_2": {
+            "id": "drv_2",
+            "name": "Sarah Johnson",
+            "phone": "+1-555-0202",
+            "rating": 4.88,
+            "car_model": "Honda Accord 2023",
+            "car_color": "Black",
+            "license_plate": "XYZ789",
+            "location": {
+                "latitude": 37.7833,
+                "longitude": -122.4167,
+                "address": "456 Mission St, San Francisco, CA 94105"
+            },
+            "available": true,
+            "last_updated": "2024-01-16T20:00:00Z"
+        }
+    },
+    "rides": {
+        "ride_1": {
+            "id": "ride_1",
+            "user_email": "casey.wringer@email.com",
+            "driver": {
+                "id": "drv_1",
+                "name": "Michael Chen",
+                "phone": "+1-555-0201",
+                "rating": 4.92,
+                "car_model": "Toyota Camry 2022",
+                "car_color": "Silver",
+                "license_plate": "ABC123"
+            },
+            "service_level": "UberX",
+            "status": "completed",
+            "pickup": {
+                "latitude": 37.7749,
+                "longitude": -122.4194,
+                "address": "123 Market St, San Francisco, CA 94105"
+            },
+            "destination": {
+                "latitude": 37.7833,
+                "longitude": -122.4167,
+                "address": "456 Mission St, San Francisco, CA 94105"
+            },
+            "estimated_price": 15.50,
+            "final_price": 16.25,
+            "created_at": "2024-01-15T18:30:00Z",
+            "pickup_time": "2024-01-15T18:35:00Z",
+            "dropoff_time": "2024-01-15T18:50:00Z",
+            "payment_method": "pm_1"
+        },
+        "ride_2": {
+            "id": "ride_2",
+            "user_email": "casey.wringer@email.com",
+            "driver": {
+                "id": "drv_2",
+                "name": "Sarah Johnson",
+                "phone": "+1-555-0202",
+                "rating": 4.88,
+                "car_model": "Honda Accord 2023",
+                "car_color": "Black",
+                "license_plate": "XYZ789"
+            },
+            "service_level": "UberComfort",
+            "status": "completed",
+            "pickup": {
+                "latitude": 37.7833,
+                "longitude": -122.4167,
+                "address": "456 Mission St, San Francisco, CA 94105"
+            },
+            "destination": {
+                "latitude": 37.7749,
+                "longitude": -122.4194,
+                "address": "123 Market St, San Francisco, CA 94105"
+            },
+            "estimated_price": 18.75,
+            "final_price": 19.50,
+            "created_at": "2024-01-16T19:15:00Z",
+            "pickup_time": "2024-01-16T19:20:00Z",
+            "dropoff_time": "2024-01-16T19:35:00Z",
+            "payment_method": "pm_1"
+        }
+    }
+}

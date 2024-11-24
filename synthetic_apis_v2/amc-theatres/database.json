@@ -1,0 +1,101 @@
+{
+    "theaters": {
+        "th_1": {
+            "id": "th_1",
+            "name": "AMC Bay Street 16",
+            "address": "5614 Bay Street",
+            "city": "Emeryville",
+            "state": "CA",
+            "zipCode": "94608",
+            "location": {
+                "latitude": 37.8332,
+                "longitude": -122.2937
+            },
+            "screens": 16,
+            "amenities": ["IMAX", "Dolby Cinema", "RealD 3D", "Wheelchair Accessible"]
+        },
+        "th_2": {
+            "id": "th_2",
+            "name": "AMC Metreon 16",
+            "address": "135 4th Street",
+            "city": "San Francisco",
+            "state": "CA",
+            "zipCode": "94103",
+            "location": {
+                "latitude": 37.7847,
+                "longitude": -122.4036
+            },
+            "screens": 16,
+            "amenities": ["IMAX", "Dolby Cinema", "RealD 3D", "Wheelchair Accessible"]
+        }
+    },
+    "movies": {
+        "mov_1": {
+            "id": "mov_1",
+            "title": "Dune: Part Two",
+            "rating": "PG-13",
+            "runtime": 166,
+            "genre": "Science Fiction",
+            "synopsis": "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
+            "posterUrl": "https://amc-theatres.com/posters/dune-2.jpg",
+            "trailerUrl": "https://amc-theatres.com/trailers/dune-2.mp4",
+            "releaseDate": "2024-03-01T00:00:00Z"
+        },
+        "mov_2": {
+            "id": "mov_2",
+            "title": "Poor Things",
+            "rating": "R",
+            "runtime": 141,
+            "genre": "Comedy/Drama",
+            "synopsis": "The incredible tale about the fantastical evolution of Bella Baxter, a young woman brought back to life by the brilliant and unorthodox scientist Dr. Godwin Baxter.",
+            "posterUrl": "https://amc-theatres.com/posters/poor-things.jpg",
+            "trailerUrl": "https://amc-theatres.com/trailers/poor-things.mp4",
+            "releaseDate": "2024-01-19T00:00:00Z"
+        }
+    },
+    "showtimes": {
+        "st_1": {
+            "id": "st_1",
+            "movieId": "mov_1",
+            "theaterId": "th_1",
+            "screenNumber": 1,
+            "startTime": "2024-03-15T19:30:00Z",
+            "endTime": "2024-03-15T22:16:00Z",
+            "format": "IMAX",
+            "price": 21.99,
+            "availableSeats": 120
+        },
+        "st_2": {
+            "id": "st_2",
+            "movieId": "mov_2",
+            "theaterId": "th_2",
+            "screenNumber": 3,
+            "startTime": "2024-03-15T20:00:00Z",
+            "endTime": "2024-03-15T22:21:00Z",
+            "format": "Digital",
+            "price": 16.99,
+            "availableSeats": 80
+        }
+    },
+    "reservations": {
+        "res_1": {
+            "id": "res_1",
+            "userEmail": "casey.wringer@email.com",
+            "showtimeId": "st_1",
+            "seats": [
+                {
+                    "row": "G",
+                    "number": 12
+                },
+                {
+                    "row": "G",
+                    "number": 13
+                }
+            ],
+            "totalPrice": 43.98,
+            "status": "confirmed",
+            "createdAt": "2024-03-01T15:30:00Z",
+            "paymentMethod": "pm_1"
+        }
+    }
+}

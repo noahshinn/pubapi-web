@@ -1,0 +1,111 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "start_date": "2024-01-01T00:00:00Z",
+            "starting_weight": 185.5,
+            "current_weight": 180.2,
+            "coach_id": "coach_1",
+            "subscription_tier": "premium"
+        }
+    },
+    "meal_logs": {
+        "casey.wringer@email.com": [
+            {
+                "id": "meal_1",
+                "user_email": "casey.wringer@email.com",
+                "meal_type": "breakfast",
+                "foods": [
+                    {
+                        "name": "Oatmeal with berries",
+                        "portion": 1,
+                        "unit": "bowl",
+                        "calories": 250,
+                        "color_category": "green"
+                    },
+                    {
+                        "name": "Banana",
+                        "portion": 1,
+                        "unit": "piece",
+                        "calories": 105,
+                        "color_category": "yellow"
+                    }
+                ],
+                "total_calories": 355,
+                "color_category": "green",
+                "timestamp": "2024-01-16T08:30:00Z",
+                "notes": "Feeling energized!"
+            },
+            {
+                "id": "meal_2",
+                "user_email": "casey.wringer@email.com",
+                "meal_type": "lunch",
+                "foods": [
+                    {
+                        "name": "Grilled chicken salad",
+                        "portion": 1,
+                        "unit": "bowl",
+                        "calories": 350,
+                        "color_category": "green"
+                    }
+                ],
+                "total_calories": 350,
+                "color_category": "green",
+                "timestamp": "2024-01-16T12:30:00Z",
+                "notes": "Great healthy lunch"
+            }
+        ]
+    },
+    "progress": {
+        "casey.wringer@email.com": {
+            "user_email": "casey.wringer@email.com",
+            "weight_logs": [
+                {
+                    "weight": 185.5,
+                    "date": "2024-01-01T00:00:00Z",
+                    "notes": "Starting weight"
+                },
+                {
+                    "weight": 183.2,
+                    "date": "2024-01-08T00:00:00Z",
+                    "notes": "First week complete"
+                },
+                {
+                    "weight": 180.2,
+                    "date": "2024-01-15T00:00:00Z",
+                    "notes": "Feeling great!"
+                }
+            ],
+            "goals": {
+                "target_weight": 165.0,
+                "weekly_goal": 1.0,
+                "target_date": "2024-04-01T00:00:00Z"
+            },
+            "streak_days": 15,
+            "total_weight_loss": 5.3
+        }
+    },
+    "messages": {
+        "casey.wringer@email.com": [
+            {
+                "id": "msg_1",
+                "user_email": "casey.wringer@email.com",
+                "coach_id": "coach_1",
+                "content": "Great progress on your weight loss journey! Keep up the healthy eating habits.",
+                "timestamp": "2024-01-15T14:30:00Z",
+                "is_from_coach": true,
+                "read": true
+            },
+            {
+                "id": "msg_2",
+                "user_email": "casey.wringer@email.com",
+                "coach_id": "coach_1",
+                "content": "Thanks! I'm feeling more energetic already.",
+                "timestamp": "2024-01-15T15:00:00Z",
+                "is_from_coach": false,
+                "read": true
+            }
+        ]
+    }
+}

@@ -1,0 +1,250 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Tesla",
+    "version": "1.0.0",
+    "description": "API for Tesla vehicle control and monitoring"
+  },
+  "paths": {
+    "/api/v1/vehicles": {
+      "get": {
+        "summary": "Get user's vehicles",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of vehicles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Vehicle"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/vehicles/{vehicleId}/state": {
+      "get": {
+        "summary": "Get vehicle state",
+        "parameters": [
+          {
+            "name": "vehicleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Vehicle state",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VehicleState"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/vehicles/{vehicleId}/command": {
+      "post": {
+        "summary": "Send command to vehicle",
+        "parameters": [
+          {
+            "name": "vehicleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Command"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Command result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/vehicles/{vehicleId}/charging/schedule": {
+      "get": {
+        "summary": "Get charging schedule",
+        "parameters": [
+          {
+            "name": "vehicleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Charging schedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargingSchedule"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update charging schedule",
+        "parameters": [
+          {
+            "name": "vehicleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargingSchedule"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated charging schedule"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Vehicle": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "vin": {"type": "string"},
+          "model": {"type": "string"},
+          "name": {"type": "string"},
+          "color": {"type": "string"},
+          "purchase_date": {"type": "string"}
+        }
+      },
+      "VehicleState": {
+        "type": "object",
+        "properties": {
+          "battery_level": {"type": "integer"},
+          "charging_state": {"type": "string"},
+          "climate_state": {
+            "type": "object",
+            "properties": {
+              "inside_temp": {"type": "number"},
+              "outside_temp": {"type": "number"},
+              "is_climate_on": {"type": "boolean"}
+            }
+          },
+          "drive_state": {
+            "type": "object",
+            "properties": {
+              "speed": {"type": "number"},
+              "latitude": {"type": "number"},
+              "longitude": {"type": "number"},
+              "heading": {"type": "number"}
+            }
+          },
+          "vehicle_state": {
+            "type": "object",
+            "properties": {
+              "locked": {"type": "boolean"},
+              "sentry_mode": {"type": "boolean"},
+              "software_update": {
+                "type": "object",
+                "properties": {
+                  "status": {"type": "string"},
+                  "version": {"type": "string"}
+                }
+              }
+            }
+          }
+        }
+      },
+      "Command": {
+        "type": "object",
+        "properties": {
+          "command": {
+            "type": "string",
+            "enum": ["wake_up", "door_lock", "door_unlock", "climate_on", "climate_off", "charge_port_door_open", "charge_port_door_close", "charge_start", "charge_stop"]
+          },
+          "parameters": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "CommandResult": {
+        "type": "object",
+        "properties": {
+          "result": {"type": "boolean"},
+          "reason": {"type": "string"}
+        }
+      },
+      "ChargingSchedule": {
+        "type": "object",
+        "properties": {
+          "enabled": {"type": "boolean"},
+          "weekly_schedule": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "day": {"type": "string"},
+                "start_time": {"type": "string"},
+                "end_time": {"type": "string"},
+                "charge_limit": {"type": "integer"}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

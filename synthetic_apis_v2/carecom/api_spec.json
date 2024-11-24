@@ -1,0 +1,196 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Care.com",
+    "version": "1.0.0",
+    "description": "API for care services platform"
+  },
+  "paths": {
+    "/api/v1/caregivers": {
+      "get": {
+        "summary": "Search for caregivers",
+        "parameters": [
+          {
+            "name": "care_type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["child_care", "senior_care", "pet_care", "housekeeping"]
+            }
+          },
+          {
+            "name": "zip_code",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "radius_miles",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of caregivers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Caregiver"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/jobs": {
+      "get": {
+        "summary": "Get user's care jobs",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of care jobs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Job"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Post new care job",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewJob"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Job created successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/applications": {
+      "post": {
+        "summary": "Apply for a care job",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobApplication"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Application submitted successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Caregiver": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "care_types": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "hourly_rate": {"type": "number"},
+          "years_experience": {"type": "integer"},
+          "bio": {"type": "string"},
+          "availability": {"type": "string"},
+          "background_check": {"type": "boolean"},
+          "reviews": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Review"
+            }
+          }
+        }
+      },
+      "Job": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "care_type": {"type": "string"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "schedule": {"type": "string"},
+          "hourly_rate": {"type": "number"},
+          "location": {"type": "string"},
+          "status": {"type": "string"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "NewJob": {
+        "type": "object",
+        "properties": {
+          "care_type": {"type": "string"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "schedule": {"type": "string"},
+          "hourly_rate": {"type": "number"},
+          "location": {"type": "string"}
+        },
+        "required": ["care_type", "title", "description", "schedule", "location"]
+      },
+      "JobApplication": {
+        "type": "object",
+        "properties": {
+          "job_id": {"type": "string"},
+          "caregiver_id": {"type": "string"},
+          "cover_letter": {"type": "string"},
+          "availability": {"type": "string"}
+        },
+        "required": ["job_id", "caregiver_id"]
+      },
+      "Review": {
+        "type": "object",
+        "properties": {
+          "rating": {"type": "integer"},
+          "comment": {"type": "string"},
+          "author": {"type": "string"},
+          "created_at": {"type": "string"}
+        }
+      }
+    }
+  }
+}

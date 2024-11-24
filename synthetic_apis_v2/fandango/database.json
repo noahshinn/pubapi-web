@@ -1,0 +1,93 @@
+{
+    "movies": {
+        "mov_1": {
+            "id": "mov_1",
+            "title": "The Matrix Resurrections",
+            "description": "Return to a world of two realities: one, everyday life; the other, what lies behind it.",
+            "duration_mins": 148,
+            "rating": "R",
+            "genre": "Action/Sci-Fi",
+            "release_date": "2024-01-01",
+            "poster_url": "https://example.com/matrix.jpg",
+            "trailer_url": "https://example.com/matrix-trailer.mp4",
+            "cast": ["Keanu Reeves", "Carrie-Anne Moss"]
+        },
+        "mov_2": {
+            "id": "mov_2",
+            "title": "Dune: Part Two",
+            "description": "The saga continues as Paul Atreides unites with Chani and the Fremen.",
+            "duration_mins": 155,
+            "rating": "PG-13",
+            "genre": "Sci-Fi/Adventure",
+            "release_date": "2024-03-01",
+            "poster_url": "https://example.com/dune2.jpg",
+            "trailer_url": "https://example.com/dune2-trailer.mp4",
+            "cast": ["Timothée Chalamet", "Zendaya"]
+        }
+    },
+    "theaters": {
+        "th_1": {
+            "id": "th_1",
+            "name": "Century 16",
+            "address": "123 Cinema Way",
+            "city": "San Francisco",
+            "state": "CA",
+            "zip": "94105",
+            "latitude": 37.7849,
+            "longitude": -122.3968,
+            "amenities": ["IMAX", "Dolby Atmos", "Recliner Seats"]
+        },
+        "th_2": {
+            "id": "th_2",
+            "name": "AMC Metreon",
+            "address": "456 Theater Street",
+            "city": "San Francisco",
+            "state": "CA",
+            "zip": "94103",
+            "latitude": 37.7847,
+            "longitude": -122.4036,
+            "amenities": ["IMAX", "Dolby Cinema", "Recliner Seats"]
+        }
+    },
+    "showtimes": {
+        "st_1": {
+            "id": "st_1",
+            "movie_id": "mov_1",
+            "theater_id": "th_1",
+            "start_time": "2024-01-16T19:00:00Z",
+            "end_time": "2024-01-16T21:28:00Z",
+            "screen": "IMAX",
+            "price": 18.50,
+            "available_seats": 120
+        },
+        "st_2": {
+            "id": "st_2",
+            "movie_id": "mov_1",
+            "theater_id": "th_2",
+            "start_time": "2024-01-16T20:00:00Z",
+            "end_time": "2024-01-16T22:28:00Z",
+            "screen": "Dolby Cinema",
+            "price": 19.50,
+            "available_seats": 85
+        }
+    },
+    "tickets": {
+        "tick_1": {
+            "id": "tick_1",
+            "showtime": {
+                "id": "st_1",
+                "movie_id": "mov_1",
+                "theater_id": "th_1",
+                "start_time": "2024-01-16T19:00:00Z",
+                "end_time": "2024-01-16T21:28:00Z",
+                "screen": "IMAX",
+                "price": 18.50
+            },
+            "user_email": "casey.wringer@email.com",
+            "seat_count": 2,
+            "total_price": 37.00,
+            "purchase_date": "2024-01-15T10:30:00Z",
+            "qr_code": "qr_abc123"
+        }
+    }
+}

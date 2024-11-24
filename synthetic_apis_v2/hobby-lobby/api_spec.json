@@ -1,0 +1,230 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Hobby Lobby",
+    "version": "1.0.0",
+    "description": "API for craft supplies and home decor retail"
+  },
+  "paths": {
+    "/api/v1/products": {
+      "get": {
+        "summary": "Get products with optional filtering",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onSale",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cart": {
+      "get": {
+        "summary": "Get user's shopping cart",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Shopping cart contents",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add item to cart",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddToCartRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated cart contents"
+          }
+        }
+      }
+    },
+    "/api/v1/orders": {
+      "get": {
+        "summary": "Get user's order history",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Place new order",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewOrder"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order created"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "category": {"type": "string"},
+          "price": {"type": "number"},
+          "salePrice": {"type": "number"},
+          "onSale": {"type": "boolean"},
+          "inStock": {"type": "boolean"},
+          "stockQuantity": {"type": "integer"}
+        }
+      },
+      "CartItem": {
+        "type": "object",
+        "properties": {
+          "productId": {"type": "string"},
+          "quantity": {"type": "integer"},
+          "price": {"type": "number"}
+        }
+      },
+      "Cart": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "userEmail": {"type": "string"},
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItem"
+            }
+          },
+          "subtotal": {"type": "number"},
+          "tax": {"type": "number"},
+          "total": {"type": "number"}
+        }
+      },
+      "AddToCartRequest": {
+        "type": "object",
+        "properties": {
+          "userEmail": {"type": "string"},
+          "productId": {"type": "string"},
+          "quantity": {"type": "integer"}
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "userEmail": {"type": "string"},
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItem"
+            }
+          },
+          "subtotal": {"type": "number"},
+          "tax": {"type": "number"},
+          "total": {"type": "number"},
+          "status": {"type": "string"},
+          "createdAt": {"type": "string"}
+        }
+      },
+      "NewOrder": {
+        "type": "object",
+        "properties": {
+          "userEmail": {"type": "string"},
+          "shippingAddress": {
+            "type": "object",
+            "properties": {
+              "street": {"type": "string"},
+              "city": {"type": "string"},
+              "state": {"type": "string"},
+              "zipCode": {"type": "string"}
+            }
+          },
+          "paymentMethodId": {"type": "string"}
+        }
+      }
+    }
+  }
+}

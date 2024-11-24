@@ -1,0 +1,221 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Uber",
+    "version": "1.0.0",
+    "description": "API for ride-hailing service"
+  },
+  "paths": {
+    "/api/v1/rides/estimate": {
+      "post": {
+        "summary": "Get ride estimate",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RideEstimateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ride estimates for different service levels",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RideEstimate"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rides": {
+      "post": {
+        "summary": "Request a ride",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RideRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Ride created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ride"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get user's ride history",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of rides",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ride"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rides/{rideId}": {
+      "get": {
+        "summary": "Get ride status and details",
+        "parameters": [
+          {
+            "name": "rideId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ride details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ride"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Cancel ride",
+        "parameters": [
+          {
+            "name": "rideId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ride cancelled successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Location": {
+        "type": "object",
+        "properties": {
+          "latitude": {"type": "number"},
+          "longitude": {"type": "number"},
+          "address": {"type": "string"}
+        }
+      },
+      "RideEstimateRequest": {
+        "type": "object",
+        "properties": {
+          "pickup": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/Location"
+          }
+        }
+      },
+      "RideEstimate": {
+        "type": "object",
+        "properties": {
+          "service_level": {"type": "string"},
+          "estimated_price": {"type": "number"},
+          "estimated_duration": {"type": "integer"},
+          "estimated_distance": {"type": "number"}
+        }
+      },
+      "RideRequest": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "service_level": {"type": "string"},
+          "pickup": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "payment_method": {"type": "string"}
+        }
+      },
+      "Driver": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "phone": {"type": "string"},
+          "rating": {"type": "number"},
+          "car_model": {"type": "string"},
+          "car_color": {"type": "string"},
+          "license_plate": {"type": "string"}
+        }
+      },
+      "Ride": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "driver": {
+            "$ref": "#/components/schemas/Driver"
+          },
+          "service_level": {"type": "string"},
+          "status": {"type": "string"},
+          "pickup": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "estimated_price": {"type": "number"},
+          "final_price": {"type": "number"},
+          "created_at": {"type": "string"},
+          "pickup_time": {"type": "string"},
+          "dropoff_time": {"type": "string"}
+        }
+      }
+    }
+  }
+}

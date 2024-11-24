@@ -1,0 +1,59 @@
+{
+  "articles": {
+    "art_1": {
+      "id": "art_1",
+      "title": "Tech Giants Face New Regulations in AI Development",
+      "abstract": "Global regulators are implementing stricter oversight of artificial intelligence development.",
+      "content": "In a landmark decision, international regulatory bodies have agreed to establish new guidelines for AI development...",
+      "author": "Sarah Chen",
+      "section": "technology",
+      "publishedAt": "2024-01-16T08:00:00Z",
+      "updatedAt": "2024-01-16T10:30:00Z",
+      "url": "/2024/01/16/technology/ai-regulations",
+      "imageUrl": "/images/2024/01/ai-regulations.jpg"
+    },
+    "art_2": {
+      "id": "art_2",
+      "title": "Climate Change: Latest Research Shows Accelerated Impact",
+      "abstract": "New studies reveal faster-than-expected climate change effects on global ecosystems.",
+      "content": "Recent research from leading climate scientists indicates that the pace of global warming has accelerated...",
+      "author": "Michael Rodriguez",
+      "section": "science",
+      "publishedAt": "2024-01-15T14:00:00Z",
+      "updatedAt": "2024-01-15T16:45:00Z",
+      "url": "/2024/01/15/science/climate-change-acceleration",
+      "imageUrl": "/images/2024/01/climate-change.jpg"
+    },
+    "art_3": {
+      "id": "art_3",
+      "title": "Global Markets React to Economic Policy Shifts",
+      "abstract": "International markets show volatility as major economies adjust monetary policies.",
+      "content": "Stock markets worldwide experienced significant fluctuations today as central banks announced new policy measures...",
+      "author": "Jennifer Wallace",
+      "section": "business",
+      "publishedAt": "2024-01-16T09:30:00Z",
+      "updatedAt": "2024-01-16T11:15:00Z",
+      "url": "/2024/01/16/business/market-policy-impact",
+      "imageUrl": "/images/2024/01/market-trends.jpg"
+    }
+  },
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "subscription": {
+        "email": "casey.wringer@email.com",
+        "type": "all-access",
+        "status": "active",
+        "startDate": "2023-12-01T00:00:00Z",
+        "endDate": "2024-12-01T00:00:00Z",
+        "autoRenew": true,
+        "paymentMethod": {
+          "type": "credit_card",
+          "last4": "4242"
+        }
+      },
+      "bookmarks": ["art_1", "art_2"]
+    }
+  }
+}

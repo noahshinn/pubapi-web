@@ -1,0 +1,268 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Starbucks",
+    "version": "1.0.0",
+    "description": "API for Starbucks coffee ordering and rewards"
+  },
+  "paths": {
+    "/api/v1/stores": {
+      "get": {
+        "summary": "Get nearby Starbucks stores",
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of stores",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Store"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/menu": {
+      "get": {
+        "summary": "Get menu items",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["drinks", "food", "merchandise"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of menu items",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MenuItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rewards": {
+      "get": {
+        "summary": "Get user's rewards information",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's rewards information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rewards"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orders": {
+      "get": {
+        "summary": "Get user's order history",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Place new order",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewOrder"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order created"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Store": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "address": {"type": "string"},
+          "latitude": {"type": "number"},
+          "longitude": {"type": "number"},
+          "hours": {"type": "string"},
+          "features": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "is_open": {"type": "boolean"}
+        }
+      },
+      "MenuItem": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "category": {"type": "string"},
+          "description": {"type": "string"},
+          "price": {"type": "number"},
+          "calories": {"type": "integer"},
+          "customization_options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomizationOption"
+            }
+          }
+        }
+      },
+      "CustomizationOption": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "options": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "max_selections": {"type": "integer"}
+        }
+      },
+      "Rewards": {
+        "type": "object",
+        "properties": {
+          "stars": {"type": "integer"},
+          "tier": {"type": "string"},
+          "stars_to_next_reward": {"type": "integer"},
+          "available_rewards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Reward"
+            }
+          }
+        }
+      },
+      "Reward": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "stars_required": {"type": "integer"},
+          "expires_at": {"type": "string"}
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "store": {"$ref": "#/components/schemas/Store"},
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            }
+          },
+          "status": {"type": "string"},
+          "total": {"type": "number"},
+          "stars_earned": {"type": "integer"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "OrderItem": {
+        "type": "object",
+        "properties": {
+          "menu_item_id": {"type": "string"},
+          "name": {"type": "string"},
+          "quantity": {"type": "integer"},
+          "price": {"type": "number"},
+          "customizations": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "NewOrder": {
+        "type": "object",
+        "properties": {
+          "store_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            }
+          },
+          "payment_method": {"type": "string"}
+        }
+      }
+    }
+  }
+}

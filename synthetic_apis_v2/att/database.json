@@ -1,0 +1,105 @@
+{
+  "accounts": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "address": "789 Tech Avenue, San Francisco, CA 94105",
+      "current_plan": {
+        "id": "unlimited_elite",
+        "name": "Unlimited Elite",
+        "data_limit": -1,
+        "price": 85.00,
+        "features": [
+          "Unlimited 5G data",
+          "HBO Max included",
+          "4K UHD streaming",
+          "100GB mobile hotspot"
+        ]
+      },
+      "devices": [
+        {
+          "id": "dev_1",
+          "phone_number": "+1-555-0123",
+          "model": "iPhone 14 Pro",
+          "status": "active",
+          "contract_end_date": "2025-01-15T00:00:00Z"
+        },
+        {
+          "id": "dev_2",
+          "phone_number": "+1-555-0124",
+          "model": "iPad Pro 12.9",
+          "status": "active",
+          "contract_end_date": "2024-06-30T00:00:00Z"
+        }
+      ],
+      "usage": {
+        "data_used": 45.2,
+        "data_limit": -1,
+        "voice_minutes": 420,
+        "text_messages": 1250,
+        "billing_cycle_end": "2024-02-15T00:00:00Z"
+      },
+      "bills": [
+        {
+          "id": "bill_1",
+          "amount": 95.00,
+          "due_date": "2024-02-01T00:00:00Z",
+          "status": "unpaid",
+          "statement_date": "2024-01-15T00:00:00Z"
+        },
+        {
+          "id": "bill_2",
+          "amount": 95.00,
+          "due_date": "2024-01-01T00:00:00Z",
+          "status": "paid",
+          "statement_date": "2023-12-15T00:00:00Z"
+        }
+      ],
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242",
+          "expiry_mm": 12,
+          "expiry_yy": 25
+        }
+      ]
+    }
+  },
+  "plans": [
+    {
+      "id": "unlimited_starter",
+      "name": "Unlimited Starter",
+      "data_limit": -1,
+      "price": 65.00,
+      "features": [
+        "Unlimited 5G data",
+        "Standard definition streaming",
+        "5GB mobile hotspot"
+      ]
+    },
+    {
+      "id": "unlimited_extra",
+      "name": "Unlimited Extra",
+      "data_limit": -1,
+      "price": 75.00,
+      "features": [
+        "Unlimited 5G data",
+        "HD streaming",
+        "50GB mobile hotspot"
+      ]
+    },
+    {
+      "id": "unlimited_elite",
+      "name": "Unlimited Elite",
+      "data_limit": -1,
+      "price": 85.00,
+      "features": [
+        "Unlimited 5G data",
+        "HBO Max included",
+        "4K UHD streaming",
+        "100GB mobile hotspot"
+      ]
+    }
+  ]
+}

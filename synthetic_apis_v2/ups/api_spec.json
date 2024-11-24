@@ -1,0 +1,227 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "UPS",
+    "version": "1.0.0",
+    "description": "API for package tracking and shipping services"
+  },
+  "paths": {
+    "/api/v1/tracking/{trackingNumber}": {
+      "get": {
+        "summary": "Track a package",
+        "parameters": [
+          {
+            "name": "trackingNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Package tracking information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrackingInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/shipments": {
+      "post": {
+        "summary": "Create a new shipment",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShipmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Shipment created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Shipment"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get user's shipments",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of shipments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Shipment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rates": {
+      "post": {
+        "summary": "Calculate shipping rates",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Shipping rate options",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Rate"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Address": {
+        "type": "object",
+        "properties": {
+          "street": {"type": "string"},
+          "city": {"type": "string"},
+          "state": {"type": "string"},
+          "postal_code": {"type": "string"},
+          "country": {"type": "string"}
+        }
+      },
+      "TrackingInfo": {
+        "type": "object",
+        "properties": {
+          "tracking_number": {"type": "string"},
+          "status": {"type": "string"},
+          "estimated_delivery": {"type": "string"},
+          "service_level": {"type": "string"},
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrackingEvent"
+            }
+          }
+        }
+      },
+      "TrackingEvent": {
+        "type": "object",
+        "properties": {
+          "timestamp": {"type": "string"},
+          "location": {"type": "string"},
+          "status": {"type": "string"},
+          "description": {"type": "string"}
+        }
+      },
+      "ShipmentRequest": {
+        "type": "object",
+        "properties": {
+          "from_address": {"$ref": "#/components/schemas/Address"},
+          "to_address": {"$ref": "#/components/schemas/Address"},
+          "packages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Package"
+            }
+          },
+          "service_level": {"type": "string"},
+          "user_email": {"type": "string"}
+        }
+      },
+      "Package": {
+        "type": "object",
+        "properties": {
+          "weight": {"type": "number"},
+          "dimensions": {
+            "type": "object",
+            "properties": {
+              "length": {"type": "number"},
+              "width": {"type": "number"},
+              "height": {"type": "number"}
+            }
+          },
+          "declared_value": {"type": "number"}
+        }
+      },
+      "Shipment": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "tracking_number": {"type": "string"},
+          "status": {"type": "string"},
+          "created_at": {"type": "string"},
+          "from_address": {"$ref": "#/components/schemas/Address"},
+          "to_address": {"$ref": "#/components/schemas/Address"},
+          "service_level": {"type": "string"},
+          "cost": {"type": "number"},
+          "label_url": {"type": "string"}
+        }
+      },
+      "RateRequest": {
+        "type": "object",
+        "properties": {
+          "from_address": {"$ref": "#/components/schemas/Address"},
+          "to_address": {"$ref": "#/components/schemas/Address"},
+          "packages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Package"
+            }
+          }
+        }
+      },
+      "Rate": {
+        "type": "object",
+        "properties": {
+          "service_level": {"type": "string"},
+          "cost": {"type": "number"},
+          "currency": {"type": "string"},
+          "delivery_days": {"type": "integer"},
+          "guaranteed_delivery": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}

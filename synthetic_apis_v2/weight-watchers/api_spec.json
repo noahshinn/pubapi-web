@@ -1,0 +1,217 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Weight Watchers",
+    "version": "1.0.0",
+    "description": "API for weight management and wellness tracking"
+  },
+  "paths": {
+    "/api/v1/daily-log": {
+      "get": {
+        "summary": "Get user's daily food log",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Daily food log",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyLog"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add food item to daily log",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FoodLogEntry"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Food item added to log"
+          }
+        }
+      }
+    },
+    "/api/v1/progress": {
+      "get": {
+        "summary": "Get user's progress",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's progress data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Progress"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new weight measurement",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeightEntry"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Weight measurement added"
+          }
+        }
+      }
+    },
+    "/api/v1/foods/search": {
+      "get": {
+        "summary": "Search food database",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of matching foods",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Food"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Food": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "points": {"type": "integer"},
+          "serving_size": {"type": "string"},
+          "calories": {"type": "integer"},
+          "protein": {"type": "number"},
+          "carbs": {"type": "number"},
+          "fat": {"type": "number"}
+        }
+      },
+      "FoodLogEntry": {
+        "type": "object",
+        "properties": {
+          "food_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "date": {"type": "string", "format": "date"},
+          "meal_type": {"type": "string", "enum": ["breakfast", "lunch", "dinner", "snack"]},
+          "servings": {"type": "number"}
+        }
+      },
+      "DailyLog": {
+        "type": "object",
+        "properties": {
+          "date": {"type": "string", "format": "date"},
+          "total_points": {"type": "integer"},
+          "points_remaining": {"type": "integer"},
+          "meals": {
+            "type": "object",
+            "properties": {
+              "breakfast": {
+                "type": "array",
+                "items": {"$ref": "#/components/schemas/FoodLogEntry"}
+              },
+              "lunch": {
+                "type": "array",
+                "items": {"$ref": "#/components/schemas/FoodLogEntry"}
+              },
+              "dinner": {
+                "type": "array",
+                "items": {"$ref": "#/components/schemas/FoodLogEntry"}
+              },
+              "snack": {
+                "type": "array",
+                "items": {"$ref": "#/components/schemas/FoodLogEntry"}
+              }
+            }
+          }
+        }
+      },
+      "WeightEntry": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "weight": {"type": "number"},
+          "date": {"type": "string", "format": "date"}
+        }
+      },
+      "Progress": {
+        "type": "object",
+        "properties": {
+          "starting_weight": {"type": "number"},
+          "current_weight": {"type": "number"},
+          "goal_weight": {"type": "number"},
+          "weekly_points_allowance": {"type": "integer"},
+          "points_used_this_week": {"type": "integer"},
+          "weight_history": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/WeightEntry"}
+          }
+        }
+      }
+    }
+  }
+}

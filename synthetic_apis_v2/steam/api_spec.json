@@ -1,0 +1,238 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Steam",
+    "version": "1.0.0",
+    "description": "API for gaming platform service"
+  },
+  "paths": {
+    "/api/v1/library": {
+      "get": {
+        "summary": "Get user's game library",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of owned games",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Game"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/store": {
+      "get": {
+        "summary": "Get store listings",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of games in store",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StoreGame"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/friends": {
+      "get": {
+        "summary": "Get user's friends list",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of friends",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Friend"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/achievements/{gameId}": {
+      "get": {
+        "summary": "Get user's achievements for a game",
+        "parameters": [
+          {
+            "name": "gameId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of achievements",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Achievement"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/purchases": {
+      "post": {
+        "summary": "Purchase a game",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Purchase successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Purchase"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Game": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "playtime": {"type": "integer"},
+          "last_played": {"type": "string"},
+          "installed": {"type": "boolean"}
+        }
+      },
+      "StoreGame": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "price": {"type": "number"},
+          "discount": {"type": "number"},
+          "rating": {"type": "number"},
+          "tags": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "release_date": {"type": "string"}
+        }
+      },
+      "Friend": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "username": {"type": "string"},
+          "status": {"type": "string"},
+          "current_game": {"type": "string"},
+          "last_online": {"type": "string"}
+        }
+      },
+      "Achievement": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "unlocked": {"type": "boolean"},
+          "unlock_date": {"type": "string"}
+        }
+      },
+      "PurchaseRequest": {
+        "type": "object",
+        "properties": {
+          "game_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "payment_method": {"type": "string"}
+        },
+        "required": ["game_id", "user_email", "payment_method"]
+      },
+      "Purchase": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "game": {"$ref": "#/components/schemas/Game"},
+          "price": {"type": "number"},
+          "purchase_date": {"type": "string"}
+        }
+      }
+    }
+  }
+}

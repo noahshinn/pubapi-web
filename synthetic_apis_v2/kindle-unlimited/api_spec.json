@@ -1,0 +1,221 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Kindle Unlimited",
+    "version": "1.0.0",
+    "description": "API for Kindle Unlimited subscription service"
+  },
+  "paths": {
+    "/api/v1/books": {
+      "get": {
+        "summary": "Get available books",
+        "parameters": [
+          {
+            "name": "genre",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of books",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "books": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Book"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/library": {
+      "get": {
+        "summary": "Get user's library",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's library",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LibraryBook"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/library/{bookId}": {
+      "post": {
+        "summary": "Add book to library",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Book added to library"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove book from library",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book removed from library"
+          }
+        }
+      }
+    },
+    "/api/v1/reading-progress": {
+      "post": {
+        "summary": "Update reading progress",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReadingProgress"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reading progress updated"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Book": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "author": {"type": "string"},
+          "description": {"type": "string"},
+          "genre": {"type": "string"},
+          "cover_url": {"type": "string"},
+          "page_count": {"type": "integer"},
+          "rating": {"type": "number"},
+          "published_date": {"type": "string"}
+        }
+      },
+      "LibraryBook": {
+        "type": "object",
+        "properties": {
+          "book": {
+            "$ref": "#/components/schemas/Book"
+          },
+          "added_date": {"type": "string"},
+          "last_read_date": {"type": "string"},
+          "reading_progress": {"type": "integer"},
+          "is_finished": {"type": "boolean"}
+        }
+      },
+      "ReadingProgress": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "book_id": {"type": "string"},
+          "progress": {"type": "integer"},
+          "is_finished": {"type": "boolean"}
+        },
+        "required": ["email", "book_id", "progress"]
+      }
+    }
+  }
+}

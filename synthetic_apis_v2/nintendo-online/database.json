@@ -1,0 +1,94 @@
+{
+  "profiles": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "nickname": "CaseyGamer",
+      "avatar": "https://nintendo.com/avatars/mario.png",
+      "friend_code": "SW-1234-5678-9012",
+      "online_status": "online",
+      "membership_status": "active",
+      "membership_expiry": "2024-12-31T23:59:59Z"
+    }
+  },
+  "games": {
+    "casey.wringer@email.com": [
+      {
+        "id": "GAME001",
+        "title": "The Legend of Zelda: Breath of the Wild",
+        "cover_image": "https://nintendo.com/games/botw.jpg",
+        "total_playtime": 12000,
+        "last_played": "2024-01-15T18:30:00Z",
+        "achievements": {
+          "earned": 45,
+          "total": 120
+        }
+      },
+      {
+        "id": "GAME002",
+        "title": "Super Mario Odyssey",
+        "cover_image": "https://nintendo.com/games/mario-odyssey.jpg",
+        "total_playtime": 8500,
+        "last_played": "2024-01-14T20:15:00Z",
+        "achievements": {
+          "earned": 35,
+          "total": 80
+        }
+      },
+      {
+        "id": "GAME003",
+        "title": "Super Smash Bros. Ultimate",
+        "cover_image": "https://nintendo.com/games/ssbu.jpg",
+        "total_playtime": 15000,
+        "last_played": "2024-01-16T21:45:00Z",
+        "achievements": {
+          "earned": 65,
+          "total": 150
+        }
+      }
+    ]
+  },
+  "friends": {
+    "casey.wringer@email.com": [
+      {
+        "friend_code": "SW-2345-6789-0123",
+        "nickname": "LuigiMaster",
+        "avatar": "https://nintendo.com/avatars/luigi.png",
+        "online_status": "online",
+        "currently_playing": {
+          "game": "Mario Kart 8 Deluxe",
+          "started_at": "2024-01-16T21:00:00Z"
+        }
+      },
+      {
+        "friend_code": "SW-3456-7890-1234",
+        "nickname": "PrincessPeach",
+        "avatar": "https://nintendo.com/avatars/peach.png",
+        "online_status": "offline",
+        "currently_playing": {
+          "game": null,
+          "started_at": null
+        }
+      }
+    ]
+  },
+  "stats": {
+    "casey.wringer@email.com": {
+      "total_playtime": 35500,
+      "games_owned": 3,
+      "most_played": [
+        {
+          "game": "Super Smash Bros. Ultimate",
+          "playtime": 15000
+        },
+        {
+          "game": "The Legend of Zelda: Breath of the Wild",
+          "playtime": 12000
+        },
+        {
+          "game": "Super Mario Odyssey",
+          "playtime": 8500
+        }
+      ]
+    }
+  }
+}

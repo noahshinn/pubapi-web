@@ -1,0 +1,95 @@
+{
+    "profiles": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "avatar": "https://disney-plus.example.com/avatars/mickey.png",
+            "preferences": {
+                "autoplay": true,
+                "subtitle_language": "en",
+                "audio_language": "en"
+            },
+            "watchlist": ["content_1", "content_3", "content_5"],
+            "watch_progress": [
+                {
+                    "content_id": "content_1",
+                    "progress_seconds": 3600,
+                    "total_seconds": 7200,
+                    "last_watched": "2024-01-15T20:30:00Z"
+                },
+                {
+                    "content_id": "content_2",
+                    "progress_seconds": 1800,
+                    "total_seconds": 2700,
+                    "last_watched": "2024-01-14T19:45:00Z",
+                    "season": 1,
+                    "episode": 3
+                }
+            ]
+        }
+    },
+    "content": {
+        "content_1": {
+            "id": "content_1",
+            "title": "The Lion King",
+            "type": "movie",
+            "description": "A young lion prince flees his kingdom only to learn the true meaning of responsibility and bravery.",
+            "release_year": 1994,
+            "rating": "G",
+            "duration": 88,
+            "genre": "Animation",
+            "thumbnail_url": "https://disney-plus.example.com/thumbnails/lion-king.jpg",
+            "stream_url": "https://disney-plus.example.com/stream/lion-king"
+        },
+        "content_2": {
+            "id": "content_2",
+            "title": "The Mandalorian",
+            "type": "series",
+            "description": "The travels of a lone bounty hunter in the outer reaches of the galaxy.",
+            "release_year": 2019,
+            "rating": "TV-14",
+            "duration": 40,
+            "genre": "Science Fiction",
+            "thumbnail_url": "https://disney-plus.example.com/thumbnails/mandalorian.jpg",
+            "stream_url": "https://disney-plus.example.com/stream/mandalorian",
+            "seasons": 3
+        },
+        "content_3": {
+            "id": "content_3",
+            "title": "Frozen",
+            "type": "movie",
+            "description": "When the newly crowned Queen Elsa accidentally uses her power to turn things into ice to curse her home in infinite winter, her sister Anna teams up with a mountain man, his playful reindeer, and a snowman to change the weather condition.",
+            "release_year": 2013,
+            "rating": "PG",
+            "duration": 102,
+            "genre": "Animation",
+            "thumbnail_url": "https://disney-plus.example.com/thumbnails/frozen.jpg",
+            "stream_url": "https://disney-plus.example.com/stream/frozen"
+        },
+        "content_4": {
+            "id": "content_4",
+            "title": "WandaVision",
+            "type": "series",
+            "description": "Blending the style of classic sitcoms with the MCU, Wanda Maximoff and Vision live their ideal suburban lives.",
+            "release_year": 2021,
+            "rating": "TV-PG",
+            "duration": 30,
+            "genre": "Superhero",
+            "thumbnail_url": "https://disney-plus.example.com/thumbnails/wandavision.jpg",
+            "stream_url": "https://disney-plus.example.com/stream/wandavision",
+            "seasons": 1
+        },
+        "content_5": {
+            "id": "content_5",
+            "title": "Soul",
+            "type": "movie",
+            "description": "A musician who has lost his passion for music is transported out of his body and must find his way back with the help of an infant soul learning about herself.",
+            "release_year": 2020,
+            "rating": "PG",
+            "duration": 100,
+            "genre": "Animation",
+            "thumbnail_url": "https://disney-plus.example.com/thumbnails/soul.jpg",
+            "stream_url": "https://disney-plus.example.com/stream/soul"
+        }
+    }
+}

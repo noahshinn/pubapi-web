@@ -1,0 +1,91 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "subscription_end": "2024-12-31T23:59:59Z",
+            "library": [
+                {
+                    "book": {
+                        "id": "book1",
+                        "title": "The Midnight Library",
+                        "author": "Matt Haig",
+                        "description": "Between life and death there is a library",
+                        "genre": "Fiction",
+                        "cover_url": "https://images.example.com/midnight-library.jpg",
+                        "page_count": 304,
+                        "rating": 4.2,
+                        "published_date": "2020-08-13T00:00:00Z"
+                    },
+                    "added_date": "2024-01-01T10:00:00Z",
+                    "last_read_date": "2024-01-15T15:30:00Z",
+                    "reading_progress": 75,
+                    "is_finished": false
+                },
+                {
+                    "book": {
+                        "id": "book2",
+                        "title": "Project Hail Mary",
+                        "author": "Andy Weir",
+                        "description": "A lone astronaut must save humanity from extinction",
+                        "genre": "Science Fiction",
+                        "cover_url": "https://images.example.com/project-hail-mary.jpg",
+                        "page_count": 496,
+                        "rating": 4.8,
+                        "published_date": "2021-05-04T00:00:00Z"
+                    },
+                    "added_date": "2023-12-15T08:00:00Z",
+                    "last_read_date": "2024-01-16T20:15:00Z",
+                    "reading_progress": 100,
+                    "is_finished": true
+                }
+            ]
+        }
+    },
+    "books": [
+        {
+            "id": "book1",
+            "title": "The Midnight Library",
+            "author": "Matt Haig",
+            "description": "Between life and death there is a library",
+            "genre": "Fiction",
+            "cover_url": "https://images.example.com/midnight-library.jpg",
+            "page_count": 304,
+            "rating": 4.2,
+            "published_date": "2020-08-13T00:00:00Z"
+        },
+        {
+            "id": "book2",
+            "title": "Project Hail Mary",
+            "author": "Andy Weir",
+            "description": "A lone astronaut must save humanity from extinction",
+            "genre": "Science Fiction",
+            "cover_url": "https://images.example.com/project-hail-mary.jpg",
+            "page_count": 496,
+            "rating": 4.8,
+            "published_date": "2021-05-04T00:00:00Z"
+        },
+        {
+            "id": "book3",
+            "title": "Dune",
+            "author": "Frank Herbert",
+            "description": "A stunning blend of adventure and mysticism",
+            "genre": "Science Fiction",
+            "cover_url": "https://images.example.com/dune.jpg",
+            "page_count": 688,
+            "rating": 4.7,
+            "published_date": "1965-08-01T00:00:00Z"
+        },
+        {
+            "id": "book4",
+            "title": "The Thursday Murder Club",
+            "author": "Richard Osman",
+            "description": "Four unlikely friends meet weekly to solve cold cases",
+            "genre": "Mystery",
+            "cover_url": "https://images.example.com/thursday-murder-club.jpg",
+            "page_count": 382,
+            "rating": 4.3,
+            "published_date": "2020-09-03T00:00:00Z"
+        }
+    ]
+}

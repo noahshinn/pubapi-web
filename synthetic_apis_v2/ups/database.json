@@ -1,0 +1,116 @@
+{
+    "shipments": {
+        "ship_1": {
+            "id": "ship_1",
+            "tracking_number": "1Z999999999999",
+            "user_email": "casey.wringer@email.com",
+            "from_address": {
+                "street": "789 Tech Avenue",
+                "city": "San Francisco",
+                "state": "CA",
+                "postal_code": "94105",
+                "country": "US"
+            },
+            "to_address": {
+                "street": "456 Pine Street",
+                "city": "Seattle",
+                "state": "WA",
+                "postal_code": "98101",
+                "country": "US"
+            },
+            "packages": [
+                {
+                    "weight": 5.5,
+                    "length": 12,
+                    "width": 8,
+                    "height": 6,
+                    "declared_value": 150.00
+                }
+            ],
+            "service_level": "2DAY",
+            "status": "IN_TRANSIT",
+            "cost": 45.75,
+            "created_at": "2024-01-15T10:30:00Z",
+            "events": [
+                {
+                    "timestamp": "2024-01-15T10:30:00Z",
+                    "location": "San Francisco, CA",
+                    "status": "LABEL_CREATED",
+                    "description": "Shipping label has been created"
+                },
+                {
+                    "timestamp": "2024-01-15T14:20:00Z",
+                    "location": "San Francisco, CA",
+                    "status": "PICKUP_COMPLETE",
+                    "description": "Package picked up"
+                },
+                {
+                    "timestamp": "2024-01-15T18:45:00Z",
+                    "location": "Oakland, CA",
+                    "status": "IN_TRANSIT",
+                    "description": "Package arrived at UPS facility"
+                }
+            ],
+            "label_url": "https://ups.com/labels/ship_1.pdf"
+        },
+        "ship_2": {
+            "id": "ship_2",
+            "tracking_number": "1Z888888888888",
+            "user_email": "casey.wringer@email.com",
+            "from_address": {
+                "street": "789 Tech Avenue",
+                "city": "San Francisco",
+                "state": "CA",
+                "postal_code": "94105",
+                "country": "US"
+            },
+            "to_address": {
+                "street": "123 Main Street",
+                "city": "New York",
+                "state": "NY",
+                "postal_code": "10001",
+                "country": "US"
+            },
+            "packages": [
+                {
+                    "weight": 2.0,
+                    "length": 10,
+                    "width": 7,
+                    "height": 4,
+                    "declared_value": 75.00
+                }
+            ],
+            "service_level": "GROUND",
+            "status": "DELIVERED",
+            "cost": 28.50,
+            "created_at": "2024-01-10T09:15:00Z",
+            "events": [
+                {
+                    "timestamp": "2024-01-10T09:15:00Z",
+                    "location": "San Francisco, CA",
+                    "status": "LABEL_CREATED",
+                    "description": "Shipping label has been created"
+                },
+                {
+                    "timestamp": "2024-01-10T13:30:00Z",
+                    "location": "San Francisco, CA",
+                    "status": "PICKUP_COMPLETE",
+                    "description": "Package picked up"
+                },
+                {
+                    "timestamp": "2024-01-15T08:20:00Z",
+                    "location": "New York, NY",
+                    "status": "OUT_FOR_DELIVERY",
+                    "description": "Package out for delivery"
+                },
+                {
+                    "timestamp": "2024-01-15T14:45:00Z",
+                    "location": "New York, NY",
+                    "status": "DELIVERED",
+                    "description": "Package delivered"
+                }
+            ],
+            "label_url": "https://ups.com/labels/ship_2.pdf"
+        }
+    }
+}

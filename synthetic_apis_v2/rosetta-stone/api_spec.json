@@ -1,0 +1,191 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Rosetta Stone",
+    "version": "1.0.0",
+    "description": "API for language learning platform"
+  },
+  "paths": {
+    "/api/v1/languages": {
+      "get": {
+        "summary": "Get available languages",
+        "responses": {
+          "200": {
+            "description": "List of available languages",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Language"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/courses": {
+      "get": {
+        "summary": "Get user's enrolled courses",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of enrolled courses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Course"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Enroll in a new course",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnrollmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Course enrollment successful"
+          }
+        }
+      }
+    },
+    "/api/v1/progress": {
+      "get": {
+        "summary": "Get user's learning progress",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "course_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's progress in the course",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Progress"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Update learning progress",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Progress updated successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Language": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "native_name": {"type": "string"},
+          "difficulty": {"type": "string"},
+          "available_levels": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "Course": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "language_id": {"type": "string"},
+          "level": {"type": "string"},
+          "total_units": {"type": "integer"},
+          "total_lessons": {"type": "integer"},
+          "enrolled_at": {"type": "string"}
+        }
+      },
+      "Progress": {
+        "type": "object",
+        "properties": {
+          "course_id": {"type": "string"},
+          "current_unit": {"type": "integer"},
+          "current_lesson": {"type": "integer"},
+          "completed_lessons": {"type": "integer"},
+          "accuracy": {"type": "number"},
+          "streak_days": {"type": "integer"},
+          "last_activity": {"type": "string"}
+        }
+      },
+      "EnrollmentRequest": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "language_id": {"type": "string"},
+          "level": {"type": "string"}
+        },
+        "required": ["user_email", "language_id", "level"]
+      },
+      "ProgressUpdate": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "course_id": {"type": "string"},
+          "lesson_id": {"type": "string"},
+          "completed": {"type": "boolean"},
+          "score": {"type": "number"}
+        },
+        "required": ["user_email", "course_id", "lesson_id", "completed"]
+      }
+    }
+  }
+}

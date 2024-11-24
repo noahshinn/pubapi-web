@@ -1,0 +1,119 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "payment_methods": [
+                {
+                    "id": "pm_1",
+                    "type": "credit_card",
+                    "last4": "4242"
+                }
+            ]
+        }
+    },
+    "events": {
+        "evt_1": {
+            "id": "evt_1",
+            "title": "Taylor Swift | The Eras Tour",
+            "category": "concerts",
+            "venue": {
+                "id": "venue_1",
+                "name": "Levi's Stadium",
+                "address": "4900 Marie P DeBartolo Way",
+                "city": "Santa Clara",
+                "state": "CA",
+                "country": "USA",
+                "capacity": 68500
+            },
+            "date": "2024-07-28T19:00:00Z",
+            "description": "Taylor Swift's record-breaking Eras Tour",
+            "min_price": 199.00,
+            "max_price": 899.00,
+            "image_url": "https://example.com/events/taylor-swift-eras.jpg"
+        },
+        "evt_2": {
+            "id": "evt_2",
+            "title": "San Francisco 49ers vs Seattle Seahawks",
+            "category": "sports",
+            "venue": {
+                "id": "venue_1",
+                "name": "Levi's Stadium",
+                "address": "4900 Marie P DeBartolo Way",
+                "city": "Santa Clara",
+                "state": "CA",
+                "country": "USA",
+                "capacity": 68500
+            },
+            "date": "2024-09-15T13:00:00Z",
+            "description": "NFL Regular Season Game",
+            "min_price": 85.00,
+            "max_price": 450.00,
+            "image_url": "https://example.com/events/49ers-seahawks.jpg"
+        }
+    },
+    "tickets": {
+        "tkt_1": {
+            "id": "tkt_1",
+            "event_id": "evt_1",
+            "section": "C128",
+            "row": "12",
+            "seat": "15",
+            "price": 450.00,
+            "service_fee": 67.50,
+            "delivery_method": "mobile",
+            "seller_rating": 4.8,
+            "available": true
+        },
+        "tkt_2": {
+            "id": "tkt_2",
+            "event_id": "evt_1",
+            "section": "C128",
+            "row": "12",
+            "seat": "16",
+            "price": 450.00,
+            "service_fee": 67.50,
+            "delivery_method": "mobile",
+            "seller_rating": 4.8,
+            "available": true
+        },
+        "tkt_3": {
+            "id": "tkt_3",
+            "event_id": "evt_2",
+            "section": "B124",
+            "row": "20",
+            "seat": "8",
+            "price": 175.00,
+            "service_fee": 26.25,
+            "delivery_method": "mobile",
+            "seller_rating": 4.5,
+            "available": true
+        }
+    },
+    "orders": {
+        "ord_1": {
+            "id": "ord_1",
+            "user_email": "casey.wringer@email.com",
+            "event": {
+                "id": "evt_2",
+                "title": "San Francisco 49ers vs Seattle Seahawks"
+            },
+            "tickets": [
+                {
+                    "id": "tkt_4",
+                    "section": "B124",
+                    "row": "20",
+                    "seat": "9",
+                    "price": 175.00,
+                    "service_fee": 26.25
+                }
+            ],
+            "total_price": 175.00,
+            "service_fees": 26.25,
+            "delivery_method": "mobile",
+            "status": "confirmed",
+            "purchase_date": "2024-01-15T10:30:00Z",
+            "payment_method": "pm_1"
+        }
+    }
+}

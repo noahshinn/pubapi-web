@@ -1,0 +1,261 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Costco",
+    "version": "1.0.0",
+    "description": "API for Costco wholesale membership and shopping"
+  },
+  "paths": {
+    "/api/v1/membership": {
+      "get": {
+        "summary": "Get membership details",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Membership details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Membership"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/products": {
+      "get": {
+        "summary": "Get available products",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "warehouse_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orders": {
+      "get": {
+        "summary": "Get order history",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Place new order",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewOrder"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order created"
+          }
+        }
+      }
+    },
+    "/api/v1/warehouses": {
+      "get": {
+        "summary": "Get nearby warehouses",
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of warehouses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Warehouse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Membership": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string"},
+          "status": {"type": "string"},
+          "expiration_date": {"type": "string"},
+          "member_since": {"type": "string"},
+          "auto_renewal": {"type": "boolean"},
+          "additional_cards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdditionalCard"
+            }
+          }
+        }
+      },
+      "AdditionalCard": {
+        "type": "object",
+        "properties": {
+          "holder_name": {"type": "string"},
+          "relationship": {"type": "string"},
+          "card_number": {"type": "string"}
+        }
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "category": {"type": "string"},
+          "price": {"type": "number"},
+          "unit": {"type": "string"},
+          "stock": {"type": "integer"},
+          "is_members_only": {"type": "boolean"},
+          "description": {"type": "string"},
+          "image_url": {"type": "string"}
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "warehouse_id": {"type": "string"},
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            }
+          },
+          "total": {"type": "number"},
+          "tax": {"type": "number"},
+          "date": {"type": "string"},
+          "status": {"type": "string"}
+        }
+      },
+      "OrderItem": {
+        "type": "object",
+        "properties": {
+          "product_id": {"type": "string"},
+          "quantity": {"type": "integer"},
+          "price": {"type": "number"}
+        }
+      },
+      "NewOrder": {
+        "type": "object",
+        "properties": {
+          "warehouse_id": {"type": "string"},
+          "email": {"type": "string"},
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            }
+          },
+          "payment_method_id": {"type": "string"}
+        }
+      },
+      "Warehouse": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "address": {"type": "string"},
+          "city": {"type": "string"},
+          "state": {"type": "string"},
+          "zip": {"type": "string"},
+          "latitude": {"type": "number"},
+          "longitude": {"type": "number"},
+          "hours": {"type": "string"},
+          "phone": {"type": "string"},
+          "services": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      }
+    }
+  }
+}

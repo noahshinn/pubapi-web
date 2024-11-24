@@ -1,0 +1,217 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "CVS",
+    "version": "1.0.0",
+    "description": "API for CVS pharmacy services"
+  },
+  "paths": {
+    "/api/v1/prescriptions": {
+      "get": {
+        "summary": "Get user's prescriptions",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of prescriptions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Prescription"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/prescriptions/{prescriptionId}/refill": {
+      "post": {
+        "summary": "Request prescription refill",
+        "parameters": [
+          {
+            "name": "prescriptionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Refill request created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RefillRequest"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/stores": {
+      "get": {
+        "summary": "Find nearby CVS stores",
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of stores",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Store"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/appointments": {
+      "get": {
+        "summary": "Get user's appointments",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of appointments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Schedule new appointment",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAppointment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Appointment created"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Prescription": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "dosage": {"type": "string"},
+          "quantity": {"type": "integer"},
+          "refills_remaining": {"type": "integer"},
+          "last_filled": {"type": "string"},
+          "expires_at": {"type": "string"},
+          "prescriber": {"type": "string"},
+          "status": {"type": "string"}
+        }
+      },
+      "RefillRequest": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "prescription_id": {"type": "string"},
+          "status": {"type": "string"},
+          "requested_at": {"type": "string"},
+          "pickup_store": {"type": "string"},
+          "estimated_ready": {"type": "string"}
+        }
+      },
+      "Store": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "address": {"type": "string"},
+          "phone": {"type": "string"},
+          "hours": {"type": "string"},
+          "has_pharmacy": {"type": "boolean"},
+          "has_minute_clinic": {"type": "boolean"},
+          "latitude": {"type": "number"},
+          "longitude": {"type": "number"}
+        }
+      },
+      "Appointment": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string"},
+          "datetime": {"type": "string"},
+          "store_id": {"type": "string"},
+          "status": {"type": "string"},
+          "notes": {"type": "string"}
+        }
+      },
+      "NewAppointment": {
+        "type": "object",
+        "properties": {
+          "type": {"type": "string"},
+          "datetime": {"type": "string"},
+          "store_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "notes": {"type": "string"}
+        }
+      }
+    }
+  }
+}

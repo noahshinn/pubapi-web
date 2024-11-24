@@ -1,0 +1,107 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "address": {
+                "street": "789 Tech Avenue",
+                "city": "San Francisco",
+                "state": "CA",
+                "zip_code": "94105",
+                "country": "USA"
+            },
+            "payment_methods": [
+                {
+                    "id": "pm_1",
+                    "type": "credit_card",
+                    "last4": "4242",
+                    "expiry_mm": 12,
+                    "expiry_yy": 25
+                }
+            ],
+            "prime_member": true
+        }
+    },
+    "products": {
+        "prod_1": {
+            "id": "prod_1",
+            "title": "Echo Dot (5th Gen)",
+            "description": "Smart speaker with Alexa",
+            "price": 49.99,
+            "category": "Electronics",
+            "rating": 4.7,
+            "reviews_count": 125890,
+            "prime_eligible": true,
+            "in_stock": true,
+            "estimated_delivery": "Tomorrow by 10PM"
+        },
+        "prod_2": {
+            "id": "prod_2",
+            "title": "Kindle Paperwhite",
+            "description": "6.8\" display, waterproof e-reader",
+            "price": 139.99,
+            "category": "Electronics",
+            "rating": 4.8,
+            "reviews_count": 89234,
+            "prime_eligible": true,
+            "in_stock": true,
+            "estimated_delivery": "Tomorrow by 10PM"
+        },
+        "prod_3": {
+            "id": "prod_3",
+            "title": "The Psychology of Money",
+            "description": "Timeless lessons on wealth, greed, and happiness",
+            "price": 14.99,
+            "category": "Books",
+            "rating": 4.7,
+            "reviews_count": 45673,
+            "prime_eligible": true,
+            "in_stock": true,
+            "estimated_delivery": "Tomorrow by 10PM"
+        }
+    },
+    "carts": {
+        "casey.wringer@email.com": {
+            "user_email": "casey.wringer@email.com",
+            "items": [
+                {
+                    "product_id": "prod_1",
+                    "quantity": 1,
+                    "price": 49.99
+                }
+            ],
+            "subtotal": 49.99,
+            "shipping": 0,
+            "tax": 4.12,
+            "total": 54.11
+        }
+    },
+    "orders": {
+        "ord_1": {
+            "id": "ord_1",
+            "user_email": "casey.wringer@email.com",
+            "items": [
+                {
+                    "product_id": "prod_2",
+                    "quantity": 1,
+                    "price": 139.99
+                }
+            ],
+            "status": "delivered",
+            "shipping_address": {
+                "street": "789 Tech Avenue",
+                "city": "San Francisco",
+                "state": "CA",
+                "zip_code": "94105",
+                "country": "USA"
+            },
+            "payment_method": "pm_1",
+            "subtotal": 139.99,
+            "shipping": 0,
+            "tax": 11.55,
+            "total": 151.54,
+            "created_at": "2024-01-10T15:30:00Z",
+            "updated_at": "2024-01-12T14:20:00Z"
+        }
+    }
+}

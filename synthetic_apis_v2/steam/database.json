@@ -1,0 +1,112 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "username": "CaseyGamer",
+            "library": [
+                {
+                    "id": "game_1",
+                    "title": "Elden Ring",
+                    "playtime": 156,
+                    "last_played": "2024-01-15T22:15:00Z",
+                    "installed": true
+                },
+                {
+                    "id": "game_2",
+                    "title": "Cyberpunk 2077",
+                    "playtime": 85,
+                    "last_played": "2024-01-10T18:30:00Z",
+                    "installed": true
+                },
+                {
+                    "id": "game_3",
+                    "title": "Stardew Valley",
+                    "playtime": 200,
+                    "last_played": "2024-01-16T20:45:00Z",
+                    "installed": true
+                }
+            ],
+            "friends": [
+                {
+                    "id": "user_1",
+                    "username": "GameMaster42",
+                    "status": "online",
+                    "current_game": "Elden Ring",
+                    "last_online": "2024-01-16T21:00:00Z"
+                },
+                {
+                    "id": "user_2",
+                    "username": "PixelPirate",
+                    "status": "offline",
+                    "current_game": "",
+                    "last_online": "2024-01-15T23:45:00Z"
+                }
+            ],
+            "achievements": {
+                "game_1": [
+                    {
+                        "id": "ach_1",
+                        "name": "First Steps",
+                        "description": "Complete the tutorial",
+                        "unlocked": true,
+                        "unlock_date": "2024-01-01T15:30:00Z"
+                    },
+                    {
+                        "id": "ach_2",
+                        "name": "Dragon Slayer",
+                        "description": "Defeat the first major boss",
+                        "unlocked": true,
+                        "unlock_date": "2024-01-03T19:45:00Z"
+                    }
+                ],
+                "game_2": [
+                    {
+                        "id": "ach_3",
+                        "name": "Street Kid",
+                        "description": "Complete the Street Kid prologue",
+                        "unlocked": true,
+                        "unlock_date": "2024-01-05T21:20:00Z"
+                    }
+                ]
+            },
+            "payment_methods": [
+                {
+                    "id": "pm_1",
+                    "type": "credit_card",
+                    "last4": "4242",
+                    "expiry_mm": 12,
+                    "expiry_yy": 25
+                }
+            ]
+        }
+    },
+    "store_games": {
+        "game_4": {
+            "id": "game_4",
+            "title": "Baldur's Gate 3",
+            "price": 59.99,
+            "discount": 0.0,
+            "rating": 4.9,
+            "tags": ["RPG", "Fantasy", "Story Rich"],
+            "release_date": "2023-08-03T00:00:00Z"
+        },
+        "game_5": {
+            "id": "game_5",
+            "title": "Red Dead Redemption 2",
+            "price": 49.99,
+            "discount": 0.33,
+            "rating": 4.8,
+            "tags": ["Action", "Adventure", "Open World"],
+            "release_date": "2019-12-05T00:00:00Z"
+        },
+        "game_6": {
+            "id": "game_6",
+            "title": "Hollow Knight",
+            "price": 14.99,
+            "discount": 0.5,
+            "rating": 4.7,
+            "tags": ["Metroidvania", "Indie", "Action"],
+            "release_date": "2017-02-24T00:00:00Z"
+        }
+    }
+}

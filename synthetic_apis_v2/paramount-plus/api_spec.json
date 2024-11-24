@@ -1,0 +1,213 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Paramount Plus",
+    "version": "1.0.0",
+    "description": "API for Paramount+ streaming service"
+  },
+  "paths": {
+    "/api/v1/catalog": {
+      "get": {
+        "summary": "Get content catalog",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["movie", "show", "live"]
+            }
+          },
+          {
+            "name": "genre",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Content"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/watchlist": {
+      "get": {
+        "summary": "Get user's watchlist",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's watchlist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Content"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add content to watchlist",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "content_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Content added to watchlist"
+          }
+        }
+      }
+    },
+    "/api/v1/continue-watching": {
+      "get": {
+        "summary": "Get user's continue watching list",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's continue watching list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WatchProgress"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/watch": {
+      "post": {
+        "summary": "Record watch progress",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WatchProgress"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Watch progress recorded"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Content": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["movie", "show", "live"]
+          },
+          "genre": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "release_date": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "integer"
+          },
+          "thumbnail_url": {
+            "type": "string"
+          },
+          "stream_url": {
+            "type": "string"
+          }
+        }
+      },
+      "WatchProgress": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "content_id": {
+            "type": "string"
+          },
+          "progress_seconds": {
+            "type": "integer"
+          },
+          "total_seconds": {
+            "type": "integer"
+          },
+          "last_watched": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

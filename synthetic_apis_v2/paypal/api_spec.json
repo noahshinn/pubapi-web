@@ -1,0 +1,317 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PayPal",
+    "version": "1.0.0",
+    "description": "API for digital payment service"
+  },
+  "paths": {
+    "/api/v1/balance": {
+      "get": {
+        "summary": "Get account balance",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account balance information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Balance"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/transactions": {
+      "get": {
+        "summary": "Get transaction history",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of transactions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Transaction"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Send money",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMoneyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Transaction created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transaction"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/payment-methods": {
+      "get": {
+        "summary": "Get linked payment methods",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of payment methods",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentMethod"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new payment method",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPaymentMethod"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Payment method added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethod"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Balance": {
+        "type": "object",
+        "properties": {
+          "available": {
+            "type": "number"
+          },
+          "pending": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          }
+        }
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["payment", "refund", "transfer"]
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "completed", "failed", "reversed"]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "sender_email": {
+            "type": "string"
+          },
+          "recipient_email": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SendMoneyRequest": {
+        "type": "object",
+        "properties": {
+          "sender_email": {
+            "type": "string"
+          },
+          "recipient_email": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "payment_method_id": {
+            "type": "string"
+          }
+        },
+        "required": ["sender_email", "recipient_email", "amount", "currency"]
+      },
+      "PaymentMethod": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["bank_account", "credit_card", "debit_card"]
+          },
+          "last4": {
+            "type": "string"
+          },
+          "bank_name": {
+            "type": "string"
+          },
+          "card_type": {
+            "type": "string"
+          },
+          "expiry_month": {
+            "type": "integer"
+          },
+          "expiry_year": {
+            "type": "integer"
+          },
+          "is_default": {
+            "type": "boolean"
+          }
+        }
+      },
+      "NewPaymentMethod": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["bank_account", "credit_card", "debit_card"]
+          },
+          "account_number": {
+            "type": "string"
+          },
+          "routing_number": {
+            "type": "string"
+          },
+          "card_number": {
+            "type": "string"
+          },
+          "expiry_month": {
+            "type": "integer"
+          },
+          "expiry_year": {
+            "type": "integer"
+          },
+          "cvv": {
+            "type": "string"
+          },
+          "billing_address": {
+            "type": "object",
+            "properties": {
+              "street": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "postal_code": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

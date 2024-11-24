@@ -1,0 +1,271 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "AMC Theatres",
+    "version": "1.0.0",
+    "description": "API for movie theater ticketing and services"
+  },
+  "paths": {
+    "/api/v1/theaters": {
+      "get": {
+        "summary": "Get nearby theaters",
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of theaters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Theater"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/movies": {
+      "get": {
+        "summary": "Get current movies",
+        "parameters": [
+          {
+            "name": "theaterId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Movie"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/showtimes": {
+      "get": {
+        "summary": "Get movie showtimes",
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "theaterId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of showtimes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Showtime"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reservations": {
+      "post": {
+        "summary": "Create ticket reservation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Reservation created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reservation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get user's reservations",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of reservations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Reservation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Theater": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "address": {"type": "string"},
+          "city": {"type": "string"},
+          "state": {"type": "string"},
+          "zipCode": {"type": "string"},
+          "latitude": {"type": "number"},
+          "longitude": {"type": "number"},
+          "screens": {"type": "integer"},
+          "amenities": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "Movie": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "rating": {"type": "string"},
+          "runtime": {"type": "integer"},
+          "genre": {"type": "string"},
+          "synopsis": {"type": "string"},
+          "posterUrl": {"type": "string"},
+          "trailerUrl": {"type": "string"},
+          "releaseDate": {"type": "string", "format": "date"}
+        }
+      },
+      "Showtime": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "movieId": {"type": "string"},
+          "theaterId": {"type": "string"},
+          "screenNumber": {"type": "integer"},
+          "startTime": {"type": "string", "format": "date-time"},
+          "endTime": {"type": "string", "format": "date-time"},
+          "format": {"type": "string"},
+          "price": {"type": "number"},
+          "availableSeats": {"type": "integer"}
+        }
+      },
+      "ReservationRequest": {
+        "type": "object",
+        "properties": {
+          "showtimeId": {"type": "string"},
+          "userEmail": {"type": "string"},
+          "seats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "row": {"type": "string"},
+                "number": {"type": "integer"}
+              }
+            }
+          },
+          "paymentMethodId": {"type": "string"}
+        }
+      },
+      "Reservation": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "userEmail": {"type": "string"},
+          "showtime": {"$ref": "#/components/schemas/Showtime"},
+          "movie": {"$ref": "#/components/schemas/Movie"},
+          "theater": {"$ref": "#/components/schemas/Theater"},
+          "seats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "row": {"type": "string"},
+                "number": {"type": "integer"}
+              }
+            }
+          },
+          "totalPrice": {"type": "number"},
+          "status": {"type": "string"},
+          "createdAt": {"type": "string", "format": "date-time"}
+        }
+      }
+    }
+  }
+}

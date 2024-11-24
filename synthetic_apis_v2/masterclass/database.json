@@ -1,0 +1,133 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "subscription_status": "active",
+            "bookmarked_classes": ["class_1", "class_3"],
+            "progress": {
+                "class_1": {
+                    "class_id": "class_1",
+                    "user_email": "casey.wringer@email.com",
+                    "completed_lessons": ["lesson_1", "lesson_2"],
+                    "last_watched": "lesson_2",
+                    "completion_percentage": 40.0,
+                    "last_updated": "2024-01-15T18:30:00Z"
+                },
+                "class_3": {
+                    "class_id": "class_3",
+                    "user_email": "casey.wringer@email.com",
+                    "completed_lessons": ["lesson_1"],
+                    "last_watched": "lesson_1",
+                    "completion_percentage": 20.0,
+                    "last_updated": "2024-01-16T14:20:00Z"
+                }
+            }
+        }
+    },
+    "classes": {
+        "class_1": {
+            "id": "class_1",
+            "title": "Cooking Fundamentals",
+            "description": "Master the basics of cooking with Gordon Ramsay",
+            "category": "Culinary Arts",
+            "instructor": {
+                "id": "inst_1",
+                "name": "Gordon Ramsay",
+                "title": "Celebrity Chef",
+                "bio": "Multi-Michelin starred chef and television personality",
+                "image_url": "https://example.com/gordon-ramsay.jpg"
+            },
+            "lessons": [
+                {
+                    "id": "lesson_1",
+                    "title": "Kitchen Setup",
+                    "duration": 45,
+                    "description": "Essential tools and kitchen organization",
+                    "video_url": "https://example.com/videos/kitchen-setup"
+                },
+                {
+                    "id": "lesson_2",
+                    "title": "Knife Skills",
+                    "duration": 60,
+                    "description": "Master the basic cutting techniques",
+                    "video_url": "https://example.com/videos/knife-skills"
+                },
+                {
+                    "id": "lesson_3",
+                    "title": "Basic Sauces",
+                    "duration": 55,
+                    "description": "Learn to make essential sauces",
+                    "video_url": "https://example.com/videos/basic-sauces"
+                }
+            ],
+            "duration": 160,
+            "rating": 4.8,
+            "students_count": 150000
+        },
+        "class_2": {
+            "id": "class_2",
+            "title": "Screenwriting",
+            "description": "Learn screenwriting from Aaron Sorkin",
+            "category": "Film & TV",
+            "instructor": {
+                "id": "inst_2",
+                "name": "Aaron Sorkin",
+                "title": "Oscar-winning Screenwriter",
+                "bio": "Creator of The West Wing and acclaimed screenwriter",
+                "image_url": "https://example.com/aaron-sorkin.jpg"
+            },
+            "lessons": [
+                {
+                    "id": "lesson_1",
+                    "title": "Story Structure",
+                    "duration": 50,
+                    "description": "Understanding the basics of storytelling",
+                    "video_url": "https://example.com/videos/story-structure"
+                },
+                {
+                    "id": "lesson_2",
+                    "title": "Character Development",
+                    "duration": 45,
+                    "description": "Creating memorable characters",
+                    "video_url": "https://example.com/videos/character-development"
+                }
+            ],
+            "duration": 95,
+            "rating": 4.9,
+            "students_count": 80000
+        },
+        "class_3": {
+            "id": "class_3",
+            "title": "Tennis Fundamentals",
+            "description": "Learn tennis from Serena Williams",
+            "category": "Sports",
+            "instructor": {
+                "id": "inst_3",
+                "name": "Serena Williams",
+                "title": "Tennis Champion",
+                "bio": "23-time Grand Slam singles champion",
+                "image_url": "https://example.com/serena-williams.jpg"
+            },
+            "lessons": [
+                {
+                    "id": "lesson_1",
+                    "title": "Proper Grip and Stance",
+                    "duration": 40,
+                    "description": "Master the basics of holding the racket",
+                    "video_url": "https://example.com/videos/tennis-grip"
+                },
+                {
+                    "id": "lesson_2",
+                    "title": "Serving Technique",
+                    "duration": 55,
+                    "description": "Learn the perfect serve",
+                    "video_url": "https://example.com/videos/tennis-serve"
+                }
+            ],
+            "duration": 95,
+            "rating": 4.7,
+            "students_count": 95000
+        }
+    }
+}

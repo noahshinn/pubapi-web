@@ -1,0 +1,107 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "phone": "+1-555-0123",
+            "date_of_birth": "1990-05-15",
+            "address": {
+                "street": "789 Tech Avenue",
+                "city": "San Francisco",
+                "state": "CA",
+                "zip_code": "94105",
+                "latitude": 37.7849,
+                "longitude": -122.3968
+            },
+            "insurance_info": {
+                "provider": "Blue Cross Blue Shield",
+                "policy_number": "BCBS123456789",
+                "group_number": "GRP987654",
+                "bin_number": "123456"
+            },
+            "preferred_store": "store_1"
+        }
+    },
+    "prescriptions": {
+        "rx_1": {
+            "id": "rx_1",
+            "name": "Lisinopril",
+            "dosage": "10mg",
+            "quantity": 30,
+            "refills_remaining": 2,
+            "last_filled": "2024-01-01T10:00:00Z",
+            "expires_at": "2024-12-31T23:59:59Z",
+            "prescriber": "Dr. Sarah Johnson",
+            "status": "active",
+            "user_email": "casey.wringer@email.com"
+        },
+        "rx_2": {
+            "id": "rx_2",
+            "name": "Metformin",
+            "dosage": "500mg",
+            "quantity": 60,
+            "refills_remaining": 3,
+            "last_filled": "2024-01-10T14:30:00Z",
+            "expires_at": "2024-12-31T23:59:59Z",
+            "prescriber": "Dr. Michael Chen",
+            "status": "active",
+            "user_email": "casey.wringer@email.com"
+        }
+    },
+    "stores": {
+        "store_1": {
+            "id": "store_1",
+            "name": "CVS Pharmacy #1234",
+            "address": {
+                "street": "100 Market Street",
+                "city": "San Francisco",
+                "state": "CA",
+                "zip_code": "94105",
+                "latitude": 37.7920,
+                "longitude": -122.3969
+            },
+            "phone": "+1-555-9876",
+            "hours": "8:00 AM - 10:00 PM",
+            "has_pharmacy": true,
+            "has_minute_clinic": true
+        },
+        "store_2": {
+            "id": "store_2",
+            "name": "CVS Pharmacy #5678",
+            "address": {
+                "street": "200 Mission Street",
+                "city": "San Francisco",
+                "state": "CA",
+                "zip_code": "94105",
+                "latitude": 37.7897,
+                "longitude": -122.3997
+            },
+            "phone": "+1-555-5432",
+            "hours": "8:00 AM - 9:00 PM",
+            "has_pharmacy": true,
+            "has_minute_clinic": false
+        }
+    },
+    "appointments": {
+        "apt_1": {
+            "id": "apt_1",
+            "type": "COVID-19 Vaccination",
+            "datetime": "2024-01-20T15:30:00Z",
+            "store_id": "store_1",
+            "user_email": "casey.wringer@email.com",
+            "status": "scheduled",
+            "notes": "Second booster shot"
+        }
+    },
+    "refill_requests": {
+        "ref_1": {
+            "id": "ref_1",
+            "prescription_id": "rx_1",
+            "user_email": "casey.wringer@email.com",
+            "status": "ready_for_pickup",
+            "requested_at": "2024-01-15T09:00:00Z",
+            "pickup_store": "store_1",
+            "estimated_ready": "2024-01-16T09:00:00Z"
+        }
+    }
+}

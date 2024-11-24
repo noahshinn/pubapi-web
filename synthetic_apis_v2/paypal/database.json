@@ -1,0 +1,90 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "balance": {
+        "available": 2547.82,
+        "pending": 150.00,
+        "currency": "USD"
+      },
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242",
+          "card_type": "Visa",
+          "expiry_month": 12,
+          "expiry_year": 2025,
+          "is_default": true
+        },
+        {
+          "id": "pm_2",
+          "type": "bank_account",
+          "last4": "9876",
+          "bank_name": "Chase Bank",
+          "is_default": false
+        }
+      ],
+      "created_at": "2023-01-01T00:00:00Z",
+      "last_activity_at": "2024-01-16T15:30:00Z"
+    },
+    "john.doe@email.com": {
+      "email": "john.doe@email.com",
+      "name": "John Doe",
+      "balance": {
+        "available": 1250.00,
+        "pending": 0.00,
+        "currency": "USD"
+      },
+      "payment_methods": [
+        {
+          "id": "pm_3",
+          "type": "credit_card",
+          "last4": "1111",
+          "card_type": "MasterCard",
+          "expiry_month": 3,
+          "expiry_year": 2026,
+          "is_default": true
+        }
+      ],
+      "created_at": "2023-02-15T00:00:00Z",
+      "last_activity_at": "2024-01-15T18:45:00Z"
+    }
+  },
+  "transactions": {
+    "tx_1": {
+      "id": "tx_1",
+      "type": "payment",
+      "status": "completed",
+      "amount": 50.00,
+      "currency": "USD",
+      "sender_email": "casey.wringer@email.com",
+      "recipient_email": "john.doe@email.com",
+      "description": "Dinner split",
+      "created_at": "2024-01-15T19:30:00Z"
+    },
+    "tx_2": {
+      "id": "tx_2",
+      "type": "payment",
+      "status": "completed",
+      "amount": 150.00,
+      "currency": "USD",
+      "sender_email": "john.doe@email.com",
+      "recipient_email": "casey.wringer@email.com",
+      "description": "Concert tickets",
+      "created_at": "2024-01-16T14:20:00Z"
+    },
+    "tx_3": {
+      "id": "tx_3",
+      "type": "payment",
+      "status": "pending",
+      "amount": 150.00,
+      "currency": "USD",
+      "sender_email": "casey.wringer@email.com",
+      "recipient_email": "john.doe@email.com",
+      "description": "Group vacation deposit",
+      "created_at": "2024-01-16T15:30:00Z"
+    }
+  }
+}

@@ -1,0 +1,243 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Substack",
+    "version": "1.0.0",
+    "description": "API for blog publishing and newsletter platform"
+  },
+  "paths": {
+    "/api/v1/posts": {
+      "get": {
+        "summary": "Get published posts",
+        "parameters": [
+          {
+            "name": "author_email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of posts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Post"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPost"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Post created"
+          }
+        }
+      }
+    },
+    "/api/v1/posts/{postId}": {
+      "get": {
+        "summary": "Get post by ID",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/subscriptions": {
+      "get": {
+        "summary": "Get user's subscriptions",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of subscriptions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Subscription"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Subscribe to a publication",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewSubscription"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Subscription created"
+          }
+        }
+      }
+    },
+    "/api/v1/comments": {
+      "post": {
+        "summary": "Add comment to post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewComment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Comment created"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Post": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "content": {"type": "string"},
+          "author": {"$ref": "#/components/schemas/Author"},
+          "is_premium": {"type": "boolean"},
+          "published_at": {"type": "string"},
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Comment"
+            }
+          }
+        }
+      },
+      "NewPost": {
+        "type": "object",
+        "properties": {
+          "title": {"type": "string"},
+          "content": {"type": "string"},
+          "author_email": {"type": "string"},
+          "is_premium": {"type": "boolean"}
+        }
+      },
+      "Author": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "name": {"type": "string"},
+          "bio": {"type": "string"},
+          "publication_name": {"type": "string"}
+        }
+      },
+      "Subscription": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "publication": {"type": "string"},
+          "subscriber_email": {"type": "string"},
+          "tier": {"type": "string"},
+          "status": {"type": "string"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "NewSubscription": {
+        "type": "object",
+        "properties": {
+          "publication": {"type": "string"},
+          "subscriber_email": {"type": "string"},
+          "tier": {"type": "string"}
+        }
+      },
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "content": {"type": "string"},
+          "author": {"$ref": "#/components/schemas/Author"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "NewComment": {
+        "type": "object",
+        "properties": {
+          "post_id": {"type": "string"},
+          "content": {"type": "string"},
+          "author_email": {"type": "string"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "address": {
+                "street": "789 Tech Avenue",
+                "city": "San Francisco",
+                "state": "CA",
+                "zipCode": "94105"
+            },
+            "paymentMethods": ["pm_1"]
+        }
+    },
+    "products": {
+        "prod_1": {
+            "id": "prod_1",
+            "name": "Acrylic Paint Set",
+            "description": "Professional 24-color acrylic paint set",
+            "category": "Art Supplies",
+            "price": 29.99,
+            "salePrice": 24.99,
+            "onSale": true,
+            "inStock": true,
+            "stockQuantity": 50
+        },
+        "prod_2": {
+            "id": "prod_2",
+            "name": "Decorative Wall Mirror",
+            "description": "Vintage-style round wall mirror",
+            "category": "Home Decor",
+            "price": 89.99,
+            "salePrice": null,
+            "onSale": false,
+            "inStock": true,
+            "stockQuantity": 15
+        },
+        "prod_3": {
+            "id": "prod_3",
+            "name": "Yarn Bundle",
+            "description": "Set of 10 premium yarn skeins",
+            "category": "Crafts",
+            "price": 34.99,
+            "salePrice": 29.99,
+            "onSale": true,
+            "inStock": true,
+            "stockQuantity": 25
+        }
+    },
+    "carts": {
+        "cart_1": {
+            "id": "cart_1",
+            "userEmail": "casey.wringer@email.com",
+            "items": [
+                {
+                    "productId": "prod_1",
+                    "quantity": 1,
+                    "price": 24.99
+                }
+            ],
+            "subtotal": 24.99,
+            "tax": 2.06,
+            "total": 27.05
+        }
+    },
+    "orders": {
+        "ord_1": {
+            "id": "ord_1",
+            "userEmail": "casey.wringer@email.com",
+            "items": [
+                {
+                    "productId": "prod_2",
+                    "quantity": 1,
+                    "price": 89.99
+                }
+            ],
+            "subtotal": 89.99,
+            "tax": 7.42,
+            "total": 97.41,
+            "status": "delivered",
+            "shippingAddress": {
+                "street": "789 Tech Avenue",
+                "city": "San Francisco",
+                "state": "CA",
+                "zipCode": "94105"
+            },
+            "createdAt": "2024-01-15T14:30:00Z"
+        }
+    }
+}

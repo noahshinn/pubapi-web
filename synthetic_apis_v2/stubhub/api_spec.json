@@ -1,0 +1,253 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "StubHub",
+    "version": "1.0.0",
+    "description": "API for ticket marketplace service"
+  },
+  "paths": {
+    "/api/v1/events": {
+      "get": {
+        "summary": "Search events",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search term for events"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Event category (sports, concerts, theater)"
+          },
+          {
+            "name": "date_from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "date_to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of events",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Event"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/events/{eventId}": {
+      "get": {
+        "summary": "Get event details",
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/events/{eventId}/tickets": {
+      "get": {
+        "summary": "Get available tickets for event",
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of available tickets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ticket"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orders": {
+      "get": {
+        "summary": "Get user's ticket orders",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Purchase tickets",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "category": {"type": "string"},
+          "venue": {"$ref": "#/components/schemas/Venue"},
+          "date": {"type": "string", "format": "date-time"},
+          "description": {"type": "string"},
+          "min_price": {"type": "number"},
+          "max_price": {"type": "number"},
+          "image_url": {"type": "string"}
+        }
+      },
+      "Venue": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "address": {"type": "string"},
+          "city": {"type": "string"},
+          "state": {"type": "string"},
+          "country": {"type": "string"},
+          "capacity": {"type": "integer"}
+        }
+      },
+      "Ticket": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "section": {"type": "string"},
+          "row": {"type": "string"},
+          "seat": {"type": "string"},
+          "price": {"type": "number"},
+          "service_fee": {"type": "number"},
+          "delivery_method": {"type": "string"},
+          "seller_rating": {"type": "number"}
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "event": {"$ref": "#/components/schemas/Event"},
+          "tickets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Ticket"
+            }
+          },
+          "total_price": {"type": "number"},
+          "service_fees": {"type": "number"},
+          "delivery_method": {"type": "string"},
+          "status": {"type": "string"},
+          "purchase_date": {"type": "string", "format": "date-time"}
+        }
+      },
+      "PurchaseRequest": {
+        "type": "object",
+        "properties": {
+          "event_id": {"type": "string"},
+          "ticket_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "user_email": {"type": "string"},
+          "payment_method_id": {"type": "string"},
+          "delivery_method": {"type": "string"}
+        },
+        "required": ["event_id", "ticket_ids", "user_email", "payment_method_id", "delivery_method"]
+      }
+    }
+  }
+}

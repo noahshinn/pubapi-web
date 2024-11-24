@@ -1,0 +1,218 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "FTD",
+    "version": "1.0.0",
+    "description": "API for floral and gift delivery service"
+  },
+  "paths": {
+    "/api/v1/products": {
+      "get": {
+        "summary": "Get available products",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["flowers", "plants", "gifts"]
+            }
+          },
+          {
+            "name": "occasion",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orders": {
+      "get": {
+        "summary": "Get user's orders",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Place new order",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewOrder"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/delivery-dates": {
+      "get": {
+        "summary": "Get available delivery dates",
+        "parameters": [
+          {
+            "name": "zip_code",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available delivery dates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeliveryDate"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "category": {"type": "string"},
+          "occasions": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "price": {"type": "number"},
+          "image_url": {"type": "string"},
+          "available": {"type": "boolean"}
+        }
+      },
+      "DeliveryDate": {
+        "type": "object",
+        "properties": {
+          "date": {"type": "string"},
+          "available": {"type": "boolean"},
+          "delivery_fee": {"type": "number"},
+          "cutoff_time": {"type": "string"}
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "product": {"$ref": "#/components/schemas/Product"},
+          "recipient": {"$ref": "#/components/schemas/Recipient"},
+          "message": {"type": "string"},
+          "delivery_date": {"type": "string"},
+          "status": {"type": "string"},
+          "total": {"type": "number"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "Recipient": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "phone": {"type": "string"},
+          "address": {"$ref": "#/components/schemas/Address"}
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "street": {"type": "string"},
+          "city": {"type": "string"},
+          "state": {"type": "string"},
+          "zip_code": {"type": "string"}
+        }
+      },
+      "NewOrder": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "product_id": {"type": "string"},
+          "recipient": {"$ref": "#/components/schemas/Recipient"},
+          "message": {"type": "string"},
+          "delivery_date": {"type": "string"},
+          "payment_method_id": {"type": "string"}
+        },
+        "required": [
+          "user_email",
+          "product_id",
+          "recipient",
+          "delivery_date",
+          "payment_method_id"
+        ]
+      }
+    }
+  }
+}

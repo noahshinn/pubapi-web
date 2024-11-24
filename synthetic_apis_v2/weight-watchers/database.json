@@ -1,0 +1,95 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "start_date": "2024-01-01T00:00:00Z",
+            "height": 170,
+            "daily_points_target": 23,
+            "weekly_points_target": 35,
+            "goal_weight": 65.0
+        }
+    },
+    "foods": {
+        "food_1": {
+            "id": "food_1",
+            "name": "Oatmeal with Banana",
+            "points": 5,
+            "serving_size": "1 bowl (240g)",
+            "calories": 220,
+            "protein": 6.0,
+            "carbs": 42.0,
+            "fat": 3.5
+        },
+        "food_2": {
+            "id": "food_2",
+            "name": "Grilled Chicken Breast",
+            "points": 2,
+            "serving_size": "3 oz (85g)",
+            "calories": 140,
+            "protein": 26.0,
+            "carbs": 0.0,
+            "fat": 3.0
+        },
+        "food_3": {
+            "id": "food_3",
+            "name": "Mixed Green Salad",
+            "points": 0,
+            "serving_size": "2 cups (100g)",
+            "calories": 15,
+            "protein": 1.0,
+            "carbs": 3.0,
+            "fat": 0.0
+        }
+    },
+    "food_logs": {
+        "casey.wringer@email.com": [
+            {
+                "food_id": "food_1",
+                "user_email": "casey.wringer@email.com",
+                "date": "2024-01-16",
+                "meal_type": "breakfast",
+                "servings": 1,
+                "created_at": "2024-01-16T08:30:00Z"
+            },
+            {
+                "food_id": "food_2",
+                "user_email": "casey.wringer@email.com",
+                "date": "2024-01-16",
+                "meal_type": "lunch",
+                "servings": 1,
+                "created_at": "2024-01-16T12:30:00Z"
+            },
+            {
+                "food_id": "food_3",
+                "user_email": "casey.wringer@email.com",
+                "date": "2024-01-16",
+                "meal_type": "lunch",
+                "servings": 1,
+                "created_at": "2024-01-16T12:30:00Z"
+            }
+        ]
+    },
+    "weight_logs": {
+        "casey.wringer@email.com": [
+            {
+                "user_email": "casey.wringer@email.com",
+                "weight": 72.5,
+                "date": "2024-01-01",
+                "created_at": "2024-01-01T08:00:00Z"
+            },
+            {
+                "user_email": "casey.wringer@email.com",
+                "weight": 71.8,
+                "date": "2024-01-08",
+                "created_at": "2024-01-08T08:00:00Z"
+            },
+            {
+                "user_email": "casey.wringer@email.com",
+                "weight": 71.2,
+                "date": "2024-01-15",
+                "created_at": "2024-01-15T08:00:00Z"
+            }
+        ]
+    }
+}

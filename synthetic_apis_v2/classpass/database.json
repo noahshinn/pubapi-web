@@ -1,0 +1,89 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "phone": "+1-555-0123",
+            "location": {
+                "address": "789 Tech Avenue",
+                "city": "San Francisco",
+                "state": "CA",
+                "zip_code": "94105",
+                "latitude": 37.7849,
+                "longitude": -122.3968
+            },
+            "credits_balance": 50,
+            "membership_type": "premium",
+            "joined_at": "2023-06-15T00:00:00Z"
+        }
+    },
+    "studios": {
+        "studio_1": {
+            "id": "studio_1",
+            "name": "YogaFlow SF",
+            "categories": ["yoga", "meditation"],
+            "rating": 4.8,
+            "location": {
+                "address": "123 Yoga Street",
+                "city": "San Francisco",
+                "state": "CA",
+                "zip_code": "94105",
+                "latitude": 37.7850,
+                "longitude": -122.3968
+            },
+            "description": "Premium yoga studio offering various styles of yoga"
+        },
+        "studio_2": {
+            "id": "studio_2",
+            "name": "CycleBeat",
+            "categories": ["cycling", "hiit"],
+            "rating": 4.7,
+            "location": {
+                "address": "456 Spin Avenue",
+                "city": "San Francisco",
+                "state": "CA",
+                "zip_code": "94105",
+                "latitude": 37.7855,
+                "longitude": -122.3972
+            },
+            "description": "High-energy cycling studio with state-of-the-art bikes"
+        }
+    },
+    "classes": {
+        "class_1": {
+            "id": "class_1",
+            "studio_id": "studio_1",
+            "name": "Vinyasa Flow",
+            "description": "Dynamic flowing practice linking breath to movement",
+            "instructor": "Sarah Chen",
+            "category": "yoga",
+            "start_time": "2024-01-17T09:00:00Z",
+            "duration": 60,
+            "capacity": 20,
+            "spots_available": 8,
+            "credits_required": 2
+        },
+        "class_2": {
+            "id": "class_2",
+            "studio_id": "studio_2",
+            "name": "Power Cycle",
+            "description": "High-intensity cycling class with hill climbs and sprints",
+            "instructor": "Mike Johnson",
+            "category": "cycling",
+            "start_time": "2024-01-17T10:30:00Z",
+            "duration": 45,
+            "capacity": 25,
+            "spots_available": 12,
+            "credits_required": 3
+        }
+    },
+    "bookings": {
+        "booking_1": {
+            "id": "booking_1",
+            "user_email": "casey.wringer@email.com",
+            "class_id": "class_1",
+            "status": "confirmed",
+            "created_at": "2024-01-15T14:30:00Z"
+        }
+    }
+}

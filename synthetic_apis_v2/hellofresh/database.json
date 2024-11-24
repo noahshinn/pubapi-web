@@ -1,0 +1,121 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "address": "789 Tech Avenue, San Francisco, CA 94105",
+            "phone": "+1-555-0123",
+            "dietary_preferences": ["vegetarian"],
+            "created_at": "2023-01-01T00:00:00Z"
+        }
+    },
+    "meal_plans": {
+        "plan_1": {
+            "id": "plan_1",
+            "name": "Classic 2-Person",
+            "meals_per_week": 3,
+            "servings_per_meal": 2,
+            "price_per_serving": 11.99,
+            "description": "Perfect for couples or roommates"
+        },
+        "plan_2": {
+            "id": "plan_2",
+            "name": "Family Plan",
+            "meals_per_week": 4,
+            "servings_per_meal": 4,
+            "price_per_serving": 9.99,
+            "description": "Great for families"
+        }
+    },
+    "recipes": {
+        "recipe_1": {
+            "id": "recipe_1",
+            "name": "Vegetarian Buddha Bowl",
+            "description": "Nutritious bowl with quinoa, roasted vegetables, and tahini dressing",
+            "prep_time": 35,
+            "difficulty": "easy",
+            "calories": 650,
+            "ingredients": [
+                {
+                    "name": "Quinoa",
+                    "amount": 1,
+                    "unit": "cup"
+                },
+                {
+                    "name": "Sweet Potato",
+                    "amount": 2,
+                    "unit": "medium"
+                }
+            ],
+            "tags": ["vegetarian", "healthy", "bowl"],
+            "image_url": "https://example.com/buddha-bowl.jpg"
+        },
+        "recipe_2": {
+            "id": "recipe_2",
+            "name": "Mediterranean Pasta",
+            "description": "Fresh pasta with cherry tomatoes, olives, and feta",
+            "prep_time": 25,
+            "difficulty": "easy",
+            "calories": 750,
+            "ingredients": [
+                {
+                    "name": "Pasta",
+                    "amount": 8,
+                    "unit": "oz"
+                },
+                {
+                    "name": "Cherry Tomatoes",
+                    "amount": 2,
+                    "unit": "cups"
+                }
+            ],
+            "tags": ["vegetarian", "pasta", "mediterranean"],
+            "image_url": "https://example.com/med-pasta.jpg"
+        }
+    },
+    "subscriptions": {
+        "sub_1": {
+            "id": "sub_1",
+            "user_email": "casey.wringer@email.com",
+            "meal_plan": {
+                "id": "plan_1",
+                "name": "Classic 2-Person",
+                "meals_per_week": 3,
+                "servings_per_meal": 2,
+                "price_per_serving": 11.99
+            },
+            "delivery_day": "Wednesday",
+            "status": "active",
+            "next_delivery": "2024-01-24T00:00:00Z",
+            "dietary_preferences": ["vegetarian"]
+        }
+    },
+    "weekly_selections": {
+        "casey.wringer@email.com_2024-01-22": {
+            "user_email": "casey.wringer@email.com",
+            "week": "2024-01-22T00:00:00Z",
+            "recipes": [
+                {
+                    "id": "recipe_1",
+                    "name": "Vegetarian Buddha Bowl"
+                },
+                {
+                    "id": "recipe_2",
+                    "name": "Mediterranean Pasta"
+                }
+            ]
+        }
+    },
+    "weekly_menus": {
+        "2024-01-22": [
+            {
+                "id": "recipe_1",
+                "name": "Vegetarian Buddha Bowl"
+            },
+            {
+                "id": "recipe_2",
+                "name": "Mediterranean Pasta"
+            }
+        ]
+    }
+}

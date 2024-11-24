@@ -1,0 +1,119 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "vehicle_ids": ["vehicle_1", "vehicle_2"]
+        }
+    },
+    "vehicles": {
+        "vehicle_1": {
+            "id": "vehicle_1",
+            "vin": "5YJ3E1EA8LF123456",
+            "model": "Model 3",
+            "name": "Casey's Model 3",
+            "color": "Deep Blue Metallic",
+            "purchase_date": "2023-03-15T00:00:00Z"
+        },
+        "vehicle_2": {
+            "id": "vehicle_2",
+            "vin": "5YJXCAE4XLF789012",
+            "model": "Model Y",
+            "name": "Casey's Model Y",
+            "color": "Pearl White Multi-Coat",
+            "purchase_date": "2023-08-20T00:00:00Z"
+        }
+    },
+    "vehicle_states": {
+        "vehicle_1": {
+            "battery_level": 72,
+            "charging_state": "Stopped",
+            "climate_state": {
+                "inside_temp": 21.5,
+                "outside_temp": 18.0,
+                "is_climate_on": false
+            },
+            "drive_state": {
+                "speed": 0,
+                "latitude": 37.7749,
+                "longitude": -122.4194,
+                "heading": 90
+            },
+            "locked": true,
+            "sentry_mode": true,
+            "software_update": {
+                "status": "up_to_date",
+                "version": "2024.2.3"
+            }
+        },
+        "vehicle_2": {
+            "battery_level": 85,
+            "charging_state": "Charging",
+            "climate_state": {
+                "inside_temp": 22.0,
+                "outside_temp": 19.5,
+                "is_climate_on": true
+            },
+            "drive_state": {
+                "speed": 0,
+                "latitude": 37.7833,
+                "longitude": -122.4167,
+                "heading": 180
+            },
+            "locked": true,
+            "sentry_mode": false,
+            "software_update": {
+                "status": "available",
+                "version": "2024.3.1"
+            }
+        }
+    },
+    "charging_schedules": {
+        "vehicle_1": {
+            "enabled": true,
+            "weekly_schedule": [
+                {
+                    "day": "Monday",
+                    "start_time": "01:00",
+                    "end_time": "06:00",
+                    "charge_limit": 90
+                },
+                {
+                    "day": "Wednesday",
+                    "start_time": "01:00",
+                    "end_time": "06:00",
+                    "charge_limit": 90
+                },
+                {
+                    "day": "Friday",
+                    "start_time": "01:00",
+                    "end_time": "06:00",
+                    "charge_limit": 90
+                }
+            ]
+        },
+        "vehicle_2": {
+            "enabled": true,
+            "weekly_schedule": [
+                {
+                    "day": "Tuesday",
+                    "start_time": "02:00",
+                    "end_time": "07:00",
+                    "charge_limit": 85
+                },
+                {
+                    "day": "Thursday",
+                    "start_time": "02:00",
+                    "end_time": "07:00",
+                    "charge_limit": 85
+                },
+                {
+                    "day": "Sunday",
+                    "start_time": "02:00",
+                    "end_time": "07:00",
+                    "charge_limit": 85
+                }
+            ]
+        }
+    }
+}

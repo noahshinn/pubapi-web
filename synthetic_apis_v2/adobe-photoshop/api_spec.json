@@ -1,0 +1,215 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Adobe Photoshop",
+    "version": "1.0.0",
+    "description": "API for Adobe Photoshop cloud services and project management"
+  },
+  "paths": {
+    "/api/v1/projects": {
+      "get": {
+        "summary": "Get user's projects",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of projects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new project",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewProject"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Project created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{projectId}/layers": {
+      "get": {
+        "summary": "Get project layers",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of layers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Layer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new layer",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewLayer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Layer created"
+          }
+        }
+      }
+    },
+    "/api/v1/storage/usage": {
+      "get": {
+        "summary": "Get storage usage",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Storage usage details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StorageUsage"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Project": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "dimensions": {
+            "type": "object",
+            "properties": {
+              "width": {"type": "integer"},
+              "height": {"type": "integer"}
+            }
+          },
+          "created_at": {"type": "string"},
+          "modified_at": {"type": "string"},
+          "thumbnail_url": {"type": "string"},
+          "size": {"type": "integer"}
+        }
+      },
+      "NewProject": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "dimensions": {
+            "type": "object",
+            "properties": {
+              "width": {"type": "integer"},
+              "height": {"type": "integer"}
+            }
+          },
+          "template_id": {"type": "string"}
+        }
+      },
+      "Layer": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "type": {"type": "string"},
+          "visible": {"type": "boolean"},
+          "opacity": {"type": "number"},
+          "blend_mode": {"type": "string"},
+          "locked": {"type": "boolean"}
+        }
+      },
+      "NewLayer": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "type": {"type": "string"},
+          "content": {"type": "string"}
+        }
+      },
+      "StorageUsage": {
+        "type": "object",
+        "properties": {
+          "total_storage": {"type": "integer"},
+          "used_storage": {"type": "integer"},
+          "available_storage": {"type": "integer"},
+          "storage_limit": {"type": "integer"}
+        }
+      }
+    }
+  }
+}

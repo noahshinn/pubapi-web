@@ -1,0 +1,208 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PlayStation Network",
+    "version": "1.0.0",
+    "description": "API for PlayStation Network gaming service"
+  },
+  "paths": {
+    "/api/v1/profile": {
+      "get": {
+        "summary": "Get user profile",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User profile information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/games": {
+      "get": {
+        "summary": "Get user's games library",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of games",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Game"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/trophies": {
+      "get": {
+        "summary": "Get user's trophies",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "game_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of trophies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Trophy"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/friends": {
+      "get": {
+        "summary": "Get user's friends list",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of friends",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Friend"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "psn_id": {"type": "string"},
+          "email": {"type": "string"},
+          "display_name": {"type": "string"},
+          "avatar_url": {"type": "string"},
+          "level": {"type": "integer"},
+          "trophy_level": {"type": "integer"},
+          "plus_member": {"type": "boolean"},
+          "plus_expiry": {"type": "string"},
+          "country": {"type": "string"},
+          "language": {"type": "string"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "Game": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "platform": {"type": "string"},
+          "purchase_date": {"type": "string"},
+          "last_played": {"type": "string"},
+          "total_play_time": {"type": "integer"},
+          "completion_rate": {"type": "number"},
+          "trophy_progress": {
+            "type": "object",
+            "properties": {
+              "bronze": {"type": "integer"},
+              "silver": {"type": "integer"},
+              "gold": {"type": "integer"},
+              "platinum": {"type": "integer"}
+            }
+          }
+        }
+      },
+      "Trophy": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "game_id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "type": {"type": "string"},
+          "rarity": {"type": "string"},
+          "earned": {"type": "boolean"},
+          "earned_at": {"type": "string"},
+          "progress": {"type": "integer"}
+        }
+      },
+      "Friend": {
+        "type": "object",
+        "properties": {
+          "psn_id": {"type": "string"},
+          "display_name": {"type": "string"},
+          "avatar_url": {"type": "string"},
+          "online_status": {"type": "string"},
+          "current_game": {
+            "type": "object",
+            "properties": {
+              "id": {"type": "string"},
+              "title": {"type": "string"},
+              "platform": {"type": "string"}
+            }
+          },
+          "friendship_date": {"type": "string"}
+        }
+      }
+    }
+  }
+}

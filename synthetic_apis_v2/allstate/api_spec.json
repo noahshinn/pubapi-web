@@ -1,0 +1,223 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Allstate",
+    "version": "1.0.0",
+    "description": "API for insurance services"
+  },
+  "paths": {
+    "/api/v1/policies": {
+      "get": {
+        "summary": "Get user's insurance policies",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of policies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Policy"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new policy quote",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PolicyQuoteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Policy quote created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyQuote"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/claims": {
+      "get": {
+        "summary": "Get user's claims",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of claims",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Claim"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "File new claim",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewClaim"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Claim filed successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/claims/{claimId}": {
+      "get": {
+        "summary": "Get claim details",
+        "parameters": [
+          {
+            "name": "claimId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Claim details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Claim"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Policy": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string"},
+          "status": {"type": "string"},
+          "start_date": {"type": "string"},
+          "end_date": {"type": "string"},
+          "premium": {"type": "number"},
+          "coverage_amount": {"type": "number"},
+          "deductible": {"type": "number"},
+          "details": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "PolicyQuoteRequest": {
+        "type": "object",
+        "properties": {
+          "type": {"type": "string"},
+          "user_email": {"type": "string"},
+          "coverage_amount": {"type": "number"},
+          "details": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "PolicyQuote": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "monthly_premium": {"type": "number"},
+          "coverage_amount": {"type": "number"},
+          "deductible": {"type": "number"},
+          "details": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "Claim": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "policy_id": {"type": "string"},
+          "type": {"type": "string"},
+          "status": {"type": "string"},
+          "incident_date": {"type": "string"},
+          "description": {"type": "string"},
+          "amount": {"type": "number"},
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Document"
+            }
+          }
+        }
+      },
+      "Document": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string"},
+          "url": {"type": "string"},
+          "uploaded_at": {"type": "string"}
+        }
+      },
+      "NewClaim": {
+        "type": "object",
+        "properties": {
+          "policy_id": {"type": "string"},
+          "type": {"type": "string"},
+          "incident_date": {"type": "string"},
+          "description": {"type": "string"},
+          "amount": {"type": "number"}
+        }
+      }
+    }
+  }
+}

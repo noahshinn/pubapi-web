@@ -1,0 +1,210 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Verizon",
+    "version": "1.0.0",
+    "description": "API for wireless carrier services"
+  },
+  "paths": {
+    "/api/v1/account": {
+      "get": {
+        "summary": "Get account details",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/usage": {
+      "get": {
+        "summary": "Get current billing cycle usage",
+        "parameters": [
+          {
+            "name": "phone_number",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usage details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bills": {
+      "get": {
+        "summary": "Get billing history",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of bills",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Bill"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/plans": {
+      "get": {
+        "summary": "Get available plans",
+        "responses": {
+          "200": {
+            "description": "List of available plans",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Plan"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Account": {
+        "type": "object",
+        "properties": {
+          "account_id": {"type": "string"},
+          "owner": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "email": {"type": "string"},
+              "phone": {"type": "string"}
+            }
+          },
+          "plan": {"$ref": "#/components/schemas/Plan"},
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhoneLine"
+            }
+          },
+          "autopay": {"type": "boolean"},
+          "paperless_billing": {"type": "boolean"}
+        }
+      },
+      "PhoneLine": {
+        "type": "object",
+        "properties": {
+          "phone_number": {"type": "string"},
+          "device": {"$ref": "#/components/schemas/Device"},
+          "plan": {"$ref": "#/components/schemas/Plan"},
+          "status": {"type": "string"}
+        }
+      },
+      "Device": {
+        "type": "object",
+        "properties": {
+          "model": {"type": "string"},
+          "manufacturer": {"type": "string"},
+          "imei": {"type": "string"},
+          "status": {"type": "string"}
+        }
+      },
+      "Plan": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "data_limit": {"type": "integer"},
+          "talk_minutes": {"type": "integer"},
+          "text_messages": {"type": "integer"},
+          "price": {"type": "number"},
+          "features": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "Usage": {
+        "type": "object",
+        "properties": {
+          "billing_cycle": {
+            "type": "object",
+            "properties": {
+              "start_date": {"type": "string"},
+              "end_date": {"type": "string"}
+            }
+          },
+          "data_used": {"type": "number"},
+          "data_remaining": {"type": "number"},
+          "talk_minutes_used": {"type": "integer"},
+          "text_messages_sent": {"type": "integer"}
+        }
+      },
+      "Bill": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "billing_date": {"type": "string"},
+          "due_date": {"type": "string"},
+          "amount": {"type": "number"},
+          "status": {"type": "string"},
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "description": {"type": "string"},
+                "amount": {"type": "number"}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Medium",
+    "version": "1.0.0",
+    "description": "API for content publishing and reading platform"
+  },
+  "paths": {
+    "/api/v1/articles": {
+      "get": {
+        "summary": "Get articles feed",
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "author",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of articles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Article"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new article",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewArticle"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Article created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/articles/{articleId}": {
+      "get": {
+        "summary": "Get article by ID",
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Article details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/articles/{articleId}/claps": {
+      "post": {
+        "summary": "Clap for an article",
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 50
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Clap recorded"
+          }
+        }
+      }
+    },
+    "/api/v1/users/{userId}/following": {
+      "get": {
+        "summary": "Get users followed by userId",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of followed users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "email": {"type": "string"},
+          "name": {"type": "string"},
+          "bio": {"type": "string"},
+          "following_count": {"type": "integer"},
+          "followers_count": {"type": "integer"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "Article": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "subtitle": {"type": "string"},
+          "content": {"type": "string"},
+          "author": {"$ref": "#/components/schemas/User"},
+          "tags": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "claps": {"type": "integer"},
+          "reading_time": {"type": "integer"},
+          "created_at": {"type": "string"},
+          "updated_at": {"type": "string"}
+        }
+      },
+      "NewArticle": {
+        "type": "object",
+        "properties": {
+          "title": {"type": "string"},
+          "subtitle": {"type": "string"},
+          "content": {"type": "string"},
+          "tags": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        },
+        "required": ["title", "content"]
+      }
+    }
+  }
+}

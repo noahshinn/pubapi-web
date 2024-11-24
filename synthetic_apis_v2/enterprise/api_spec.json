@@ -1,0 +1,241 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Enterprise",
+    "version": "1.0.0",
+    "description": "API for car rental service"
+  },
+  "paths": {
+    "/api/v1/vehicles": {
+      "get": {
+        "summary": "Search available vehicles",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pickup_date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "return_date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "vehicle_class",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["economy", "compact", "intermediate", "standard", "full-size", "luxury", "suv", "van"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of available vehicles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Vehicle"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reservations": {
+      "get": {
+        "summary": "Get user's reservations",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of reservations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Reservation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new reservation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewReservation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Reservation created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reservation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/locations": {
+      "get": {
+        "summary": "Get rental locations",
+        "parameters": [
+          {
+            "name": "zip_code",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of rental locations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Location"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Vehicle": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "make": {"type": "string"},
+          "model": {"type": "string"},
+          "year": {"type": "integer"},
+          "class": {"type": "string"},
+          "seats": {"type": "integer"},
+          "transmission": {"type": "string"},
+          "fuel_type": {"type": "string"},
+          "daily_rate": {"type": "number"},
+          "features": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "Location": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "address": {"type": "string"},
+          "city": {"type": "string"},
+          "state": {"type": "string"},
+          "zip_code": {"type": "string"},
+          "phone": {"type": "string"},
+          "hours": {
+            "type": "object",
+            "properties": {
+              "monday": {"type": "string"},
+              "tuesday": {"type": "string"},
+              "wednesday": {"type": "string"},
+              "thursday": {"type": "string"},
+              "friday": {"type": "string"},
+              "saturday": {"type": "string"},
+              "sunday": {"type": "string"}
+            }
+          }
+        }
+      },
+      "Reservation": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "vehicle": {"$ref": "#/components/schemas/Vehicle"},
+          "pickup_location": {"$ref": "#/components/schemas/Location"},
+          "return_location": {"$ref": "#/components/schemas/Location"},
+          "pickup_date": {"type": "string", "format": "date-time"},
+          "return_date": {"type": "string", "format": "date-time"},
+          "status": {"type": "string"},
+          "total_cost": {"type": "number"},
+          "insurance_option": {"type": "string"},
+          "additional_drivers": {"type": "integer"},
+          "created_at": {"type": "string", "format": "date-time"}
+        }
+      },
+      "NewReservation": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "vehicle_id": {"type": "string"},
+          "pickup_location_id": {"type": "string"},
+          "return_location_id": {"type": "string"},
+          "pickup_date": {"type": "string", "format": "date-time"},
+          "return_date": {"type": "string", "format": "date-time"},
+          "insurance_option": {"type": "string"},
+          "additional_drivers": {"type": "integer"}
+        },
+        "required": [
+          "user_email",
+          "vehicle_id",
+          "pickup_location_id",
+          "return_location_id",
+          "pickup_date",
+          "return_date"
+        ]
+      }
+    }
+  }
+}

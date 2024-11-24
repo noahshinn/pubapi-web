@@ -1,0 +1,143 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "preferred_seats": ["window", "aisle"],
+      "preferences": {
+        "preferred_airlines": ["United", "Delta", "American"],
+        "preferred_hotels": ["Marriott", "Hilton", "Hyatt"]
+      },
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242",
+          "expiry_mm": 12,
+          "expiry_yy": 25
+        }
+      ]
+    }
+  },
+  "flights": {
+    "flight_1": {
+      "id": "flight_1",
+      "airline": "United",
+      "flight_number": "UA123",
+      "origin": {
+        "city": "San Francisco",
+        "country": "USA",
+        "airport": "SFO",
+        "latitude": 37.7749,
+        "longitude": -122.4194
+      },
+      "destination": {
+        "city": "New York",
+        "country": "USA",
+        "airport": "JFK",
+        "latitude": 40.7128,
+        "longitude": -74.0060
+      },
+      "departure_time": "2024-02-01T08:00:00Z",
+      "arrival_time": "2024-02-01T16:30:00Z",
+      "price": 399.99,
+      "seats_available": 45,
+      "class": "economy"
+    },
+    "flight_2": {
+      "id": "flight_2",
+      "airline": "Delta",
+      "flight_number": "DL456",
+      "origin": {
+        "city": "Los Angeles",
+        "country": "USA",
+        "airport": "LAX",
+        "latitude": 34.0522,
+        "longitude": -118.2437
+      },
+      "destination": {
+        "city": "Chicago",
+        "country": "USA",
+        "airport": "ORD",
+        "latitude": 41.8781,
+        "longitude": -87.6298
+      },
+      "departure_time": "2024-02-02T10:00:00Z",
+      "arrival_time": "2024-02-02T16:00:00Z",
+      "price": 299.99,
+      "seats_available": 32,
+      "class": "economy"
+    }
+  },
+  "hotels": {
+    "hotel_1": {
+      "id": "hotel_1",
+      "name": "Marriott Downtown",
+      "location": {
+        "city": "New York",
+        "country": "USA",
+        "latitude": 40.7128,
+        "longitude": -74.0060
+      },
+      "rating": 4.5,
+      "price_per_night": 299.99,
+      "amenities": [
+        "wifi",
+        "pool",
+        "gym",
+        "restaurant"
+      ],
+      "rooms_available": 15,
+      "check_in": "2024-02-01T15:00:00Z",
+      "check_out": "2024-02-05T11:00:00Z"
+    },
+    "hotel_2": {
+      "id": "hotel_2",
+      "name": "Hilton Financial District",
+      "location": {
+        "city": "San Francisco",
+        "country": "USA",
+        "latitude": 37.7749,
+        "longitude": -122.4194
+      },
+      "rating": 4.3,
+      "price_per_night": 259.99,
+      "amenities": [
+        "wifi",
+        "gym",
+        "business_center"
+      ],
+      "rooms_available": 20,
+      "check_in": "2024-02-01T15:00:00Z",
+      "check_out": "2024-02-04T11:00:00Z"
+    }
+  },
+  "bookings": {
+    "booking_1": {
+      "id": "booking_1",
+      "user_email": "casey.wringer@email.com",
+      "type": "flight",
+      "status": "confirmed",
+      "details": {
+        "id": "flight_1",
+        "airline": "United",
+        "flight_number": "UA123"
+      },
+      "total_price": 399.99,
+      "booking_date": "2024-01-15T10:30:00Z"
+    },
+    "booking_2": {
+      "id": "booking_2",
+      "user_email": "casey.wringer@email.com",
+      "type": "hotel",
+      "status": "confirmed",
+      "details": {
+        "id": "hotel_1",
+        "name": "Marriott Downtown"
+      },
+      "total_price": 1199.96,
+      "booking_date": "2024-01-15T10:35:00Z"
+    }
+  }
+}

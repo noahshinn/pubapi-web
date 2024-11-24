@@ -1,0 +1,104 @@
+{
+    "categories": [
+        {
+            "id": "plumbing",
+            "name": "Plumbing",
+            "description": "Plumbing installation, repair, and maintenance services",
+            "subcategories": [
+                "Pipe Repair",
+                "Water Heater Installation",
+                "Drain Cleaning"
+            ]
+        },
+        {
+            "id": "electrical",
+            "name": "Electrical",
+            "description": "Electrical installation and repair services",
+            "subcategories": [
+                "Wiring",
+                "Lighting Installation",
+                "Panel Upgrades"
+            ]
+        },
+        {
+            "id": "landscaping",
+            "name": "Landscaping",
+            "description": "Lawn care and landscaping services",
+            "subcategories": [
+                "Lawn Maintenance",
+                "Tree Service",
+                "Garden Design"
+            ]
+        }
+    ],
+    "providers": {
+        "prov_1": {
+            "id": "prov_1",
+            "name": "Quick Fix Plumbing",
+            "services": ["plumbing"],
+            "rating": 4.8,
+            "review_count": 156,
+            "verified": true,
+            "service_area": ["94105", "94107", "94108"],
+            "description": "Professional plumbing services with 15 years of experience",
+            "years_active": 15,
+            "license": "PL-12345",
+            "insurance": true
+        },
+        "prov_2": {
+            "id": "prov_2",
+            "name": "Green Thumb Landscaping",
+            "services": ["landscaping"],
+            "rating": 4.6,
+            "review_count": 89,
+            "verified": true,
+            "service_area": ["94105", "94107"],
+            "description": "Full-service landscaping company",
+            "years_active": 8,
+            "license": "LS-67890",
+            "insurance": true
+        }
+    },
+    "projects": {
+        "proj_1": {
+            "id": "proj_1",
+            "user_email": "casey.wringer@email.com",
+            "service_category": "plumbing",
+            "description": "Water heater replacement needed",
+            "status": "in_progress",
+            "created_at": "2024-01-15T14:30:00Z",
+            "budget_range": {
+                "min": 800,
+                "max": 1200
+            },
+            "timeline": "As soon as possible",
+            "location": {
+                "address": "789 Tech Avenue",
+                "zip_code": "94105"
+            },
+            "proposals": [
+                {
+                    "id": "prop_1",
+                    "provider_id": "prov_1",
+                    "project_id": "proj_1",
+                    "price": 950,
+                    "timeline": "Can start tomorrow",
+                    "message": "We specialize in water heater installations and can get this done quickly.",
+                    "status": "accepted",
+                    "created_at": "2024-01-15T15:00:00Z"
+                }
+            ]
+        }
+    },
+    "reviews": {
+        "rev_1": {
+            "id": "rev_1",
+            "provider_id": "prov_1",
+            "user_email": "casey.wringer@email.com",
+            "project_id": "proj_1",
+            "rating": 5,
+            "comment": "Excellent service! Quick and professional water heater installation.",
+            "created_at": "2024-01-16T18:00:00Z"
+        }
+    }
+}

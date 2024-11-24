@@ -1,0 +1,238 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Comcast",
+    "version": "1.0.0",
+    "description": "API for Comcast internet and TV services"
+  },
+  "paths": {
+    "/api/v1/account/usage": {
+      "get": {
+        "summary": "Get internet usage details",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Internet usage details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternetUsage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/account/bills": {
+      "get": {
+        "summary": "Get billing history",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of bills",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Bill"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tv/recordings": {
+      "get": {
+        "summary": "Get DVR recordings",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of recordings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Recording"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Schedule new recording",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewRecording"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Recording scheduled"
+          }
+        }
+      }
+    },
+    "/api/v1/support/tickets": {
+      "get": {
+        "summary": "Get support tickets",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of support tickets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SupportTicket"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create support ticket",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewSupportTicket"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Support ticket created"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "InternetUsage": {
+        "type": "object",
+        "properties": {
+          "total_usage_gb": {"type": "number"},
+          "data_cap_gb": {"type": "number"},
+          "remaining_gb": {"type": "number"},
+          "current_speed_mbps": {"type": "number"},
+          "billing_cycle_end": {"type": "string"}
+        }
+      },
+      "Bill": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "amount": {"type": "number"},
+          "due_date": {"type": "string"},
+          "status": {"type": "string"},
+          "services": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {"type": "string"},
+                "amount": {"type": "number"}
+              }
+            }
+          }
+        }
+      },
+      "Recording": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "show_name": {"type": "string"},
+          "channel": {"type": "string"},
+          "start_time": {"type": "string"},
+          "duration_minutes": {"type": "integer"},
+          "status": {"type": "string"},
+          "series_recording": {"type": "boolean"}
+        }
+      },
+      "NewRecording": {
+        "type": "object",
+        "properties": {
+          "show_name": {"type": "string"},
+          "channel": {"type": "string"},
+          "start_time": {"type": "string"},
+          "duration_minutes": {"type": "integer"},
+          "series_recording": {"type": "boolean"}
+        }
+      },
+      "SupportTicket": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "subject": {"type": "string"},
+          "description": {"type": "string"},
+          "status": {"type": "string"},
+          "priority": {"type": "string"},
+          "created_at": {"type": "string"},
+          "updated_at": {"type": "string"}
+        }
+      },
+      "NewSupportTicket": {
+        "type": "object",
+        "properties": {
+          "subject": {"type": "string"},
+          "description": {"type": "string"},
+          "priority": {"type": "string"}
+        }
+      }
+    }
+  }
+}

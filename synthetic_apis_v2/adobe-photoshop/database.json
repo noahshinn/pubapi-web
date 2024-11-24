@@ -1,0 +1,101 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "subscription": "Creative Cloud All Apps",
+      "storage_usage": {
+        "total_storage": 107374182400,
+        "used_storage": 42949672960,
+        "available_storage": 64424509440,
+        "storage_limit": 107374182400
+      }
+    }
+  },
+  "projects": {
+    "proj_1": {
+      "id": "proj_1",
+      "name": "Website Banner Design",
+      "user_email": "casey.wringer@email.com",
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "created_at": "2024-01-15T10:00:00Z",
+      "modified_at": "2024-01-16T15:30:00Z",
+      "thumbnail_url": "https://adobe-cloud.example.com/thumbnails/proj_1.jpg",
+      "size": 25678912,
+      "layers": [
+        {
+          "id": "layer_1",
+          "name": "Background",
+          "type": "background",
+          "visible": true,
+          "opacity": 1.0,
+          "blend_mode": "normal",
+          "locked": true
+        },
+        {
+          "id": "layer_2",
+          "name": "Logo",
+          "type": "shape",
+          "visible": true,
+          "opacity": 1.0,
+          "blend_mode": "normal",
+          "locked": false
+        },
+        {
+          "id": "layer_3",
+          "name": "Text Overlay",
+          "type": "text",
+          "visible": true,
+          "opacity": 0.9,
+          "blend_mode": "overlay",
+          "locked": false
+        }
+      ]
+    },
+    "proj_2": {
+      "id": "proj_2",
+      "name": "Social Media Post",
+      "user_email": "casey.wringer@email.com",
+      "dimensions": {
+        "width": 1080,
+        "height": 1080
+      },
+      "created_at": "2024-01-16T09:00:00Z",
+      "modified_at": "2024-01-16T14:45:00Z",
+      "thumbnail_url": "https://adobe-cloud.example.com/thumbnails/proj_2.jpg",
+      "size": 15482365,
+      "layers": [
+        {
+          "id": "layer_1",
+          "name": "Background Image",
+          "type": "image",
+          "visible": true,
+          "opacity": 1.0,
+          "blend_mode": "normal",
+          "locked": true
+        },
+        {
+          "id": "layer_2",
+          "name": "Product Photo",
+          "type": "image",
+          "visible": true,
+          "opacity": 1.0,
+          "blend_mode": "normal",
+          "locked": false
+        },
+        {
+          "id": "layer_3",
+          "name": "Caption",
+          "type": "text",
+          "visible": true,
+          "opacity": 1.0,
+          "blend_mode": "normal",
+          "locked": false
+        }
+      ]
+    }
+  }
+}

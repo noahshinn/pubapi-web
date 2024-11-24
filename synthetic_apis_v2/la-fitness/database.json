@@ -1,0 +1,112 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "phone": "+1-555-0123",
+            "membership": {
+                "id": "mem_1",
+                "type": "premium",
+                "startDate": "2024-01-01T00:00:00Z",
+                "endDate": "2025-01-01T00:00:00Z",
+                "status": "active",
+                "homeGym": "loc_1",
+                "paymentMethod": {
+                    "type": "credit_card",
+                    "last4": "4242"
+                }
+            }
+        }
+    },
+    "locations": {
+        "loc_1": {
+            "id": "loc_1",
+            "name": "LA Fitness - Downtown",
+            "address": "123 Fitness Way, San Francisco, CA 94105",
+            "phone": "+1-555-9876",
+            "hours": {
+                "weekday": "5:00 AM - 11:00 PM",
+                "weekend": "7:00 AM - 8:00 PM"
+            },
+            "amenities": [
+                "Pool",
+                "Basketball Court",
+                "Sauna",
+                "Free Weights",
+                "Cardio Equipment",
+                "Personal Training"
+            ],
+            "latitude": 37.7849,
+            "longitude": -122.3968
+        },
+        "loc_2": {
+            "id": "loc_2",
+            "name": "LA Fitness - Marina",
+            "address": "456 Workout Blvd, San Francisco, CA 94123",
+            "phone": "+1-555-8765",
+            "hours": {
+                "weekday": "5:00 AM - 11:00 PM",
+                "weekend": "7:00 AM - 8:00 PM"
+            },
+            "amenities": [
+                "Cardio Equipment",
+                "Free Weights",
+                "Group Fitness",
+                "Personal Training"
+            ],
+            "latitude": 37.8025,
+            "longitude": -122.4382
+        }
+    },
+    "classes": {
+        "class_1": {
+            "id": "class_1",
+            "name": "Yoga Flow",
+            "instructor": "Sarah Chen",
+            "startTime": "2024-01-17T09:00:00Z",
+            "endTime": "2024-01-17T10:00:00Z",
+            "capacity": 20,
+            "enrolled": 15,
+            "location": "loc_1",
+            "description": "Beginner-friendly yoga class focusing on flexibility and mindfulness"
+        },
+        "class_2": {
+            "id": "class_2",
+            "name": "HIIT Training",
+            "instructor": "Mike Johnson",
+            "startTime": "2024-01-17T17:30:00Z",
+            "endTime": "2024-01-17T18:30:00Z",
+            "capacity": 15,
+            "enrolled": 12,
+            "location": "loc_1",
+            "description": "High-intensity interval training for maximum calorie burn"
+        },
+        "class_3": {
+            "id": "class_3",
+            "name": "Spin Class",
+            "instructor": "Lisa Rodriguez",
+            "startTime": "2024-01-17T18:00:00Z",
+            "endTime": "2024-01-17T19:00:00Z",
+            "capacity": 25,
+            "enrolled": 20,
+            "location": "loc_2",
+            "description": "High-energy indoor cycling class"
+        }
+    },
+    "bookings": {
+        "booking_1": {
+            "id": "booking_1",
+            "classId": "class_1",
+            "userEmail": "casey.wringer@email.com",
+            "status": "confirmed",
+            "bookedAt": "2024-01-15T10:00:00Z"
+        },
+        "booking_2": {
+            "id": "booking_2",
+            "classId": "class_2",
+            "userEmail": "casey.wringer@email.com",
+            "status": "confirmed",
+            "bookedAt": "2024-01-16T14:30:00Z"
+        }
+    }
+}

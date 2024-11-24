@@ -1,0 +1,252 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "WhatsApp",
+    "version": "1.0.0",
+    "description": "API for messaging service"
+  },
+  "paths": {
+    "/api/v1/messages": {
+      "get": {
+        "summary": "Get chat messages",
+        "parameters": [
+          {
+            "name": "chat_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            }
+          },
+          {
+            "name": "before_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of messages",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Message"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Send a message",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Message sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/chats": {
+      "get": {
+        "summary": "Get user's chats",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of chats",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Chat"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/status": {
+      "get": {
+        "summary": "Get contact statuses",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of contact statuses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Post new status",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewStatus"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Status posted"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Message": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "chat_id": {"type": "string"},
+          "sender_id": {"type": "string"},
+          "content": {"type": "string"},
+          "type": {"type": "string", "enum": ["text", "image", "video", "audio", "document"]},
+          "media_url": {"type": "string"},
+          "timestamp": {"type": "string"},
+          "read": {"type": "boolean"},
+          "delivered": {"type": "boolean"}
+        }
+      },
+      "NewMessage": {
+        "type": "object",
+        "properties": {
+          "chat_id": {"type": "string"},
+          "sender_id": {"type": "string"},
+          "content": {"type": "string"},
+          "type": {"type": "string", "enum": ["text", "image", "video", "audio", "document"]},
+          "media_url": {"type": "string"}
+        },
+        "required": ["chat_id", "sender_id", "content", "type"]
+      },
+      "Chat": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string", "enum": ["individual", "group"]},
+          "name": {"type": "string"},
+          "participants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
+          },
+          "last_message": {
+            "$ref": "#/components/schemas/Message"
+          },
+          "created_at": {"type": "string"},
+          "updated_at": {"type": "string"}
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "phone": {"type": "string"},
+          "name": {"type": "string"},
+          "status": {"type": "string"},
+          "profile_picture": {"type": "string"},
+          "last_seen": {"type": "string"}
+        }
+      },
+      "Status": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_id": {"type": "string"},
+          "content": {"type": "string"},
+          "type": {"type": "string", "enum": ["text", "image", "video"]},
+          "media_url": {"type": "string"},
+          "created_at": {"type": "string"},
+          "expires_at": {"type": "string"},
+          "views": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StatusView"
+            }
+          }
+        }
+      },
+      "StatusView": {
+        "type": "object",
+        "properties": {
+          "user_id": {"type": "string"},
+          "viewed_at": {"type": "string"}
+        }
+      },
+      "NewStatus": {
+        "type": "object",
+        "properties": {
+          "user_id": {"type": "string"},
+          "content": {"type": "string"},
+          "type": {"type": "string", "enum": ["text", "image", "video"]},
+          "media_url": {"type": "string"}
+        },
+        "required": ["user_id", "type"]
+      }
+    }
+  }
+}

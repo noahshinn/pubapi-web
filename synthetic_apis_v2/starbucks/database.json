@@ -1,0 +1,96 @@
+{
+    "stores": [
+        {
+            "id": "store_1",
+            "name": "Starbucks - Financial District",
+            "address": "123 Market St, San Francisco, CA 94105",
+            "latitude": 37.7935,
+            "longitude": -122.3964,
+            "hours": "Mon-Fri 5:30AM-8PM, Sat-Sun 6AM-7PM",
+            "features": ["Mobile Order", "Drive-Thru", "Nitro Cold Brew"],
+            "is_open": true
+        },
+        {
+            "id": "store_2",
+            "name": "Starbucks - SoMa",
+            "address": "456 Howard St, San Francisco, CA 94105",
+            "latitude": 37.7884,
+            "longitude": -122.3978,
+            "hours": "Mon-Fri 5AM-9PM, Sat-Sun 6AM-8PM",
+            "features": ["Mobile Order", "Nitro Cold Brew", "Breakfast"],
+            "is_open": true
+        }
+    ],
+    "menu_items": [
+        {
+            "id": "drink_1",
+            "name": "Caramel Macchiato",
+            "category": "drinks",
+            "description": "Freshly steamed milk with vanilla-flavored syrup marked with espresso and caramel drizzle",
+            "price": 4.95,
+            "calories": 250,
+            "customization_options": [
+                {
+                    "name": "Size",
+                    "options": ["Tall", "Grande", "Venti"],
+                    "max_selections": 1
+                },
+                {
+                    "name": "Milk",
+                    "options": ["Whole", "2%", "Nonfat", "Almond", "Oat"],
+                    "max_selections": 1
+                }
+            ]
+        },
+        {
+            "id": "food_1",
+            "name": "Bacon & Gouda Breakfast Sandwich",
+            "category": "food",
+            "description": "Applewood-smoked bacon, aged Gouda and a parmesan frittata on an artisan roll",
+            "price": 4.75,
+            "calories": 360,
+            "customization_options": []
+        }
+    ],
+    "rewards": {
+        "casey.wringer@email.com": {
+            "stars": 450,
+            "tier": "Gold",
+            "stars_to_next_reward": 50,
+            "available_rewards": [
+                {
+                    "id": "reward_1",
+                    "name": "Free Handcrafted Drink",
+                    "stars_required": 150,
+                    "expires_at": "2024-02-15T00:00:00Z"
+                }
+            ]
+        }
+    },
+    "orders": [
+        {
+            "id": "order_1",
+            "user_email": "casey.wringer@email.com",
+            "store": {
+                "id": "store_1",
+                "name": "Starbucks - Financial District"
+            },
+            "items": [
+                {
+                    "menu_item_id": "drink_1",
+                    "name": "Caramel Macchiato",
+                    "quantity": 1,
+                    "price": 4.95,
+                    "customizations": {
+                        "size": "Grande",
+                        "milk": "Oat"
+                    }
+                }
+            ],
+            "status": "completed",
+            "total": 4.95,
+            "stars_earned": 10,
+            "created_at": "2024-01-16T08:30:00Z"
+        }
+    ]
+}

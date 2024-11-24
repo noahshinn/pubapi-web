@@ -1,0 +1,244 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MasterClass",
+    "version": "1.0.0",
+    "description": "API for online education platform featuring celebrity instructors"
+  },
+  "paths": {
+    "/api/v1/classes": {
+      "get": {
+        "summary": "Get available classes",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instructor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of classes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Class"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/classes/{classId}": {
+      "get": {
+        "summary": "Get class details",
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Class details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Class"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/progress": {
+      "get": {
+        "summary": "Get user's learning progress",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's progress across all classes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Progress"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Update learning progress",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Progress updated successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/bookmarks": {
+      "get": {
+        "summary": "Get user's bookmarked classes",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of bookmarked classes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Class"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add or remove bookmark",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookmarkUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Bookmark updated successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Instructor": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "title": {"type": "string"},
+          "bio": {"type": "string"},
+          "image_url": {"type": "string"}
+        }
+      },
+      "Lesson": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "duration": {"type": "integer"},
+          "description": {"type": "string"},
+          "video_url": {"type": "string"}
+        }
+      },
+      "Class": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "category": {"type": "string"},
+          "instructor": {"$ref": "#/components/schemas/Instructor"},
+          "lessons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Lesson"
+            }
+          },
+          "duration": {"type": "integer"},
+          "rating": {"type": "number"},
+          "students_count": {"type": "integer"}
+        }
+      },
+      "Progress": {
+        "type": "object",
+        "properties": {
+          "class_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "completed_lessons": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "last_watched": {"type": "string"},
+          "completion_percentage": {"type": "number"}
+        }
+      },
+      "ProgressUpdate": {
+        "type": "object",
+        "properties": {
+          "class_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "lesson_id": {"type": "string"},
+          "completed": {"type": "boolean"}
+        }
+      },
+      "BookmarkUpdate": {
+        "type": "object",
+        "properties": {
+          "class_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "bookmarked": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}

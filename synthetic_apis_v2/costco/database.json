@@ -1,0 +1,115 @@
+{
+    "memberships": {
+        "casey.wringer@email.com": {
+            "id": "mem_123456",
+            "type": "Executive",
+            "status": "active",
+            "expiration_date": "2025-01-20T00:00:00Z",
+            "member_since": "2020-03-15T00:00:00Z",
+            "auto_renewal": true,
+            "additional_cards": [
+                {
+                    "holder_name": "Alex Wringer",
+                    "relationship": "spouse",
+                    "card_number": "1234-5678-9012"
+                }
+            ]
+        }
+    },
+    "products": {
+        "prod_1": {
+            "id": "prod_1",
+            "name": "Kirkland Signature Water",
+            "category": "Beverages",
+            "price": 3.99,
+            "unit": "40/16.9 fl oz",
+            "stock": 500,
+            "is_members_only": false,
+            "description": "Purified water in BPA-free bottles",
+            "image_url": "https://costco.com/images/water.jpg"
+        },
+        "prod_2": {
+            "id": "prod_2",
+            "name": "Organic Bananas",
+            "category": "Produce",
+            "price": 1.99,
+            "unit": "3 lb bag",
+            "stock": 200,
+            "is_members_only": false,
+            "description": "Fresh organic bananas",
+            "image_url": "https://costco.com/images/bananas.jpg"
+        },
+        "prod_3": {
+            "id": "prod_3",
+            "name": "Kirkland Signature Paper Towels",
+            "category": "Household",
+            "price": 19.99,
+            "unit": "12 rolls",
+            "stock": 300,
+            "is_members_only": true,
+            "description": "2-ply paper towels with select-a-size sheets",
+            "image_url": "https://costco.com/images/paper-towels.jpg"
+        }
+    },
+    "orders": {
+        "ord_1": {
+            "id": "ord_1",
+            "warehouse_id": "wh_1",
+            "user_email": "casey.wringer@email.com",
+            "items": [
+                {
+                    "product_id": "prod_1",
+                    "quantity": 2,
+                    "price": 3.99
+                },
+                {
+                    "product_id": "prod_3",
+                    "quantity": 1,
+                    "price": 19.99
+                }
+            ],
+            "total": 27.97,
+            "tax": 2.31,
+            "date": "2024-01-15T14:30:00Z",
+            "status": "completed"
+        }
+    },
+    "warehouses": {
+        "wh_1": {
+            "id": "wh_1",
+            "name": "San Francisco Warehouse",
+            "address": "450 10th Street",
+            "city": "San Francisco",
+            "state": "CA",
+            "zip": "94103",
+            "latitude": 37.7749,
+            "longitude": -122.4194,
+            "hours": "Mon-Fri: 10AM-8:30PM, Sat-Sun: 9:30AM-6PM",
+            "phone": "415-555-0123",
+            "services": [
+                "Pharmacy",
+                "Optical",
+                "Food Court",
+                "Gas Station",
+                "Tire Center"
+            ]
+        },
+        "wh_2": {
+            "id": "wh_2",
+            "name": "South San Francisco Warehouse",
+            "address": "1600 El Camino Real",
+            "city": "South San Francisco",
+            "state": "CA",
+            "zip": "94080",
+            "latitude": 37.6547,
+            "longitude": -122.4077,
+            "hours": "Mon-Fri: 10AM-8:30PM, Sat-Sun: 9:30AM-6PM",
+            "phone": "650-555-0123",
+            "services": [
+                "Pharmacy",
+                "Food Court",
+                "Hearing Aid Center"
+            ]
+        }
+    }
+}

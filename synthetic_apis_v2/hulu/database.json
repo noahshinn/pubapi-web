@@ -1,0 +1,101 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "subscription": "premium",
+      "watchlist": ["content_1", "content_3", "content_5"],
+      "watch_history": [
+        {
+          "content_id": "content_2",
+          "watched_at": "2024-01-15T20:30:00Z",
+          "completed": true
+        },
+        {
+          "content_id": "content_4",
+          "watched_at": "2024-01-16T21:15:00Z",
+          "completed": false
+        }
+      ],
+      "preferences": {
+        "preferred_genres": ["sci-fi", "drama", "comedy"],
+        "language": "english",
+        "subtitles": true
+      }
+    }
+  },
+  "content": {
+    "content_1": {
+      "id": "content_1",
+      "title": "The Last Journey",
+      "type": "movie",
+      "genre": "sci-fi",
+      "release_year": 2023,
+      "rating": "PG-13",
+      "duration": 142,
+      "description": "A thrilling space adventure about humanity's first interstellar mission",
+      "thumbnail_url": "/thumbnails/last-journey.jpg",
+      "stream_url": "/streams/last-journey.m3u8"
+    },
+    "content_2": {
+      "id": "content_2",
+      "title": "Office Life",
+      "type": "series",
+      "genre": "comedy",
+      "release_year": 2022,
+      "rating": "TV-14",
+      "duration": 30,
+      "description": "A hilarious look at modern workplace dynamics",
+      "thumbnail_url": "/thumbnails/office-life.jpg",
+      "stream_url": "/streams/office-life.m3u8"
+    },
+    "content_3": {
+      "id": "content_3",
+      "title": "Dark Waters",
+      "type": "movie",
+      "genre": "drama",
+      "release_year": 2023,
+      "rating": "R",
+      "duration": 128,
+      "description": "A gripping tale of corruption and justice",
+      "thumbnail_url": "/thumbnails/dark-waters.jpg",
+      "stream_url": "/streams/dark-waters.m3u8"
+    },
+    "content_4": {
+      "id": "content_4",
+      "title": "Future Tech",
+      "type": "series",
+      "genre": "sci-fi",
+      "release_year": 2024,
+      "rating": "TV-MA",
+      "duration": 45,
+      "description": "Exploring the impact of emerging technologies on society",
+      "thumbnail_url": "/thumbnails/future-tech.jpg",
+      "stream_url": "/streams/future-tech.m3u8"
+    },
+    "content_5": {
+      "id": "content_5",
+      "title": "The Chef's Table",
+      "type": "series",
+      "genre": "reality",
+      "release_year": 2023,
+      "rating": "TV-PG",
+      "duration": 60,
+      "description": "Behind the scenes with world-renowned chefs",
+      "thumbnail_url": "/thumbnails/chefs-table.jpg",
+      "stream_url": "/streams/chefs-table.m3u8"
+    }
+  },
+  "watch_progress": {
+    "casey.wringer@email.com:content_4": {
+      "content_id": "content_4",
+      "progress_seconds": 1800,
+      "last_watched": "2024-01-16T21:15:00Z"
+    },
+    "casey.wringer@email.com:content_5": {
+      "content_id": "content_5",
+      "progress_seconds": 900,
+      "last_watched": "2024-01-17T19:45:00Z"
+    }
+  }
+}

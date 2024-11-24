@@ -1,0 +1,88 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "subscription": "premium",
+      "watchlist": ["content_1", "content_3", "content_5"],
+      "watch_progress": [
+        {
+          "content_id": "content_1",
+          "progress_seconds": 3600,
+          "total_seconds": 7200,
+          "last_watched": "2024-01-15T20:30:00Z"
+        },
+        {
+          "content_id": "content_2",
+          "progress_seconds": 1800,
+          "total_seconds": 1800,
+          "last_watched": "2024-01-14T19:00:00Z"
+        }
+      ],
+      "preferred_genres": ["action", "sci-fi", "drama"]
+    }
+  },
+  "content": {
+    "content_1": {
+      "id": "content_1",
+      "title": "Star Trek: Strange New Worlds",
+      "type": "show",
+      "genre": "sci-fi",
+      "description": "Follow Captain Pike and the crew of the USS Enterprise in this Star Trek prequel series",
+      "release_date": "2022-05-05",
+      "rating": "TV-14",
+      "duration": 7200,
+      "thumbnail_url": "/images/strange-new-worlds.jpg",
+      "stream_url": "/stream/strange-new-worlds"
+    },
+    "content_2": {
+      "id": "content_2",
+      "title": "Top Gun: Maverick",
+      "type": "movie",
+      "genre": "action",
+      "description": "After thirty years, Maverick is still pushing the envelope as a top naval aviator",
+      "release_date": "2022-05-27",
+      
+      "rating": "PG-13",
+      "duration": 7320,
+      "thumbnail_url": "/images/top-gun-maverick.jpg",
+      "stream_url": "/stream/top-gun-maverick"
+    },
+    "content_3": {
+      "id": "content_3",
+      "title": "Yellowstone",
+      "type": "show",
+      "genre": "drama",
+      "description": "A ranching family in Montana faces off against others encroaching on their land",
+      "release_date": "2018-06-20",
+      "rating": "TV-MA",
+      "duration": 3600,
+      "thumbnail_url": "/images/yellowstone.jpg",
+      "stream_url": "/stream/yellowstone"
+    },
+    "content_4": {
+      "id": "content_4",
+      "title": "Halo",
+      "type": "show",
+      "genre": "sci-fi",
+      "description": "Master Chief defends humanity in an epic conflict with alien forces known as the Covenant",
+      "release_date": "2022-03-24",
+      "rating": "TV-14",
+      "duration": 3600,
+      "thumbnail_url": "/images/halo.jpg",
+      "stream_url": "/stream/halo"
+    },
+    "content_5": {
+      "id": "content_5",
+      "title": "1883",
+      "type": "show",
+      "genre": "drama",
+      "description": "Follow the Dutton family as they embark on a journey west through the Great Plains",
+      "release_date": "2021-12-19",
+      "rating": "TV-MA",
+      "duration": 3600,
+      "thumbnail_url": "/images/1883.jpg",
+      "stream_url": "/stream/1883"
+    }
+  }
+}

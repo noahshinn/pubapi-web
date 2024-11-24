@@ -1,0 +1,105 @@
+{
+    "accounts": {
+        "acc_checking": {
+            "id": "acc_checking",
+            "type": "checking",
+            "name": "Essential Checking",
+            "balance": 5428.92,
+            "currency": "USD",
+            "status": "active",
+            "last_four": "4567",
+            "user_email": "casey.wringer@email.com"
+        },
+        "acc_savings": {
+            "id": "acc_savings",
+            "type": "savings",
+            "name": "Way2Save Savings",
+            "balance": 15750.33,
+            "currency": "USD",
+            "status": "active",
+            "last_four": "8901",
+            "user_email": "casey.wringer@email.com"
+        },
+        "acc_credit": {
+            "id": "acc_credit",
+            "type": "credit",
+            "name": "Active Cash Card",
+            "balance": -1250.45,
+            "currency": "USD",
+            "status": "active",
+            "last_four": "2345",
+            "user_email": "casey.wringer@email.com"
+        }
+    },
+    "transactions": {
+        "tx_1": {
+            "id": "tx_1",
+            "account_id": "acc_checking",
+            "date": "2024-01-15T10:30:00Z",
+            "description": "DoorDash Order",
+            "amount": -40.97,
+            "type": "debit",
+            "category": "food",
+            "status": "completed"
+        },
+        "tx_2": {
+            "id": "tx_2",
+            "account_id": "acc_checking",
+            "date": "2024-01-14T15:45:00Z",
+            "description": "Direct Deposit - ACME Corp",
+            "amount": 2500.00,
+            "type": "credit",
+            "category": "income",
+            "status": "completed"
+        },
+        "tx_3": {
+            "id": "tx_3",
+            "account_id": "acc_savings",
+            "date": "2024-01-13T12:00:00Z",
+            "description": "Transfer from Checking",
+            "amount": 500.00,
+            "type": "credit",
+            "category": "transfer",
+            "status": "completed"
+        }
+    },
+    "bills": {
+        "bill_1": {
+            "id": "bill_1",
+            "payee": "PG&E",
+            "amount": 125.45,
+            "due_date": "2024-02-01T00:00:00Z",
+            "status": "pending",
+            "autopay": true,
+            "user_email": "casey.wringer@email.com"
+        },
+        "bill_2": {
+            "id": "bill_2",
+            "payee": "AT&T",
+            "amount": 89.99,
+            "due_date": "2024-02-05T00:00:00Z",
+            "status": "pending",
+            "autopay": false,
+            "user_email": "casey.wringer@email.com"
+        },
+        "bill_3": {
+            "id": "bill_3",
+            "payee": "State Farm Insurance",
+            "amount": 145.00,
+            "due_date": "2024-02-15T00:00:00Z",
+            "status": "pending",
+            "autopay": true,
+            "user_email": "casey.wringer@email.com"
+        }
+    },
+    "bill_payments": {
+        "pmt_1": {
+            "id": "pmt_1",
+            "bill_id": "bill_1",
+            "account_id": "acc_checking",
+            "amount": 125.45,
+            "payment_date": "2024-01-10T00:00:00Z",
+            "status": "completed"
+        }
+    }
+}

@@ -1,0 +1,82 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "address": {
+        "street": "789 Tech Avenue",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94105"
+      },
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242",
+          "expiry_mm": 12,
+          "expiry_yy": 25
+        }
+      ]
+    }
+  },
+  "products": {
+    "prod_1": {
+      "id": "prod_1",
+      "name": "Classic Rose Bouquet",
+      "description": "One dozen red roses arranged with baby's breath",
+      "category": "flowers",
+      "occasions": ["romance", "anniversary", "birthday"],
+      "price": 49.99,
+      "image_url": "https://example.com/roses.jpg",
+      "available": true
+    },
+    "prod_2": {
+      "id": "prod_2",
+      "name": "Peace Lily Plant",
+      "description": "Beautiful peace lily in decorative pot",
+      "category": "plants",
+      "occasions": ["sympathy", "housewarming"],
+      "price": 39.99,
+      "image_url": "https://example.com/peace-lily.jpg",
+      "available": true
+    },
+    "prod_3": {
+      "id": "prod_3",
+      "name": "Birthday Celebration Bundle",
+      "description": "Mixed flowers with birthday balloon and chocolates",
+      "category": "gifts",
+      "occasions": ["birthday"],
+      "price": 79.99,
+      "image_url": "https://example.com/birthday-bundle.jpg",
+      "available": true
+    }
+  },
+  "orders": {
+    "ord_1": {
+      "id": "ord_1",
+      "user_email": "casey.wringer@email.com",
+      "product": {
+        "id": "prod_1",
+        "name": "Classic Rose Bouquet",
+        "price": 49.99
+      },
+      "recipient": {
+        "name": "Sarah Johnson",
+        "phone": "+1-555-9876",
+        "address": {
+          "street": "456 Love Lane",
+          "city": "San Francisco",
+          "state": "CA",
+          "zip_code": "94110"
+        }
+      },
+      "message": "Happy Anniversary!",
+      "delivery_date": "2024-02-14",
+      "status": "delivered",
+      "total": 62.98,
+      "created_at": "2024-01-15T10:30:00Z"
+    }
+  }
+}

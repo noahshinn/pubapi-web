@@ -1,0 +1,138 @@
+{
+  "profiles": {
+    "casey.wringer@email.com": {
+      "psn_id": "CaseyGamer",
+      "email": "casey.wringer@email.com",
+      "display_name": "Casey Wringer",
+      "avatar_url": "https://psn.com/avatars/default.jpg",
+      "level": 32,
+      "trophy_level": 28,
+      "plus_member": true,
+      "plus_expiry": "2024-12-31T23:59:59Z",
+      "country": "US",
+      "language": "en",
+      "created_at": "2020-03-15T00:00:00Z"
+    }
+  },
+  "games": {
+    "casey.wringer@email.com": [
+      {
+        "id": "game_1",
+        "title": "God of War Ragnarök",
+        "platform": "PS5",
+        "purchase_date": "2023-11-15T00:00:00Z",
+        "last_played": "2024-01-15T22:30:00Z",
+        "total_play_time": 4320,
+        "completion_rate": 87.5,
+        "trophy_progress": {
+          "bronze": 28,
+          "silver": 15,
+          "gold": 8,
+          "platinum": 1
+        }
+      },
+      {
+        "id": "game_2",
+        "title": "Spider-Man 2",
+        "platform": "PS5",
+        "purchase_date": "2023-10-20T00:00:00Z",
+        "last_played": "2024-01-16T18:45:00Z",
+        "total_play_time": 3150,
+        "completion_rate": 92.3,
+        "trophy_progress": {
+          "bronze": 35,
+          "silver": 12,
+          "gold": 5,
+          "platinum": 1
+        }
+      },
+      {
+        "id": "game_3",
+        "title": "Final Fantasy XVI",
+        "platform": "PS5",
+        "purchase_date": "2023-06-22T00:00:00Z",
+        "last_played": "2023-12-30T21:15:00Z",
+        "total_play_time": 5840,
+        "completion_rate": 76.8,
+        "trophy_progress": {
+          "bronze": 42,
+          "silver": 18,
+          "gold": 7,
+          "platinum": 0
+        }
+      }
+    ]
+  },
+  "trophies": {
+    "casey.wringer@email.com": [
+      {
+        "id": "trophy_1",
+        "game_id": "game_1",
+        "name": "Father and Son",
+        "description": "Complete the main story",
+        "type": "gold",
+        "rarity": "rare",
+        "earned": true,
+        "earned_at": "2023-12-01T23:45:12Z",
+        "progress": 100
+      },
+      {
+        "id": "trophy_2",
+        "game_id": "game_1",
+        "name": "Platinum Champion",
+        "description": "Collect all trophies",
+        "type": "platinum",
+        "rarity": "ultra rare",
+        "earned": true,
+        "earned_at": "2023-12-15T02:30:45Z",
+        "progress": 100
+      },
+      {
+        "id": "trophy_3",
+        "game_id": "game_2",
+        "name": "Friendly Neighborhood",
+        "description": "Complete all side missions",
+        "type": "gold",
+        "rarity": "very rare",
+        "earned": true,
+        "earned_at": "2023-11-30T19:20:33Z",
+        "progress": 100
+      }
+    ]
+  },
+  "friends": {
+    "casey.wringer@email.com": [
+      {
+        "psn_id": "GamerPro99",
+        "display_name": "Alex Thompson",
+        "avatar_url": "https://psn.com/avatars/alex.jpg",
+        "online_status": "online",
+        "current_game": {
+          "id": "game_1",
+          "title": "God of War Ragnarök",
+          "platform": "PS5"
+        },
+        "friendship_date": "2021-05-20T00:00:00Z"
+      },
+      {
+        "psn_id": "NightOwl42",
+        "display_name": "Sarah Chen",
+        "avatar_url": "https://psn.com/avatars/sarah.jpg",
+        "online_status": "offline",
+        "friendship_date": "2022-01-15T00:00:00Z"
+      },
+      {
+        "psn_id": "SpeedRunner",
+        "display_name": "Mike Rodriguez",
+        "avatar_url": "https://psn.com/avatars/mike.jpg",
+        "online_status": "away",
+        "current_game": {
+          "id": "game_3",
+          "title": "Final Fantasy XVI",
+          "platform": "PS5"
+        },
+        "friendship_date": "2022-08-30T00:00:00Z"
+      }
+    ]
+  }
+}

@@ -1,0 +1,94 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "phone": "+1-555-0123",
+            "address": {
+                "street": "789 Tech Avenue",
+                "city": "San Francisco",
+                "state": "CA",
+                "zip_code": "94105"
+            },
+            "created_at": "2023-01-01T00:00:00Z"
+        }
+    },
+    "caregivers": {
+        "cg_1": {
+            "id": "cg_1",
+            "name": "Sarah Johnson",
+            "email": "sarah.j@email.com",
+            "phone": "+1-555-0456",
+            "address": {
+                "street": "123 Care Street",
+                "city": "San Francisco",
+                "state": "CA",
+                "zip_code": "94105"
+            },
+            "care_types": ["child_care", "pet_care"],
+            "hourly_rate": 25.00,
+            "years_experience": 5,
+            "bio": "Experienced childcare provider with a passion for early childhood development",
+            "availability": "Weekdays 9AM-6PM",
+            "background_check": true,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "comment": "Sarah is amazing with kids!",
+                    "author": "casey.wringer@email.com",
+                    "created_at": "2024-01-10T15:30:00Z"
+                }
+            ],
+            "created_at": "2023-06-01T00:00:00Z"
+        },
+        "cg_2": {
+            "id": "cg_2",
+            "name": "Michael Chen",
+            "email": "michael.c@email.com",
+            "phone": "+1-555-0789",
+            "address": {
+                "street": "456 Helper Lane",
+                "city": "San Francisco",
+                "state": "CA",
+                "zip_code": "94105"
+            },
+            "care_types": ["senior_care", "housekeeping"],
+            "hourly_rate": 30.00,
+            "years_experience": 8,
+            "bio": "Certified nursing assistant specializing in senior care",
+            "availability": "Flexible schedule",
+            "background_check": true,
+            "reviews": [],
+            "created_at": "2023-07-15T00:00:00Z"
+        }
+    },
+    "jobs": {
+        "job_1": {
+            "id": "job_1",
+            "user_email": "casey.wringer@email.com",
+            "care_type": "child_care",
+            "title": "After-school care needed",
+            "description": "Looking for someone to watch my 8-year-old after school",
+            "schedule": "Mon-Fri 3PM-6PM",
+            "hourly_rate": 25.00,
+            "location": {
+                "street": "789 Tech Avenue",
+                "city": "San Francisco",
+                "state": "CA",
+                "zip_code": "94105"
+            },
+            "status": "open",
+            "created_at": "2024-01-15T00:00:00Z"
+        }
+    },
+    "applications": {
+        "app_1": {
+            "id": "app_1",
+            "job_id": "job_1",
+            "caregiver_id": "cg_1",
+            "cover_letter": "I would love to help with after-school care. I have extensive experience with school-age children.",
+            "status": "pending",
+            "created_at": "2024-01-15T12:00:00Z"
+        }
+    }
+}

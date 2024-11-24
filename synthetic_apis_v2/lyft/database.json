@@ -1,0 +1,121 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "rating": 4.9,
+      "payment_methods": [
+        {
+          "id": "pm_1",
+          "type": "credit_card",
+          "last4": "4242",
+          "expiry_mm": 12,
+          "expiry_yy": 25
+        }
+      ]
+    }
+  },
+  "drivers": {
+    "d_1": {
+      "id": "d_1",
+      "name": "John Smith",
+      "vehicle": {
+        "make": "Toyota",
+        "model": "Camry",
+        "year": 2020,
+        "color": "Silver",
+        "license_plate": "ABC123"
+      },
+      "rating": 4.8,
+      "location": {
+        "latitude": 37.7749,
+        "longitude": -122.4194,
+        "address": "123 Market St, San Francisco, CA 94105"
+      },
+      "status": "available"
+    },
+    "d_2": {
+      "id": "d_2",
+      "name": "Sarah Johnson",
+      "vehicle": {
+        "make": "Honda",
+        "model": "Accord",
+        "year": 2021,
+        "color": "Black",
+        "license_plate": "XYZ789"
+      },
+      "rating": 4.9,
+      "location": {
+        "latitude": 37.7833,
+        "longitude": -122.4167,
+        "address": "456 Mission St, San Francisco, CA 94105"
+      },
+      "status": "available"
+    }
+  },
+  "rides": {
+    "r_1": {
+      "id": "r_1",
+      "user_email": "casey.wringer@email.com",
+      "driver": {
+        "id": "d_1",
+        "name": "John Smith",
+        "vehicle": {
+          "make": "Toyota",
+          "model": "Camry",
+          "year": 2020,
+          "color": "Silver",
+          "license_plate": "ABC123"
+        }
+      },
+      "pickup": {
+        "latitude": 37.7749,
+        "longitude": -122.4194,
+        "address": "123 Market St, San Francisco, CA 94105"
+      },
+      "dropoff": {
+        "latitude": 37.7833,
+        "longitude": -122.4167,
+        "address": "456 Mission St, San Francisco, CA 94105"
+      },
+      "status": "completed",
+      "ride_type": "lyft",
+      "price": 15.50,
+      "created_at": "2024-01-15T14:30:00Z",
+      "updated_at": "2024-01-15T15:00:00Z",
+      "payment_id": "pm_1"
+    },
+    "r_2": {
+      "id": "r_2",
+      "user_email": "casey.wringer@email.com",
+      "driver": {
+        "id": "d_2",
+        "name": "Sarah Johnson",
+        "vehicle": {
+          "make": "Honda",
+          "model": "Accord",
+          "year": 2021,
+          "color": "Black",
+          "license_plate": "XYZ789"
+        }
+      },
+      "pickup": {
+        "latitude": 37.7833,
+        "longitude": -122.4167,
+        "address": "456 Mission St, San Francisco, CA 94105"
+      },
+      "dropoff": {
+        "latitude": 37.7749,
+        "longitude": -122.4194,
+        "address": "789 Market St, San Francisco, CA 94105"
+      },
+      "status": "completed",
+      "ride_type": "lyft_xl",
+      "price": 25.75,
+      "created_at": "2024-01-16T09:15:00Z",
+      "updated_at": "2024-01-16T09:45:00Z",
+      "payment_id": "pm_1"
+    }
+  }
+}

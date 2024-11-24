@@ -1,0 +1,273 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Angi",
+    "version": "1.0.0",
+    "description": "API for home services and contractor connections"
+  },
+  "paths": {
+    "/api/v1/services": {
+      "get": {
+        "summary": "Get available service categories",
+        "responses": {
+          "200": {
+            "description": "List of service categories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ServiceCategory"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/providers": {
+      "get": {
+        "summary": "Search service providers",
+        "parameters": [
+          {
+            "name": "service_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "zip_code",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of service providers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ServiceProvider"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects": {
+      "get": {
+        "summary": "Get user's projects",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of projects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new project request",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewProject"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Project created"
+          }
+        }
+      }
+    },
+    "/api/v1/reviews": {
+      "get": {
+        "summary": "Get provider reviews",
+        "parameters": [
+          {
+            "name": "provider_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of reviews",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Review"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Submit a review",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewReview"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Review submitted"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ServiceCategory": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "subcategories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ServiceProvider": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "services": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rating": {"type": "number"},
+          "review_count": {"type": "integer"},
+          "verified": {"type": "boolean"},
+          "service_area": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Project": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "service_category": {"type": "string"},
+          "description": {"type": "string"},
+          "status": {"type": "string"},
+          "created_at": {"type": "string"},
+          "budget_range": {
+            "type": "object",
+            "properties": {
+              "min": {"type": "number"},
+              "max": {"type": "number"}
+            }
+          },
+          "timeline": {"type": "string"},
+          "location": {
+            "type": "object",
+            "properties": {
+              "address": {"type": "string"},
+              "zip_code": {"type": "string"}
+            }
+          }
+        }
+      },
+      "NewProject": {
+        "type": "object",
+        "properties": {
+          "service_category_id": {"type": "string"},
+          "description": {"type": "string"},
+          "budget_range": {
+            "type": "object",
+            "properties": {
+              "min": {"type": "number"},
+              "max": {"type": "number"}
+            }
+          },
+          "timeline": {"type": "string"},
+          "location": {
+            "type": "object",
+            "properties": {
+              "address": {"type": "string"},
+              "zip_code": {"type": "string"}
+            }
+          }
+        }
+      },
+      "Review": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "provider_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "rating": {"type": "number"},
+          "comment": {"type": "string"},
+          "project_id": {"type": "string"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "NewReview": {
+        "type": "object",
+        "properties": {
+          "provider_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "rating": {"type": "number"},
+          "comment": {"type": "string"},
+          "project_id": {"type": "string"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "native_language": "English",
+            "enrolled_courses": [
+                {
+                    "id": "course_1",
+                    "language_id": "es",
+                    "level": "beginner",
+                    "total_units": 10,
+                    "total_lessons": 50,
+                    "enrolled_at": "2024-01-01T10:00:00Z"
+                },
+                {
+                    "id": "course_2",
+                    "language_id": "fr",
+                    "level": "beginner",
+                    "total_units": 10,
+                    "total_lessons": 50,
+                    "enrolled_at": "2024-01-15T14:30:00Z"
+                }
+            ],
+            "progress": [
+                {
+                    "course_id": "course_1",
+                    "current_unit": 3,
+                    "current_lesson": 2,
+                    "completed_lessons": 12,
+                    "accuracy": 0.85,
+                    "streak_days": 15,
+                    "last_activity": "2024-01-16T18:45:00Z"
+                },
+                {
+                    "course_id": "course_2",
+                    "current_unit": 1,
+                    "current_lesson": 3,
+                    "completed_lessons": 2,
+                    "accuracy": 0.90,
+                    "streak_days": 2,
+                    "last_activity": "2024-01-16T19:20:00Z"
+                }
+            ],
+            "joined_at": "2024-01-01T10:00:00Z"
+        }
+    },
+    "languages": {
+        "es": {
+            "id": "es",
+            "name": "Spanish",
+            "native_name": "Español",
+            "difficulty": "medium",
+            "available_levels": ["beginner", "intermediate", "advanced"]
+        },
+        "fr": {
+            "id": "fr",
+            "name": "French",
+            "native_name": "Français",
+            "difficulty": "medium",
+            "available_levels": ["beginner", "intermediate", "advanced"]
+        },
+        "de": {
+            "id": "de",
+            "name": "German",
+            "native_name": "Deutsch",
+            "difficulty": "medium",
+            "available_levels": ["beginner", "intermediate", "advanced"]
+        },
+        "it": {
+            "id": "it",
+            "name": "Italian",
+            "native_name": "Italiano",
+            "difficulty": "medium",
+            "available_levels": ["beginner", "intermediate", "advanced"]
+        },
+        "ja": {
+            "id": "ja",
+            "name": "Japanese",
+            "native_name": "日本語",
+            "difficulty": "hard",
+            "available_levels": ["beginner", "intermediate", "advanced"]
+        }
+    }
+}

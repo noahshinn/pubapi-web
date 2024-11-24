@@ -1,0 +1,215 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ClassPass",
+    "version": "1.0.0",
+    "description": "API for fitness class booking platform"
+  },
+  "paths": {
+    "/api/v1/studios": {
+      "get": {
+        "summary": "Get nearby fitness studios",
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["yoga", "pilates", "hiit", "cycling", "strength", "dance"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of studios",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Studio"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/classes": {
+      "get": {
+        "summary": "Get available classes",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "studio_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of classes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Class"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bookings": {
+      "get": {
+        "summary": "Get user's bookings",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of bookings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Booking"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Book a class",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewBooking"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Booking created"
+          }
+        }
+      }
+    },
+    "/api/v1/bookings/{bookingId}": {
+      "delete": {
+        "summary": "Cancel a booking",
+        "parameters": [
+          {
+            "name": "bookingId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Booking cancelled"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Studio": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "categories": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "rating": {"type": "number"},
+          "address": {"type": "string"},
+          "latitude": {"type": "number"},
+          "longitude": {"type": "number"}
+        }
+      },
+      "Class": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "studio": {"$ref": "#/components/schemas/Studio"},
+          "name": {"type": "string"},
+          "instructor": {"type": "string"},
+          "category": {"type": "string"},
+          "start_time": {"type": "string", "format": "date-time"},
+          "duration": {"type": "integer"},
+          "spots_available": {"type": "integer"},
+          "credits_required": {"type": "integer"}
+        }
+      },
+      "Booking": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "class": {"$ref": "#/components/schemas/Class"},
+          "status": {"type": "string"},
+          "created_at": {"type": "string", "format": "date-time"}
+        }
+      },
+      "NewBooking": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "class_id": {"type": "string"}
+        },
+        "required": ["user_email", "class_id"]
+      }
+    }
+  }
+}

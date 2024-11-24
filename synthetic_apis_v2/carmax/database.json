@@ -1,0 +1,98 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "phone": "+1-555-0123",
+            "saved_cars": ["car_1", "car_3"]
+        }
+    },
+    "cars": {
+        "car_1": {
+            "id": "car_1",
+            "make": "Toyota",
+            "model": "Camry",
+            "year": 2021,
+            "price": 25999.00,
+            "mileage": 15000,
+            "exterior_color": "Silver",
+            "interior_color": "Black",
+            "fuel_type": "Gasoline",
+            "transmission": "Automatic",
+            "location": "San Francisco CarMax",
+            "vin": "1HGCM82633A123456",
+            "features": [
+                "Bluetooth",
+                "Backup Camera",
+                "Lane Departure Warning",
+                "Apple CarPlay"
+            ],
+            "accident_history": "No accidents reported",
+            "owners_count": 1,
+            "images": [
+                "https://example.com/camry1.jpg",
+                "https://example.com/camry2.jpg"
+            ]
+        },
+        "car_2": {
+            "id": "car_2",
+            "make": "Honda",
+            "model": "CR-V",
+            "year": 2020,
+            "price": 27500.00,
+            "mileage": 22000,
+            "exterior_color": "Blue",
+            "interior_color": "Gray",
+            "fuel_type": "Gasoline",
+            "transmission": "Automatic",
+            "location": "San Francisco CarMax",
+            "vin": "2HKRW2H54LH123456",
+            "features": [
+                "Sunroof",
+                "Navigation System",
+                "Heated Seats",
+                "Android Auto"
+            ],
+            "accident_history": "Minor accident reported",
+            "owners_count": 1,
+            "images": [
+                "https://example.com/crv1.jpg",
+                "https://example.com/crv2.jpg"
+            ]
+        },
+        "car_3": {
+            "id": "car_3",
+            "make": "Tesla",
+            "model": "Model 3",
+            "year": 2022,
+            "price": 45999.00,
+            "mileage": 8000,
+            "exterior_color": "Red",
+            "interior_color": "White",
+            "fuel_type": "Electric",
+            "transmission": "Automatic",
+            "location": "San Francisco CarMax",
+            "vin": "5YJ3E1EA8LF123456",
+            "features": [
+                "Autopilot",
+                "Premium Audio",
+                "Glass Roof",
+                "Full Self-Driving Capability"
+            ],
+            "accident_history": "No accidents reported",
+            "owners_count": 1,
+            "images": [
+                "https://example.com/tesla1.jpg",
+                "https://example.com/tesla2.jpg"
+            ]
+        }
+    },
+    "appraisals": {
+        "appr_1": {
+            "id": "appr_1",
+            "offer_amount": 22500.00,
+            "valid_until": "2024-01-23T00:00:00Z",
+            "location": "CarMax San Francisco"
+        }
+    }
+}

@@ -1,0 +1,69 @@
+{
+    "authors": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "bio": "Tech enthusiast and software developer writing about the future of technology",
+            "publication_name": "Tech Insights Weekly"
+        }
+    },
+    "posts": {
+        "post_1": {
+            "id": "post_1",
+            "title": "The Future of AI Development",
+            "content": "As we look ahead to the future of artificial intelligence...",
+            "author": {
+                "email": "casey.wringer@email.com",
+                "name": "Casey Wringer",
+                "publication_name": "Tech Insights Weekly"
+            },
+            "is_premium": true,
+            "published_at": "2024-01-15T10:00:00Z",
+            "comments": [
+                {
+                    "id": "comment_1",
+                    "content": "Great insights on the future of AI!",
+                    "author": {
+                        "email": "reader@email.com",
+                        "name": "Regular Reader"
+                    },
+                    "created_at": "2024-01-15T11:30:00Z"
+                }
+            ]
+        },
+        "post_2": {
+            "id": "post_2",
+            "title": "Getting Started with Go Programming",
+            "content": "Go is a powerful programming language that excels at...",
+            "author": {
+                "email": "casey.wringer@email.com",
+                "name": "Casey Wringer",
+                "publication_name": "Tech Insights Weekly"
+            },
+            "is_premium": false,
+            "published_at": "2024-01-16T10:00:00Z",
+            "comments": []
+        }
+    },
+    "subscriptions": {
+        "sub_1": {
+            "id": "sub_1",
+            "publication": "Tech Insights Weekly",
+            "subscriber_email": "premium.reader@email.com",
+            "tier": "premium",
+            "status": "active",
+            "created_at": "2024-01-01T00:00:00Z"
+        }
+    },
+    "comments": {
+        "comment_1": {
+            "id": "comment_1",
+            "content": "Great insights on the future of AI!",
+            "author": {
+                "email": "reader@email.com",
+                "name": "Regular Reader"
+            },
+            "created_at": "2024-01-15T11:30:00Z"
+        }
+    }
+}

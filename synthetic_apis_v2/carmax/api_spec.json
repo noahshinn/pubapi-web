@@ -1,0 +1,252 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "CarMax",
+    "version": "1.0.0",
+    "description": "API for car buying and selling service"
+  },
+  "paths": {
+    "/api/v1/inventory": {
+      "get": {
+        "summary": "Search available cars",
+        "parameters": [
+          {
+            "name": "make",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "year_min",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "year_max",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "price_min",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "price_max",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of cars",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Car"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/inventory/{carId}": {
+      "get": {
+        "summary": "Get detailed car information",
+        "parameters": [
+          {
+            "name": "carId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Car details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CarDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/appraisals": {
+      "post": {
+        "summary": "Get car appraisal",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppraisalRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Appraisal offer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Appraisal"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/saved-cars": {
+      "get": {
+        "summary": "Get user's saved cars",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of saved cars",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Car"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Save a car",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "carId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Car saved successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Car": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "make": {"type": "string"},
+          "model": {"type": "string"},
+          "year": {"type": "integer"},
+          "price": {"type": "number"},
+          "mileage": {"type": "integer"},
+          "exterior_color": {"type": "string"},
+          "interior_color": {"type": "string"},
+          "fuel_type": {"type": "string"},
+          "transmission": {"type": "string"},
+          "location": {"type": "string"},
+          "image_url": {"type": "string"}
+        }
+      },
+      "CarDetail": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "make": {"type": "string"},
+          "model": {"type": "string"},
+          "year": {"type": "integer"},
+          "price": {"type": "number"},
+          "mileage": {"type": "integer"},
+          "exterior_color": {"type": "string"},
+          "interior_color": {"type": "string"},
+          "fuel_type": {"type": "string"},
+          "transmission": {"type": "string"},
+          "location": {"type": "string"},
+          "vin": {"type": "string"},
+          "features": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "accident_history": {"type": "string"},
+          "owners_count": {"type": "integer"},
+          "images": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "AppraisalRequest": {
+        "type": "object",
+        "properties": {
+          "make": {"type": "string"},
+          "model": {"type": "string"},
+          "year": {"type": "integer"},
+          "mileage": {"type": "integer"},
+          "condition": {"type": "string"},
+          "zip_code": {"type": "string"}
+        }
+      },
+      "Appraisal": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "offer_amount": {"type": "number"},
+          "valid_until": {"type": "string"},
+          "location": {"type": "string"}
+        }
+      }
+    }
+  }
+}

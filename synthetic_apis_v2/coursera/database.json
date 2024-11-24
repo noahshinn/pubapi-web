@@ -1,0 +1,111 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "join_date": "2023-06-15T00:00:00Z",
+      "interests": ["Computer Science", "Data Science", "Machine Learning"],
+      "certifications": ["Python Programming", "Data Analysis Fundamentals"],
+      "preferred_language": "English"
+    }
+  },
+  "courses": {
+    "course_1": {
+      "id": "course_1",
+      "title": "Machine Learning Fundamentals",
+      "description": "Learn the basics of machine learning algorithms and their applications",
+      "instructor": "Dr. Sarah Chen",
+      "category": "Data Science",
+      "difficulty": "intermediate",
+      "duration_weeks": 8,
+      "rating": 4.8,
+      "modules": [
+        
+        {
+          "id": "module_1",
+          "title": "Introduction to Machine Learning",
+          "description": "Basic concepts and terminology",
+          "content": "Video lectures and quizzes",
+          "duration_minutes": 120,
+          "order": 1
+        },
+        {
+          "id": "module_2",
+          "title": "Supervised Learning",
+          "description": "Classification and regression",
+          "content": "Interactive exercises",
+          "duration_minutes": 180,
+          "order": 2
+        },
+        {
+          "id": "module_3",
+          "title": "Unsupervised Learning",
+          "description": "Clustering and dimensionality reduction",
+          "content": "Hands-on projects",
+          "duration_minutes": 150,
+          "order": 3
+        }
+      ],
+      "created_at": "2023-01-15T00:00:00Z"
+    },
+    "course_2": {
+      "id": "course_2",
+      "title": "Advanced Python Programming",
+      "description": "Master advanced Python concepts and best practices",
+      "instructor": "Prof. Michael Roberts",
+      "category": "Computer Science",
+      "difficulty": "advanced",
+      "duration_weeks": 6,
+      "rating": 4.7,
+      "modules": [
+        {
+          "id": "module_1",
+          "title": "Advanced Data Structures",
+          "description": "Deep dive into Python data structures",
+          "content": "Video lectures and coding exercises",
+          "duration_minutes": 160,
+          "order": 1
+        },
+        {
+          "id": "module_2",
+          "title": "Concurrency and Parallelism",
+          "description": "Threading and multiprocessing",
+          "content": "Practical examples",
+          "duration_minutes": 140,
+          "order": 2
+        }
+      ],
+      "created_at": "2023-02-20T00:00:00Z"
+    }
+  },
+  "enrollments": {
+    "enroll_1": {
+      "id": "enroll_1",
+      "course_id": "course_1",
+      "user_email": "casey.wringer@email.com",
+      "status": "in_progress",
+      "progress": {
+        "enrollment_id": "enroll_1",
+        "completed_modules": 2,
+        "total_modules": 3,
+        "current_grade": 92.5,
+        "last_activity": "2024-01-15T14:30:00Z"
+      },
+      "enrolled_at": "2024-01-01T00:00:00Z"
+    },
+    "enroll_2": {
+      "id": "enroll_2",
+      "course_id": "course_2",
+      "user_email": "casey.wringer@email.com",
+      "status": "active",
+      "progress": {
+        "enrollment_id": "enroll_2",
+        "completed_modules": 1,
+        "total_modules": 2,
+        "current_grade": 88.0,
+        "last_activity": "2024-01-16T09:15:00Z"
+      },
+      "enrolled_at": "2024-01-10T00:00:00Z"
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+    "profiles": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "username": "caseyw",
+            "display_name": "Casey Wringer",
+            "learning_language": "spanish",
+            "native_language": "english",
+            "total_xp": 2750,
+            "level": 3,
+            "streak": 12,
+            "premium": false,
+            "created_at": "2023-12-01T10:00:00Z",
+            "last_practice_at": "2024-01-16T08:30:00Z"
+        }
+    },
+    "courses": {
+        "spanish-en": {
+            "id": "spanish-en",
+            "language": "spanish",
+            "from_language": "english",
+            "title": "Spanish from English",
+            "description": "Learn Spanish with bite-sized lessons",
+            "difficulty": "beginner",
+            "total_units": 8,
+            "image_url": "https://example.com/flags/spanish.png"
+        },
+        "french-en": {
+            "id": "french-en",
+            "language": "french",
+            "from_language": "english",
+            "title": "French from English",
+            "description": "Learn French with bite-sized lessons",
+            "difficulty": "beginner",
+            "total_units": 8,
+            "image_url": "https://example.com/flags/french.png"
+        }
+    },
+    "lessons": {
+        "sp-basics-1": {
+            "id": "sp-basics-1",
+            "course_id": "spanish-en",
+            "unit": 1,
+            "title": "Basics 1",
+            "type": "skill",
+            "xp_reward": 10,
+            "required_level": 1,
+            "completed": true
+        },
+        "sp-basics-2": {
+            "id": "sp-basics-2",
+            "course_id": "spanish-en",
+            "unit": 1,
+            "title": "Basics 2",
+            "type": "skill",
+            "xp_reward": 10,
+            "required_level": 1,
+            "completed": true
+        },
+        "sp-phrases": {
+            "id": "sp-phrases",
+            "course_id": "spanish-en",
+            "unit": 2,
+            "title": "Common Phrases",
+            "type": "skill",
+            "xp_reward": 10,
+            "required_level": 1,
+            "completed": false
+        }
+    },
+    "progress": {
+        "casey.wringer@email.com": [
+            {
+                "lesson_id": "sp-basics-1",
+                "score": 95,
+                "mistakes": 1,
+                "time_spent": 300
+            },
+            {
+                "lesson_id": "sp-basics-2",
+                "score": 90,
+                "mistakes": 2,
+                "time_spent": 280
+            }
+        ]
+    },
+    "streaks": {
+        "casey.wringer@email.com": {
+            "current_streak": 12,
+            "longest_streak": 15,
+            "last_practice": "2024-01-16T08:30:00Z",
+            "freeze_remaining": 2
+        }
+    }
+}

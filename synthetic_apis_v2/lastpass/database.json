@@ -1,0 +1,49 @@
+{
+    "vaults": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "encrypted_items": [
+                {
+                    "id": "item_1",
+                    "type": "login",
+                    "name": "Gmail",
+                    "encrypted_data": "AES256-CBC{credentials_data_encrypted}",
+                    "favorite": true,
+                    "last_modified": "2024-01-15T10:30:00Z"
+                },
+                {
+                    "id": "item_2",
+                    "type": "login",
+                    "name": "Amazon",
+                    "encrypted_data": "AES256-CBC{credentials_data_encrypted}",
+                    "favorite": true,
+                    "last_modified": "2024-01-15T11:45:00Z"
+                },
+                {
+                    "id": "item_3",
+                    "type": "credit_card",
+                    "name": "Personal Credit Card",
+                    "encrypted_data": "AES256-CBC{card_data_encrypted}",
+                    "favorite": false,
+                    "last_modified": "2024-01-14T09:20:00Z"
+                },
+                {
+                    "id": "item_4",
+                    "type": "secure_note",
+                    "name": "Passport Information",
+                    "encrypted_data": "AES256-CBC{note_data_encrypted}",
+                    "favorite": false,
+                    "last_modified": "2024-01-13T15:10:00Z"
+                }
+            ],
+            "last_modified": "2024-01-15T11:45:00Z"
+        }
+    },
+    "shared_access": {
+        "share_1": {
+            "item_id": "item_1",
+            "email": "work@email.com",
+            "permission": "read"
+        }
+    }
+}

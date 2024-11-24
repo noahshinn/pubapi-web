@@ -1,0 +1,219 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Dollar Shave Club",
+    "version": "1.0.0",
+    "description": "API for subscription-based razor and personal care products"
+  },
+  "paths": {
+    "/api/v1/subscriptions": {
+      "get": {
+        "summary": "Get user's active subscriptions",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of active subscriptions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Subscription"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new subscription",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewSubscription"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Subscription created"
+          }
+        }
+      }
+    },
+    "/api/v1/products": {
+      "get": {
+        "summary": "Get available products",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["razors", "shave", "shower", "hair", "skin"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orders": {
+      "get": {
+        "summary": "Get order history",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/subscriptions/{subscriptionId}": {
+      "put": {
+        "summary": "Update subscription",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSubscription"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription updated"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "category": {"type": "string"},
+          "price": {"type": "number"},
+          "image_url": {"type": "string"},
+          "in_stock": {"type": "boolean"}
+        }
+      },
+      "Subscription": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "product": {"$ref": "#/components/schemas/Product"},
+          "frequency": {"type": "string"},
+          "next_delivery": {"type": "string"},
+          "status": {"type": "string"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "NewSubscription": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "product_id": {"type": "string"},
+          "frequency": {"type": "string"}
+        },
+        "required": ["user_email", "product_id", "frequency"]
+      },
+      "UpdateSubscription": {
+        "type": "object",
+        "properties": {
+          "frequency": {"type": "string"},
+          "status": {"type": "string"}
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            }
+          },
+          "total": {"type": "number"},
+          "status": {"type": "string"},
+          "shipping_address": {"type": "string"},
+          "tracking_number": {"type": "string"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "OrderItem": {
+        "type": "object",
+        "properties": {
+          "product_id": {"type": "string"},
+          "name": {"type": "string"},
+          "quantity": {"type": "integer"},
+          "price": {"type": "number"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Fidelity",
+    "version": "1.0.0",
+    "description": "API for investment and trading services"
+  },
+  "paths": {
+    "/api/v1/accounts": {
+      "get": {
+        "summary": "Get user's investment accounts",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of investment accounts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Account"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/accounts/{accountId}/positions": {
+      "get": {
+        "summary": "Get account positions",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of positions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Position"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/accounts/{accountId}/orders": {
+      "get": {
+        "summary": "Get account orders",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Place new order",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewOrder"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/quotes/{symbol}": {
+      "get": {
+        "summary": "Get real-time quote",
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quote information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Quote"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Account": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string"},
+          "name": {"type": "string"},
+          "balance": {"type": "number"},
+          "buying_power": {"type": "number"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "Position": {
+        "type": "object",
+        "properties": {
+          "symbol": {"type": "string"},
+          "quantity": {"type": "number"},
+          "average_price": {"type": "number"},
+          "current_price": {"type": "number"},
+          "market_value": {"type": "number"},
+          "unrealized_pl": {"type": "number"},
+          "unrealized_pl_percent": {"type": "number"}
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "symbol": {"type": "string"},
+          "side": {"type": "string"},
+          "type": {"type": "string"},
+          "quantity": {"type": "number"},
+          "price": {"type": "number"},
+          "status": {"type": "string"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "NewOrder": {
+        "type": "object",
+        "properties": {
+          "symbol": {"type": "string"},
+          "side": {"type": "string"},
+          "type": {"type": "string"},
+          "quantity": {"type": "number"},
+          "price": {"type": "number"}
+        },
+        "required": ["symbol", "side", "type", "quantity"]
+      },
+      "Quote": {
+        "type": "object",
+        "properties": {
+          "symbol": {"type": "string"},
+          "company_name": {"type": "string"},
+          "last_price": {"type": "number"},
+          "change": {"type": "number"},
+          "change_percent": {"type": "number"},
+          "volume": {"type": "integer"},
+          "bid": {"type": "number"},
+          "ask": {"type": "number"},
+          "timestamp": {"type": "string"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,265 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Noom",
+    "version": "1.0.0",
+    "description": "API for health tracking and wellness coaching"
+  },
+  "paths": {
+    "/api/v1/meals": {
+      "get": {
+        "summary": "Get user's meal logs",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of meal logs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MealLog"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Log a new meal",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMealLog"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Meal logged successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/progress": {
+      "get": {
+        "summary": "Get user's progress data",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User progress data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Progress"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Update progress data",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Progress updated successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/coaching/messages": {
+      "get": {
+        "summary": "Get coaching messages",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of coaching messages",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CoachingMessage"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Send message to coach",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Message sent successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "MealLog": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "meal_type": {"type": "string"},
+          "foods": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FoodItem"
+            }
+          },
+          "total_calories": {"type": "number"},
+          "color_category": {"type": "string"},
+          "timestamp": {"type": "string", "format": "date-time"},
+          "notes": {"type": "string"}
+        }
+      },
+      "FoodItem": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "portion": {"type": "number"},
+          "unit": {"type": "string"},
+          "calories": {"type": "number"},
+          "color_category": {"type": "string"}
+        }
+      },
+      "NewMealLog": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "meal_type": {"type": "string"},
+          "foods": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FoodItem"
+            }
+          },
+          "notes": {"type": "string"}
+        }
+      },
+      "Progress": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "weight_logs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WeightLog"
+            }
+          },
+          "goals": {
+            "$ref": "#/components/schemas/Goals"
+          },
+          "streak_days": {"type": "integer"},
+          "total_weight_loss": {"type": "number"}
+        }
+      },
+      "WeightLog": {
+        "type": "object",
+        "properties": {
+          "weight": {"type": "number"},
+          "date": {"type": "string", "format": "date"},
+          "notes": {"type": "string"}
+        }
+      },
+      "Goals": {
+        "type": "object",
+        "properties": {
+          "target_weight": {"type": "number"},
+          "weekly_goal": {"type": "number"},
+          "target_date": {"type": "string", "format": "date"}
+        }
+      },
+      "ProgressUpdate": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "weight": {"type": "number"},
+          "notes": {"type": "string"}
+        }
+      },
+      "CoachingMessage": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "coach_id": {"type": "string"},
+          "content": {"type": "string"},
+          "timestamp": {"type": "string", "format": "date-time"},
+          "is_from_coach": {"type": "boolean"},
+          "read": {"type": "boolean"}
+        }
+      },
+      "NewMessage": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "content": {"type": "string"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "address": "789 Tech Avenue, San Francisco, CA 94105",
+      "payment_methods": ["pm_1"],
+      "favorite_listings": ["list_1", "list_3"]
+    }
+  },
+  "listings": {
+    "list_1": {
+      "id": "list_1",
+      "title": "Handmade Leather Wallet",
+      "description": "Beautiful handcrafted leather wallet with card slots and money pocket",
+      "price": 45.99,
+      "shipping_price": 4.99,
+      "category": "Accessories",
+      "seller": {
+        "id": "seller_1",
+        "name": "LeatherCrafts",
+        "rating": 4.9,
+        "total_sales": 1250,
+        "joined_date": "2020-03-15T00:00:00Z"
+      },
+      "images": [
+        "wallet_1.jpg",
+        "wallet_2.jpg"
+      ],
+      "tags": ["leather", "wallet", "handmade", "accessories"],
+      "created_at": "2023-12-01T10:00:00Z"
+    },
+    "list_2": {
+      "id": "list_2",
+      "title": "Custom Name Necklace",
+      "description": "Personalized sterling silver name necklace",
+      "price": 29.99,
+      "shipping_price": 3.99,
+      "category": "Jewelry",
+      "seller": {
+        "id": "seller_2",
+        "name": "SilverCrafter",
+        "rating": 4.8,
+        "total_sales": 3420,
+        "joined_date": "2019-06-20T00:00:00Z"
+      },
+      "images": [
+        "necklace_1.jpg",
+        "necklace_2.jpg"
+      ],
+      "tags": ["jewelry", "necklace", "personalized", "silver"],
+      "created_at": "2023-12-15T14:30:00Z"
+    },
+    "list_3": {
+      "id": "list_3",
+      "title": "Vintage Polaroid Camera",
+      "description": "1970s Polaroid SX-70 Land Camera in excellent condition",
+      "price": 149.99,
+      "shipping_price": 12.99,
+      "category": "Vintage",
+      "seller": {
+        "id": "seller_3",
+        "name": "RetroFinds",
+        "rating": 4.7,
+        "total_sales": 892,
+        "joined_date": "2021-01-10T00:00:00Z"
+      },
+      "images": [
+        "camera_1.jpg",
+        "camera_2.jpg"
+      ],
+      "tags": ["vintage", "camera", "polaroid", "photography"],
+      "created_at": "2024-01-05T09:15:00Z"
+    }
+  },
+  "carts": {
+    "casey.wringer@email.com": {
+      "user_email": "casey.wringer@email.com",
+      "items": [
+        {
+          "listing": {
+            "id": "list_2",
+            "title": "Custom Name Necklace",
+            "price": 29.99,
+            "shipping_price": 3.99
+          },
+          "quantity": 1,
+          "personalization": "Casey"
+        }
+      ],
+      "subtotal": 29.99,
+      "shipping_total": 3.99,
+      "total": 33.98
+    }
+  },
+  "orders": {
+    "ord_1": {
+      "id": "ord_1",
+      "user_email": "casey.wringer@email.com",
+      "items": [
+        {
+          "listing": {
+            "id": "list_1",
+            "title": "Handmade Leather Wallet",
+            "price": 45.99,
+            "shipping_price": 4.99
+          },
+          "quantity": 1,
+          "personalization": ""
+        }
+      ],
+      "status": "delivered",
+      "shipping_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "payment_method": "pm_1",
+      "subtotal": 45.99,
+      "shipping_total": 4.99,
+      "total": 50.98,
+      "created_at": "2024-01-10T15:30:00Z"
+    }
+  }
+}

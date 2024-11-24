@@ -1,0 +1,233 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Hilton",
+    "version": "1.0.0",
+    "description": "API for Hilton hotel bookings and rewards"
+  },
+  "paths": {
+    "/api/v1/hotels": {
+      "get": {
+        "summary": "Search for hotels",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "check_in",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "check_out",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "guests",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of available hotels",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Hotel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reservations": {
+      "get": {
+        "summary": "Get user's reservations",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of reservations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Reservation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new reservation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewReservation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Reservation created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reservation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rewards": {
+      "get": {
+        "summary": "Get user's rewards information",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Rewards information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rewards"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Hotel": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "address": {"$ref": "#/components/schemas/Address"},
+          "rating": {"type": "number"},
+          "amenities": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "room_types": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/RoomType"}
+          },
+          "images": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "street": {"type": "string"},
+          "city": {"type": "string"},
+          "state": {"type": "string"},
+          "country": {"type": "string"},
+          "postal_code": {"type": "string"},
+          "latitude": {"type": "number"},
+          "longitude": {"type": "number"}
+        }
+      },
+      "RoomType": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "capacity": {"type": "integer"},
+          "price_per_night": {"type": "number"},
+          "available": {"type": "boolean"}
+        }
+      },
+      "Reservation": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "hotel": {"$ref": "#/components/schemas/Hotel"},
+          "room_type": {"$ref": "#/components/schemas/RoomType"},
+          "check_in": {"type": "string", "format": "date"},
+          "check_out": {"type": "string", "format": "date"},
+          "guests": {"type": "integer"},
+          "total_price": {"type": "number"},
+          "status": {"type": "string"},
+          "created_at": {"type": "string", "format": "date-time"}
+        }
+      },
+      "NewReservation": {
+        "type": "object",
+        "properties": {
+          "hotel_id": {"type": "string"},
+          "room_type_id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "check_in": {"type": "string", "format": "date"},
+          "check_out": {"type": "string", "format": "date"},
+          "guests": {"type": "integer"},
+          "special_requests": {"type": "string"}
+        }
+      },
+      "Rewards": {
+        "type": "object",
+        "properties": {
+          "tier": {"type": "string"},
+          "points": {"type": "integer"},
+          "nights_stayed": {"type": "integer"},
+          "nights_to_next_tier": {"type": "integer"},
+          "member_since": {"type": "string", "format": "date"}
+        }
+      }
+    }
+  }
+}

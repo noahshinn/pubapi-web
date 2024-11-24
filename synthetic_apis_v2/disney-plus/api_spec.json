@@ -1,0 +1,229 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Disney Plus",
+    "version": "1.0.0",
+    "description": "API for Disney+ streaming service"
+  },
+  "paths": {
+    "/api/v1/content/featured": {
+      "get": {
+        "summary": "Get featured content",
+        "responses": {
+          "200": {
+            "description": "Featured content items",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Content"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/content/search": {
+      "get": {
+        "summary": "Search content",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Content"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/profiles/{email}/watchlist": {
+      "get": {
+        "summary": "Get user's watchlist",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's watchlist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Content"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add content to watchlist",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Content added to watchlist"
+          }
+        }
+      }
+    },
+    "/api/v1/profiles/{email}/continue-watching": {
+      "get": {
+        "summary": "Get user's continue watching list",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's continue watching list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WatchProgress"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/profiles/{email}/watch-progress": {
+      "post": {
+        "summary": "Update watch progress",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WatchProgress"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Watch progress updated"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Content": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "type": {"type": "string", "enum": ["movie", "series"]},
+          "description": {"type": "string"},
+          "release_year": {"type": "integer"},
+          "rating": {"type": "string"},
+          "duration": {"type": "integer"},
+          "genre": {"type": "string"},
+          "thumbnail_url": {"type": "string"},
+          "stream_url": {"type": "string"}
+        }
+      },
+      "WatchProgress": {
+        "type": "object",
+        "properties": {
+          "content_id": {"type": "string"},
+          "progress_seconds": {"type": "integer"},
+          "total_seconds": {"type": "integer"},
+          "last_watched": {"type": "string"},
+          "season": {"type": "integer"},
+          "episode": {"type": "integer"}
+        }
+      },
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "name": {"type": "string"},
+          "avatar": {"type": "string"},
+          "preferences": {
+            "type": "object",
+            "properties": {
+              "autoplay": {"type": "boolean"},
+              "subtitle_language": {"type": "string"},
+              "audio_language": {"type": "string"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

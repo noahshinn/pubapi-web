@@ -1,0 +1,70 @@
+{
+  "users": {
+    "user_1": {
+      "id": "user_1",
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "bio": "Tech enthusiast and writer. Sharing thoughts on software development and digital innovation.",
+      "following_count": 42,
+      "followers_count": 156,
+      "created_at": "2023-01-15T10:00:00Z"
+    },
+    "user_2": {
+      "id": "user_2",
+      "name": "Alex Thompson",
+      "email": "alex.thompson@email.com",
+      "bio": "AI researcher and tech blogger",
+      "following_count": 85,
+      "followers_count": 230,
+      "created_at": "2023-02-20T15:30:00Z"
+    },
+    "user_3": {
+      "id": "user_3",
+      "name": "Sarah Chen",
+      "email": "sarah.chen@email.com",
+      "bio": "Product designer and UX advocate",
+      "following_count": 120,
+      "followers_count": 310,
+      "created_at": "2023-03-10T08:45:00Z"
+    }
+  },
+  "articles": {
+    "article_1": {
+      "id": "article_1",
+      "title": "The Future of Web Development: What's Next?",
+      "subtitle": "Exploring emerging trends and technologies shaping the web",
+      "content": "As we look ahead to the future of web development, several exciting trends are emerging...",
+      "author": {
+        "id": "user_1",
+        "name": "Casey Wringer",
+        "email": "casey.wringer@email.com"
+      },
+      "tags": ["web development", "technology", "future"],
+      "claps": 238,
+      "reading_time": 8,
+      "created_at": "2024-01-15T14:30:00Z",
+      "updated_at": "2024-01-15T14:30:00Z"
+    },
+    "article_2": {
+      "id": "article_2",
+      "title": "Understanding Modern JavaScript Frameworks",
+      "subtitle": "A deep dive into React, Vue, and Angular",
+      "content": "Modern JavaScript frameworks have revolutionized how we build web applications...",
+      "author": {
+        "id": "user_1",
+        "name": "Casey Wringer",
+        "email": "casey.wringer@email.com"
+      },
+      "tags": ["javascript", "frameworks", "web development"],
+      "claps": 156,
+      "reading_time": 12,
+      "created_at": "2024-01-10T09:15:00Z",
+      "updated_at": "2024-01-10T09:15:00Z"
+    }
+  },
+  "following": {
+    "user_1": ["user_2", "user_3"],
+    "user_2": ["user_1"],
+    "user_3": ["user_1", "user_2"]
+  }
+}

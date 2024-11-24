@@ -1,0 +1,268 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MyFitnessPal",
+    "version": "1.0.0",
+    "description": "API for fitness and nutrition tracking"
+  },
+  "paths": {
+    "/api/v1/diary/{date}": {
+      "get": {
+        "summary": "Get food diary entries for a specific date",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Food diary entries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiaryDay"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/diary/entries": {
+      "post": {
+        "summary": "Add food entry to diary",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewDiaryEntry"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Entry created"
+          }
+        }
+      }
+    },
+    "/api/v1/foods/search": {
+      "get": {
+        "summary": "Search food database",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of matching foods",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Food"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/progress": {
+      "get": {
+        "summary": "Get user's progress data",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Progress data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Progress"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/weight": {
+      "post": {
+        "summary": "Log weight measurement",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeightEntry"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Weight logged"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Food": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "brand": {"type": "string"},
+          "serving_size": {"type": "string"},
+          "calories": {"type": "integer"},
+          "protein": {"type": "number"},
+          "carbs": {"type": "number"},
+          "fat": {"type": "number"},
+          "fiber": {"type": "number"}
+        }
+      },
+      "DiaryEntry": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "food": {"$ref": "#/components/schemas/Food"},
+          "meal_type": {"type": "string"},
+          "servings": {"type": "number"},
+          "notes": {"type": "string"}
+        }
+      },
+      "DiaryDay": {
+        "type": "object",
+        "properties": {
+          "date": {"type": "string"},
+          "entries": {
+            "type": "object",
+            "properties": {
+              "breakfast": {
+                "type": "array",
+                "items": {"$ref": "#/components/schemas/DiaryEntry"}
+              },
+              "lunch": {
+                "type": "array",
+                "items": {"$ref": "#/components/schemas/DiaryEntry"}
+              },
+              "dinner": {
+                "type": "array",
+                "items": {"$ref": "#/components/schemas/DiaryEntry"}
+              },
+              "snacks": {
+                "type": "array",
+                "items": {"$ref": "#/components/schemas/DiaryEntry"}
+              }
+            }
+          },
+          "totals": {
+            "type": "object",
+            "properties": {
+              "calories": {"type": "integer"},
+              "protein": {"type": "number"},
+              "carbs": {"type": "number"},
+              "fat": {"type": "number"}
+            }
+          }
+        }
+      },
+      "NewDiaryEntry": {
+        "type": "object",
+        "properties": {
+          "food_id": {"type": "string"},
+          "meal_type": {"type": "string"},
+          "servings": {"type": "number"},
+          "date": {"type": "string"},
+          "user_email": {"type": "string"},
+          "notes": {"type": "string"}
+        }
+      },
+      "WeightEntry": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "weight": {"type": "number"},
+          "date": {"type": "string"}
+        }
+      },
+      "Progress": {
+        "type": "object",
+        "properties": {
+          "weight_entries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {"type": "string"},
+                "weight": {"type": "number"}
+              }
+            }
+          },
+          "nutrition_averages": {
+            "type": "object",
+            "properties": {
+              "calories": {"type": "number"},
+              "protein": {"type": "number"},
+              "carbs": {"type": "number"},
+              "fat": {"type": "number"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

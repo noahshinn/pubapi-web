@@ -1,0 +1,205 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "LastPass",
+    "version": "1.0.0",
+    "description": "API for secure password management"
+  },
+  "paths": {
+    "/api/v1/vault": {
+      "get": {
+        "summary": "Get user's encrypted vault",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Encrypted vault data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vault"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/vault/items": {
+      "post": {
+        "summary": "Add new vault item",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewVaultItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Item created successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/vault/items/{itemId}": {
+      "put": {
+        "summary": "Update vault item",
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VaultItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Item updated successfully"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete vault item",
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Item deleted successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/sharing": {
+      "post": {
+        "summary": "Share vault item",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShareRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Item shared successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Vault": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "encrypted_items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VaultItem"
+            }
+          },
+          "last_modified": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "VaultItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["login", "secure_note", "credit_card", "address"]
+          },
+          "name": {
+            "type": "string"
+          },
+          "encrypted_data": {
+            "type": "string"
+          },
+          "favorite": {
+            "type": "boolean"
+          },
+          "last_modified": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "NewVaultItem": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["login", "secure_note", "credit_card", "address"]
+          },
+          "name": {
+            "type": "string"
+          },
+          "encrypted_data": {
+            "type": "string"
+          },
+          "favorite": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ShareRequest": {
+        "type": "object",
+        "properties": {
+          "item_id": {
+            "type": "string"
+          },
+          "recipient_email": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "string",
+            "enum": ["read", "write"]
+          }
+        }
+      }
+    }
+  }
+}

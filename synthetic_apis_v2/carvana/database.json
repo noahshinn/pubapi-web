@@ -1,0 +1,83 @@
+{
+  "vehicles": {
+    "v1": {
+      "id": "v1",
+      "make": "Toyota",
+      "model": "Camry",
+      "year": 2021,
+      "price": 25999.99,
+      "mileage": 15000,
+      "vin": "1HGCM82633A123456",
+      "exterior_color": "Silver",
+      "interior_color": "Black",
+      "transmission": "Automatic",
+      "fuel_type": "Gasoline",
+      "body_style": "Sedan",
+      "features": [
+        "Bluetooth",
+        "Backup Camera",
+        "Lane Departure Warning",
+        "Apple CarPlay"
+      ],
+      "images": [
+        "https://example.com/images/camry1.jpg",
+        "https://example.com/images/camry2.jpg"
+      ],
+      "carfax_link": "https://www.carfax.com/report/1HGCM82633A123456",
+      "available": true
+    },
+    "v2": {
+      "id": "v2",
+      "make": "Honda",
+      "model": "CR-V",
+      "year": 2022,
+      "price": 31999.99,
+      "mileage": 8000,
+      "vin": "2HKRW2H54HH123456",
+      "exterior_color": "Blue",
+      "interior_color": "Gray",
+      "transmission": "Automatic",
+      "fuel_type": "Gasoline",
+      "body_style": "SUV",
+      "features": [
+        "Sunroof",
+        "Navigation",
+        "Heated Seats",
+        "Android Auto"
+      ],
+      "images": [
+        "https://example.com/images/crv1.jpg",
+        "https://example.com/images/crv2.jpg"
+      ],
+      "carfax_link": "https://www.carfax.com/report/2HKRW2H54HH123456",
+      "available": true
+    }
+  },
+  "orders": {
+    "o1": {
+      "id": "o1",
+      "user_email": "casey.wringer@email.com",
+      "vehicle": {
+        "id": "v3",
+        "make": "Tesla",
+        "model": "Model 3",
+        "year": 2022,
+        "price": 45999.99,
+        "mileage": 12000,
+        "vin": "5YJ3E1EA8JF123456"
+      },
+      "status": "delivered",
+      "delivery_date": "2023-12-15T14:00:00Z",
+      "delivery_address": "789 Tech Avenue, San Francisco, CA 94105",
+      "payment_method": "financing",
+      "financing_details": {
+        "term_months": 60,
+        "down_payment": 5000,
+        "monthly_payment": 749.99,
+        "apr": 3.99
+      },
+      "total_price": 45999.99,
+      "created_at": "2023-12-01T10:30:00Z"
+    }
+  }
+}

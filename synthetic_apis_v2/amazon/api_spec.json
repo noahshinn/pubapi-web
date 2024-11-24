@@ -1,0 +1,250 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Amazon",
+    "version": "1.0.0",
+    "description": "API for e-commerce platform"
+  },
+  "paths": {
+    "/api/v1/products": {
+      "get": {
+        "summary": "Search products",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Product"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cart": {
+      "get": {
+        "summary": "Get user's cart",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cart contents",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add item to cart",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddToCartRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated cart"
+          }
+        }
+      }
+    },
+    "/api/v1/orders": {
+      "get": {
+        "summary": "Get user's orders",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Place new order",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlaceOrderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order created"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "price": {"type": "number"},
+          "category": {"type": "string"},
+          "rating": {"type": "number"},
+          "reviews_count": {"type": "integer"},
+          "prime_eligible": {"type": "boolean"},
+          "in_stock": {"type": "boolean"},
+          "estimated_delivery": {"type": "string"}
+        }
+      },
+      "CartItem": {
+        "type": "object",
+        "properties": {
+          "product_id": {"type": "string"},
+          "quantity": {"type": "integer"},
+          "price": {"type": "number"}
+        }
+      },
+      "Cart": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItem"
+            }
+          },
+          "subtotal": {"type": "number"},
+          "shipping": {"type": "number"},
+          "tax": {"type": "number"},
+          "total": {"type": "number"}
+        }
+      },
+      "AddToCartRequest": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "product_id": {"type": "string"},
+          "quantity": {"type": "integer"}
+        },
+        "required": ["user_email", "product_id", "quantity"]
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "user_email": {"type": "string"},
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItem"
+            }
+          },
+          "status": {"type": "string"},
+          "shipping_address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "payment_method": {"type": "string"},
+          "subtotal": {"type": "number"},
+          "shipping": {"type": "number"},
+          "tax": {"type": "number"},
+          "total": {"type": "number"},
+          "created_at": {"type": "string"}
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "street": {"type": "string"},
+          "city": {"type": "string"},
+          "state": {"type": "string"},
+          "zip_code": {"type": "string"},
+          "country": {"type": "string"}
+        }
+      },
+      "PlaceOrderRequest": {
+        "type": "object",
+        "properties": {
+          "user_email": {"type": "string"},
+          "shipping_address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "payment_method": {"type": "string"}
+        },
+        "required": ["user_email", "shipping_address", "payment_method"]
+      }
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+    "vehicles": {
+        "v1": {
+            "id": "v1",
+            "make": "Toyota",
+            "model": "Camry",
+            "year": 2023,
+            "class": "intermediate",
+            "seats": 5,
+            "transmission": "automatic",
+            "fuel_type": "gasoline",
+            "daily_rate": 45.99,
+            "features": [
+                "bluetooth",
+                "backup camera",
+                "cruise control",
+                "usb ports"
+            ]
+        },
+        "v2": {
+            "id": "v2",
+            "make": "Ford",
+            "model": "Explorer",
+            "year": 2023,
+            "class": "suv",
+            "seats": 7,
+            "transmission": "automatic",
+            "fuel_type": "gasoline",
+            "daily_rate": 65.99,
+            "features": [
+                "third row seating",
+                "bluetooth",
+                "backup camera",
+                "cruise control",
+                "usb ports",
+                "roof rack"
+            ]
+        },
+        "v3": {
+            "id": "v3",
+            "make": "Mercedes-Benz",
+            "model": "E-Class",
+            "year": 2023,
+            "class": "luxury",
+            "seats": 5,
+            "transmission": "automatic",
+            "fuel_type": "gasoline",
+            "daily_rate": 89.99,
+            "features": [
+                "leather seats",
+                "navigation",
+                "bluetooth",
+                "backup camera",
+                "cruise control",
+                "heated seats"
+            ]
+        }
+    },
+    "locations": {
+        "l1": {
+            "id": "l1",
+            "name": "Enterprise SFO Airport",
+            "address": "780 McDonnell Road",
+            "city": "San Francisco",
+            "state": "CA",
+            "zip_code": "94128",
+            "phone": "415-555-0123",
+            "hours": {
+                "monday": "7:00 AM - 11:00 PM",
+                "tuesday": "7:00 AM - 11:00 PM",
+                "wednesday": "7:00 AM - 11:00 PM",
+                "thursday": "7:00 AM - 11:00 PM",
+                "friday": "7:00 AM - 11:00 PM",
+                "saturday": "7:00 AM - 11:00 PM",
+                "sunday": "7:00 AM - 11:00 PM"
+            }
+        },
+        "l2": {
+            "id": "l2",
+            "name": "Enterprise Downtown SF",
+            "address": "501 Van Ness Ave",
+            "city": "San Francisco",
+            "state": "CA",
+            "zip_code": "94102",
+            "phone": "415-555-0124",
+            "hours": {
+                "monday": "7:30 AM - 6:00 PM",
+                "tuesday": "7:30 AM - 6:00 PM",
+                "wednesday": "7:30 AM - 6:00 PM",
+                "thursday": "7:30 AM - 6:00 PM",
+                "friday": "7:30 AM - 6:00 PM",
+                "saturday": "9:00 AM - 12:00 PM",
+                "sunday": "closed"
+            }
+        }
+    },
+    "reservations": {
+        "r1": {
+            "id": "r1",
+            "user_email": "casey.wringer@email.com",
+            "vehicle": {
+                "id": "v1",
+                "make": "Toyota",
+                "model": "Camry",
+                "year": 2023,
+                "class": "intermediate"
+            },
+            "pickup_location": {
+                "id": "l1",
+                "name": "Enterprise SFO Airport"
+            },
+            "return_location": {
+                "id": "l1",
+                "name": "Enterprise SFO Airport"
+            },
+            "pickup_date": "2024-02-15T10:00:00Z",
+            "return_date": "2024-02-18T10:00:00Z",
+            "status": "confirmed",
+            "total_cost": 137.97,
+            "insurance_option": "basic",
+            "additional_drivers": 0,
+            "created_at": "2024-01-15T08:30:00Z"
+        }
+    }
+}

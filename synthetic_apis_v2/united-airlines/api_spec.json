@@ -1,0 +1,235 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "United Airlines",
+    "version": "1.0.0",
+    "description": "API for flight bookings and management"
+  },
+  "paths": {
+    "/api/v1/flights/search": {
+      "get": {
+        "summary": "Search available flights",
+        "parameters": [
+          {
+            "name": "origin",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "destination",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "departure_date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "return_date",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "passengers",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of available flights",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Flight"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reservations": {
+      "get": {
+        "summary": "Get user's reservations",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of reservations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Reservation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new reservation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewReservation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Reservation created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reservation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/check-in": {
+      "post": {
+        "summary": "Check in for flight",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckInRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Check-in successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoardingPass"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Flight": {
+        "type": "object",
+        "properties": {
+          "flight_number": {"type": "string"},
+          "origin": {"type": "string"},
+          "destination": {"type": "string"},
+          "departure_time": {"type": "string", "format": "date-time"},
+          "arrival_time": {"type": "string", "format": "date-time"},
+          "aircraft_type": {"type": "string"},
+          "available_seats": {"type": "integer"},
+          "price": {"type": "number"},
+          "cabin_classes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["economy", "premium_economy", "business", "first"]
+            }
+          }
+        }
+      },
+      "Reservation": {
+        "type": "object",
+        "properties": {
+          "reservation_number": {"type": "string"},
+          "passenger": {"$ref": "#/components/schemas/Passenger"},
+          "flights": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Flight"
+            }
+          },
+          "status": {"type": "string"},
+          "total_price": {"type": "number"},
+          "created_at": {"type": "string", "format": "date-time"}
+        }
+      },
+      "NewReservation": {
+        "type": "object",
+        "properties": {
+          "flight_numbers": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "passenger": {"$ref": "#/components/schemas/Passenger"},
+          "cabin_class": {"type": "string"},
+          "payment_method_id": {"type": "string"}
+        }
+      },
+      "Passenger": {
+        "type": "object",
+        "properties": {
+          "email": {"type": "string"},
+          "first_name": {"type": "string"},
+          "last_name": {"type": "string"},
+          "date_of_birth": {"type": "string", "format": "date"},
+          "frequent_flyer_number": {"type": "string"}
+        }
+      },
+      "CheckInRequest": {
+        "type": "object",
+        "properties": {
+          "reservation_number": {"type": "string"},
+          "last_name": {"type": "string"}
+        }
+      },
+      "BoardingPass": {
+        "type": "object",
+        "properties": {
+          "passenger_name": {"type": "string"},
+          "flight_number": {"type": "string"},
+          "seat": {"type": "string"},
+          "gate": {"type": "string"},
+          "boarding_time": {"type": "string", "format": "date-time"},
+          "qr_code": {"type": "string"}
+        }
+      }
+    }
+  }
+}

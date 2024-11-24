@@ -1,0 +1,154 @@
+{
+    "users": {
+        "casey.wringer@email.com": {
+            "email": "casey.wringer@email.com",
+            "name": "Casey Wringer",
+            "phone": "+1-555-0123",
+            "address": {
+                "street": "789 Tech Avenue",
+                "city": "San Francisco",
+                "state": "CA",
+                "country": "USA",
+                "postal_code": "94105",
+                "latitude": 37.7849,
+                "longitude": -122.3968
+            },
+            "rewards": {
+                "tier": "Diamond",
+                "points": 250000,
+                "nights_stayed": 45,
+                "nights_to_next_tier": 15,
+                "member_since": "2020-03-15T00:00:00Z"
+            }
+        }
+    },
+    "hotels": {
+        "sf_hilton": {
+            "id": "sf_hilton",
+            "name": "Hilton San Francisco Union Square",
+            "address": {
+                "street": "333 O'Farrell Street",
+                "city": "San Francisco",
+                "state": "CA",
+                "country": "USA",
+                "postal_code": "94102",
+                "latitude": 37.7859,
+                "longitude": -122.4097
+            },
+            "rating": 4.5,
+            "amenities": [
+                "Pool",
+                "Spa",
+                "Restaurant",
+                "Fitness Center",
+                "Business Center",
+                "WiFi"
+            ],
+            "room_types": [
+                {
+                    "id": "king_deluxe",
+                    "name": "King Deluxe Room",
+                    "description": "Spacious room with king bed and city view",
+                    "capacity": 2,
+                    "price_per_night": 299.99,
+                    "available": true
+                },
+                {
+                    "id": "double_queen",
+                    "name": "Double Queen Room",
+                    "description": "Comfortable room with two queen beds",
+                    "capacity": 4,
+                    "price_per_night": 349.99,
+                    "available": true
+                }
+            ],
+            "images": [
+                "sf_hilton_exterior.jpg",
+                "sf_hilton_lobby.jpg",
+                "sf_hilton_room.jpg"
+            ]
+        },
+        "ny_hilton": {
+            "id": "ny_hilton",
+            "name": "New York Hilton Midtown",
+            "address": {
+                "street": "1335 Avenue of the Americas",
+                "city": "New York",
+                "state": "NY",
+                "country": "USA",
+                "postal_code": "10019",
+                "latitude": 40.7622,
+                "longitude": -73.9779
+            },
+            "rating": 4.7,
+            "amenities": [
+                "Restaurant",
+                "Fitness Center",
+                "Business Center",
+                "WiFi",
+                "Conference Facilities"
+            ],
+            "room_types": [
+                {
+                    "id": "city_view_king",
+                    "name": "City View King Room",
+                    "description": "Luxurious room with Manhattan skyline views",
+                    "capacity": 2,
+                    "price_per_night": 399.99,
+                    "available": true
+                },
+                {
+                    "id": "executive_suite",
+                    "name": "Executive Suite",
+                    "description": "Spacious suite with separate living area",
+                    "capacity": 3,
+                    "price_per_night": 599.99,
+                    "available": true
+                }
+            ],
+            "images": [
+                "ny_hilton_exterior.jpg",
+                "ny_hilton_lobby.jpg",
+                "ny_hilton_room.jpg"
+            ]
+        }
+    },
+    "reservations": {
+        "res_1": {
+            "id": "res_1",
+            "user_email": "casey.wringer@email.com",
+            "hotel": {
+                "id": "sf_hilton",
+                "name": "Hilton San Francisco Union Square"
+            },
+            "room_type": {
+                "id": "king_deluxe",
+                "name": "King Deluxe Room"
+            },
+            "check_in": "2024-02-15",
+            "check_out": "2024-02-18",
+            "guests": 2,
+            "total_price": 899.97,
+            "status": "confirmed",
+            "created_at": "2024-01-15T10:30:00Z"
+        },
+        "res_2": {
+            "id": "res_2",
+            "user_email": "casey.wringer@email.com",
+            "hotel": {
+                "id": "ny_hilton",
+                "name": "New York Hilton Midtown"
+            },
+            "room_type": {
+                "id": "city_view_king",
+                "name": "City View King Room"
+            },
+            "check_in": "2024-03-20",
+            "check_out": "2024-03-25",
+            "guests": 2,
+            "total_price": 1999.95,
+            "status": "confirmed",
+            "created_at": "2024-01-16T15:45:00Z"
+        }
+    }
+}

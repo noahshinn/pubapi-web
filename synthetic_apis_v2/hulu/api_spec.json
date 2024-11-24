@@ -1,0 +1,194 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Hulu",
+    "version": "1.0.0",
+    "description": "API for streaming video service"
+  },
+  "paths": {
+    "/api/v1/content": {
+      "get": {
+        "summary": "Get available content",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["movie", "series", "all"]
+            }
+          },
+          {
+            "name": "genre",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Content"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/watchlist": {
+      "get": {
+        "summary": "Get user's watchlist",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's watchlist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Content"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add content to watchlist",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {"type": "string"},
+                  "content_id": {"type": "string"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Content added to watchlist"
+          }
+        }
+      }
+    },
+    "/api/v1/watch-history": {
+      "get": {
+        "summary": "Get user's watch history",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's watch history",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WatchHistory"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/continue-watching": {
+      "get": {
+        "summary": "Get user's continue watching list",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's continue watching list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WatchProgress"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Content": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "type": {"type": "string"},
+          "genre": {"type": "string"},
+          "release_year": {"type": "integer"},
+          "rating": {"type": "string"},
+          "duration": {"type": "integer"},
+          "description": {"type": "string"},
+          "thumbnail_url": {"type": "string"},
+          "stream_url": {"type": "string"}
+        }
+      },
+      "WatchHistory": {
+        "type": "object",
+        "properties": {
+          "content": {"$ref": "#/components/schemas/Content"},
+          "watched_at": {"type": "string"},
+          "completed": {"type": "boolean"}
+        }
+      },
+      "WatchProgress": {
+        "type": "object",
+        "properties": {
+          "content": {"$ref": "#/components/schemas/Content"},
+          "progress_seconds": {"type": "integer"},
+          "last_watched": {"type": "string"}
+        }
+      }
+    }
+  }
+}

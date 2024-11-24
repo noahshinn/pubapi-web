@@ -1,0 +1,121 @@
+{
+  "users": {
+    "casey.wringer@email.com": {
+      "email": "casey.wringer@email.com",
+      "name": "Casey Wringer",
+      "phone": "+1-555-0123",
+      "date_of_birth": "1990-05-15",
+      "address": {
+        "street": "789 Tech Avenue",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94105",
+        "latitude": 37.7849,
+        "longitude": -122.3968
+      },
+      "insurance_info": {
+        "provider": "Blue Cross Blue Shield",
+        "policy_number": "BCBS123456789",
+        "group_number": "GRP987654"
+      }
+    }
+  },
+  "stores": {
+    "store_1": {
+      "id": "store_1",
+      "name": "Walgreens #1234",
+      "address": {
+        "street": "500 Market Street",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94105",
+        "latitude": 37.7897,
+        "longitude": -122.3997
+      },
+      "phone": "+1-555-9876",
+      "hours": "8:00 AM - 10:00 PM",
+      "has_pharmacy": true,
+      "has_drive_thru": false
+    },
+    "store_2": {
+      "id": "store_2",
+      "name": "Walgreens #1235",
+      "address": {
+        "street": "300 California Street",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": "94104",
+        "latitude": 37.7929,
+        "longitude": -122.4014
+      },
+      "phone": "+1-555-8765",
+      "hours": "24 hours",
+      "has_pharmacy": true,
+      "has_drive_thru": true
+    }
+  },
+  "prescriptions": {
+    "rx_1": {
+      "id": "rx_1",
+      "user_email": "casey.wringer@email.com",
+      "name": "Lisinopril",
+      "dosage": "10mg daily",
+      "prescriber": "Dr. Sarah Johnson",
+      "remaining_refills": 3,
+      "last_filled": "2024-01-01T10:00:00Z",
+      "next_refill_date": "2024-02-01T00:00:00Z",
+      "status": "active"
+    },
+    "rx_2": {
+      "id": "rx_2",
+      "user_email": "casey.wringer@email.com",
+      "name": "Metformin",
+      "dosage": "500mg twice daily",
+      "prescriber": "Dr. Sarah Johnson",
+      "remaining_refills": 5,
+      "last_filled": "2024-01-10T14:30:00Z",
+      "next_refill_date": "2024-02-10T00:00:00Z",
+      "status": "active"
+    }
+  },
+  "refill_requests": {
+    "ref_1": {
+      "id": "ref_1",
+      "prescription_id": "rx_1",
+      "user_email": "casey.wringer@email.com",
+      "status": "ready",
+      "pickup_store": "store_1",
+      "requested_date": "2024-01-15T09:00:00Z",
+      "ready_date": "2024-01-16T14:00:00Z"
+    }
+  },
+  "products": {
+    "prod_1": {
+      "id": "prod_1",
+      "name": "Tylenol Extra Strength",
+      "description": "Pain reliever/fever reducer, 500mg, 100 tablets",
+      "price": 11.99,
+      "category": "Pain Relief",
+      "in_stock": true,
+      "requires_prescription": false
+    },
+    "prod_2": {
+      "id": "prod_2",
+      "name": "Band-Aid Flexible Fabric Bandages",
+      "description": "Assorted sizes, 100 count",
+      "price": 7.99,
+      "category": "First Aid",
+      "in_stock": true,
+      "requires_prescription": false
+    },
+    "prod_3": {
+      "id": "prod_3",
+      "name": "Vitamin D3",
+      "description": "2000 IU, 90 softgels",
+      "price": 13.99,
+      "category": "Vitamins & Supplements",
+      "in_stock": true,
+      "requires_prescription": false
+    }
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "LA Fitness",
+    "version": "1.0.0",
+    "description": "API for LA Fitness gym services"
+  },
+  "paths": {
+    "/api/v1/locations": {
+      "get": {
+        "summary": "Get nearby gym locations",
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of gym locations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Location"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/classes": {
+      "get": {
+        "summary": "Get available fitness classes",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of fitness classes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FitnessClass"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bookings": {
+      "get": {
+        "summary": "Get user's class bookings",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of bookings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Booking"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Book a fitness class",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewBooking"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Booking confirmed"
+          }
+        }
+      }
+    },
+    "/api/v1/membership": {
+      "get": {
+        "summary": "Get user's membership details",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Membership details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Membership"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Location": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "address": {"type": "string"},
+          "phone": {"type": "string"},
+          "hours": {
+            "type": "object",
+            "properties": {
+              "weekday": {"type": "string"},
+              "weekend": {"type": "string"}
+            }
+          },
+          "amenities": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "FitnessClass": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "instructor": {"type": "string"},
+          "startTime": {"type": "string"},
+          "endTime": {"type": "string"},
+          "capacity": {"type": "integer"},
+          "enrolled": {"type": "integer"},
+          "location": {"type": "string"},
+          "description": {"type": "string"}
+        }
+      },
+      "Booking": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "classId": {"type": "string"},
+          "userId": {"type": "string"},
+          "status": {"type": "string"},
+          "bookedAt": {"type": "string"}
+        }
+      },
+      "NewBooking": {
+        "type": "object",
+        "properties": {
+          "classId": {"type": "string"},
+          "userEmail": {"type": "string"}
+        },
+        "required": ["classId", "userEmail"]
+      },
+      "Membership": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string"},
+          "startDate": {"type": "string"},
+          "endDate": {"type": "string"},
+          "status": {"type": "string"},
+          "homeGym": {"type": "string"},
+          "paymentMethod": {
+            "type": "object",
+            "properties": {
+              "type": {"type": "string"},
+              "last4": {"type": "string"}
+            }
+          }
+        }
+      }
+    }
+  }
+}
