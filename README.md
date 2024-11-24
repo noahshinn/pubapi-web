@@ -1,6 +1,6 @@
-# A simple web network of APIs
+# A prototype of a public network of APIs
 
-A mini world-wide web of machines that serve public API specs rather than rendered web pages.
+A mini world-wide web of machines that serve public API specs rather than html pages.
 
 ## Synthetic web
 
