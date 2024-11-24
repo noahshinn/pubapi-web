@@ -7,7 +7,7 @@ A mini world-wide web of machines that serve public API specs rather than render
 First, start the synthetic web:
 
 ```bash
-go run ./cmd/www/main.go --servers ./synthetic_servers_v2 --max-num-servers 5
+go run ./cmd/www/main.go --servers ./demo/synthetic_servers/v2 --max-num-servers 5
 ```
 
 For this demo, we'll only spin up 5 servers. See `./endpoints.json` for the list of local servers.
@@ -15,7 +15,7 @@ For this demo, we'll only spin up 5 servers. See `./endpoints.json` for the list
 Then, build an index of the synthetic web:
 
 ```bash
-go run ./cmd/index --endpoints-path ./synthetic_servers_v2/endpoints.json --max-concurrency 16 --output-path ./synthetic-web-index.json
+go run ./cmd/index --endpoints-path ./endpoints.json --max-concurrency 16 --output-path ./synthetic-web-index.json
 ```
 
 To run an agent on the synthetic web:
