@@ -6,54 +6,66 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
-	"path/filepath"
 	"search_engine/index"
-	"search_engine/primitives/api"
-	"search_engine/utils/slicesx"
 	"search_engine/www"
 )
 
 func main() {
 	ctx := context.Background()
-	specsPath := flag.String("specs-path", "", "Directory containing OpenAPI spec JSON files")
+	endpointsPath := flag.String("endpoints-path", "", "Path to a json file containing endpoints")
 	maxConcurrency := flag.Int("max-concurrency", 8, "Maximum number of concurrent processes")
 	outputPath := flag.String("output-path", "", "File to output indexed docs to")
 	flag.Parse()
 
-	if *specsPath == "" {
-		log.Fatal("Please provide a directory containing OpenAPI spec JSON files using the -specs-path flag")
+	if *endpointsPath == "" {
+		log.Fatal("Please provide a path to endpoints.txt using the -endpoints-path flag")
 	}
 	if *outputPath == "" {
 		log.Fatal("Please provide a path to output the indexed docs to using the -output-path flag")
 	}
-	api := api.DefaultAPI()
-
-	paths, err := os.ReadDir(*specsPath)
+	endpoints := []*www.Endpoint{}
+	endpointsBytes, err := os.ReadFile(*endpointsPath)
 	if err != nil {
-		log.Fatalf("Error reading specs directory: %v", err)
+		log.Fatalf("Error reading endpoints: %v", err)
 	}
-	webPages := []*www.WebPage{}
-	for _, path := range paths {
-		if path.IsDir() {
-			continue
-		}
-		specPath := filepath.Join(*specsPath, path.Name())
-		spec, err := os.ReadFile(specPath)
+	if err := json.Unmarshal(endpointsBytes, &endpoints); err != nil {
+		log.Fatalf("Error unmarshalling endpoints: %v", err)
+	}
+	endpointToWebPage := []*index.EndpointAndWebPage{}
+	for _, endpoint := range endpoints {
+		client := &http.Client{}
+		req, err := http.NewRequest("GET", endpoint.URL(), nil)
 		if err != nil {
-			log.Fatalf("Error reading doc file: %v", err)
+			log.Fatalf("Error creating request: %v", err)
 		}
+		resp, err := client.Do(req)
+		if err != nil {
+			log.Fatalf("Error making request: %v", err)
+		}
+		defer resp.Body.Close()
 		var specMap map[string]any
-		err = json.Unmarshal(spec, &specMap)
-		if err != nil {
-			log.Fatalf("Error unmarshalling doc file: %v", err)
+		if err := json.NewDecoder(resp.Body).Decode(&specMap); err != nil {
+			log.Fatalf("Error decoding response: %v", err)
 		}
-		webPages = append(webPages, www.NewWebPage(path.Name(), specMap))
+		title, ok := specMap["info"].(map[string]any)["title"]
+		if !ok {
+			log.Fatalf("Error getting title from spec: %v", specMap)
+		}
+		if title == nil {
+			log.Fatalf("Title is nil for spec: %v", specMap)
+		}
+		if titleStr, ok := title.(string); !ok {
+			log.Fatalf("Title is not a string: %v", title)
+		} else {
+			endpointToWebPage = append(endpointToWebPage, &index.EndpointAndWebPage{Endpoint: endpoint, WebPage: www.NewWebPage(titleStr, specMap)})
+		}
 	}
 
-	indexedDocs, err := index.IndexWebPages(ctx, slicesx.Map(webPages, func(webPage *www.WebPage, _ int) *index.AddressAndWebPage {
-		return &index.AddressAndWebPage{Address: 0, WebPage: webPage}
-	}), api, *maxConcurrency)
+	indexedDocs, err := index.IndexWebPages(ctx, endpointToWebPage, &index.IndexOptions{
+		MaxConcurrency: *maxConcurrency,
+	})
 	if err != nil {
 		log.Fatalf("Error indexing docs: %v", err)
 	}

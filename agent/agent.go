@@ -22,7 +22,7 @@ type BrowserAction struct {
 }
 
 type LLMBrowserAgent struct {
-	api *api.API
+	api *api.ModelAPI
 }
 
 func (a *LLMBrowserAgent) determinePageToVisit(ctx context.Context, query string, results []*search.SearchResult) (foundPage bool, pageIdxToVisit int, err error) {
@@ -60,11 +60,17 @@ func (a *LLMBrowserAgent) Solve(ctx context.Context, query string, b browser.Bro
 		return "", err
 	}
 	if foundPage {
-		pageToVisit, err := b.Navigate(ctx, results[pageIdxToVisit].MachineAddress)
+		userGeoLocation, err := b.GetLocation(ctx)
 		if err != nil {
 			return "", err
 		}
-		action, err := a.act(ctx, query, pageToVisit)
+		pageToVisit, err := b.Navigate(ctx, results[pageIdxToVisit].Endpoint)
+		if err != nil {
+			return "", err
+		}
+		// TODO: move this to the browser
+		browserDisplay := fmt.Sprintf("## User location:\n\nLatitude: %f\nLongitude: %f\nCity: %s\nCountry: %s\n\n## Page display:\n\n%s\n", userGeoLocation.Latitude, userGeoLocation.Longitude, userGeoLocation.City, userGeoLocation.Country, pageToVisit)
+		action, err := a.act(ctx, query, browserDisplay)
 		if err != nil {
 			return "", err
 		}
@@ -81,6 +87,16 @@ func (a *LLMBrowserAgent) Solve(ctx context.Context, query string, b browser.Bro
 	}
 }
 
-func NewLLMBrowserAgent(a *api.API) BrowserAgent {
-	return &LLMBrowserAgent{api: a}
+type LLMBrowserAgentOptions struct {
+	ModelAPI *api.ModelAPI
+}
+
+func NewLLMBrowserAgent(options *LLMBrowserAgentOptions) BrowserAgent {
+	modelAPI := api.DefaultModelAPI()
+	if options != nil {
+		if options.ModelAPI != nil {
+			modelAPI = options.ModelAPI
+		}
+	}
+	return &LLMBrowserAgent{api: modelAPI}
 }

@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"net/http"
 	"path/filepath"
 	"search_engine/cache"
 	"search_engine/index"
@@ -15,56 +16,67 @@ import (
 
 type SearchEngine interface {
 	Search(ctx context.Context, query string, options *SearchOptions) ([]*SearchResult, error)
-	RefreshIndex(ctx context.Context, web *www.WWW, addresses []int, options *RefreshIndexOptions) error
+	RefreshIndex(ctx context.Context, endpoints []*www.Endpoint, options *RefreshIndexOptions) error
 }
 
-type PubAPISearchEngine struct {
-	api   *api.API
-	index []*index.Document
+type DenseEmbeddingSearchEngine struct {
+	modelAPI *api.ModelAPI
+	index    []*index.Document
 	// a cache of json-serialized web pages to documents
 	cache cache.DiskCache
 }
 
-func (e *PubAPISearchEngine) Search(ctx context.Context, query string, options *SearchOptions) ([]*SearchResult, error) {
+func (e *DenseEmbeddingSearchEngine) Search(ctx context.Context, query string, options *SearchOptions) ([]*SearchResult, error) {
 	if e.index == nil {
 		return nil, errors.New("index is not initialized")
 	}
 	if len(e.index) == 0 {
 		return nil, errors.New("index is empty")
 	}
-	return Search(ctx, e.index, query, e.api, options)
+	return Search(ctx, e.index, query, options)
 }
 
 type RefreshIndexOptions struct {
 	MaxConcurrency int
 }
 
-func (e *PubAPISearchEngine) RefreshIndex(ctx context.Context, web *www.WWW, addresses []int, options *RefreshIndexOptions) error {
+func (e *DenseEmbeddingSearchEngine) RefreshIndex(ctx context.Context, endpoints []*www.Endpoint, options *RefreshIndexOptions) error {
 	maxConcurrency := defaultMaxConcurrency
 	if options != nil && options.MaxConcurrency != 0 {
 		maxConcurrency = options.MaxConcurrency
 	}
 
-	webIndex := make([]*index.Document, 0, len(addresses))
-	errChan := make(chan error, len(addresses))
-	resultChan := make(chan *index.Document, len(addresses))
+	webIndex := make([]*index.Document, 0, len(endpoints))
+	errChan := make(chan error, len(endpoints))
+	resultChan := make(chan *index.Document, len(endpoints))
 
 	semaphore := make(chan struct{}, maxConcurrency)
 
-	for _, address := range addresses {
-		go func(addr int) {
+	for _, endpoint := range endpoints {
+		go func(endpoint *www.Endpoint) {
 			semaphore <- struct{}{}
 			defer func() { <-semaphore }()
-			machine, err := web.Get(addr)
+			client := &http.Client{}
+			req, err := http.NewRequest("GET", fmt.Sprintf("http://%s:%d/", endpoint.IpAddress, endpoint.Port), nil)
 			if err != nil {
 				errChan <- err
 				return
 			}
-			webPage, err := machine.Request()
+
+			resp, err := client.Do(req)
 			if err != nil {
 				errChan <- err
 				return
 			}
+			defer resp.Body.Close()
+
+			var webPage www.WebPage
+			decoder := json.NewDecoder(resp.Body)
+			if err := decoder.Decode(&webPage.Content); err != nil {
+				errChan <- err
+				return
+			}
+
 			webPageJsonBytes, err := json.Marshal(webPage.Content)
 			if err != nil {
 				errChan <- err
@@ -85,7 +97,10 @@ func (e *PubAPISearchEngine) RefreshIndex(ctx context.Context, web *www.WWW, add
 				}
 				resultChan <- &d
 			} else {
-				docs, err := index.IndexWebPages(ctx, []*index.AddressAndWebPage{{Address: addr, WebPage: webPage}}, e.api, 1)
+				docs, err := index.IndexWebPages(ctx, []*index.EndpointAndWebPage{{Endpoint: endpoint, WebPage: &webPage}}, &index.IndexOptions{
+					MaxConcurrency: maxConcurrency,
+					ModelAPI:       e.modelAPI,
+				})
 				if err != nil {
 					errChan <- err
 					return
@@ -94,9 +109,9 @@ func (e *PubAPISearchEngine) RefreshIndex(ctx context.Context, web *www.WWW, add
 				e.cache.Set(cacheKey, doc)
 				resultChan <- doc
 			}
-		}(address)
+		}(endpoint)
 	}
-	for i := 0; i < len(addresses); i++ {
+	for i := 0; i < len(endpoints); i++ {
 		select {
 		case err := <-errChan:
 			return err
@@ -113,8 +128,18 @@ func (e *PubAPISearchEngine) RefreshIndex(ctx context.Context, web *www.WWW, add
 	return nil
 }
 
-func NewPubAPISearchEngine(a *api.API, web *www.WWW) (SearchEngine, error) {
-	se := &PubAPISearchEngine{api: a}
+type DenseEmbeddingSearchEngineOptions struct {
+	ModelAPI *api.ModelAPI
+}
+
+func NewDenseEmbeddingSearchEngine(searchIndex []*index.Document, options *DenseEmbeddingSearchEngineOptions) (SearchEngine, error) {
+	modelAPI := api.DefaultModelAPI()
+	if options != nil {
+		if options.ModelAPI != nil {
+			modelAPI = options.ModelAPI
+		}
+	}
+	se := &DenseEmbeddingSearchEngine{modelAPI: modelAPI, index: searchIndex}
 	cachePath, err := se.getRootCachePath()
 	if err != nil {
 		return nil, err
@@ -123,10 +148,11 @@ func NewPubAPISearchEngine(a *api.API, web *www.WWW) (SearchEngine, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &PubAPISearchEngine{api: a, cache: c}, nil
+	se.cache = c
+	return se, nil
 }
 
-func (e *PubAPISearchEngine) getRootCachePath() (string, error) {
+func (e *DenseEmbeddingSearchEngine) getRootCachePath() (string, error) {
 	cacheRoot, err := cache.GetCacheRootPath()
 	if err != nil {
 		return "", err

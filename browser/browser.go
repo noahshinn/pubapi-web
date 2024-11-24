@@ -3,36 +3,46 @@ package browser
 import (
 	"context"
 	"encoding/json"
+	"fmt"
+	"net/http"
 	"search_engine/search"
 	"search_engine/www"
 )
 
 type Browser interface {
 	Search(ctx context.Context, query string, options *search.SearchOptions) ([]*search.SearchResult, error)
-	Navigate(ctx context.Context, address int) (string, error)
-	Execute(ctx context.Context, address int, endpoint string, body map[string]any) (string, error)
+	Navigate(ctx context.Context, endpoint *www.Endpoint) (string, error)
+	Execute(ctx context.Context, endpoint *www.Endpoint, body map[string]any) (string, error)
+	GetLocation(ctx context.Context) (*GeoLocation, error)
 }
 
-type PubAPISpecBrowser struct {
+type BaseBrowser struct {
 	searchEngine   search.SearchEngine
-	web            *www.WWW
 	maxConcurrency int
 }
 
-func (b *PubAPISpecBrowser) Search(ctx context.Context, query string, options *search.SearchOptions) ([]*search.SearchResult, error) {
+func (b *BaseBrowser) Search(ctx context.Context, query string, options *search.SearchOptions) ([]*search.SearchResult, error) {
 	return b.searchEngine.Search(ctx, query, options)
 }
 
-func (b *PubAPISpecBrowser) Navigate(ctx context.Context, address int) (string, error) {
-	machine, err := b.web.Get(address)
+func (b *BaseBrowser) Navigate(ctx context.Context, endpoint *www.Endpoint) (string, error) {
+	client := &http.Client{}
+	req, err := http.NewRequestWithContext(ctx, "GET", fmt.Sprintf("http://%s:%d/", endpoint.IpAddress, endpoint.Port), nil)
 	if err != nil {
 		return "", err
 	}
-	webPage, err := machine.Request()
+	resp, err := client.Do(req)
 	if err != nil {
 		return "", err
 	}
-	jsonBytes, err := json.Marshal(webPage.Content)
+	defer resp.Body.Close()
+
+	var content map[string]any
+	err = json.NewDecoder(resp.Body).Decode(&content)
+	if err != nil {
+		return "", err
+	}
+	jsonBytes, err := json.Marshal(content)
 	if err != nil {
 		return "", err
 	}
@@ -45,15 +55,19 @@ type BrowserOptions struct {
 
 const defaultMaxConcurrency = 1
 
-func NewPubAPISpecBrowser(searchEngine search.SearchEngine, web *www.WWW, options *BrowserOptions) (Browser, error) {
+func NewBaseBrowser(searchEngine search.SearchEngine, options *BrowserOptions) (Browser, error) {
 	maxConcurrency := defaultMaxConcurrency
 	if options != nil && options.MaxConcurrency > 0 {
 		maxConcurrency = options.MaxConcurrency
 	}
-	return &PubAPISpecBrowser{searchEngine: searchEngine, web: web, maxConcurrency: maxConcurrency}, nil
+	return &BaseBrowser{searchEngine: searchEngine, maxConcurrency: maxConcurrency}, nil
 }
 
-func (b *PubAPISpecBrowser) Execute(ctx context.Context, address int, endpoint string, body map[string]any) (string, error) {
+func (b *BaseBrowser) Execute(ctx context.Context, endpoint *www.Endpoint, body map[string]any) (string, error) {
 	// TODO: implement
 	return "", nil
+}
+
+func (b *BaseBrowser) GetLocation(ctx context.Context) (*GeoLocation, error) {
+	return getLocationFromIP()
 }

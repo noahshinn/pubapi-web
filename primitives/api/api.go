@@ -9,7 +9,7 @@ import (
 	"search_engine/primitives/router"
 )
 
-type API struct {
+type ModelAPI struct {
 	binaryClassifyModels []models.BinaryClassifyModel
 	classifyModels       []models.ClassifyModel
 	scoreModels          []models.ScoreModel
@@ -53,7 +53,7 @@ type GenerateRequestOptions struct {
 	Models   []models.GenerateModel
 }
 
-func (a *API) BinaryClassify(ctx context.Context, instruction string, text string, requestOptions *BinaryClassifyRequestOptions) (bool, error) {
+func (a *ModelAPI) BinaryClassify(ctx context.Context, instruction string, text string, requestOptions *BinaryClassifyRequestOptions) (bool, error) {
 	dp := &datapoint.BinaryClassifyDatapoint{
 		Instruction: instruction,
 		Text:        text,
@@ -74,7 +74,7 @@ func (a *API) BinaryClassify(ctx context.Context, instruction string, text strin
 	return model.BinaryClassify(ctx, instruction, text, examples)
 }
 
-func (a *API) Classify(ctx context.Context, instruction string, text string, options []string, requestOptions *ClassifyRequestOptions) (int, error) {
+func (a *ModelAPI) Classify(ctx context.Context, instruction string, text string, options []string, requestOptions *ClassifyRequestOptions) (int, error) {
 	dp := &datapoint.ClassifyDatapoint{
 		Instruction: instruction,
 		Text:        text,
@@ -96,7 +96,7 @@ func (a *API) Classify(ctx context.Context, instruction string, text string, opt
 	return model.Classify(ctx, instruction, text, options, examples)
 }
 
-func (a *API) ParseForce(ctx context.Context, instruction string, text string, v any, requestOptions *ParseForceRequestOptions) error {
+func (a *ModelAPI) ParseForce(ctx context.Context, instruction string, text string, v any, requestOptions *ParseForceRequestOptions) error {
 	dp := &datapoint.ParseForceDatapoint{
 		Instruction: instruction,
 		Text:        text,
@@ -118,7 +118,7 @@ func (a *API) ParseForce(ctx context.Context, instruction string, text string, v
 	return model.ParseForce(ctx, instruction, text, v, examples)
 }
 
-func (a *API) Score(ctx context.Context, instruction string, text string, min int, max int, requestOptions *ScoreRequestOptions) (int, error) {
+func (a *ModelAPI) Score(ctx context.Context, instruction string, text string, min int, max int, requestOptions *ScoreRequestOptions) (int, error) {
 	dp := &datapoint.ScoreDatapoint{
 		Instruction: instruction,
 		Text:        text,
@@ -141,7 +141,7 @@ func (a *API) Score(ctx context.Context, instruction string, text string, min in
 	return model.Score(ctx, instruction, text, min, max, examples)
 }
 
-func (a *API) Generate(ctx context.Context, instruction string, text string, requestOptions *GenerateRequestOptions) (string, error) {
+func (a *ModelAPI) Generate(ctx context.Context, instruction string, text string, requestOptions *GenerateRequestOptions) (string, error) {
 	dp := &datapoint.GenerateDatapoint{
 		Instruction: instruction,
 		Text:        text,
@@ -162,7 +162,7 @@ func (a *API) Generate(ctx context.Context, instruction string, text string, req
 	return model.Generate(ctx, instruction, text, examples)
 }
 
-func (a *API) Embedding(ctx context.Context, text string) ([]float64, error) {
+func (a *ModelAPI) Embedding(ctx context.Context, text string) ([]float64, error) {
 	embeddings, err := a.embeddingModels[0].GetEmbedding(ctx, text)
 	if err != nil {
 		return nil, err
@@ -170,7 +170,7 @@ func (a *API) Embedding(ctx context.Context, text string) ([]float64, error) {
 	return embeddings, nil
 }
 
-func DefaultAPI() *API {
+func DefaultModelAPI() *ModelAPI {
 	generalModel, err := model.DefaultGeneralModel()
 	if err != nil {
 		panic(fmt.Errorf("failed to create default general model: %v", err))
@@ -179,7 +179,7 @@ func DefaultAPI() *API {
 	if err != nil {
 		panic(fmt.Errorf("failed to create default embedding model: %v", err))
 	}
-	return &API{
+	return &ModelAPI{
 		binaryClassifyModels: []models.BinaryClassifyModel{generalModel},
 		classifyModels:       []models.ClassifyModel{generalModel},
 		scoreModels:          []models.ScoreModel{generalModel},
