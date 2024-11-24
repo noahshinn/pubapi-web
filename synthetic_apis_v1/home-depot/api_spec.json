@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Home Depot Public API",
+    "title": "Home Depot",
     "version": "1.0.0",
     "description": "API for Home Depot home improvement retail service"
   },

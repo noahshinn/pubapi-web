@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Comcast Public API",
+    "title": "Comcast",
     "version": "1.0.0",
     "description": "API for Comcast internet and TV services"
   },

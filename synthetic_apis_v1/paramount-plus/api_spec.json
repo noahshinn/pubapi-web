@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Paramount+ Public API",
+    "title": "Paramount+",
     "version": "1.0.0",
     "description": "API for Paramount+ streaming service"
   },

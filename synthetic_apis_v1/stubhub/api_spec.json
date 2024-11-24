@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "StubHub Public API",
+    "title": "StubHub",
     "version": "1.0.0",
     "description": "API for event ticket marketplace"
   },

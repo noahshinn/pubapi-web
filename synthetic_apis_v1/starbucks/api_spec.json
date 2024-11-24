@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Starbucks Public API",
+    "title": "Starbucks",
     "version": "1.0.0",
     "description": "API for Starbucks coffee ordering and rewards"
   },

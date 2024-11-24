@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Match.com Public API",
+    "title": "Match.com",
     "version": "1.0.0",
     "description": "API for Match.com dating service"
   },

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Masterclass Public API",
+    "title": "Masterclass",
     "version": "1.0.0",
     "description": "API for online education platform"
   },

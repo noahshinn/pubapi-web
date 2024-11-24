@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "GoodRx Public API",
+    "title": "GoodRx",
     "version": "1.0.0",
     "description": "API for prescription drug prices and pharmacy services"
   },

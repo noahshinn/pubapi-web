@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Regal Cinemas Public API",
+    "title": "Regal Cinemas",
     "version": "1.0.0",
     "description": "API for movie theater ticketing and information"
   },

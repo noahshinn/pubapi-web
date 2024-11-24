@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "LA Fitness Public API",
+    "title": "LA Fitness",
     "version": "1.0.0",
     "description": "API for LA Fitness gym services"
   },

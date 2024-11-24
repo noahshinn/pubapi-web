@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "PayPal Public API",
+    "title": "PayPal",
     "version": "1.0.0",
     "description": "API for digital payment processing"
   },

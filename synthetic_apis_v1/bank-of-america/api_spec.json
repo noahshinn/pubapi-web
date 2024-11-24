@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Bank of America Public API",
+    "title": "Bank of America",
     "version": "1.0.0",
     "description": "API for banking services"
   },

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Microsoft Teams Public API",
+    "title": "Microsoft Teams",
     "version": "1.0.0",
     "description": "API for team collaboration and communication"
   },

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "ClassPass Public API",
+    "title": "ClassPass",
     "version": "1.0.0",
     "description": "API for fitness class booking platform"
   },

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Udemy Public API",
+    "title": "Udemy",
     "version": "1.0.0",
     "description": "API for online learning platform"
   },

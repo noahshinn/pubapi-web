@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Walgreens Public API",
+    "title": "Walgreens",
     "version": "1.0.0",
     "description": "API for pharmacy and retail services"
   },

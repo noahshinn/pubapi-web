@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "1800Flowers Public API",
+    "title": "1800Flowers",
     "version": "1.0.0",
     "description": "API for flower delivery and gift service"
   },

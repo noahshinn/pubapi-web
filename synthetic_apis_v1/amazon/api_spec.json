@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Amazon Public API",
+    "title": "Amazon",
     "version": "1.0.0",
     "description": "API for Amazon e-commerce platform"
   },

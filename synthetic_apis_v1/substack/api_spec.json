@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Substack Public API",
+    "title": "Substack",
     "version": "1.0.0",
     "description": "API for newsletter publishing and subscription platform"
   },

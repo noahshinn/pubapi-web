@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "AMC Theatres Public API",
+    "title": "AMC Theatres",
     "version": "1.0.0",
     "description": "API for movie theater ticketing and services"
   },

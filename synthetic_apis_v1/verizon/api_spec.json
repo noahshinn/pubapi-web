@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Verizon Public API",
+    "title": "Verizon",
     "version": "1.0.0",
     "description": "API for Verizon wireless services"
   },

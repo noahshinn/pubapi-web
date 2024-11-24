@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Weight Watchers Public API",
+    "title": "Weight Watchers",
     "version": "1.0.0",
     "description": "API for weight management and wellness tracking"
   },

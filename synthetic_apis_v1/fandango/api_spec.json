@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Fandango Public API",
+    "title": "Fandango",
     "version": "1.0.0",
     "description": "API for movie tickets and cinema information"
   },

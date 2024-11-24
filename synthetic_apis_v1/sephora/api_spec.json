@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Sephora Public API",
+    "title": "Sephora",
     "version": "1.0.0",
     "description": "API for beauty and cosmetics retail service"
   },

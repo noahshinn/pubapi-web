@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Duolingo Public API",
+    "title": "Duolingo",
     "version": "1.0.0",
     "description": "API for language learning platform"
   },

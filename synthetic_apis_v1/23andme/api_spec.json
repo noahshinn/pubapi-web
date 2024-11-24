@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "23andMe Public API",
+    "title": "23andMe",
     "version": "1.0.0",
     "description": "API for genetic testing and ancestry services"
   },

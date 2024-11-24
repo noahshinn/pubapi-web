@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "KAYAK Public API",
+    "title": "KAYAK",
     "version": "1.0.0",
     "description": "API for travel search and booking services"
   },

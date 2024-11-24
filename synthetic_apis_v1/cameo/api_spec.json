@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Cameo Public API",
+    "title": "Cameo",
     "version": "1.0.0",
     "description": "API for celebrity video messaging platform"
   },

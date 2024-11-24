@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Chase Bank Public API",
+    "title": "Chase Bank",
     "version": "1.0.0",
     "description": "API for Chase banking services"
   },

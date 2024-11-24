@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Expedia Public API",
+    "title": "Expedia",
     "version": "1.0.0",
     "description": "API for travel bookings and reservations"
   },

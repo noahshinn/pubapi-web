@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "UPS Public API",
+    "title": "UPS",
     "version": "1.0.0",
     "description": "API for package tracking and shipping services"
   },

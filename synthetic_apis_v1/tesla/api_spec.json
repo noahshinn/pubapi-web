@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Tesla Public API",
+    "title": "Tesla",
     "version": "1.0.0",
     "description": "API for Tesla vehicle control and account management"
   },

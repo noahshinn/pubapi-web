@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "SiriusXM Public API",
+    "title": "SiriusXM",
     "version": "1.0.0",
     "description": "API for satellite radio and streaming content service"
   },

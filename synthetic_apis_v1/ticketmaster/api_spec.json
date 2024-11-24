@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Ticketmaster Public API",
+    "title": "Ticketmaster",
     "version": "1.0.0",
     "description": "API for event ticketing service"
   },

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "CarMax Public API",
+    "title": "CarMax",
     "version": "1.0.0",
     "description": "API for car buying and selling service"
   },

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Dropbox Public API",
+    "title": "Dropbox",
     "version": "1.0.0",
     "description": "API for cloud storage and file sharing service"
   },

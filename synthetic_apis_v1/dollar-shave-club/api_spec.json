@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Dollar Shave Club Public API",
+    "title": "Dollar Shave Club",
     "version": "1.0.0",
     "description": "API for subscription-based grooming products service"
   },

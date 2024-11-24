@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Care.com Public API",
+    "title": "Care.com",
     "version": "1.0.0",
     "description": "API for caregiving services platform"
   },

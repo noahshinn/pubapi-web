@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Patreon Public API",
+    "title": "Patreon",
     "version": "1.0.0",
     "description": "API for creator subscription platform"
   },

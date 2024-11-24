@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Nike Public API",
+    "title": "Nike",
     "version": "1.0.0",
     "description": "API for Nike's e-commerce and fitness tracking platform"
   },

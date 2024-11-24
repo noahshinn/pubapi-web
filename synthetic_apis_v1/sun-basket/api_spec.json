@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Sun Basket Public API",
+    "title": "Sun Basket",
     "version": "1.0.0",
     "description": "API for meal kit delivery service"
   },

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "American Airlines Public API",
+    "title": "American Airlines",
     "version": "1.0.0",
     "description": "API for flight bookings and travel management"
   },

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Hobby Lobby Public API",
+    "title": "Hobby Lobby",
     "version": "1.0.0",
     "description": "API for craft supplies and home decor retail"
   },

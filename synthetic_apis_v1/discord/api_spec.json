@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Discord Public API",
+    "title": "Discord",
     "version": "1.0.0",
     "description": "API for Discord messaging and community platform"
   },

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Noom Public API",
+    "title": "Noom",
     "version": "1.0.0",
     "description": "API for health tracking and wellness coaching"
   },

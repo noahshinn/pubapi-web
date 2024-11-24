@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Etsy Public API",
+    "title": "Etsy",
     "version": "1.0.0",
     "description": "API for handmade and vintage marketplace"
   },

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Apple Music Public API",
+    "title": "Apple Music",
     "version": "1.0.0",
     "description": "API for music streaming service"
   },

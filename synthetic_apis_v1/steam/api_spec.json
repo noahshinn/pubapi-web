@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Steam Public API",
+    "title": "Steam",
     "version": "1.0.0",
     "description": "API for gaming platform service"
   },

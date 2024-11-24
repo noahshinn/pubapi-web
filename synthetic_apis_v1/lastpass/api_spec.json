@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "LastPass Public API",
+    "title": "LastPass",
     "version": "1.0.0",
     "description": "API for password management service"
   },

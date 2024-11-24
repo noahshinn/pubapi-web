@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Credit Karma Public API",
+    "title": "Credit Karma",
     "version": "1.0.0",
     "description": "API for credit score monitoring and financial recommendations"
   },
